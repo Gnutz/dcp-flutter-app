@@ -20,44 +20,6 @@ doc/api/
 *.js.deps
 *.js.map
 
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@Gnutz 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-flutter
-/
-flutter
-3.6k
-116k16.5k
-Code
-Issues
-5k+
-Pull requests
-191
-Actions
-Projects
-137
-Wiki
-Security
-Insights
-flutter/.gitignore
-@jmagman
-jmagman Add ephemeral iOS directory to put future generated files (#76830)
-Latest commit d099ae6 12 days ago
- History
- 22 contributors
-@gspencergoog@jonahwilliams@xster@jmagman@christopherfujino@mravn-google@goderbauer@yjbanov@shihaohong@pq@mdebbar@MarcusTomlinson
-118 lines (107 sloc)  2.17 KB
-  
 # Miscellaneous
 *.class
 *.lock
@@ -176,15 +138,3 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
