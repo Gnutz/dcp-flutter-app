@@ -1,4 +1,10 @@
 {
     "@@locale": "da",
-    "helloWorld": "Hej Verden"
+    "helloWorld": "Hej Verden",
+    "themes": "Temaer",
+    "colors": "Farver",
+    "productionLastTen": "Sidste 10 produktioner",
+    "seeAll": "se alle",
+    "checkOut": "check ud",
+    "costumeDetailsFor": "Detaljer {id}"
 }

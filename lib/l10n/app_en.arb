@@ -2,6 +2,39 @@
     "@@locale": "en",
     "helloWorld": "Hello World!",
     "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  }
+        "description": "The conventional newborn programmer greeting"
+    },
+
+    "themes": "Themes",
+    "@themes": {
+        "description": ""
+     },
+
+    "colors": "Colors",
+    "@colors": {
+    "description": ""
+    },
+
+    "productionLastTen": "Last 10 Productions",
+    "@productionLastTen": {
+    "description": ""
+    },
+
+    "seeAll": "see all",
+    "@seeAll": {
+        "description": ""
+    },
+
+    "checkOut": "check out",
+    "@checkOut": {
+        "description": ""
+    },
+
+    "costumeDetailsFor": "Details {id}",
+    "@costumeDetailsFor": {
+      "description": "",
+      "placeholders": {
+        "id": {}
+      }
+    }
 }

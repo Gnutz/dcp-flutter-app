@@ -2,6 +2,7 @@ import 'package:digtial_costume_platform/Costume.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -24,72 +25,6 @@ class _CostumeDetailState extends State<CostumeDetail> {
       default:
         return null;
     }
-  }
-
-  //wrapper function for creating Text list
-  Widget textTemplate(String text) => Text('$text, ');
-
-  Widget costumeTempate(costume) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-      child: Column(
-        children: <Widget>[
-          //Banner of id, time period, quantity and gender marker
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Text('${costume.id},'),
-            Text('${costume.timeperiod},'),
-            Text('${costume.quantity.toString()},'),
-            SizedBox(width: 50.0),
-            Icon(fashionToIcon(costume.fashion))
-          ]),
-          Column(
-            children: <Widget>[
-              Row(children: [
-                Text(
-                  'Themes: ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: costume.themes
-                      .map<Widget>((theme) => textTemplate(theme))
-                      .toList(),
-                ),
-              ]),
-              Row(children: [
-                Text(
-                  'Colors: ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: costume.colors
-                      .map<Widget>((color) => textTemplate(color))
-                      .toList(),
-                ),
-              ]),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(width: 20.0),
-              IconButton(icon: Icon(Icons.add), onPressed: null),
-              IconButton(icon: Icon(Icons.edit), onPressed: null),
-              IconButton(icon: Icon(Icons.delete_outline), onPressed: null),
-              FlatButton(onPressed: null, child: Text('Check out')),
-              SizedBox(width: 20.0),
-            ],
-          ),
-          Column(children: [
-            Text('TopTen Productions: '),
-            Column(
-              children: costume.productions
-                  .map<Widget>((production) => Text(production.title))
-                  .toList(),
-            ),
-          ])
-        ],
-      ),
-    );
   }
 
   List<Costume> costumes = [
@@ -115,6 +50,144 @@ class _CostumeDetailState extends State<CostumeDetail> {
     )
   ];
 
+  Widget costumeTemplate(costume, BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            //Banner of id, time period, quantity and gender marker
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              Text('${costume.id},',
+                  style: TextStyle(
+                      fontSize: 24.0,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.bold)),
+              Text('${costume.timeperiod},',
+                  style: TextStyle(
+                      fontSize: 24.0,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.bold)),
+              Text('${costume.quantity.toString()},',
+                  style: TextStyle(
+                      fontSize: 24.0,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.bold)),
+              SizedBox(width: 50.0),
+              Icon(fashionToIcon(costume.fashion))
+            ]),
+
+            // Colors and themes, secondary information
+            SizedBox(height: 25.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Wrap(children: [
+                  Text(
+                    '${AppLocalizations.of(context).themes}: ',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  ...(costume.themes
+                      .map<Widget>((theme) => textTemplate(theme))
+                      .toList()),
+                ]),
+                SizedBox(height: 10.0),
+                Wrap(children: [
+                  Text(
+                    '${AppLocalizations.of(context).colors}: ',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  ...(costume.colors
+                      .map<Widget>((color) => textTemplate(color))
+                      .toList())
+                ]),
+              ],
+            ),
+            SizedBox(height: 10.0),
+
+            // user operations
+            //TODO: needs to change depending on user dependency injection
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(width: 20.0),
+                IconButton(icon: Icon(Icons.add), onPressed: null),
+                IconButton(icon: Icon(Icons.edit), onPressed: null),
+                IconButton(icon: Icon(Icons.delete_outline), onPressed: null),
+                RaisedButton(
+                    onPressed: null,
+                    child: Text(AppLocalizations.of(context).checkOut)),
+                SizedBox(width: 20.0),
+              ],
+            ),
+            SizedBox(height: 10.0),
+
+            //Productions:
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(children: [
+                  Text(
+                    AppLocalizations.of(context).productionLastTen,
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  Column(children: [
+                    ...(costume.productions
+                        .map<Widget>(
+                            (production) => productionTemplate(production))
+                        .toList()),
+                    RaisedButton(
+                        onPressed: () {},
+                        child: Text(AppLocalizations.of(context).seeAll,
+                            style: TextStyle(
+                                fontSize: 14.0, color: Colors.grey[600])))
+                    //TODO: Add link to fetch all productions
+                  ]),
+                ]),
+              ),
+            )
+
+            //TODO: Add images section
+            //FloatingActionButton(onPressed: null)
+          ],
+        ),
+      ),
+    );
+  }
+
+  //wrapper function for creating Text list
+  Widget textTemplate(String text) => Text(
+        '$text, ',
+        style: TextStyle(fontSize: 18.0, color: Colors.grey[600]),
+      );
+
+  Widget productionTemplate(Production production) => Card(
+        margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              Text('${production.title},',
+                  style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
+              Text(DateFormat('dd-MM-yyyy').format(production.startDate),
+                  style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
+              Text(' - ',
+                  style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
+              Text(DateFormat('dd-MM-yyyy').format(production.endDate),
+                  style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
+            ],
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,8 +196,9 @@ class _CostumeDetailState extends State<CostumeDetail> {
         centerTitle: true,
       ),
       body: Column(
-          children:
-              costumes.map((costume) => costumeTempate(costume)).toList()),
+          children: costumes
+              .map((costume) => costumeTemplate(costume, context))
+              .toList()),
     );
   }
 }
