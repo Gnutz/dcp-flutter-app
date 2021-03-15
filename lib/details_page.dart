@@ -91,6 +91,7 @@ class DetailsPage extends StatelessWidget {
 
             // user operations
             //TODO: needs to change depending on user dependency injection
+            //TODO: add a add to list option
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -98,7 +99,7 @@ class DetailsPage extends StatelessWidget {
                 IconButton(icon: Icon(Icons.add), onPressed: null),
                 IconButton(icon: Icon(Icons.edit), onPressed: null),
                 IconButton(icon: Icon(Icons.delete_outline), onPressed: null),
-                RaisedButton(
+                ElevatedButton(
                     onPressed: null,
                     child: Text(AppLocalizations.of(context).checkOut)),
                 SizedBox(width: 20.0),
@@ -124,7 +125,7 @@ class DetailsPage extends StatelessWidget {
                         .map<Widget>((production) =>
                             ProductionCard(production: production))
                         .toList()),
-                    RaisedButton(
+                    ElevatedButton(
                         onPressed: () {},
                         child: Text(AppLocalizations.of(context).seeAll,
                             style: TextStyle(
