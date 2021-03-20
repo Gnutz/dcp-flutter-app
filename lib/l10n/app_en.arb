@@ -24,17 +24,87 @@
     "@seeAll": {
         "description": ""
     },
-
     "checkOut": "check out",
     "@checkOut": {
         "description": ""
     },
-
     "costumeDetailsFor": "Details {id}",
     "@costumeDetailsFor": {
-      "description": "",
-      "placeholders": {
-        "id": {}
-      }
+        "description": "",
+        "placeholders": {
+            "id": {}
+        }
+    },
+    "signUp": "Sign Up",
+    "@signUp": {
+        "description": ""
+    },
+    "signIn": "Sign  In",
+    "@signIn": {
+        "description": ""
+    },
+    "yourName": "Your Name",
+    "@yourName": {
+        "description": ""
+    },
+    "email": "Email",
+    "@email": {
+        "description": ""
+    },
+    "password": "Password",
+    "@password": {
+        "description": ""
+    },
+    "passwordConfirmation": "Confirm Password",
+    "@passwordConfirmation": {
+        "description": ""
+    },
+    "selectRole": "Select Your Role",
+    "@selectRole": {
+        "description": ""
+    },
+    "enterAName": "Enter a name",
+    "@enterAName": {
+        "description": ""
+    },
+    "enterAnEmail": "Enter an email",
+    "@enterAnEmail": {
+        "description": ""
+    },
+    "passwordMustContainOneLowercaseCharacter": "The password must contain at least 1 lowercase alphabetical character",
+    "@passwordMustContainOneLowercaseCharacter": {
+        "description": ""
+    },
+    "passwordMustContainOneUppercaseCharacter": "The password must contain at least 1 uppercase alphabetical character",
+    "@passwordMustContainOneUppercaseCharacter": {
+        "description": ""
+    },
+    "passwordMustContainOneNumericCharacter": "The password must contain at least 1 numerical character",
+    "@passwordMustContainOneNumericCharacter": {
+        "description": ""
+    },
+    "passwordMustContainOneOneSpecialCharacter": "The password must contain at least 1 special (! @ # $ % ^ & *) character",
+    "@passwordMustContainOneOneSpecialCharacter": {
+        "description": ""
+    },
+    "passwordMustBeAtLeastEightCharacterLong": "The password be at least 8 character long",
+    "@passwordMustBeAtLeastEightCharacterLong": {
+        "description": ""
+    },
+    "userDataStorageConsentOptInMessage": "I understand and consent that the information I have provided will be stored and and used to identify me to other users of the app for as long as I have an user account",
+    "@userDataStorageConsentOptInMessage": {
+        "description": ""
+    },
+    "youMustSelectYourInstitution": "You must select an institution",
+    "@youMustSelectYourInstitution": {
+        "description": ""
+    },
+    "passwordsMustBeIdentical": "passwords must to be identical",
+    "@passwordsMustBeIdentical": {
+        "description": ""
+    },
+    "selectYourInstitution": "Select Your Institution",
+    "@selectYourInstitution": {
+        "description": ""
     }
 }

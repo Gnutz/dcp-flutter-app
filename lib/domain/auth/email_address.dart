@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 @immutable
 class EmailAddress {
@@ -27,14 +28,8 @@ class EmailAddress {
         r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
     if (RegExp(emailRegex).hasMatch(input)) {
       return input;
-    } else {
-      throw InvalidEmailException(failedValue: input);
-    }
+    } else {}
+
+    return null;
   }
-}
-
-class InvalidEmailException {
-  final String failedValue;
-
-  InvalidEmailException({@required this.failedValue});
 }

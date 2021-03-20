@@ -1,15 +1,50 @@
-import 'package:digtial_costume_platform/costume.dart';
+import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/presentation/auth/register.dart';
+import 'package:digtial_costume_platform/presentation/costume/details/details_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'details_page.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
-void main() => runApp(MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: CostumeDetail(),
-    ));
+class MyApp extends StatelessWidget {
+  // Create the initialization Future outside of `build`:
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error.toString());
+            return MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: Text(snapshot.error.toString()),
+            ); //TODO: change this
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            return const MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: Register(),
+            );
+          }
+          return const MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Register(),
+          ); //TODO: change this
+        });
+  }
+}
 
 class CostumeDetail extends StatefulWidget {
   @override
@@ -20,7 +55,7 @@ class _CostumeDetailState extends State<CostumeDetail> {
 
   Costume costume = Costume(
     id: "0",
-    fashion: Fashion.Mens,
+    fashion: Fashion.mens,
     timeperiod: "1920",
     category: "Shirt",
     quantity: 1,

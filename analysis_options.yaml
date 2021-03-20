@@ -9,3 +9,6 @@ analyzer:
   errors:
     missing_required_param: error
     parameter_assignments: error
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"

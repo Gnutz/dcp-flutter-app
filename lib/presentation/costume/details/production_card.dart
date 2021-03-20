@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'costume.dart';
+import '../../../domain/costume/costume.dart';
 
 class ProductionCard extends StatelessWidget {
   final Production production;
 
-  ProductionCard({this.production});
+  const ProductionCard({this.production});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+      margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
