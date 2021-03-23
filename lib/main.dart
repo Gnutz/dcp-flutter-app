@@ -1,6 +1,6 @@
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
-import 'package:digtial_costume_platform/presentation/auth/register.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/details_page.dart';
+import 'package:digtial_costume_platform/presentation/costume/edit/edit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,16 +31,16 @@ class MyApp extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.done) {
-            return const MaterialApp(
+            return MaterialApp(
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
-              home: Register(),
+              home: CostumeEditPage(),
             );
           }
-          return const MaterialApp(
+          return MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            home: Register(),
+            home: CostumeEditPage(),
           ); //TODO: change this
         });
   }

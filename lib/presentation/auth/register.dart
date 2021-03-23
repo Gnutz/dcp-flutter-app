@@ -27,7 +27,7 @@ class _RegisterState extends State<Register> {
   var loading = false;
   String selectedRole = "Creative";
   String selectedInstitution;
-  bool consentToStoreUserData = false;
+  bool consentUserAgreement = false;
 
   @override
   Widget build(BuildContext context) {
@@ -80,48 +80,13 @@ class _RegisterState extends State<Register> {
                           const SizedBox(
                             height: 20.0,
                           ),
-                          CheckboxListTile(
-                            title: Text(AppLocalizations.of(context)
-                                .userDataStorageConsentOptInMessage),
-                            value: consentToStoreUserData,
-                            onChanged: (newValue) => setState(() =>
-                                consentToStoreUserData =
-                                    !consentToStoreUserData),
-                            controlAffinity: ListTileControlAffinity
-                                .leading, //  <-- leading Checkbox
-                          ),
+                          _buildUserAgreementCheckBox(),
                           const SizedBox(
                             height: 20.0,
                           ),
-                          ElevatedButton(
-                            onPressed: consentToStoreUserData
-                                ? () async {
-                                    if (_formKey.currentState.validate()) {
-                                      setState(() => loading = true);
-                                      final dynamic result = await _auth
-                                          .registerWithEmailAndPassword(
-                                              email, password);
-                                      if (result == null) {
-                                        setState(() {
-                                          error =
-                                              "please supply a valid email"; //TODO: change this
-                                          loading = false;
-                                        });
-                                      }
-                                    }
-                                  }
-                                : null,
-                            //color: Colors.pink[400],
-                            child: Text(AppLocalizations.of(context).signUp,
-                                style: const TextStyle(color: Colors.white)),
-                            //disabledColor: Colors.cyan,
-                          ),
+                          _buildSubmitButton(),
                           const SizedBox(height: 12.0),
-                          Text(
-                            error,
-                            style: const TextStyle(
-                                color: Colors.red, fontSize: 14.0),
-                          )
+                          _buildErrorDisplay(),
                         ],
                       ),
                     ),
@@ -210,6 +175,48 @@ class _RegisterState extends State<Register> {
         value: selectedInstitution);
   }
 
+  Widget _buildUserAgreementCheckBox() {
+    return CheckboxListTile(
+      title:
+          Text(AppLocalizations.of(context).userDataStorageConsentOptInMessage),
+      value: consentUserAgreement,
+      onChanged: (newValue) =>
+          setState(() => consentUserAgreement = !consentUserAgreement),
+      controlAffinity: ListTileControlAffinity.leading,
+    );
+  }
+
+  Widget _buildSubmitButton() {
+    return ElevatedButton(
+      onPressed: consentUserAgreement
+          ? () async {
+              if (_formKey.currentState.validate()) {
+                setState(() => loading = true);
+                final dynamic result =
+                    await _auth.registerWithEmailAndPassword(email, password);
+                if (result == null) {
+                  setState(() {
+                    error = "please supply a valid email"; //TODO: change this
+                    loading = false;
+                  });
+                }
+              }
+            }
+          : null,
+      //color: Colors.pink[400],
+      child: Text(AppLocalizations.of(context).signUp,
+          style: const TextStyle(color: Colors.white)),
+      //disabledColor: Colors.cyan,
+    );
+  }
+
+  Widget _buildErrorDisplay() {
+    return Text(
+      error,
+      style: const TextStyle(color: Colors.red, fontSize: 14.0),
+    );
+  }
+
   String _validatePassword() {
     //https://dzone.com/articles/use-regex-test-password
 
@@ -244,7 +251,6 @@ class _RegisterState extends State<Register> {
       errorMessage +=
           "* ${AppLocalizations.of(context).passwordMustBeAtLeastEightCharacterLong}\n";
     }
-
     return errorMessage.isEmpty ? null : errorMessage;
   }
 }
