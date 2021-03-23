@@ -27,7 +27,7 @@ class AuthService {
       print("password: $password");
       final UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      final User firebaseUser = result.user;
+      final User? firebaseUser = result.user;
       //return _userFromFirebaseUser(firebaseUser);
       return firebaseUser;
     } catch (e) {
@@ -35,7 +35,7 @@ class AuthService {
     }
   }
 
-  Stream<User> get user {
+  Stream<User?> get user {
     return _auth.authStateChanges();
   }
 

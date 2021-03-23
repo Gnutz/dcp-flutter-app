@@ -31,13 +31,13 @@ class MyApp extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.done) {
-            return MaterialApp(
+            return const MaterialApp(
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               home: CostumeEditPage(),
             );
           }
-          return MaterialApp(
+          return const MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             home: CostumeEditPage(),
@@ -76,7 +76,7 @@ class _CostumeDetailState extends State<CostumeDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).costumeDetailsFor('')),
+          title: Text(AppLocalizations.of(context)!.costumeDetailsFor('')),
           centerTitle: true,
         ),
         body: DetailsPage(

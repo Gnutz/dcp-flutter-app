@@ -8,26 +8,26 @@ enum Fashion {
 enum UserRoles { admin, creator, creative }
 
 class Production {
-  String title;
-  DateTime startDate;
-  DateTime endDate;
+  String? title;
+  DateTime? startDate;
+  DateTime? endDate;
 
   Production({this.title, this.startDate, this.endDate});
 }
 
 class Costume {
-  String id;
+  String? id;
 
-  DateTime created;
-  DateTime edited;
-  Fashion fashion;
-  String category;
-  String timeperiod;
-  List<String> themes;
-  List<String> colors;
-  List<Production> productions;
-  int quantity;
-  String storageLocation;
+  DateTime? created;
+  DateTime? edited;
+  Fashion? fashion;
+  String? category;
+  String? timeperiod;
+  List<String>? themes;
+  List<String>? colors;
+  List<Production>? productions;
+  int? quantity;
+  String? storageLocation;
 
   Costume(
       {this.id,
@@ -44,22 +44,16 @@ class Costume {
 class CostumeList {
   String uid;
   String owner;
-  List<String> sharedWith;
-  DateTime created;
+  List<String> sharedWith = <String>[];
+  DateTime? created;
   String title;
-  List<Costume> costumes;
+  List<Costume> costumes = <Costume>[];
 
-  CostumeList(
-      {this.uid,
-      this.owner,
-      this.sharedWith,
-      this.created,
-      this.title,
-      this.costumes});
+  CostumeList({required this.uid, required this.owner, required this.title});
 }
 
 class Invitation {
-  String uid;
+  String? uid;
   User from;
   User to;
   String listId;
@@ -67,12 +61,12 @@ class Invitation {
   int numberOfCostumes;
 
   Invitation(
-      {this.from,
-      this.to,
+      {required this.from,
+      required this.to,
       this.uid,
-      this.listId,
-      this.listTitle,
-      this.numberOfCostumes});
+      required this.listId,
+      required this.listTitle,
+      required this.numberOfCostumes});
 }
 
 class Institution {
@@ -80,17 +74,18 @@ class Institution {
   String name;
   String domain;
   String alias;
+
+  Institution(
+      {required this.uid,
+      required this.alias,
+      required this.domain,
+      required this.name});
 }
 
 class CreatorRoleRequest {
   User requestedBy;
 
-  CreatorRoleRequest({this.requestedBy});
+  CreatorRoleRequest({required this.requestedBy});
 }
 
 abstract class Status {}
-
-class StorageLocation {
-  String mainLocation;
-  String subLocation;
-}

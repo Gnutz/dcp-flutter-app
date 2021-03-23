@@ -14,14 +14,14 @@ const textInputDecorator = InputDecoration(
 class InputField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
-  final String Function(String val) validator;
+  final String? Function(String? val)? validator;
   final void Function(String val) onChanged;
 
   const InputField(
-      {this.hintText,
+      {required this.hintText,
       this.obscureText = false,
-      this.validator,
-      this.onChanged});
+      required this.validator,
+      required this.onChanged});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignIn extends StatefulWidget {
   final Function toggleView;
 
-  const SignIn({this.toggleView});
+  const SignIn({required this.toggleView});
 
   @override
   _SignInState createState() => _SignInState();
@@ -31,14 +31,14 @@ class _SignInState extends State<SignIn> {
             appBar: AppBar(
               backgroundColor: Colors.brown[400],
               elevation: 0.0,
-              title: Text(AppLocalizations.of(context).signIn),
+              title: Text(AppLocalizations.of(context)!.signIn),
               actions: [
                 TextButton.icon(
                     onPressed: () {
                       widget.toggleView();
                     },
                     icon: const Icon(Icons.person),
-                    label: Text(AppLocalizations.of(context).signUp))
+                    label: Text(AppLocalizations.of(context)!.signUp))
               ],
             ),
             body: Container(
@@ -75,18 +75,18 @@ class _SignInState extends State<SignIn> {
 
   Widget _buildEmailInput() {
     return InputField(
-      hintText: AppLocalizations.of(context).email,
+      hintText: AppLocalizations.of(context)!.email,
       validator: (val) =>
-          val.isEmpty ? AppLocalizations.of(context).enterAnEmail : null,
+          val!.isEmpty ? AppLocalizations.of(context)!.enterAnEmail : null,
       onChanged: (val) => setState(() => email = val),
     );
   }
 
   Widget _buildPasswordInput() {
     return InputField(
-        hintText: AppLocalizations.of(context).password,
-        validator: (val) => val.length < 8
-            ? AppLocalizations.of(context)
+        hintText: AppLocalizations.of(context)!.password,
+        validator: (val) => val!.length < 8
+            ? AppLocalizations.of(context)!
                 .passwordMustBeAtLeastEightCharacterLong
             : null,
         obscureText: true,
@@ -96,7 +96,7 @@ class _SignInState extends State<SignIn> {
   Widget _buildSubmitButton() {
     return ElevatedButton(
         onPressed: () async {
-          if (_formKey.currentState.validate()) {
+          if (_formKey.currentState!.validate()) {
             setState(() => loading = true);
             final dynamic result =
                 await _auth.signInWithEmailAndPassword(email, password);
@@ -110,8 +110,8 @@ class _SignInState extends State<SignIn> {
           }
         },
         //color: Colors.pink[400],
-        child: Text(AppLocalizations.of(context).signIn,
-            style: TextStyle(color: Colors.white)));
+        child: Text(AppLocalizations.of(context)!.signIn,
+            style: const TextStyle(color: Colors.white)));
   }
 
   Widget _buildErrorDisplay() {

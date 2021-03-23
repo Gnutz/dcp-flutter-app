@@ -7,7 +7,7 @@ import '../../../domain/costume/costume.dart';
 class ProductionCard extends StatelessWidget {
   final Production production;
 
-  const ProductionCard({this.production});
+  const ProductionCard({required this.production});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,11 @@ class ProductionCard extends StatelessWidget {
           children: [
             Text('${production.title},',
                 style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
-            Text(DateFormat('dd-MM-yyyy').format(production.startDate),
+            Text(DateFormat('dd-MM-yyyy').format(production.startDate!),
                 style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
             Text(' - ',
                 style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
-            Text(DateFormat('dd-MM-yyyy').format(production.endDate),
+            Text(DateFormat('dd-MM-yyyy').format(production.endDate!),
                 style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
           ],
         ),

@@ -7,9 +7,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class DetailsPage extends StatelessWidget {
   final Costume costume;
 
-  const DetailsPage({this.costume});
+  const DetailsPage({required this.costume});
 
-  IconData fashionToIcon(Fashion fashion) {
+  IconData? fashionToIcon(Fashion fashion) {
     switch (fashion) {
       case Fashion.mens:
         return Icons.accessibility_outlined;
@@ -47,7 +47,7 @@ class DetailsPage extends StatelessWidget {
                       color: Colors.grey[600],
                       fontWeight: FontWeight.bold)),
               const SizedBox(width: 50.0),
-              Icon(fashionToIcon(costume.fashion))
+              Icon(fashionToIcon(costume.fashion!))
             ]),
 
             // Colors and themes, secondary information
@@ -57,11 +57,11 @@ class DetailsPage extends StatelessWidget {
               children: <Widget>[
                 Wrap(children: [
                   Text(
-                    '${AppLocalizations.of(context).themes}: ',
+                    '${AppLocalizations.of(context)!.themes}: ',
                     style: const TextStyle(
                         fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
-                  ...costume.themes
+                  ...costume.themes!
                       .map<Widget>((theme) => Text(
                             '$theme, ',
                             style: TextStyle(
@@ -72,11 +72,11 @@ class DetailsPage extends StatelessWidget {
                 const SizedBox(height: 10.0),
                 Wrap(children: [
                   Text(
-                    '${AppLocalizations.of(context).colors}: ',
+                    '${AppLocalizations.of(context)!.colors}: ',
                     style: const TextStyle(
                         fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
-                  ...costume.colors
+                  ...costume.colors!
                       .map<Widget>((color) => Text(
                             '$color, ',
                             style: TextStyle(
@@ -101,7 +101,7 @@ class DetailsPage extends StatelessWidget {
                     icon: Icon(Icons.delete_outline), onPressed: null),
                 ElevatedButton(
                     onPressed: null,
-                    child: Text(AppLocalizations.of(context).checkOut)),
+                    child: Text(AppLocalizations.of(context)!.checkOut)),
                 const SizedBox(width: 20.0),
               ],
             ),
@@ -116,18 +116,18 @@ class DetailsPage extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: Column(children: [
                   Text(
-                    AppLocalizations.of(context).productionLastTen,
+                    AppLocalizations.of(context)!.productionLastTen,
                     style: const TextStyle(
                         fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   Column(children: [
-                    ...costume.productions
+                    ...costume.productions!
                         .map<Widget>((production) =>
                             ProductionCard(production: production))
                         .toList(),
                     ElevatedButton(
                         onPressed: () {},
-                        child: Text(AppLocalizations.of(context).seeAll,
+                        child: Text(AppLocalizations.of(context)!.seeAll,
                             style: TextStyle(
                                 fontSize: 14.0, color: Colors.grey[600])))
                     //TODO: Add link to fetch all productions
