@@ -129,13 +129,14 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
   Widget _buildCategorySelection() {
     return DropdownButtonFormField<String>(
         decoration: textInputDecorator.copyWith(
-            hintText: "Select the costume's category"),
+            hintText: AppLocalizations.of(context)!.selectTheCostumeCategory),
         items: _categories
             .map((category) =>
                 DropdownMenuItem(value: category, child: Text(category)))
             .toList(),
-        validator: (val) =>
-            _costume.category == val ? "You must select a category" : null,
+        validator: (val) => _costume.category == val
+            ? AppLocalizations.of(context)!.youMustSelectACategory
+            : null,
         onChanged: (category) {
           setState(() {
             _costume.category = category;
@@ -147,9 +148,9 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
   Widget _buildTimeSelection() {
     return DropdownButtonFormField<String>(
         decoration: textInputDecorator.copyWith(
-            hintText: "Select the costume's time period"),
+            hintText: AppLocalizations.of(context)!.selectTheCostumeTimePeriod),
         validator: (val) => _costume.timeperiod == null
-            ? "You must select a time period"
+            ? AppLocalizations.of(context)!.youMustSelectATimePeriod
             : null,
         items: _timePeriods
             .map((time) => DropdownMenuItem(value: time, child: Text(time)))
@@ -163,10 +164,11 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
   }
 
   Widget _buildSubmitButton() {
-    return const ElevatedButton(
+    return ElevatedButton(
       onPressed: null,
       //color: Colors.pink[400],
-      child: Text("Save", style: TextStyle(color: Colors.white)),
+      child: Text(AppLocalizations.of(context)!.save,
+          style: TextStyle(color: Colors.white)),
       //disabledColor: Colors.cyan,
     );
   }
@@ -199,14 +201,14 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
                   value: Fashion.mens,
                   groupValue: _costume.fashion,
                   onChanged: (val) => setState(() => _costume.fashion = val)),
-              const Text("Men's")
+              Text(AppLocalizations.of(context)!.mens)
             ]),
             Row(children: [
               Radio<Fashion>(
                   value: Fashion.womens,
                   groupValue: _costume.fashion,
                   onChanged: (val) => setState(() => _costume.fashion = val)),
-              const Text("Women's")
+              Text(AppLocalizations.of(context)!.womens)
             ]),
           ],
         ),
@@ -220,7 +222,8 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       Flexible(
         child: TextFormField(
           controller: _themeHolder,
-          decoration: textInputDecorator.copyWith(hintText: "New Theme"),
+          decoration: textInputDecorator.copyWith(
+              hintText: AppLocalizations.of(context)!.newTheme),
           onChanged: (val) {
             setState(() => _currentTheme = val);
           },
@@ -230,7 +233,8 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       const SizedBox(width: 8.0),
       ElevatedButton(
         onPressed: _submitTheme,
-        child: const Text("Add", style: const TextStyle(color: Colors.white)),
+        child: Text(AppLocalizations.of(context)!.add,
+            style: const TextStyle(color: Colors.white)),
       ),
     ]);
   }
@@ -240,7 +244,8 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       Flexible(
         child: TextFormField(
           controller: _colorHolder,
-          decoration: textInputDecorator.copyWith(hintText: "New Color"),
+          decoration: textInputDecorator.copyWith(
+              hintText: AppLocalizations.of(context)!.newColor),
           onChanged: (val) {
             setState(() => _currentColor = val);
           },
@@ -250,7 +255,8 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       const SizedBox(width: 8.0),
       ElevatedButton(
         onPressed: _submitColor,
-        child: const Text("Add", style: const TextStyle(color: Colors.white)),
+        child: Text(AppLocalizations.of(context)!.add,
+            style: const TextStyle(color: Colors.white)),
       ),
     ]);
   }
@@ -305,14 +311,16 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              const Text(
-                'Storage',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.storage,
+                style: const TextStyle(
+                    fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12.0),
               DropdownButtonFormField<String>(
                   decoration: textInputDecorator.copyWith(
-                      hintText: "Select where the costume is stored"),
+                      hintText: AppLocalizations.of(context)!
+                          .selectWhereTheCostumeIsStored),
                   items: _storageLocations
                       .map((storage) => DropdownMenuItem(
                           value: storage, child: Text(storage)))
@@ -326,7 +334,8 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
               const SizedBox(height: 12.0),
               DropdownButtonFormField<String>(
                   decoration: textInputDecorator.copyWith(
-                      hintText: "Select where the costume is stored"),
+                      hintText: AppLocalizations.of(context)!
+                          .selectWhereTheCostumeIsStored),
                   items: _storageLocations
                       .map((storage) => DropdownMenuItem(
                           value: storage, child: Text(storage)))

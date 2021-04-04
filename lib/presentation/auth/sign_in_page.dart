@@ -1,3 +1,4 @@
+/*
 import 'package:digtial_costume_platform/services/auth.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:digtial_costume_platform/shared/loading.dart';
@@ -14,7 +15,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final AuthService _auth = AuthService();
+  final AuthOldService _auth = AuthOldService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
@@ -118,6 +119,39 @@ class _SignInState extends State<SignIn> {
     return Text(
       error,
       style: const TextStyle(color: Colors.red, fontSize: 14.0),
+    );
+  }
+}
+
+ */
+
+import 'package:digtial_costume_platform/application/auth/sign_in/sign_in_bloc.dart';
+import 'package:digtial_costume_platform/presentation/auth/sign_in_form.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../locator.dart';
+
+class SignInPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.brown[100],
+      appBar: AppBar(
+        backgroundColor: Colors.brown[400],
+        elevation: 0.0,
+        title: Text(AppLocalizations.of(context)!.signIn),
+        actions: [
+          TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.person),
+              label: Text(AppLocalizations.of(context)!.signUp))
+        ],
+      ),
+      body: BlocProvider(
+          create: (context) => Locator().locator<SignInBloc>(),
+          child: SignInForm()),
     );
   }
 }

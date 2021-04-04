@@ -5,8 +5,6 @@ enum Fashion {
   womens,
 }
 
-enum UserRoles { admin, creator, creative }
-
 class Production {
   String? title;
   DateTime? startDate;
@@ -69,18 +67,6 @@ class Invitation {
       required this.numberOfCostumes});
 }
 
-class Institution {
-  String uid;
-  String name;
-  String domain;
-  String alias;
-
-  Institution(
-      {required this.uid,
-      required this.alias,
-      required this.domain,
-      required this.name});
-}
 
 class CreatorRoleRequest {
   User requestedBy;

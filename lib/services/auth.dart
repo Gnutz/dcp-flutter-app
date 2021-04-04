@@ -2,7 +2,7 @@
 //firebase auth User class
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthService {
+class AuthOldService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //User _userFromFirebaseUser(User user) {

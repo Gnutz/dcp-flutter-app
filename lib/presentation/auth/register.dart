@@ -1,9 +1,5 @@
-import 'package:digtial_costume_platform/services/auth.dart';
-import 'package:digtial_costume_platform/shared/constants.dart';
-import 'package:digtial_costume_platform/shared/loading.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+/*
 class Register extends StatefulWidget {
   final Function toggleView;
 
@@ -14,7 +10,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final AuthService _auth = AuthService();
+  final AuthOldService _auth = AuthOldService();
   final _formKey = GlobalKey<FormState>();
   final _roles = <String>['Creative', 'Creator'];
   final _institutions = <String>["Aarhus Teater"];
@@ -31,7 +27,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return _loading
+    return
         ? Loading()
         : Scaffold(
             backgroundColor: Colors.brown[100],
@@ -109,8 +105,7 @@ class _RegisterState extends State<Register> {
   Widget _buildEmailInput() {
     return InputField(
       hintText: AppLocalizations.of(context)!.email,
-      validator: (val) =>
-          val!.isEmpty ? AppLocalizations.of(context)!.enterAnEmail : null,
+      validator: (_) => validateEmailAddress(context, state.email)
       onChanged: (val) => setState(() => _email = val),
     );
   }
@@ -120,7 +115,7 @@ class _RegisterState extends State<Register> {
         cursorColor: Colors.pink,
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(context)!.password, errorMaxLines: 5),
-        validator: (val) => _validatePassword(),
+        validator: (_) => validatePassword(context, state.password),
         obscureText: true,
         onChanged: (val) => setState(() => _password = val));
   }
@@ -217,40 +212,11 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  String? _validatePassword() {
-    //https://dzone.com/articles/use-regex-test-password
-
-    var errorMessage = "";
-
-    const atLeastOneLowerCaseCharacterRegex = r"""^(?=.*[a-z])""";
-    if (!RegExp(atLeastOneLowerCaseCharacterRegex).hasMatch(_password)) {
-      errorMessage +=
-          "* ${AppLocalizations.of(context)!.passwordMustContainOneLowercaseCharacter}\n";
-    }
-
-    const atLeastOneUpperCaseCharacterRegex = r"""^(?=.*[A-Z])""";
-    if (!RegExp(atLeastOneUpperCaseCharacterRegex).hasMatch(_password)) {
-      errorMessage +=
-          "* ${AppLocalizations.of(context)!.passwordMustContainOneUppercaseCharacter}\n";
-    }
-
-    const atLeastOneNumericCharacterRegex = r"""^(?=.*[0-9])""";
-    if (!RegExp(atLeastOneNumericCharacterRegex).hasMatch(_password)) {
-      errorMessage +=
-          "* ${AppLocalizations.of(context)!.passwordMustContainOneNumericCharacter}\n";
-    }
-
-    const atLeastOneSpecialCharacterRegex = r"""^(?=.*[!@#\$%\^&\*])""";
-    if (!RegExp(atLeastOneSpecialCharacterRegex).hasMatch(_password)) {
-      errorMessage +=
-          "* ${AppLocalizations.of(context)!.passwordMustContainOneOneSpecialCharacter}\n";
-    }
-
-    const atLeastEightCharacterLongRegex = r"""^(?=.{8,})""";
-    if (!RegExp(atLeastEightCharacterLongRegex).hasMatch(_password)) {
-      errorMessage +=
-          "* ${AppLocalizations.of(context)!.passwordMustBeAtLeastEightCharacterLong}\n";
-    }
-    return errorMessage.isEmpty ? null : errorMessage;
-  }
 }
+
+class registerPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+} */

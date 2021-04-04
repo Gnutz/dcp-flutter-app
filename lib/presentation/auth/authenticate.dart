@@ -1,7 +1,5 @@
-import 'package:digtial_costume_platform/presentation/auth/register.dart';
-import 'package:digtial_costume_platform/presentation/auth/sign_in.dart';
-import 'package:flutter/material.dart';
 
+/*
 class Authenticate extends StatefulWidget {
   @override
   _AuthenticateState createState() => _AuthenticateState();
@@ -23,3 +21,6 @@ class _AuthenticateState extends State<Authenticate> {
     }
   }
 }
+
+
+ */
