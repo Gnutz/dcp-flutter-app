@@ -79,16 +79,18 @@ class _CostumeDetailState extends State<CostumeDetail> {
 }
  */
 
+import 'package:digtial_costume_platform/presentation/auth/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        home: Text(""));
+    return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
+      home: SignInPage(),
+    );
   }
 }

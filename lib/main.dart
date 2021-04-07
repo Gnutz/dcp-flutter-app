@@ -9,3 +9,4 @@ void main() async {
   Locator().setUp();
   runApp(App());
 }
+

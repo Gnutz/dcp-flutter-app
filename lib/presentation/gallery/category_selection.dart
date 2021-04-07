@@ -1,11 +1,7 @@
-import 'package:digtial_costume_platform/application/auth/gallery/category_select/category_selection_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../locator.dart';
+/*S
+class CategorySelection extends StatelessWidget {
 
-class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +17,10 @@ class SignInPage extends StatelessWidget {
               label: Text(AppLocalizations.of(context)!.signUp))
         ],
       ),
-      body: BlocProvider(
-          create: (context) => Locator().locator<CategorySelectionBloc>(),
+      body: BlocProvider(create: (context) => Locator().locator<CategorySelectionBloc>(),
           child: Container()),
+
     );
   }
 }
+*/

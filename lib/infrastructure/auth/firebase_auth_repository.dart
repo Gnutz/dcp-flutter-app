@@ -1,12 +1,18 @@
-/*
-class FirebaseAuthRepository implements IAuthService{
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
+import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
+import 'package:digtial_costume_platform/domain/auth/i_user_service.dart';
+import 'package:digtial_costume_platform/domain/auth/user.dart';
+import 'package:digtial_costume_platform/domain/core/institution.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
+
+class FirebaseAuthRepository implements IAuthService {
   final fba.FirebaseAuth _auth = fba.FirebaseAuth.instance;
-  final _store =  FirebaseFirestore.instance;
+  final _store = FirebaseFirestore.instance;
 
+  final IUserService _userRepository;
 
-  final String USERS_COLLECTION = 'users';
-
-
+  FirebaseAuthRepository(this._userRepository);
 
   @override
   Future<void> isCreator() {
@@ -15,16 +21,14 @@ class FirebaseAuthRepository implements IAuthService{
   }
 
   @override
-  Future<AuthFailure?> signInWithEmailAndPassword({required String email, required String password}) async {
-    print('test');
-    try{
+  Future<AuthFailure?> signInWithEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-    } on fba.FirebaseException catch(e){
-      if(e.code == "wrong-password" || e.code == "user-not-found"){
-        print('test2');
-      return const AuthFailure.invalidEmailAndPasswordCombination();
-      }
-      else{
+    } on fba.FirebaseException catch (e) {
+      if (e.code == "wrong-password" || e.code == "user-not-found") {
+        return const AuthFailure.invalidEmailAndPasswordCombination();
+      } else {
         return const AuthFailure.serverError();
       }
     }
@@ -33,47 +37,56 @@ class FirebaseAuthRepository implements IAuthService{
 
   @override
   Future<void> signOut() async {
-    // TODO: implement signOut
     await _auth.signOut();
   }
 
   @override
   Future<void> isAdmin() {
-    // TODO: implement isAdmin
     throw UnimplementedError();
   }
 
   @override
-  Future<AuthFailure?> registerUser({required String email, required String password, required Institution institution, required UserRole role}) async {
+  Future<AuthFailure?> registerUser(
+      {required String email,
+      required String password,
+      required Institution institution,
+      required UserRole role}) async {
     final isCreatorRequest = role == UserRole.creator;
 
-    try{
+    final user = User(
+      email: email,
+      isCreative: role == UserRole.creative,
+      institution: institution,
+    );
 
-      final result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    try {
+      final result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       final firebaseUser = result.user;
-      final user = User.fromFirebaseUser(firebaseUser);
-      await _store.collection(USERS_COLLECTION).doc(user?.uid).set(data);
+      user.uid = firebaseUser?.uid;
+      await _userRepository.addUser(user);
 
-      if(isCreatorRequest) {
+      if (isCreatorRequest) {
         //TODO make a creator request:
-        _store.collection(INSTITUTIONS).doc(institution.uid).collection(CREATOR_REQUESTS).add(data);
+        _userRepository.addCreatorRequest(user);
       }
-
-    } on fba.FirebaseException catch(e){
-      if(e.code == "wrong-password" || e.code == "user-not-found"){
-        print('test2');
+    } on fba.FirebaseException catch (e) {
+      if (e.code == "wrong-password" || e.code == "user-not-found") {
         return const AuthFailure.invalidEmailAndPasswordCombination();
-      }
-      else{
+      } else {
         return const AuthFailure.serverError();
       }
     }
     return null;
   }
 
+  @override
+  Future<User?> getCurrentUser() async {
+    final authedUser = _auth.currentUser;
+    if (authedUser != null) {
+      return await _userRepository.getUser(authedUser.uid);
+    }
 
-
+    return null;
   }
-
-
-} */
+}

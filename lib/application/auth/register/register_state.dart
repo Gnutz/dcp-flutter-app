@@ -20,9 +20,7 @@ class RegisterState with _$RegisterState {
       password: "",
       passwordConfirmation: "",
       role: UserRole.creative,
-      institution: null,
       userAgreementAccepted: false,
       isSubmitting: false,
-      authFailureOrSuccessOption: null,
       showInputErrorMessages: false);
 }

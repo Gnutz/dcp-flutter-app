@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 String? validateEmailAddress(BuildContext context, String input) {
-  final isValid = EmailDomainValidator.validateEmailAddress(input);
+ final isValid = EmailDomainValidator.validateEmailAddress(input);
 
-  return isValid ? null : AppLocalizations.of(context)!.email;
+  return isValid ? null : AppLocalizations.of(context)!.enterAnEmail;
 }
 
 String? validatePassword(BuildContext context, String input) {

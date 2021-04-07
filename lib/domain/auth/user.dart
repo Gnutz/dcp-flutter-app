@@ -1,4 +1,4 @@
-import 'package:digtial_costume_platform/domain/costume/institution.dart';
+import 'package:digtial_costume_platform/domain/core/institution.dart';
 
 enum UserRole {
   creative,

@@ -1,4 +1,4 @@
-import 'package:digtial_costume_platform/domain/costume/institution.dart';
+import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:flutter/material.dart';

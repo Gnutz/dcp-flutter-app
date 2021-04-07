@@ -40,8 +40,6 @@ class SignInForm extends StatelessWidget {
                       height: 20.0,
                     ),
                     _buildSubmitButton(context),
-                    const SizedBox(height: 12.0),
-                    //_buildErrorDisplay()
                   ],
                 ),
               ),
@@ -51,20 +49,25 @@ class SignInForm extends StatelessWidget {
   }
 
   Widget _buildEmailInput(BuildContext context, SignInState state) {
+    final bloc = context.read<SignInBloc>();
+
     return InputField(
         hintText: AppLocalizations.of(context)!.email,
-        validator: (_) => validateEmailAddress(context, state.emailAddress),
-        onChanged: (val) =>
-            context.read<SignInBloc>().add(SignInEvent.emailChanged(val)));
+        validator: (_) =>
+            validateEmailAddress(context, bloc.state.emailAddress),
+        onChanged: (val) => bloc.add(SignInEvent.emailChanged(val)));
   }
 
   Widget _buildPasswordInput(BuildContext context, SignInState state) {
-    return InputField(
-        hintText: AppLocalizations.of(context)!.password,
+    final bloc = context.read<SignInBloc>();
+
+    return TextFormField(
+        cursorColor: Colors.pink,
+        decoration: textInputDecorator.copyWith(
+            hintText: AppLocalizations.of(context)!.password, errorMaxLines: 5),
         obscureText: true,
-        validator: (_) => validatePassword(context, state.password),
-        onChanged: (val) =>
-            context.read<SignInBloc>().add(SignInEvent.passwordChanged(val)));
+        validator: (_) => validatePassword(context, bloc.state.password),
+        onChanged: (val) => bloc.add(SignInEvent.passwordChanged(val)));
   }
 
   Widget _buildSubmitButton(BuildContext context) {
@@ -80,10 +83,4 @@ class SignInForm extends StatelessWidget {
             style: const TextStyle(color: Colors.white)));
   }
 
-  Widget _buildErrorDisplay() {
-    return Text(
-      "error",
-      style: const TextStyle(color: Colors.red, fontSize: 14.0),
-    );
-  }
 }

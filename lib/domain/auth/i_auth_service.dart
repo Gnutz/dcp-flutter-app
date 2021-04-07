@@ -1,6 +1,6 @@
 import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
-import 'package:digtial_costume_platform/domain/costume/institution.dart';
+import 'package:digtial_costume_platform/domain/core/institution.dart';
 
 abstract class IAuthService {
   Future<AuthFailure?> registerUser(
@@ -11,6 +11,8 @@ abstract class IAuthService {
 
   Future<AuthFailure?> signInWithEmailAndPassword(
       {required String email, required String password});
+
+  Future<User?> getCurrentUser();
 
   Future<void> signOut();
 

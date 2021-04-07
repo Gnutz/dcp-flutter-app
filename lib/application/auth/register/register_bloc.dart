@@ -4,14 +4,12 @@ import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
 import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
+import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/value_validators.dart';
-import 'package:digtial_costume_platform/domain/costume/institution.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'register_bloc.freezed.dart';
-
 part 'register_event.dart';
-
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
@@ -40,7 +38,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }, signInNavPressed: (e) async* {
       yield _signInNavEvenHandler(e);
     }, registerWithFormFilledPressed: (e) async* {
-      yield _registerSubmitEventHandler(e);
+      yield* _registerSubmitEventHandler(e);
     });
   }
 
@@ -73,7 +71,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     );
   }
 
-  RegisterState _institutionSelectedEventHandler(institutionSelected e) {
+  RegisterState _institutionSelectedEventHandler(InstitutionSelected e) {
     return state.copyWith(
       institution: e.institution,
       authFailureOrSuccessOption: null,
@@ -102,6 +100,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> _registerSubmitEventHandler(
       RegisterWithFormFilledPressed e) async* {
     AuthFailure? failureOrSuccess;
+
     final isEmailValid =
         EmailDomainValidator.validateEmailAddress(state.emailAddress);
     final isPasswordValid =
@@ -112,7 +111,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     final institutionSelected = state.institution != null;
 
     if (isEmailValid && isPasswordValid && institutionSelected) {
-      print('yayayayaya');
       yield state.copyWith(
           isSubmitting: true, authFailureOrSuccessOption: null);
 

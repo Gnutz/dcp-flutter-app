@@ -22,3 +22,4 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.passwordMissingSpecialCharacter(
       {required T failedValue}) = PasswordMissingSpecialCharacter<T>;
 }
+

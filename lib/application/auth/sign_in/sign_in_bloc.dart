@@ -8,9 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
 part 'sign_in_bloc.freezed.dart';
-
 part 'sign_in_event.dart';
-
 part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
@@ -66,8 +64,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       yield state.copyWith(
           isSubmitting: false, authFailureOrSuccessOption: failureOrSuccess);
     }
-
-    print('yeeeee');
 
     yield state.copyWith(
         isSubmitting: false,

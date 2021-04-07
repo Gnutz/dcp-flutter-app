@@ -1,6 +1,6 @@
 import 'package:digtial_costume_platform/application/auth/register/register_bloc.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
-import 'package:digtial_costume_platform/domain/costume/institution.dart';
+import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/presentation/auth/validators.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +19,17 @@ class RegisterForm extends StatelessWidget {
       listener: (context, state) {
         if (state.authFailureOrSuccessOption != null) {
           state.authFailureOrSuccessOption!.map(
-            serverError: (_) => print("serverError"),
-            emailInUse: (_) => print("mailInUse"),
+            serverError: (_) => ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text(AppLocalizations.of(context)!.errorServer))),
+            emailInUse: (_) => ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content:
+                        Text(AppLocalizations.of(context)!.errorEmailInUse))),
             invalidEmailAndPasswordCombination: (_) =>
-                print("wrongCombination"),
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(AppLocalizations.of(context)!
+                        .errorInvalidCombination))),
           );
         } else {
           //TODO: navigate
@@ -33,6 +40,7 @@ class RegisterForm extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Form(
+              autovalidate: state.showInputErrorMessages,
               child: Container(
                 alignment: Alignment.center,
                 child: SingleChildScrollView(
@@ -65,8 +73,6 @@ class RegisterForm extends StatelessWidget {
                         height: 20.0,
                       ),
                       _buildSubmitButton(context, state),
-                      const SizedBox(height: 12.0),
-                      _buildErrorDisplay(),
                     ],
                   ),
                 ),
@@ -77,59 +83,84 @@ class RegisterForm extends StatelessWidget {
   }
 
   Widget _buildNameInput(BuildContext context, RegisterState state) {
+    final bloc = context.read<RegisterBloc>();
+
     return InputField(
         hintText: AppLocalizations.of(context)!.yourName,
-        validator: (val) =>
-            val!.isEmpty ? AppLocalizations.of(context)!.enterAName : null,
-        onChanged: (val) =>
-            context.read<RegisterBloc>().add(RegisterEvent.nameChanged(val)));
+        validator: (_) => bloc.state.name.isEmpty
+            ? AppLocalizations.of(context)!.enterAName
+            : null,
+        onChanged: (val) => bloc.add(RegisterEvent.nameChanged(val)));
   }
 
   Widget _buildEmailInput(BuildContext context, RegisterState state) {
+    final bloc = context.read<RegisterBloc>();
+
     return InputField(
         hintText: AppLocalizations.of(context)!.email,
-        validator: (_) => validateEmailAddress(context, state.emailAddress),
-        onChanged: (val) =>
-            context.read<RegisterBloc>().add(RegisterEvent.emailChanged(val)));
+        validator: (_) =>
+            validateEmailAddress(context, bloc.state.emailAddress),
+        onChanged: (val) => bloc.add(RegisterEvent.emailChanged(val)));
   }
 
   Widget _buildPasswordInput(BuildContext context, RegisterState state) {
-    return InputField(
-        hintText: AppLocalizations.of(context)!.password,
+    final bloc = context.read<RegisterBloc>();
+
+    return TextFormField(
+        cursorColor: MyColorTheme.textFormFieldCursorColor,
+        decoration: textInputDecorator.copyWith(
+            hintText: AppLocalizations.of(context)!.password, errorMaxLines: 5),
         obscureText: true,
-        validator: (_) => validatePassword(context, state.password),
-        onChanged: (val) => context
-            .read<RegisterBloc>()
-            .add(RegisterEvent.passwordChanged(val)));
+        validator: (_) => validatePassword(context, bloc.state.password),
+        onChanged: (val) => bloc.add(RegisterEvent.passwordChanged(val)));
   }
 
   Widget _buildPasswordConfirmationInput(
       BuildContext context, RegisterState state) {
+    final bloc = context.read<RegisterBloc>();
+
     return InputField(
         hintText: AppLocalizations.of(context)!.passwordConfirmation,
-        validator: (val) => state.password == state.passwordConfirmation
-            ? AppLocalizations.of(context)!.passwordsMustBeIdentical
-            : null,
+        validator: (val) =>
+            bloc.state.password == bloc.state.passwordConfirmation
+                ? AppLocalizations.of(context)!.passwordsMustBeIdentical
+                : null,
         obscureText: true,
-        onChanged: (val) => context
-            .read<RegisterBloc>()
-            .add(RegisterEvent.passwordConfirmed(val)));
+        onChanged: (val) => bloc.add(RegisterEvent.passwordConfirmed(val)));
   }
 
   Widget _buildRoleSelection(BuildContext context, RegisterState state) {
+    final bloc = context.read<RegisterBloc>();
+
     return DropdownButtonFormField<UserRole>(
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(context)!.selectRole),
-        value: state.role,
+        value: bloc.state.role,
         items: UserRole.values
-            .map((UserRole role) => DropdownMenuItem<UserRole>(
-                value: role, child: Text(role.toString())))
+            .where((role) => role != UserRole.admin)
+            .map((UserRole role) => _mapUserRoleToDropDownItem(context, role))
             .toList(),
-        onChanged: (val) =>
-            context.read<RegisterBloc>().add(RegisterEvent.roleSelected(val!)));
+        onChanged: (val) => bloc.add(RegisterEvent.roleSelected(val!)));
+  }
+
+  DropdownMenuItem<UserRole> _mapUserRoleToDropDownItem(
+      BuildContext context, UserRole role) {
+    switch (role) {
+      case UserRole.creative:
+        return DropdownMenuItem<UserRole>(
+            value: role, child: Text(AppLocalizations.of(context)!.creative));
+      case UserRole.creator:
+        return DropdownMenuItem<UserRole>(
+            value: role, child: Text(AppLocalizations.of(context)!.creator));
+      case UserRole.admin:
+        return DropdownMenuItem<UserRole>(
+            value: role, child: Text(AppLocalizations.of(context)!.admin));
+    }
   }
 
   Widget _buildInstitutionSelection(BuildContext context, RegisterState state) {
+    final bloc = context.read<RegisterBloc>();
+
     return DropdownButtonFormField<Institution>(
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(context)!.selectYourInstitution),
@@ -142,40 +173,37 @@ class RegisterForm extends StatelessWidget {
                   child: Text(institution.name),
                 ))
             .toList(),
-        onChanged: (val) => context
-            .read<RegisterBloc>()
-            .add(RegisterEvent.institutionSelected(val!)),
-        value: state.institution);
+        onChanged: (val) => bloc.add(RegisterEvent.institutionSelected(val!)),
+        value: bloc.state.institution);
   }
 
   Widget _buildUserAgreementCheckBox(
       BuildContext context, RegisterState state) {
+    final bloc = context.read<RegisterBloc>();
+
     return CheckboxListTile(
       title: Text(
           AppLocalizations.of(context)!.userDataStorageConsentOptInMessage),
-      value: state.userAgreementAccepted,
-      onChanged: (_) => context
-          .read<RegisterBloc>()
-          .add(const RegisterEvent.userAgreementAcceptToggle()),
+      value: bloc.state.userAgreementAccepted,
+      onChanged: (_) =>
+          bloc.add(const RegisterEvent.userAgreementAcceptToggle()),
       controlAffinity: ListTileControlAffinity.leading,
+      checkColor: MyColorTheme.backgroundColor,
+      activeColor: MyColorTheme.buttonColor,
     );
   }
 
   Widget _buildSubmitButton(BuildContext context, RegisterState state) {
+    final bloc = context.read<RegisterBloc>();
+
     return ElevatedButton(
-      onPressed: state.userAgreementAccepted
-          ? () => context
-              .read<RegisterBloc>()
-              .add(const RegisterEvent.registerWithFormFilledPressed())
+      onPressed: bloc.state.userAgreementAccepted
+          ? () => bloc.add(const RegisterEvent.registerWithFormFilledPressed())
           : null,
-      //color: Colors.pink[400],
+      style: ElevatedButton.styleFrom(primary: MyColorTheme.buttonColor),
       child: Text(AppLocalizations.of(context)!.signUp,
-          style: const TextStyle(color: Colors.white)),
+          style: const TextStyle(color: MyColorTheme.buttonTextColor)),
       //disabledColor: Colors.cyan,
     );
-  }
-
-  Widget _buildErrorDisplay() {
-    return Text("");
   }
 }

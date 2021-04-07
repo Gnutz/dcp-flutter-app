@@ -1,9 +1,5 @@
-import 'package:digtial_costume_platform/domain/costume/costume.dart';
-import 'package:digtial_costume_platform/presentation/costume/details/production_card.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+/*
 class DetailsPage extends StatelessWidget {
   final Costume costume;
 
@@ -36,7 +32,7 @@ class DetailsPage extends StatelessWidget {
                       fontSize: 24.0,
                       color: Colors.grey[600],
                       fontWeight: FontWeight.bold)),
-              Text('${costume.timeperiod},',
+              Text('${costume.timePeriod},',
                   style: TextStyle(
                       fontSize: 24.0,
                       color: Colors.grey[600],
@@ -143,4 +139,4 @@ class DetailsPage extends StatelessWidget {
       ),
     );
   }
-}
+} */

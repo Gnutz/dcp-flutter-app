@@ -6,7 +6,7 @@ class Institution {
 
   Institution(
       {required this.uid,
-      this.alias,
       required this.domain,
-      required this.name});
+      required this.name,
+      this.alias});
 }

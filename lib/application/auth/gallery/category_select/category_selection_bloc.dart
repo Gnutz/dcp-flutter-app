@@ -7,9 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
 part 'category_selection_bloc.freezed.dart';
-
 part 'category_selection_event.dart';
-
 part 'category_selection_state.dart';
 
 class CategorySelectionBloc
@@ -28,7 +26,7 @@ class CategorySelectionBloc
     yield* event.map(catagorySelected: (e) async* {
       _categorySelectedEventHandler(e);
     }, loadCategories: (_) async* {
-      yield _loadCategories();
+      yield* _loadCategories();
     });
   }
 
@@ -37,7 +35,8 @@ class CategorySelectionBloc
   Stream<CategorySelectionState> _loadCategories() async* {
     yield CategorySelectionState.initial();
 
-    var categories = _galleryService.categories;
+    final categories = _galleryService.categories;
     yield state.copyWith(loading: false, categories: categories);
   }
 }
+

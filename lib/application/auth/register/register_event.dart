@@ -13,7 +13,7 @@ class RegisterEvent with _$RegisterEvent {
       PasswordConfirmedChanged;
 
   const factory RegisterEvent.institutionSelected(Institution institution) =
-      institutionSelected;
+      InstitutionSelected;
 
   const factory RegisterEvent.roleSelected(UserRole role) = RoleSelected;
 

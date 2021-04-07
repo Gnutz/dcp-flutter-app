@@ -1,8 +1,7 @@
+import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../../../domain/costume/costume.dart';
 
 class ProductionCard extends StatelessWidget {
   final Production production;

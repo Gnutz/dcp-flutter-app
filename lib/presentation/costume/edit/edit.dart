@@ -1,9 +1,4 @@
-import 'package:digtial_costume_platform/domain/costume/costume.dart';
-import 'package:digtial_costume_platform/shared/constants.dart';
-import 'package:digtial_costume_platform/shared/loading.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+/*
 class CostumeEditPage extends StatefulWidget {
   final Function? toggleView;
 
@@ -25,7 +20,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
   final _costume = Costume(
     id: "0",
     fashion: Fashion.mens,
-    timeperiod: "1920",
+    timePeriod: "1920",
     category: "Shirt",
     quantity: 1,
     colors: ["blue", "green"],
@@ -49,7 +44,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       Production(
           title: "third", startDate: DateTime.now(), endDate: DateTime.now())
     ],
-    storageLocation: "Lille garderobe - 13",
+    storageLocation: StorageLocation(id: "eee", location: "Lille garderobe - 13"),
   );
 
   final _error = "";
@@ -134,9 +129,8 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
             .map((category) =>
                 DropdownMenuItem(value: category, child: Text(category)))
             .toList(),
-        validator: (val) => _costume.category == val
-            ? AppLocalizations.of(context)!.youMustSelectACategory
-            : null,
+        validator: (val) =>
+            _costume.category == val ? AppLocalizations.of(context)!.youMustSelectACategory : null,
         onChanged: (category) {
           setState(() {
             _costume.category = category;
@@ -149,7 +143,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
     return DropdownButtonFormField<String>(
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(context)!.selectTheCostumeTimePeriod),
-        validator: (val) => _costume.timeperiod == null
+        validator: (val) => _costume.timePeriod == null
             ? AppLocalizations.of(context)!.youMustSelectATimePeriod
             : null,
         items: _timePeriods
@@ -157,18 +151,17 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
             .toList(),
         onChanged: (time) {
           setState(() {
-            _costume.timeperiod = time;
+            _costume.timePeriod = time;
           });
         },
-        value: _costume.timeperiod);
+        value: _costume.timePeriod);
   }
 
   Widget _buildSubmitButton() {
     return ElevatedButton(
       onPressed: null,
       //color: Colors.pink[400],
-      child: Text(AppLocalizations.of(context)!.save,
-          style: TextStyle(color: Colors.white)),
+      child: Text(AppLocalizations.of(context)!.save, style: TextStyle(color: Colors.white)),
       //disabledColor: Colors.cyan,
     );
   }
@@ -183,7 +176,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
   Widget _buildFashionSelection() {
     return Container(
       decoration: const BoxDecoration(
-          color: Colors.white,
+          color: MyColorTheme.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(5.0))),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -222,8 +215,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       Flexible(
         child: TextFormField(
           controller: _themeHolder,
-          decoration: textInputDecorator.copyWith(
-              hintText: AppLocalizations.of(context)!.newTheme),
+          decoration: textInputDecorator.copyWith(hintText:AppLocalizations.of(context)!.newTheme),
           onChanged: (val) {
             setState(() => _currentTheme = val);
           },
@@ -233,8 +225,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       const SizedBox(width: 8.0),
       ElevatedButton(
         onPressed: _submitTheme,
-        child: Text(AppLocalizations.of(context)!.add,
-            style: const TextStyle(color: Colors.white)),
+        child: Text(AppLocalizations.of(context)!.add, style: const TextStyle(color: Colors.white)),
       ),
     ]);
   }
@@ -244,8 +235,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       Flexible(
         child: TextFormField(
           controller: _colorHolder,
-          decoration: textInputDecorator.copyWith(
-              hintText: AppLocalizations.of(context)!.newColor),
+          decoration: textInputDecorator.copyWith(hintText: AppLocalizations.of(context)!.newColor),
           onChanged: (val) {
             setState(() => _currentColor = val);
           },
@@ -255,8 +245,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
       const SizedBox(width: 8.0),
       ElevatedButton(
         onPressed: _submitColor,
-        child: Text(AppLocalizations.of(context)!.add,
-            style: const TextStyle(color: Colors.white)),
+        child: Text(AppLocalizations.of(context)!.add, style: const TextStyle(color: Colors.white)),
       ),
     ]);
   }
@@ -313,41 +302,39 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
             children: [
               Text(
                 AppLocalizations.of(context)!.storage,
-                style: const TextStyle(
-                    fontSize: 18.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12.0),
               DropdownButtonFormField<String>(
                   decoration: textInputDecorator.copyWith(
-                      hintText: AppLocalizations.of(context)!
-                          .selectWhereTheCostumeIsStored),
+                      hintText: AppLocalizations.of(context)!.selectWhereTheCostumeIsStored),
                   items: _storageLocations
                       .map((storage) => DropdownMenuItem(
                           value: storage, child: Text(storage)))
                       .toList(),
                   onChanged: (storage) {
                     setState(() {
-                      _costume.storageLocation = storage;
+                      _costume.storageLocation = StorageLocation(id: _costume.storageLocation!.id, location: storage!);
                     });
                   },
-                  value: _costume.storageLocation),
+                  value: _costume.storageLocation!.location),
               const SizedBox(height: 12.0),
               DropdownButtonFormField<String>(
                   decoration: textInputDecorator.copyWith(
-                      hintText: AppLocalizations.of(context)!
-                          .selectWhereTheCostumeIsStored),
+                      hintText: AppLocalizations.of(context)!.selectWhereTheCostumeIsStored),
                   items: _storageLocations
                       .map((storage) => DropdownMenuItem(
                           value: storage, child: Text(storage)))
                       .toList(),
                   onChanged: (storage) {
                     setState(() {
-                      _costume.storageLocation = storage;
+                      _costume.storageLocation = StorageLocation(id: _costume.storageLocation!.id, location: storage!);
                     });
                   },
-                  value: _costume.storageLocation),
+                  value: _costume.storageLocation!.location),
             ],
           ),
         ));
   }
 }
+*/
