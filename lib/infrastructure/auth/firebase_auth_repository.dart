@@ -53,17 +53,27 @@ class FirebaseAuthRepository implements IAuthService {
       required UserRole role}) async {
     final isCreatorRequest = role == UserRole.creator;
 
+    print(institution.uid);
+
     final user = User(
       email: email,
-      isCreative: role == UserRole.creative,
+      isCreative: true,
+      isCreator: false,
+      isAdmin: false,
       institution: institution,
     );
+
+    print(user.name);
+    print(user.email);
+    print(user.institution?.uid);
 
     try {
       final result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       final firebaseUser = result.user;
       user.uid = firebaseUser?.uid;
+      print(user.uid);
+      print("adding user to database");
       await _userRepository.addUser(user);
 
       if (isCreatorRequest) {
@@ -71,6 +81,7 @@ class FirebaseAuthRepository implements IAuthService {
         _userRepository.addCreatorRequest(user);
       }
     } on fba.FirebaseException catch (e) {
+      print(e);
       if (e.code == "wrong-password" || e.code == "user-not-found") {
         return const AuthFailure.invalidEmailAndPasswordCombination();
       } else {

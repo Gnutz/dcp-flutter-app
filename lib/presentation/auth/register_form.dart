@@ -10,7 +10,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class RegisterForm extends StatelessWidget {
   //TODO: GRAP FROM SERVER
   final _institutions = <Institution>[
-    Institution(uid: "1", alias: "AT", domain: "@at", name: "Aarhus Teater")
+    Institution(
+        uid: "fHEEOUrR8ZcsqbH19dzC",
+        alias: "AT",
+        domain: "@at",
+        name: "Aarhus Teater")
   ];
 
   @override

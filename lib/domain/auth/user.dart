@@ -1,4 +1,7 @@
 import 'package:digtial_costume_platform/domain/core/institution.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'user.g.dart';
 
 enum UserRole {
   creative,
@@ -6,6 +9,7 @@ enum UserRole {
   admin,
 }
 
+@JsonSerializable(anyMap: true, explicitToJson: true)
 class User {
   String? uid;
   String? name;
@@ -16,11 +20,15 @@ class User {
   Institution? institution;
 
   User(
-      {this.uid,
+      {@JsonKey(ignore: true) this.uid,
       this.name,
       this.email,
       this.isCreative = true,
       this.isCreator = false,
       this.isAdmin = false,
-      this.institution});
+      Institution? this.institution});
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

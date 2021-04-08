@@ -11,12 +11,19 @@ class FirebaseUserRepository implements IUserService {
 
   @override
   Future<void> addUser(User user) async {
-    // await _store.collection(USERS_COLLECTION).doc(user?.uid).set(user);
+    try {
+      await _store
+          .collection(USERS_COLLECTION)
+          .doc(user.uid)
+          .set(user.toJson());
+    } catch (e) {
+      print("hey");
+      print(e);
+    }
   }
 
   @override
   Future<User?> getUser(String id) async {
-    //TODO tryCATCH
     final user = await _store.collection(USERS_COLLECTION).doc(id).get();
   }
 

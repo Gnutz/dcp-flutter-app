@@ -79,7 +79,7 @@ class _CostumeDetailState extends State<CostumeDetail> {
 }
  */
 
-import 'package:digtial_costume_platform/presentation/auth/sign_in_page.dart';
+import 'package:digtial_costume_platform/presentation/auth/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -90,7 +90,7 @@ class App extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
-      home: SignInPage(),
+      home: RegisterPage(),
     );
   }
 }
