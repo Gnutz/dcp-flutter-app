@@ -113,9 +113,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     if (isEmailValid && isPasswordValid && institutionSelected) {
       yield state.copyWith(
           isSubmitting: true, authFailureOrSuccessOption: null);
-
-      //TODO: clean Up
       failureOrSuccess = await _auth.registerUser(
+          name: state.name,
           email: state.emailAddress,
           password: state.password,
           institution: state.institution!,

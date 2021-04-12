@@ -1,15 +1,23 @@
+import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
+
+import 'costume.dart';
+
 abstract class ICostumeRepository {
-  //getCostumes(query)
-  //getCostume(id)
-  //create costume(costume)
-  //update costume()
-  //delete costume
+  Future<List<Costume>> getCostumes(String instituionId, CostumeQuery query);
 
-  //addImage(image, costume);
+  Future<Costume> getCostume(String instituionId, String id);
 
-  //addAProduction
+  Future<void> createCostume(String instituionId, Costume costume);
 
-  //checkOut(production, id);
-  //_setStatus()
+  Future<void> updateCostume(String instituionId, Costume updated);
+
+  Future<void> deleteCostume(String instituionId, String id);
+
+//FutuaddImage(image, costume);
+
+//addAProduction
+
+//checkOut(production, id);
+//_setStatus()
 
 }

@@ -30,7 +30,9 @@ class CategorySelectionBloc
     });
   }
 
-  void _categorySelectedEventHandler(CatagorySelected e) {}
+  void _categorySelectedEventHandler(CatagorySelected e) {
+    //TODO: navigate to galleryPage with the query
+  }
 
   Stream<CategorySelectionState> _loadCategories() async* {
     yield CategorySelectionState.initial();

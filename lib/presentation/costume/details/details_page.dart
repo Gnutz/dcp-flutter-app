@@ -1,5 +1,7 @@
+import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-/*
 class DetailsPage extends StatelessWidget {
   final Costume costume;
 
@@ -117,10 +119,10 @@ class DetailsPage extends StatelessWidget {
                         fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   Column(children: [
-                    ...costume.productions!
-                        .map<Widget>((production) =>
-                            ProductionCard(production: production))
-                        .toList(),
+                    // ...costume.productions!
+                    //     .map<Widget>((production) =>
+                    //         ProductionCard(production: production.))
+                    //    .toList(),
                     ElevatedButton(
                         onPressed: () {},
                         child: Text(AppLocalizations.of(context)!.seeAll,
@@ -139,4 +141,4 @@ class DetailsPage extends StatelessWidget {
       ),
     );
   }
-} */
+}

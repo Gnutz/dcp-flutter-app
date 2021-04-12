@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digtial_costume_platform/domain/auth/creator_role_request.dart';
 import 'package:digtial_costume_platform/domain/auth/i_user_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 
@@ -17,22 +18,26 @@ class FirebaseUserRepository implements IUserService {
           .doc(user.uid)
           .set(user.toJson());
     } catch (e) {
-      print("hey");
       print(e);
     }
   }
 
   @override
   Future<User?> getUser(String id) async {
-    final user = await _store.collection(USERS_COLLECTION).doc(id).get();
+    final snapshot = await _store.collection(USERS_COLLECTION).doc(id).get();
+    final json = snapshot.data();
+    if (json != null) {
+      return User.fromJson(json);
+    }
+    return null;
   }
 
+  @override
   Future<void> addCreatorRequest(User user) async {
     _store
         .collection(INSTITUTIONS_COLLECTION)
         .doc(user.institution!.uid)
-        .collection(CREATOR_REQUESTS_COLLECTION);
-
-    ///  .add(CreatorRoleRequest(requestedBy: user));
+        .collection(CREATOR_REQUESTS_COLLECTION)
+        .add(CreatorRoleRequest(requestedBy: user).toJson());
   }
 }

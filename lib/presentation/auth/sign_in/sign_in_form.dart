@@ -1,3 +1,4 @@
+import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/application/auth/sign_in/sign_in_bloc.dart';
 import 'package:digtial_costume_platform/presentation/auth/validators.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
@@ -16,7 +17,7 @@ class SignInForm extends StatelessWidget {
           invalidEmailAndPasswordCombination: (_) => print("wrongCombination"),
         );
       } else {
-        //TODO: navigate
+        context.read<AuthBloc>().add(const AuthEvent.checkRequested());
       }
     }, builder: (context, state) {
       return Container(
@@ -73,14 +74,12 @@ class SignInForm extends StatelessWidget {
   Widget _buildSubmitButton(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
-          print('pressed');
           context
               .read<SignInBloc>()
-              .add(SignInEvent.signInWithEmailAndPasswordPressed());
+              .add(const SignInEvent.signInWithEmailAndPasswordPressed());
         },
         //color: Colors.pink[400],
         child: Text(AppLocalizations.of(context)!.signIn,
             style: const TextStyle(color: Colors.white)));
   }
-
 }

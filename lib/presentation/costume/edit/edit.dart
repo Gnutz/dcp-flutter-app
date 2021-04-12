@@ -1,4 +1,9 @@
 /*
+import 'package:digtial_costume_platform/domain/core/production.dart';
+import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/domain/costume/status.dart';
+import 'package:flutter/cupertino.dart';
+
 class CostumeEditPage extends StatefulWidget {
   final Function? toggleView;
 
@@ -54,7 +59,7 @@ class _CostumeEditPageState extends State<CostumeEditPage> {
   String _currentColor = "";
 
   @override
-  Widget build(BuildContext context) {
+  Widget? build(BuildContext context) {
     return _loading
         ? Loading()
         : Scaffold(

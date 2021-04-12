@@ -11,6 +11,7 @@ enum UserRole {
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
 class User {
+  @JsonKey(ignore: true)
   String? uid;
   String? name;
   String? email;
@@ -20,13 +21,13 @@ class User {
   Institution? institution;
 
   User(
-      {@JsonKey(ignore: true) this.uid,
+      {this.uid,
       this.name,
       this.email,
       this.isCreative = true,
       this.isCreator = false,
       this.isAdmin = false,
-      Institution? this.institution});
+      this.institution});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

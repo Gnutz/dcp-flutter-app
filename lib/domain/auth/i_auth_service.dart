@@ -4,7 +4,8 @@ import 'package:digtial_costume_platform/domain/core/institution.dart';
 
 abstract class IAuthService {
   Future<AuthFailure?> registerUser(
-      {required String email,
+      {required String name,
+      required String email,
       required String password,
       required Institution institution,
       required UserRole role});
@@ -16,7 +17,7 @@ abstract class IAuthService {
 
   Future<void> signOut();
 
-  Future<void> isCreator();
+  Future<bool> isCreator();
 
-  Future<void> isAdmin();
+  Future<bool> isAdmin();
 }

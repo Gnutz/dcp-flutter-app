@@ -79,18 +79,30 @@ class _CostumeDetailState extends State<CostumeDetail> {
 }
  */
 
-import 'package:digtial_costume_platform/presentation/auth/register_page.dart';
+import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
+import 'package:digtial_costume_platform/locator.dart';
+import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class App extends StatelessWidget {
+  final _router = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      debugShowCheckedModeBanner: false,
-      home: RegisterPage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) =>
+                Locator().locator<AuthBloc>()..add(AuthEvent.checkRequested()))
+      ],
+      child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: _router.onGeneratedRoute,
+      ),
     );
   }
 }
