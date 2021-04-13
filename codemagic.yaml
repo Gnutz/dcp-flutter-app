@@ -7,8 +7,9 @@ workflows:
       cocoapods: default
     scripts:
       - flutter build ios --debug --no-codesign
-    artifact:
+    artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      # build/**/outputs/**/*.aab
     publishing:
       email:
         recipients:
