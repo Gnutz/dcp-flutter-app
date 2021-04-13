@@ -6,4 +6,4 @@ workflows:
       xcode: latest
       cocoapods: default
     scripts:
-      - - flutter build ios --debug --no-codesign
+      - flutter build ios --debug --no-codesign
