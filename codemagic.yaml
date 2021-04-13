@@ -9,3 +9,7 @@ workflows:
       - flutter build ios --debug --no-codesign
     artifact:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+    publishing:
+      email:
+        recipients:
+          - kga@live.dk
