@@ -8,8 +8,7 @@ workflows:
     scripts:
       - flutter build ios --debug --no-codesign
     artifacts:
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
-      # build/**/outputs/**/*.aab
+      - build/**/outputs/**/*.app
     publishing:
       email:
         recipients:
