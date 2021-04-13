@@ -1,5 +1,6 @@
 # Workflow setup for building Native iOS project
 workflows:
+  ios-build: # workflow ID
     name: iOS project # workflow name
     environment:
       xcode: latest
