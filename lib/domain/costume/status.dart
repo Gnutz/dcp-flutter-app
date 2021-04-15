@@ -3,10 +3,17 @@ import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 
 class StorageLocation {
-  final String id;
-  final String location;
+  final Location main;
+  final Location subLocation;
 
-  StorageLocation({required this.id, required this.location});
+  StorageLocation({required this.main, required this.subLocation});
+}
+
+class Location {
+  final String id;
+  final String name;
+
+  Location({required this.id, required this.name});
 }
 
 abstract class Status {}

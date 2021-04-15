@@ -3,6 +3,8 @@ import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
+import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseCostumeRepository implements ICostumeRepository {
   final _store = FirebaseFirestore.instance;
@@ -100,9 +102,21 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<List<String>> getCategories() {
-    // TODO: implement getCategories
-    throw UnimplementedError();
+  Future<List<CostumeCategory>> getCategories() {
+    final _categories = <CostumeCategory>[
+      CostumeCategory(category: "Dresses", iconUri: Icons.looks_one),
+      CostumeCategory(category: "Shoes", iconUri: Icons.looks_two),
+      CostumeCategory(category: "T-shirts", iconUri: Icons.looks_3),
+      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+    ];
+    return Future.delayed(const Duration(seconds: 5))
+        .then((value) => _categories);
   }
 
   @override

@@ -18,6 +18,13 @@ abstract class Routes {
   static const gallery = "costume/gallery";
 }
 
+class NavigationService {
+  static final GlobalKey<NavigatorState> _navigatorKey =
+      GlobalKey<NavigatorState>();
+
+  static get instance => _navigatorKey.currentState;
+}
+
 class AppRouter {
   Route onGeneratedRoute(RouteSettings settings) {
     switch (settings.name) {

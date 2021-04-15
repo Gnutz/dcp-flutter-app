@@ -6,6 +6,7 @@ import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/value_validators.dart';
+import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'register_bloc.freezed.dart';
@@ -35,8 +36,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       yield _roleSelectedEventHandler(e);
     }, userAgreementAcceptToggle: (e) async* {
       yield _userAgreementAcceptedEventHandler();
-    }, signInNavPressed: (e) async* {
-      yield _signInNavEvenHandler(e);
+    }, signInNavPressed: (_) async* {
+      _signInNavEventHandler();
     }, registerWithFormFilledPressed: (e) async* {
       yield* _registerSubmitEventHandler(e);
     });
@@ -92,9 +93,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     );
   }
 
-  RegisterState _signInNavEvenHandler(SignInNavPressed e) {
-    //TODO: handle navigation
-    return RegisterState.initial();
+  void _signInNavEventHandler() {
+    NavigationService.instance.pushReplacementNamed(Routes.signIn);
   }
 
   Stream<RegisterState> _registerSubmitEventHandler(

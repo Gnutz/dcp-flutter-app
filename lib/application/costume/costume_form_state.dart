@@ -5,7 +5,7 @@ class CostumeFormState with _$CostumeFormState {
   const factory CostumeFormState(
       {required bool loading,
       required List<String> timePeriodOptions,
-      required List<String> categoryOptions,
+      required List<CostumeCategory> categoryOptions,
       required List<StorageLocation> storageLocationOptions,
       String? id,
       Fashion? fashion,
@@ -19,7 +19,7 @@ class CostumeFormState with _$CostumeFormState {
 
   factory CostumeFormState.initial() => const CostumeFormState(
       loading: true,
-      categoryOptions: <String>[],
+      categoryOptions: <CostumeCategory>[],
       timePeriodOptions: <String>[],
       storageLocationOptions: <StorageLocation>[]);
 }
