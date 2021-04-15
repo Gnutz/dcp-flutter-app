@@ -10,15 +10,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
 part 'costume_form_bloc.freezed.dart';
-
 part 'costume_form_event.dart';
-
 part 'costume_form_state.dart';
 
 class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   final ICostumeRepository _costumeRepository;
 
-  CostumeFormBloc(this._costumeRepository) : super(CostumeFormState.initial());
+  CostumeFormBloc(this._costumeRepository) : super(CostumeFormState.initial()) {
+    add(const CostumeFormEvent.loadFormOptions());
+  }
 
   @override
   Stream<CostumeFormState> mapEventToState(
