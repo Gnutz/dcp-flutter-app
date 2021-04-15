@@ -83,7 +83,6 @@ mixin _$RegisterEvent {
     required TResult Function() registerWithFormFilledPressed,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name)? nameChanged,
@@ -98,7 +97,6 @@ mixin _$RegisterEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NameChanged value) nameChanged,
@@ -114,7 +112,6 @@ mixin _$RegisterEvent {
         registerWithFormFilledPressed,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NameChanged value)? nameChanged,
@@ -146,7 +143,6 @@ class _$RegisterEventCopyWithImpl<$Res>
   _$RegisterEventCopyWithImpl(this._value, this._then);
 
   final RegisterEvent _value;
-
   // ignore: unused_field
   final $Res Function(RegisterEvent) _then;
 }
@@ -156,7 +152,6 @@ abstract class $NameChangedCopyWith<$Res> {
   factory $NameChangedCopyWith(
           NameChanged value, $Res Function(NameChanged) then) =
       _$NameChangedCopyWithImpl<$Res>;
-
   $Res call({String name});
 }
 
@@ -293,7 +288,6 @@ abstract class NameChanged implements RegisterEvent {
   const factory NameChanged(String name) = _$NameChanged;
 
   String get name => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $NameChangedCopyWith<NameChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -304,7 +298,6 @@ abstract class $EmailChangedCopyWith<$Res> {
   factory $EmailChangedCopyWith(
           EmailChanged value, $Res Function(EmailChanged) then) =
       _$EmailChangedCopyWithImpl<$Res>;
-
   $Res call({String email});
 }
 
@@ -441,7 +434,6 @@ abstract class EmailChanged implements RegisterEvent {
   const factory EmailChanged(String email) = _$EmailChanged;
 
   String get email => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $EmailChangedCopyWith<EmailChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -452,7 +444,6 @@ abstract class $PasswordChangedCopyWith<$Res> {
   factory $PasswordChangedCopyWith(
           PasswordChanged value, $Res Function(PasswordChanged) then) =
       _$PasswordChangedCopyWithImpl<$Res>;
-
   $Res call({String password});
 }
 
@@ -591,7 +582,6 @@ abstract class PasswordChanged implements RegisterEvent {
   const factory PasswordChanged(String password) = _$PasswordChanged;
 
   String get password => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -602,7 +592,6 @@ abstract class $PasswordConfirmedChangedCopyWith<$Res> {
   factory $PasswordConfirmedChangedCopyWith(PasswordConfirmedChanged value,
           $Res Function(PasswordConfirmedChanged) then) =
       _$PasswordConfirmedChangedCopyWithImpl<$Res>;
-
   $Res call({String passwordConfirmation});
 }
 
@@ -745,7 +734,6 @@ abstract class PasswordConfirmedChanged implements RegisterEvent {
       _$PasswordConfirmedChanged;
 
   String get passwordConfirmation => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $PasswordConfirmedChangedCopyWith<PasswordConfirmedChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -756,7 +744,6 @@ abstract class $InstitutionSelectedCopyWith<$Res> {
   factory $InstitutionSelectedCopyWith(
           InstitutionSelected value, $Res Function(InstitutionSelected) then) =
       _$InstitutionSelectedCopyWithImpl<$Res>;
-
   $Res call({Institution institution});
 }
 
@@ -896,7 +883,6 @@ abstract class InstitutionSelected implements RegisterEvent {
       _$InstitutionSelected;
 
   Institution get institution => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $InstitutionSelectedCopyWith<InstitutionSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -907,7 +893,6 @@ abstract class $RoleSelectedCopyWith<$Res> {
   factory $RoleSelectedCopyWith(
           RoleSelected value, $Res Function(RoleSelected) then) =
       _$RoleSelectedCopyWithImpl<$Res>;
-
   $Res call({UserRole role});
 }
 
@@ -1044,7 +1029,6 @@ abstract class RoleSelected implements RegisterEvent {
   const factory RoleSelected(UserRole role) = _$RoleSelected;
 
   UserRole get role => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $RoleSelectedCopyWith<RoleSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1442,24 +1426,15 @@ const $RegisterState = _$RegisterStateTearOff();
 /// @nodoc
 mixin _$RegisterState {
   String get name => throw _privateConstructorUsedError;
-
   String get emailAddress => throw _privateConstructorUsedError;
-
   String get password => throw _privateConstructorUsedError;
-
   String get passwordConfirmation => throw _privateConstructorUsedError;
-
   UserRole get role => throw _privateConstructorUsedError;
-
   Institution? get institution => throw _privateConstructorUsedError;
-
   bool get userAgreementAccepted => throw _privateConstructorUsedError;
-
   bool get isSubmitting => throw _privateConstructorUsedError;
-
   AuthFailure? get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
-
   bool get showInputErrorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1472,7 +1447,6 @@ abstract class $RegisterStateCopyWith<$Res> {
   factory $RegisterStateCopyWith(
           RegisterState value, $Res Function(RegisterState) then) =
       _$RegisterStateCopyWithImpl<$Res>;
-
   $Res call(
       {String name,
       String emailAddress,
@@ -1494,7 +1468,6 @@ class _$RegisterStateCopyWithImpl<$Res>
   _$RegisterStateCopyWithImpl(this._value, this._then);
 
   final RegisterState _value;
-
   // ignore: unused_field
   final $Res Function(RegisterState) _then;
 
@@ -1574,7 +1547,6 @@ abstract class _$RegisterStateCopyWith<$Res>
   factory _$RegisterStateCopyWith(
           _RegisterState value, $Res Function(_RegisterState) then) =
       __$RegisterStateCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {String name,
@@ -1772,35 +1744,25 @@ abstract class _RegisterState implements RegisterState {
 
   @override
   String get name => throw _privateConstructorUsedError;
-
   @override
   String get emailAddress => throw _privateConstructorUsedError;
-
   @override
   String get password => throw _privateConstructorUsedError;
-
   @override
   String get passwordConfirmation => throw _privateConstructorUsedError;
-
   @override
   UserRole get role => throw _privateConstructorUsedError;
-
   @override
   Institution? get institution => throw _privateConstructorUsedError;
-
   @override
   bool get userAgreementAccepted => throw _privateConstructorUsedError;
-
   @override
   bool get isSubmitting => throw _privateConstructorUsedError;
-
   @override
   AuthFailure? get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
-
   @override
   bool get showInputErrorMessages => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$RegisterStateCopyWith<_RegisterState> get copyWith =>

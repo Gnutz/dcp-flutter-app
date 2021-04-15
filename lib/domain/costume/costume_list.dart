@@ -5,6 +5,7 @@ class CostumeList {
   String owner;
   List<String> sharedWith = <String>[];
   DateTime? created;
+  DateTime? updated;
   String title;
   List<Costume> costumes = <Costume>[];
 

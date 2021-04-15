@@ -1,4 +1,5 @@
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
+import 'package:digtial_costume_platform/domain/costume/status.dart';
 
 import 'costume.dart';
 
@@ -12,6 +13,12 @@ abstract class ICostumeRepository {
   Future<void> updateCostume(String instituionId, Costume updated);
 
   Future<void> deleteCostume(String instituionId, String id);
+
+  Future<List<String>> getCategories();
+
+  Future<List<String>> getTimePeriods();
+
+  Future<List<StorageLocation>> getStorageLocations();
 
 //FutuaddImage(image, costume);
 

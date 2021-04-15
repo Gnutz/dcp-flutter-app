@@ -36,7 +36,6 @@ mixin _$AuthEvent {
     required TResult Function() signOut,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkRequested,
@@ -44,14 +43,12 @@ mixin _$AuthEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CheckRequested value) checkRequested,
     required TResult Function(SignOut value) signOut,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CheckRequested value)? checkRequested,
@@ -72,7 +69,6 @@ class _$AuthEventCopyWithImpl<$Res> implements $AuthEventCopyWith<$Res> {
   _$AuthEventCopyWithImpl(this._value, this._then);
 
   final AuthEvent _value;
-
   // ignore: unused_field
   final $Res Function(AuthEvent) _then;
 }
@@ -272,7 +268,6 @@ mixin _$AuthState {
     required TResult Function() unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -281,7 +276,6 @@ mixin _$AuthState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
@@ -289,7 +283,6 @@ mixin _$AuthState {
     required TResult Function(Unauthenticated value) unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -311,7 +304,6 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
   _$AuthStateCopyWithImpl(this._value, this._then);
 
   final AuthState _value;
-
   // ignore: unused_field
   final $Res Function(AuthState) _then;
 }

@@ -38,7 +38,6 @@ mixin _$CategorySelectionEvent {
     required TResult Function() loadCategories,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CostumeCategory selected)? catagorySelected,
@@ -46,14 +45,12 @@ mixin _$CategorySelectionEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CatagorySelected value) catagorySelected,
     required TResult Function(LoadCategories value) loadCategories,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CatagorySelected value)? catagorySelected,
@@ -76,7 +73,6 @@ class _$CategorySelectionEventCopyWithImpl<$Res>
   _$CategorySelectionEventCopyWithImpl(this._value, this._then);
 
   final CategorySelectionEvent _value;
-
   // ignore: unused_field
   final $Res Function(CategorySelectionEvent) _then;
 }
@@ -86,7 +82,6 @@ abstract class $CatagorySelectedCopyWith<$Res> {
   factory $CatagorySelectedCopyWith(
           CatagorySelected value, $Res Function(CatagorySelected) then) =
       _$CatagorySelectedCopyWithImpl<$Res>;
-
   $Res call({CostumeCategory selected});
 }
 
@@ -193,7 +188,6 @@ abstract class CatagorySelected implements CategorySelectionEvent {
   const factory CatagorySelected(CostumeCategory selected) = _$CatagorySelected;
 
   CostumeCategory get selected => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $CatagorySelectedCopyWith<CatagorySelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -303,7 +297,6 @@ const $CategorySelectionState = _$CategorySelectionStateTearOff();
 /// @nodoc
 mixin _$CategorySelectionState {
   bool get loading => throw _privateConstructorUsedError;
-
   List<CostumeCategory> get categories => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -316,7 +309,6 @@ abstract class $CategorySelectionStateCopyWith<$Res> {
   factory $CategorySelectionStateCopyWith(CategorySelectionState value,
           $Res Function(CategorySelectionState) then) =
       _$CategorySelectionStateCopyWithImpl<$Res>;
-
   $Res call({bool loading, List<CostumeCategory> categories});
 }
 
@@ -326,7 +318,6 @@ class _$CategorySelectionStateCopyWithImpl<$Res>
   _$CategorySelectionStateCopyWithImpl(this._value, this._then);
 
   final CategorySelectionState _value;
-
   // ignore: unused_field
   final $Res Function(CategorySelectionState) _then;
 
@@ -354,7 +345,6 @@ abstract class _$CategorySelectionStateCopyWith<$Res>
   factory _$CategorySelectionStateCopyWith(_CategorySelectionState value,
           $Res Function(_CategorySelectionState) then) =
       __$CategorySelectionStateCopyWithImpl<$Res>;
-
   @override
   $Res call({bool loading, List<CostumeCategory> categories});
 }
@@ -435,10 +425,8 @@ abstract class _CategorySelectionState implements CategorySelectionState {
 
   @override
   bool get loading => throw _privateConstructorUsedError;
-
   @override
   List<CostumeCategory> get categories => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$CategorySelectionStateCopyWith<_CategorySelectionState> get copyWith =>

@@ -40,15 +40,10 @@ const $SearchState = _$SearchStateTearOff();
 /// @nodoc
 mixin _$SearchState {
   Production? get production => throw _privateConstructorUsedError;
-
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   String? get category => throw _privateConstructorUsedError;
-
   String? get timePeriod => throw _privateConstructorUsedError;
-
   List<String>? get themes => throw _privateConstructorUsedError;
-
   List<String>? get colors => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -61,7 +56,6 @@ abstract class $SearchStateCopyWith<$Res> {
   factory $SearchStateCopyWith(
           SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res>;
-
   $Res call(
       {Production? production,
       Fashion? fashion,
@@ -76,7 +70,6 @@ class _$SearchStateCopyWithImpl<$Res> implements $SearchStateCopyWith<$Res> {
   _$SearchStateCopyWithImpl(this._value, this._then);
 
   final SearchState _value;
-
   // ignore: unused_field
   final $Res Function(SearchState) _then;
 
@@ -124,7 +117,6 @@ abstract class _$SearchStateCopyWith<$Res>
   factory _$SearchStateCopyWith(
           _SearchState value, $Res Function(_SearchState) then) =
       __$SearchStateCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {Production? production,
@@ -260,22 +252,16 @@ abstract class _SearchState implements SearchState {
 
   @override
   Production? get production => throw _privateConstructorUsedError;
-
   @override
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   @override
   String? get category => throw _privateConstructorUsedError;
-
   @override
   String? get timePeriod => throw _privateConstructorUsedError;
-
   @override
   List<String>? get themes => throw _privateConstructorUsedError;
-
   @override
   List<String>? get colors => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$SearchStateCopyWith<_SearchState> get copyWith =>

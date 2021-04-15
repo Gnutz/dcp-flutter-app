@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
+import 'package:digtial_costume_platform/domain/costume/status.dart';
 
 class FirebaseCostumeRepository implements ICostumeRepository {
   final _store = FirebaseFirestore.instance;
@@ -96,5 +97,23 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     if (query.themes != null) {
       seedQuery = seedQuery.where(THEMES_KEY, arrayContains: query.themes);
     }
+  }
+
+  @override
+  Future<List<String>> getCategories() {
+    // TODO: implement getCategories
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<StorageLocation>> getStorageLocations() {
+    // TODO: implement getStorageLocations
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<String>> getTimePeriods() {
+    // TODO: implement getTimePeriods
+    throw UnimplementedError();
   }
 }

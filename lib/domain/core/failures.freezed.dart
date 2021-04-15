@@ -74,7 +74,6 @@ mixin _$ValueFailure<T> {
     required TResult Function(T failedValue) passwordMissingSpecialCharacter,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidEmail,
@@ -86,7 +85,6 @@ mixin _$ValueFailure<T> {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InvalidEmail<T> value) invalidEmail,
@@ -101,7 +99,6 @@ mixin _$ValueFailure<T> {
         passwordMissingSpecialCharacter,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InvalidEmail<T> value)? invalidEmail,
@@ -128,7 +125,6 @@ abstract class $ValueFailureCopyWith<T, $Res> {
   factory $ValueFailureCopyWith(
           ValueFailure<T> value, $Res Function(ValueFailure<T>) then) =
       _$ValueFailureCopyWithImpl<T, $Res>;
-
   $Res call({T failedValue});
 }
 
@@ -138,7 +134,6 @@ class _$ValueFailureCopyWithImpl<T, $Res>
   _$ValueFailureCopyWithImpl(this._value, this._then);
 
   final ValueFailure<T> _value;
-
   // ignore: unused_field
   final $Res Function(ValueFailure<T>) _then;
 
@@ -161,7 +156,6 @@ abstract class $InvalidEmailCopyWith<T, $Res>
   factory $InvalidEmailCopyWith(
           InvalidEmail<T> value, $Res Function(InvalidEmail<T>) then) =
       _$InvalidEmailCopyWithImpl<T, $Res>;
-
   @override
   $Res call({T failedValue});
 }
@@ -294,7 +288,6 @@ abstract class InvalidEmail<T> implements ValueFailure<T> {
 
   @override
   T get failedValue => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   $InvalidEmailCopyWith<T, InvalidEmail<T>> get copyWith =>
@@ -307,7 +300,6 @@ abstract class $ShortPasswordCopyWith<T, $Res>
   factory $ShortPasswordCopyWith(
           ShortPassword<T> value, $Res Function(ShortPassword<T>) then) =
       _$ShortPasswordCopyWithImpl<T, $Res>;
-
   @override
   $Res call({T failedValue});
 }
@@ -440,7 +432,6 @@ abstract class ShortPassword<T> implements ValueFailure<T> {
 
   @override
   T get failedValue => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   $ShortPasswordCopyWith<T, ShortPassword<T>> get copyWith =>
@@ -454,7 +445,6 @@ abstract class $PasswordMissingUppercaseCharacterCopyWith<T, $Res>
           PasswordMissingUppercaseCharacter<T> value,
           $Res Function(PasswordMissingUppercaseCharacter<T>) then) =
       _$PasswordMissingUppercaseCharacterCopyWithImpl<T, $Res>;
-
   @override
   $Res call({T failedValue});
 }
@@ -593,7 +583,6 @@ abstract class PasswordMissingUppercaseCharacter<T> implements ValueFailure<T> {
 
   @override
   T get failedValue => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   $PasswordMissingUppercaseCharacterCopyWith<T,
@@ -608,7 +597,6 @@ abstract class $PasswordMissingLowercaseCharacterCopyWith<T, $Res>
           PasswordMissingLowercaseCharacter<T> value,
           $Res Function(PasswordMissingLowercaseCharacter<T>) then) =
       _$PasswordMissingLowercaseCharacterCopyWithImpl<T, $Res>;
-
   @override
   $Res call({T failedValue});
 }
@@ -747,7 +735,6 @@ abstract class PasswordMissingLowercaseCharacter<T> implements ValueFailure<T> {
 
   @override
   T get failedValue => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   $PasswordMissingLowercaseCharacterCopyWith<T,
@@ -762,7 +749,6 @@ abstract class $PasswordMissingNumericCharacterCopyWith<T, $Res>
           PasswordMissingNumericCharacter<T> value,
           $Res Function(PasswordMissingNumericCharacter<T>) then) =
       _$PasswordMissingNumericCharacterCopyWithImpl<T, $Res>;
-
   @override
   $Res call({T failedValue});
 }
@@ -901,7 +887,6 @@ abstract class PasswordMissingNumericCharacter<T> implements ValueFailure<T> {
 
   @override
   T get failedValue => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   $PasswordMissingNumericCharacterCopyWith<T,
@@ -916,7 +901,6 @@ abstract class $PasswordMissingSpecialCharacterCopyWith<T, $Res>
           PasswordMissingSpecialCharacter<T> value,
           $Res Function(PasswordMissingSpecialCharacter<T>) then) =
       _$PasswordMissingSpecialCharacterCopyWithImpl<T, $Res>;
-
   @override
   $Res call({T failedValue});
 }
@@ -1055,7 +1039,6 @@ abstract class PasswordMissingSpecialCharacter<T> implements ValueFailure<T> {
 
   @override
   T get failedValue => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   $PasswordMissingSpecialCharacterCopyWith<T,

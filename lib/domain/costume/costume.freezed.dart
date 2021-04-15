@@ -52,27 +52,16 @@ const $Costume = _$CostumeTearOff();
 /// @nodoc
 mixin _$Costume {
   String? get id => throw _privateConstructorUsedError;
-
   DateTime? get edited => throw _privateConstructorUsedError;
-
   DateTime? get created => throw _privateConstructorUsedError;
-
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   String? get category => throw _privateConstructorUsedError;
-
   String? get timePeriod => throw _privateConstructorUsedError;
-
   List<String>? get themes => throw _privateConstructorUsedError;
-
   List<String>? get colors => throw _privateConstructorUsedError;
-
   List<Production>? get productions => throw _privateConstructorUsedError;
-
   int? get quantity => throw _privateConstructorUsedError;
-
   StorageLocation? get storageLocation => throw _privateConstructorUsedError;
-
   Status? get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -83,7 +72,6 @@ mixin _$Costume {
 abstract class $CostumeCopyWith<$Res> {
   factory $CostumeCopyWith(Costume value, $Res Function(Costume) then) =
       _$CostumeCopyWithImpl<$Res>;
-
   $Res call(
       {String? id,
       DateTime? edited,
@@ -104,7 +92,6 @@ class _$CostumeCopyWithImpl<$Res> implements $CostumeCopyWith<$Res> {
   _$CostumeCopyWithImpl(this._value, this._then);
 
   final Costume _value;
-
   // ignore: unused_field
   final $Res Function(Costume) _then;
 
@@ -180,7 +167,6 @@ class _$CostumeCopyWithImpl<$Res> implements $CostumeCopyWith<$Res> {
 abstract class _$CostumeCopyWith<$Res> implements $CostumeCopyWith<$Res> {
   factory _$CostumeCopyWith(_Costume value, $Res Function(_Costume) then) =
       __$CostumeCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {String? id,
@@ -396,40 +382,28 @@ abstract class _Costume implements Costume {
 
   @override
   String? get id => throw _privateConstructorUsedError;
-
   @override
   DateTime? get edited => throw _privateConstructorUsedError;
-
   @override
   DateTime? get created => throw _privateConstructorUsedError;
-
   @override
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   @override
   String? get category => throw _privateConstructorUsedError;
-
   @override
   String? get timePeriod => throw _privateConstructorUsedError;
-
   @override
   List<String>? get themes => throw _privateConstructorUsedError;
-
   @override
   List<String>? get colors => throw _privateConstructorUsedError;
-
   @override
   List<Production>? get productions => throw _privateConstructorUsedError;
-
   @override
   int? get quantity => throw _privateConstructorUsedError;
-
   @override
   StorageLocation? get storageLocation => throw _privateConstructorUsedError;
-
   @override
   Status? get status => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$CostumeCopyWith<_Costume> get copyWith =>
