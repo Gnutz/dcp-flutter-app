@@ -1,6 +1,7 @@
 import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/application/auth/register/register_bloc.dart';
 import 'package:digtial_costume_platform/application/auth/sign_in/sign_in_bloc.dart';
+import 'package:digtial_costume_platform/application/costume/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/category_select/category_selection_bloc.dart';
 import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/i_user_service.dart';
@@ -35,7 +36,8 @@ class Locator {
     locator.registerFactory<CategorySelectionBloc>(
         () => CategorySelectionBloc(locator<IGalleryService>()));
     //CostumeListBLoc
-    //CostumeBloc
+    locator.registerFactory<CostumeFormBloc>(
+        () => CostumeFormBloc(locator<ICostumeRepository>()));
     //ImageBloc
     //SearchBloc
   }

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CategorySelectionEventTearOff {
   const _$CategorySelectionEventTearOff();
 
-  CatagorySelected catagorySelected(CostumeCategory selected) {
+  CatagorySelected categorySelected(CostumeCategory selected) {
     return CatagorySelected(
       selected,
     );
@@ -34,26 +34,26 @@ const $CategorySelectionEvent = _$CategorySelectionEventTearOff();
 mixin _$CategorySelectionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory selected) catagorySelected,
+    required TResult Function(CostumeCategory selected) categorySelected,
     required TResult Function() loadCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory selected)? catagorySelected,
+    TResult Function(CostumeCategory selected)? categorySelected,
     TResult Function()? loadCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CatagorySelected value) catagorySelected,
+    required TResult Function(CatagorySelected value) categorySelected,
     required TResult Function(LoadCategories value) loadCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CatagorySelected value)? catagorySelected,
+    TResult Function(CatagorySelected value)? categorySelected,
     TResult Function(LoadCategories value)? loadCategories,
     required TResult orElse(),
   }) =>
@@ -118,7 +118,7 @@ class _$CatagorySelected implements CatagorySelected {
 
   @override
   String toString() {
-    return 'CategorySelectionEvent.catagorySelected(selected: $selected)';
+    return 'CategorySelectionEvent.categorySelected(selected: $selected)';
   }
 
   @override
@@ -142,21 +142,21 @@ class _$CatagorySelected implements CatagorySelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory selected) catagorySelected,
+    required TResult Function(CostumeCategory selected) categorySelected,
     required TResult Function() loadCategories,
   }) {
-    return catagorySelected(selected);
+    return categorySelected(selected);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory selected)? catagorySelected,
+    TResult Function(CostumeCategory selected)? categorySelected,
     TResult Function()? loadCategories,
     required TResult orElse(),
   }) {
-    if (catagorySelected != null) {
-      return catagorySelected(selected);
+    if (categorySelected != null) {
+      return categorySelected(selected);
     }
     return orElse();
   }
@@ -164,21 +164,21 @@ class _$CatagorySelected implements CatagorySelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CatagorySelected value) catagorySelected,
+    required TResult Function(CatagorySelected value) categorySelected,
     required TResult Function(LoadCategories value) loadCategories,
   }) {
-    return catagorySelected(this);
+    return categorySelected(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CatagorySelected value)? catagorySelected,
+    TResult Function(CatagorySelected value)? categorySelected,
     TResult Function(LoadCategories value)? loadCategories,
     required TResult orElse(),
   }) {
-    if (catagorySelected != null) {
-      return catagorySelected(this);
+    if (categorySelected != null) {
+      return categorySelected(this);
     }
     return orElse();
   }
@@ -232,7 +232,7 @@ class _$LoadCategories implements LoadCategories {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory selected) catagorySelected,
+    required TResult Function(CostumeCategory selected) categorySelected,
     required TResult Function() loadCategories,
   }) {
     return loadCategories();
@@ -241,7 +241,7 @@ class _$LoadCategories implements LoadCategories {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory selected)? catagorySelected,
+    TResult Function(CostumeCategory selected)? categorySelected,
     TResult Function()? loadCategories,
     required TResult orElse(),
   }) {
@@ -254,7 +254,7 @@ class _$LoadCategories implements LoadCategories {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CatagorySelected value) catagorySelected,
+    required TResult Function(CatagorySelected value) categorySelected,
     required TResult Function(LoadCategories value) loadCategories,
   }) {
     return loadCategories(this);
@@ -263,7 +263,7 @@ class _$LoadCategories implements LoadCategories {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CatagorySelected value)? catagorySelected,
+    TResult Function(CatagorySelected value)? categorySelected,
     TResult Function(LoadCategories value)? loadCategories,
     required TResult orElse(),
   }) {

@@ -43,7 +43,7 @@ class CategoryGrid extends StatelessWidget {
             ...state.categories
                 .map<Widget>((category) => InkWell(
                       onTap: () => context.read<CategorySelectionBloc>().add(
-                          CategorySelectionEvent.catagorySelected(category)),
+                          CategorySelectionEvent.categorySelected(category)),
                       child: CategoryCard(costumeCategory: category),
                     ))
                 .toList(),
