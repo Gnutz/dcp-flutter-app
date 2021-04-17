@@ -24,6 +24,8 @@ class Costume {
   List<Production>? productions;
   int? quantity;
   StorageLocation? storageLocation;
+
+  @JsonKey(fromJson: _statusToJsonMapper)
   Status? status;
 
   Costume(
@@ -43,5 +45,12 @@ class Costume {
   factory Costume.fromJson(Map<String, dynamic> json) =>
       _$CostumeFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$CostumeToJson(this);
+
+  static Status? _statusToJsonMapper(Map<String, dynamic> json) {
+    if (json.containsKey('location')) return InStorage.fromJson(json);
+    if (json.containsKey('inUseFor')) return InUse.fromJson(json);
+    if (json.containsKey('rentedFor')) return RentedOut.fromJson(json);
+  }
 }

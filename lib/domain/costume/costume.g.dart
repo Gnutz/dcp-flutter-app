@@ -29,8 +29,7 @@ Costume _$CostumeFromJson(Map json) {
         ? null
         : StorageLocation.fromJson(
             Map<String, dynamic>.from(json['storageLocation'] as Map)),
-    status:
-        json['status'] == null ? null : Status.fromJson(json['status'] as Map),
+    status: Costume._statusToJsonMapper(json['status'] as Map<String, dynamic>),
   );
 }
 

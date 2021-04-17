@@ -109,7 +109,7 @@ class CostumeEditForm extends StatelessWidget {
 
   Widget _buildSubmitButton() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () => _formBloc.add(CostumeFormEvent.saveCostume()),
       //color: Colors.pink[400],
       child: Text(AppLocalizations.of(_context)!.save,
           style: const TextStyle(color: Colors.white)),

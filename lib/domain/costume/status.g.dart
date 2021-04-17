@@ -6,23 +6,16 @@ part of 'status.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Status _$StatusFromJson(Map json) {
-  return Status();
-}
-
-Map<String, dynamic> _$StatusToJson(Status instance) => <String, dynamic>{};
-
 InStorage _$InStorageFromJson(Map json) {
   return InStorage(
-    json['location'] == null
-        ? null
-        : StorageLocation.fromJson(
-            Map<String, dynamic>.from(json['location'] as Map)),
+    StorageLocation.fromJson(
+        Map<String, dynamic>.from(json['location'] as Map)),
   );
 }
 
-Map<String, dynamic> _$InStorageToJson(InStorage instance) => <String, dynamic>{
-      'location': instance.location?.toJson(),
+Map<String, dynamic> _$InStorageToJson(InStorage instance) =>
+    <String, dynamic>{
+      'location': instance.location.toJson(),
     };
 
 InUse _$InUseFromJson(Map json) {

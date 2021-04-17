@@ -1,11 +1,12 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
+import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
+import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -15,8 +16,10 @@ part 'costume_form_state.dart';
 
 class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   final ICostumeRepository _costumeRepository;
+  final IGalleryService _costumeService;
 
-  CostumeFormBloc(this._costumeRepository) : super(CostumeFormState.initial()) {
+  CostumeFormBloc(this._costumeRepository, this._costumeService)
+      : super(CostumeFormState.initial()) {
     add(const CostumeFormEvent.loadFormOptions());
   }
 
@@ -25,8 +28,8 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     CostumeFormEvent event,
   ) async* {
     yield* event.map(
-        categorySelected: (e) async* {
-          yield _categorySelectedEventHandler(e);
+      categorySelected: (e) async* {
+        yield _categorySelectedEventHandler(e);
       },
       timePeriodSelected: (e) async* {
         yield _timePeriodSelectedHandler(e);
@@ -50,15 +53,15 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
         _saveCostumeEventHandler();
       },
       themeValueChanged: (ThemeValueChanged e) async* {
-          yield _themeValueEventHandler(e);
-        },
-        themeAdded: (ThemeAdded e) async* {
-          yield _themeAdded();
-        },
-        colorRemoved: (ColorRemoved e) async* {
-          yield colorRemovedEventHandler(e);
-        },
-        themeRemoved: (ThemeRemoved e) async* {
+        yield _themeValueEventHandler(e);
+      },
+      themeAdded: (ThemeAdded e) async* {
+        yield _themeAdded();
+      },
+      colorRemoved: (ColorRemoved e) async* {
+        yield colorRemovedEventHandler(e);
+      },
+      themeRemoved: (ThemeRemoved e) async* {
         yield themeRemovedEventHandler(e);
       },
       colorValueChanged: (ColorValueChanged e) async* {
@@ -110,12 +113,39 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
 
   void _saveChangesPressedEventHandler() {}
 
-  void _saveCostumeEventHandler() {}
+  void _saveCostumeEventHandler() async {
+    Costume costume;
+
+    if (state.id != null) {
+      costume = await _costumeService.getCostume(state.id!);
+    } else {
+      costume = Costume();
+    }
+
+    costume.edited = DateTime.now();
+    costume.category = state.category!.category;
+    costume.timePeriod = state.timePeriod;
+    costume.fashion = state.fashion;
+    costume.themes = state.themes;
+    costume.colors = state.colors;
+    costume.quantity = state.quantity;
+    costume.storageLocation = StorageLocation(
+        main: state.mainLocation!, subLocation: state.subLocation!);
+
+    if (costume.storageLocation!.subLocation != null ||
+        costume.storageLocation!.main != null) {
+      costume.status = InStorage(costume.storageLocation!);
+    }
+
+    if (state.id != null) {
+      _costumeService.updateCostume(costume);
+    } else {
+      _costumeService.createCostume(costume);
+    }
+  }
 
   CostumeFormState _themeValueEventHandler(ThemeValueChanged e) {
-    return state.copyWith(
-        currentTheme: e.theme
-    );
+    return state.copyWith(currentTheme: e.theme);
   }
 
   CostumeFormState _themeAdded() {
@@ -158,7 +188,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     yield state.copyWith(mainLocation: mainLocation);
 
     final subLocationsOptions =
-        await _costumeRepository.getStorageSubLocations(mainLocation.id);
+        await _costumeRepository.getStorageSubLocations(mainLocation.id!);
 
     if (subLocationsOptions != null) {
       yield state.copyWith(storageSubLocationOptions: subLocationsOptions);

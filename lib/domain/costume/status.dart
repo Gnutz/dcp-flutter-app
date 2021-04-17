@@ -6,42 +6,46 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'status.g.dart';
 
-@JsonSerializable(anyMap: true, explicitToJson: true)
-abstract class Status {}
+abstract class Status {
+  Map<String, dynamic> toJson();
+}
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class InStorage extends Status {
-  StorageLocation? location;
+class InStorage implements Status {
+  StorageLocation location;
 
-  InStorage(this.location);
+  InStorage(this.location) : super();
 
   factory InStorage.fromJson(Map<String, dynamic> json) =>
       _$InStorageFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$InStorageToJson(this);
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class InUse extends Status {
+class InUse implements Status {
   Production? inUseFor;
 
-  InUse(this.inUseFor);
+  InUse(this.inUseFor) : super();
 
   factory InUse.fromJson(Map<String, dynamic> json) => _$InUseFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$InUseToJson(this);
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class RentedOut extends Status {
+class RentedOut implements Status {
   Institution? rentedOutTo;
   User? rentedBy;
   Production? rentedFor;
 
-  RentedOut(this.rentedOutTo, this.rentedBy, this.rentedFor);
+  RentedOut(this.rentedOutTo, this.rentedBy, this.rentedFor) : super();
 
   factory RentedOut.fromJson(Map<String, dynamic> json) =>
       _$RentedOutFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$RentedOutToJson(this);
 }
