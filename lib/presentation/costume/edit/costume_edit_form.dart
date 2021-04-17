@@ -46,22 +46,22 @@ class CostumeEditForm extends StatelessWidget {
                       ),
                       _buildThemesInput(),
                       const SizedBox(height: 8.0),
-                      _buildThemesList(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildColorsInput(),
-                      const SizedBox(height: 8.0),
-                      _buildColorsList(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      //_buildStorageSelection(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildSubmitButton(),
-                    ]),
+                  _buildThemesList(),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  _buildColorsInput(),
+                  const SizedBox(height: 8.0),
+                  _buildColorsList(),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  _buildStorageSelection(),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  _buildSubmitButton(),
+                ]),
                   ),
                 ),
               ));
@@ -107,7 +107,7 @@ class CostumeEditForm extends StatelessWidget {
 
   Widget _buildSubmitButton() {
     return ElevatedButton(
-      onPressed: null,
+      onPressed: () {},
       //color: Colors.pink[400],
       child: Text(AppLocalizations.of(_context)!.save,
           style: TextStyle(color: Colors.white)),
@@ -253,28 +253,24 @@ class CostumeEditForm extends StatelessWidget {
                       hintText: AppLocalizations.of(_context)!
                           .selectWhereTheCostumeIsStored),
                   items: _state.storageMainLocationOptions
-                      .map((main) =>
-                      DropdownMenuItem<Location>(
+                      .map((main) => DropdownMenuItem<Location>(
                           value: main, child: Text(main.name)))
                       .toList(),
-                  onChanged: (main) =>
-                      _formBloc
-                          .add(CostumeFormEvent.mainLocationSelected(main!)),
-                  value: _state.mainStorageLocation),
+                  onChanged: (main) => _formBloc
+                      .add(CostumeFormEvent.mainLocationSelected(main!)),
+                  value: _state.mainLocation),
               const SizedBox(height: 12.0),
               DropdownButtonFormField<Location>(
                   decoration: textInputDecorator.copyWith(
                       hintText: AppLocalizations.of(_context)!
                           .selectWhereTheCostumeIsStored),
                   items: _state.storageSubLocationOptions
-                      .map((location) =>
-                      DropdownMenuItem<Location>(
+                      .map((location) => DropdownMenuItem<Location>(
                           value: location, child: Text(location.name)))
                       .toList(),
-                  onChanged: (location) =>
-                      _formBloc
-                          .add(CostumeFormEvent.subLocationSelected(location!)),
-                  value: _state.subStorageLocation),
+                  onChanged: (location) => _formBloc
+                      .add(CostumeFormEvent.subLocationSelected(location!)),
+                  value: _state.subLocation),
             ],
           ),
         ));

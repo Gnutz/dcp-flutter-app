@@ -3,6 +3,7 @@ import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/presentation/auth/register/register_page.dart';
 import 'package:digtial_costume_platform/presentation/auth/sign_in/sign_in_page.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/details_page.dart';
+import 'package:digtial_costume_platform/presentation/costume/edit/costume_edit_page.dart';
 import 'package:digtial_costume_platform/presentation/gallery/category_selection.dart';
 import 'package:digtial_costume_platform/presentation/gallery/gallery.dart';
 import 'package:digtial_costume_platform/presentation/splash/splash_page.dart';
@@ -38,7 +39,7 @@ class AppRouter {
       case Routes.register:
         return MaterialPageRoute(builder: (_) => RegisterPage());
       case Routes.costumesEdit:
-        return MaterialPageRoute(builder: (_) => NotFoundPage());
+        return MaterialPageRoute(builder: (_) => CostumeEditPage());
         //case Routes.costumeDetails:
         return MaterialPageRoute(
             builder: (_) =>

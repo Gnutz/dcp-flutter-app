@@ -14,9 +14,6 @@ class CostumeFormEvent with _$CostumeFormEvent {
   const factory CostumeFormEvent.quantityChanged(int quantity) =
   QuantityChanged;
 
-  const factory CostumeFormEvent.storageLocationSelected(
-      StorageLocation location) = StorageLocationSelected;
-
   const factory CostumeFormEvent.loadFormOptions() = LoadFormOptions;
 
   const factory CostumeFormEvent.saveChangesPressed() = SaveChangesPressed;

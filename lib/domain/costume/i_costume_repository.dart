@@ -21,8 +21,7 @@ abstract class ICostumeRepository {
 
   Future<List<Location>> getStorageMainLocations();
 
-  Future<List<Location>> getStorageSubLocations(String mainId);
-
+  Future<List<Location>?> getStorageSubLocations(String mainId);
 
 //FutuaddImage(image, costume);
 

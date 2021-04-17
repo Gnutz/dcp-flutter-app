@@ -21,13 +21,14 @@ class CostumeFormState with _$CostumeFormState {
           Location? mainLocation,
           Location? subLocation}) = _CostumeFormState;
 
-  factory CostumeFormState.initial() =>
-      const CostumeFormState(
-          loading: true,
-          currentColor: "",
-          currentTheme: "",
-          categoryOptions: <CostumeCategory>[],
-          timePeriodOptions: <String>[],
-          storageMainLocationOptions: <Location>[],
-          storageSubLocationOptions: <Location>[]);
+  factory CostumeFormState.initial() => const CostumeFormState(
+      loading: true,
+      currentColor: "",
+      currentTheme: "",
+      categoryOptions: <CostumeCategory>[],
+      timePeriodOptions: <String>[],
+      storageMainLocationOptions: <Location>[],
+      storageSubLocationOptions: <Location>[],
+      themes: <String>[],
+      colors: <String>[]);
 }

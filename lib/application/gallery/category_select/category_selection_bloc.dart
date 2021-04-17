@@ -33,7 +33,6 @@ class CategorySelectionBloc
   }
 
   void _categorySelectedEventHandler(CatagorySelected e) {
-    print(e.selected.category);
     NavigationService.instance!
         .pushNamed(
         Routes.gallery, arguments: CostumeQuery(category: e.selected.category));

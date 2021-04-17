@@ -40,9 +40,6 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
         colorAdded: (e) async* {
           yield _colorAddedEventHandler(e);
         },
-        storageLocationSelected: (e) async* {
-          yield _storageLocationSelectedEventHandler(e);
-        },
         loadFormOptions: (_) async* {
           yield* _loadFormOptionsEventHandler();
         },
@@ -62,17 +59,17 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
           yield colorRemovedEventHandler(e);
         },
         themeRemoved: (ThemeRemoved e) async* {
-          yield themeRemovedEventHandler(e);
-        },
-        colorValueChanged: (ColorValueChanged e) async* {
-          yield colorValueChangedEventHandler(e);
-        },
-        mainLocationSelected: (MainLocationSelected e) async* {
-          yield* mainLocationSelectedEventHandler(e);
-        },
-        subLocationSelected: (SubLocationSelected e) async* {
-          yield subLocationSelectedEventHandler(e);
-        }
+        yield themeRemovedEventHandler(e);
+      },
+      colorValueChanged: (ColorValueChanged e) async* {
+        yield colorValueChangedEventHandler(e);
+      },
+      mainLocationSelected: (MainLocationSelected e) async* {
+        yield* mainLocationSelectedEventHandler(e);
+      },
+      subLocationSelected: (SubLocationSelected e) async* {
+        yield subLocationSelectedEventHandler(e);
+      },
     );
   }
 
@@ -119,11 +116,13 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     );
   }
 
-  CostumeFormState? _themeAdded() {
+  CostumeFormState _themeAdded() {
     if (state.currentTheme.isNotEmpty) {
       state.themes!.add(state.currentTheme);
       return state.copyWith(currentTheme: "");
     }
+
+    return state;
   }
 
   CostumeFormState colorRemovedEventHandler(ColorRemoved e) {
@@ -144,15 +143,17 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
       MainLocationSelected e) async* {
     final mainLocation = e.main;
 
-    yield state.copyWith(
-        mainLocation: mainLocation
-    );
+    yield state.copyWith(mainLocation: mainLocation);
 
-    final subLocationsOptions = await _costumeRepository.getStorageSubLocations(
-        mainLocation.id);
+    final subLocationsOptions =
+        await _costumeRepository.getStorageSubLocations(mainLocation.id);
 
-    yield state.copyWith(
-        storageSubLocationOptions: subLocationsOptions
-    );
+    if (subLocationsOptions != null) {
+      yield state.copyWith(storageSubLocationOptions: subLocationsOptions);
+    }
+  }
+
+  CostumeFormState subLocationSelectedEventHandler(SubLocationSelected e) {
+    return state.copyWith(subLocation: e.location);
   }
 }

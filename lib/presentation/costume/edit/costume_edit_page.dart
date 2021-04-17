@@ -6,17 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'costume_edit_form.dart';
 
-class CategorySelectionPage extends StatelessWidget {
+class CostumeEditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.brown[100],
       body: SafeArea(
         child: BlocProvider(
-            create: (context) => Locator().locator<CostumeFormBloc>(),
-            //child: CostumeEditForm(),
-
-            child: Text("Change this back")
+          create: (context) => Locator().locator<CostumeFormBloc>(),
+          child: CostumeEditForm(),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
