@@ -95,12 +95,14 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) =>
-                Locator().locator<AuthBloc>()..add(AuthEvent.checkRequested()))
+            Locator().locator<AuthBloc>()
+              ..add(const AuthEvent.checkRequested()))
       ],
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
+        navigatorKey: NavigationService.key,
         onGenerateRoute: _router.onGeneratedRoute,
       ),
     );

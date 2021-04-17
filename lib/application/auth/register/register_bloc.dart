@@ -94,7 +94,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _signInNavEventHandler() {
-    NavigationService.instance.pushReplacementNamed(Routes.signIn);
+    NavigationService.instance!.pushReplacementNamed(Routes.signIn);
   }
 
   Stream<RegisterState> _registerSubmitEventHandler(

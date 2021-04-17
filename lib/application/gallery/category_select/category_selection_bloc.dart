@@ -25,7 +25,7 @@ class CategorySelectionBloc
   Stream<CategorySelectionState> mapEventToState(
     CategorySelectionEvent event,
   ) async* {
-    yield* event.map(catagorySelected: (e) async* {
+    yield* event.map(categorySelected: (e) async* {
       _categorySelectedEventHandler(e);
     }, loadCategories: (_) async* {
       yield* _loadCategories();
@@ -33,8 +33,10 @@ class CategorySelectionBloc
   }
 
   void _categorySelectedEventHandler(CatagorySelected e) {
-    NavigationService.instance
-        .pushNamed(Routes.gallery, CostumeQuery(category: e.selected.category));
+    print(e.selected.category);
+    NavigationService.instance!
+        .pushNamed(
+        Routes.gallery, arguments: CostumeQuery(category: e.selected.category));
   }
 
   Stream<CategorySelectionState> _loadCategories() async* {

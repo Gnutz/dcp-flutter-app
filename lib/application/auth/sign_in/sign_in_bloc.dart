@@ -72,6 +72,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   void _registerNavEventHandler() {
-    NavigationService.instance.pushReplacementNamed(Routes.register);
+    NavigationService.instance!.pushReplacementNamed(Routes.register);
   }
 }

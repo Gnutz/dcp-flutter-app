@@ -35,17 +35,19 @@ class CategoryGrid extends StatelessWidget {
   Widget _buildCategoryGrid(
       BuildContext context, CategorySelectionState state) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       child: GridView.count(
           crossAxisCount: 2,
           semanticChildCount: state.categories.length,
           children: [
             ...state.categories
-                .map<Widget>((category) => InkWell(
-                      onTap: () => context.read<CategorySelectionBloc>().add(
+                .map<Widget>((category) =>
+                InkWell(
+                  onTap: () =>
+                      context.read<CategorySelectionBloc>().add(
                           CategorySelectionEvent.categorySelected(category)),
-                      child: CategoryCard(costumeCategory: category),
-                    ))
+                  child: CategoryCard(costumeCategory: category),
+                ))
                 .toList(),
           ]),
     );
@@ -70,7 +72,7 @@ class CategoryCard extends StatelessWidget {
               size: 100,
             )),
             Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: Text(costumeCategory.category,
                   style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
             ),

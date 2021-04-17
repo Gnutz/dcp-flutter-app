@@ -20,9 +20,12 @@ abstract class Routes {
 
 class NavigationService {
   static final GlobalKey<NavigatorState> _navigatorKey =
-      GlobalKey<NavigatorState>();
+  GlobalKey<NavigatorState>();
 
-  static get instance => _navigatorKey.currentState;
+  static NavigatorState? get instance => _navigatorKey.currentState;
+
+  static GlobalKey<NavigatorState> get key => _navigatorKey;
+
 }
 
 class AppRouter {
@@ -38,9 +41,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => NotFoundPage());
         //case Routes.costumeDetails:
         return MaterialPageRoute(
-            builder: (_) => DetailsPage(
-                  costume: Costume(),
-                ));
+            builder: (_) =>
+            const DetailsPage(
+              costume: Costume(),
+            ));
       case Routes.categorySelection:
         return MaterialPageRoute(builder: (_) => CategorySelectionPage());
       case Routes.gallery:
@@ -57,7 +61,7 @@ class AppRouter {
 class NotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Text("Page not found"),
     );
   }

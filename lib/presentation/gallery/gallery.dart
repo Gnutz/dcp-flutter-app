@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class GalleryPage extends StatelessWidget {
   final CostumeQuery query;
 
-  GalleryPage({required this.query});
+  const GalleryPage({required this.query});
 
   @override
   Widget build(BuildContext context) {
-    String category = (query.category != null ? query.category : "test")!;
-    return Container(child: Text(category));
+    final String category = query.category ?? "test";
+    return Text(category);
 
     //TODO: add to search Bloc
   }

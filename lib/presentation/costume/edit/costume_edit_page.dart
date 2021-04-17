@@ -1,27 +1,22 @@
-import 'package:digtial_costume_platform/application/gallery/category_select/category_selection_bloc.dart';
+import 'package:digtial_costume_platform/application/costume/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
-import 'package:digtial_costume_platform/presentation/gallery/category_grid.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'costume_edit_form.dart';
 
 class CategorySelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.brown[100],
-      /*appBar:
-          AppBar(backgroundColor: Colors.brown[400], elevation: 0.0, actions: [
-        IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: DataSearch());
-            })
-      ]), */
       body: SafeArea(
         child: BlocProvider(
-          create: (context) => Locator().locator<CategorySelectionBloc>(),
-          child: CategoryGrid(),
+            create: (context) => Locator().locator<CostumeFormBloc>(),
+            //child: CostumeEditForm(),
+
+            child: Text("Change this back")
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -91,9 +86,10 @@ class DataSearch extends SearchDelegate<String> {
     final suggestionList = query.isNotEmpty ? recentResult : colors;
 
     return ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-          leading: const Icon(Icons.location_city),
-          title: Text(suggestionList[index]),
+        itemBuilder: (context, index) =>
+            ListTile(
+              leading: const Icon(Icons.location_city),
+              title: Text(suggestionList[index]),
             ),
         itemCount: suggestionList.length);
   }

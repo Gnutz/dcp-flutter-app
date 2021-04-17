@@ -24,25 +24,56 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   Stream<CostumeFormState> mapEventToState(
     CostumeFormEvent event,
   ) async* {
-    yield* event.map(categorySelected: (e) async* {
-      yield _categorySelectedEventHandler(e);
-    }, timePeriodSelected: (e) async* {
-      yield _timePeriodSelectedHandler(e);
-    }, fashionSelected: (e) async* {
-      yield _fashionSelectedHandler(e);
-    }, quantityChanged: (e) async* {
-      yield _quantityChangedHandler(e);
-    }, colorAdded: (e) async* {
-      yield _colorAddedEventHandler(e);
-    }, storageLocationSelected: (e) async* {
-      yield _storageLocationSelectedEventHandler(e);
-    }, loadFormOptions: (_) async* {
-      yield _loadFormOptionsEventHandler();
-    }, saveChangesPressed: (_) async* {
-      _saveChangesPressedEventHandler();
-    }, saveCostume: (_) async* {
-      _saveCostumeEventHandler();
-    });
+    yield* event.map(
+        categorySelected: (e) async* {
+          yield _categorySelectedEventHandler(e);
+        },
+        timePeriodSelected: (e) async* {
+          yield _timePeriodSelectedHandler(e);
+        },
+        fashionSelected: (e) async* {
+          yield _fashionSelectedHandler(e);
+        },
+        quantityChanged: (e) async* {
+          yield _quantityChangedHandler(e);
+        },
+        colorAdded: (e) async* {
+          yield _colorAddedEventHandler(e);
+        },
+        storageLocationSelected: (e) async* {
+          yield _storageLocationSelectedEventHandler(e);
+        },
+        loadFormOptions: (_) async* {
+          yield* _loadFormOptionsEventHandler();
+        },
+        saveChangesPressed: (_) async* {
+          _saveChangesPressedEventHandler();
+        },
+        saveCostume: (_) async* {
+          _saveCostumeEventHandler();
+        },
+        themeValueChanged: (ThemeValueChanged e) async* {
+          yield _themeValueEventHandler(e);
+        },
+        themeAdded: (ThemeAdded e) async* {
+          yield _themeAdded();
+        },
+        colorRemoved: (ColorRemoved e) async* {
+          yield colorRemovedEventHandler(e);
+        },
+        themeRemoved: (ThemeRemoved e) async* {
+          yield themeRemovedEventHandler(e);
+        },
+        colorValueChanged: (ColorValueChanged e) async* {
+          yield colorValueChangedEventHandler(e);
+        },
+        mainLocationSelected: (MainLocationSelected e) async* {
+          yield* mainLocationSelectedEventHandler(e);
+        },
+        subLocationSelected: (SubLocationSelected e) async* {
+          yield subLocationSelectedEventHandler(e);
+        }
+    );
   }
 
   CostumeFormState _categorySelectedEventHandler(CategorySelected e) {
@@ -62,28 +93,66 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   CostumeFormState _colorAddedEventHandler(ColorAdded e) {
-    state.colors!.add(e.addedColor);
+    state.colors!.add(state.currentColor);
     return state;
   }
 
-  CostumeFormState _storageLocationSelectedEventHandler(
-      StorageLocationSelected e) {
-    return state.copyWith(storageLocation: e.location);
-  }
-
-  Future<CostumeFormState> _loadFormOptionsEventHandler() async {
+  Stream<CostumeFormState> _loadFormOptionsEventHandler() async* {
     final categoryOptions = await _costumeRepository.getCategories();
     final timePeriodOptions = await _costumeRepository.getTimePeriods();
-    final storageOptions = await _costumeRepository.getStorageLocations();
+    final storageOptions = await _costumeRepository.getStorageMainLocations();
 
-    return state.copyWith(
+    yield state.copyWith(
         loading: false,
         categoryOptions: categoryOptions,
         timePeriodOptions: timePeriodOptions,
-        storageLocationOptions: storageOptions);
+        storageMainLocationOptions: storageOptions);
   }
 
   void _saveChangesPressedEventHandler() {}
 
   void _saveCostumeEventHandler() {}
+
+  CostumeFormState _themeValueEventHandler(ThemeValueChanged e) {
+    return state.copyWith(
+        currentTheme: e.theme
+    );
+  }
+
+  CostumeFormState? _themeAdded() {
+    if (state.currentTheme.isNotEmpty) {
+      state.themes!.add(state.currentTheme);
+      return state.copyWith(currentTheme: "");
+    }
+  }
+
+  CostumeFormState colorRemovedEventHandler(ColorRemoved e) {
+    state.colors!.remove(e.color);
+    return state;
+  }
+
+  CostumeFormState themeRemovedEventHandler(ThemeRemoved e) {
+    state.themes!.remove(e.theme);
+    return state;
+  }
+
+  CostumeFormState colorValueChangedEventHandler(ColorValueChanged e) {
+    return state.copyWith(currentColor: e.color);
+  }
+
+  Stream<CostumeFormState> mainLocationSelectedEventHandler(
+      MainLocationSelected e) async* {
+    final mainLocation = e.main;
+
+    yield state.copyWith(
+        mainLocation: mainLocation
+    );
+
+    final subLocationsOptions = await _costumeRepository.getStorageSubLocations(
+        mainLocation.id);
+
+    yield state.copyWith(
+        storageSubLocationOptions: subLocationsOptions
+    );
+  }
 }

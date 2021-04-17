@@ -14,10 +14,11 @@ class FirebaseAuthRepository implements IAuthService {
   @override
   Future<bool> isCreator() async {
     final currentUser = await getCurrentUser();
-    if (currentUser != null)
+    if (currentUser != null) {
       return currentUser.isCreator;
-    else
+    } else {
       return false;
+    }
   }
 
   @override
@@ -43,10 +44,11 @@ class FirebaseAuthRepository implements IAuthService {
   @override
   Future<bool> isAdmin() async {
     final currentUser = await getCurrentUser();
-    if (currentUser != null)
+    if (currentUser != null) {
       return currentUser.isAdmin;
-    else
+    } else {
       return false;
+    }
   }
 
   @override
@@ -61,9 +63,6 @@ class FirebaseAuthRepository implements IAuthService {
     final user = User(
       name: name,
       email: email,
-      isCreative: true,
-      isCreator: false,
-      isAdmin: false,
       institution: institution,
     );
 
@@ -91,9 +90,9 @@ class FirebaseAuthRepository implements IAuthService {
   @override
   Future<User?> getCurrentUser() async {
     final authenticatedUser = _auth.currentUser;
-    if (authenticatedUser == null)
+    if (authenticatedUser == null) {
       return null;
-    else {
+    } else {
       return _userRepository.getUser(authenticatedUser.uid);
     }
   }

@@ -108,7 +108,7 @@ class DetailsPage extends StatelessWidget {
             //Productions:
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(width: 1),
+                  border: Border.all(),
                   borderRadius: const BorderRadius.all(Radius.circular(5.0))),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),

@@ -12,9 +12,44 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   static const String COSTUMES_COLLECTION = 'costumes';
   static const String INSTITUTIONS_COLLECTION = "institutions";
 
+  static const List<Location> _mainStorageLocations = <Location>[
+    Location(id: "1", name: "Loftet"),
+    Location(id: "8": name: "Den aden side")
+  ];
+
+  static const Map<String, List<Location>> _subStorageLocations =
+      Map < String,
+      List
+
+  <
+
+  Location
+
+  >> {
+  "1": <Location>[
+  Location(id:"2", name: "Lille Garderobe"),
+  Location(id: "3", name: "Stor Herregarderobe"),
+  Location(id: "4": name: "Laserum"),
+  Location(id: "5", name: "Lille Herregarderobe"),
+  Location(id: "6", name: "Stor Damegarderobe"),
+  Location(id: "7" name: "Holberg Garderobe")
+  ],
+  "8": <Location>[
+  Location(id: "9", name: "1"),
+  Location(id: "10", name: "2"),
+  Location(id: "11", name: "3"),
+  Location(id: "12", name: "4"),
+  Location(id: "13", name: "5"),
+  Location(id: "14", name: "6"),
+  Location(id: "15", name: "7"),
+  Location(id: "16", name: "8"),
+  Location(id: "17", name: "9"),
+  Location(id: "18", name: "10"),
+  ]};
+
   @override
   Future<void> createCostume(String institutionId, Costume costume) async {
-    await _store.collection(INSTITUTIONS_COLLECTION).doc(institutionId);
+    _store.collection(INSTITUTIONS_COLLECTION).doc(institutionId);
     // .collection(COSTUMES_COLLECTION).add(costume.toJson());
   }
 
@@ -39,7 +74,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .doc(id)
         .get();
 
-    return Costume();
+    return const Costume();
 
     /* final json = snapshot.data();
     if(json != null) {
@@ -66,12 +101,12 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   @override
   Future<void> updateCostume(String institutionId, Costume updated) async {
-    await _store.collection(INSTITUTIONS_COLLECTION).doc(institutionId);
+    _store.collection(INSTITUTIONS_COLLECTION).doc(institutionId);
     // .collection(COSTUMES_COLLECTION).doc(updated.id).update(costume.toJson());
   }
 
-  queryFactoryMethod(
-      CollectionReference collectionReference, CostumeQuery query) {
+  Query queryFactoryMethod(CollectionReference collectionReference,
+      CostumeQuery query) {
     const PRODUCTION_KEY = "production";
     const CATEGORY_KEY = "category";
     const FASHION_KEY = "fashion";
@@ -99,6 +134,8 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     if (query.themes != null) {
       seedQuery = seedQuery.where(THEMES_KEY, arrayContains: query.themes);
     }
+
+    return seedQuery;
   }
 
   @override
@@ -120,14 +157,20 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<List<StorageLocation>> getStorageLocations() {
-    // TODO: implement getStorageLocations
+  Future<List<String>> getTimePeriods() {
+    // TODO: implement getTimePeriods
     throw UnimplementedError();
   }
 
   @override
-  Future<List<String>> getTimePeriods() {
-    // TODO: implement getTimePeriods
-    throw UnimplementedError();
+  Future<List<Location>> getStorageMainLocations() {
+    return Future.delayed(Duration(seconds: 3))
+        .then((_) => _mainStorageLocations);
+  }
+
+  @override
+  Future<List<Location>> getStorageSubLocations(String mainId) {
+    return Future.delayed(Duration(seconds: 3))
+        .then((_) => _subStorageLocations[mainId]);
   }
 }

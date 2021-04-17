@@ -44,7 +44,9 @@ class RegisterForm extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Form(
-              autovalidate: state.showInputErrorMessages,
+              autovalidateMode: AutovalidateMode.always,
+              //TODO:
+              // autovalidate: state.showInputErrorMessages,
               child: Container(
                 alignment: Alignment.center,
                 child: SingleChildScrollView(

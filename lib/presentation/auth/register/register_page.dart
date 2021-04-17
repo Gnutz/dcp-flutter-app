@@ -27,7 +27,7 @@ class RegisterPage extends StatelessWidget {
               ),
               label: Text(
                 AppLocalizations.of(context)!.signIn,
-                style: TextStyle(color: MyColorTheme.buttonTextColor),
+                style: const TextStyle(color: MyColorTheme.buttonTextColor),
               )),
         ],
       ),

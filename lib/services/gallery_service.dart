@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class GalleryService implements IGalleryService {
   Institution? _currentInstitution;
-  ICostumeRepository _costumeRepository;
+  final ICostumeRepository _costumeRepository;
 
   GalleryService(this._costumeRepository);
 
@@ -31,7 +31,7 @@ class GalleryService implements IGalleryService {
 
   @override
   // TODO: implement currentInstitution
-  Institution? get currentInstitution => this._currentInstitution;
+  Institution? get currentInstitution => _currentInstitution;
 
   @override
   void setCurrentInstitution(Institution institution) {
@@ -50,12 +50,12 @@ class GalleryService implements IGalleryService {
 
   @override
   Future<Costume> getCostume(String id) async {
-    return await _costumeRepository.getCostume(_currentInstitution!.uid!, id);
+    return _costumeRepository.getCostume(_currentInstitution!.uid!, id);
   }
 
   @override
   Future<List<Costume>> getCostumes(CostumeQuery query) async {
-    return await _costumeRepository.getCostumes(
+    return _costumeRepository.getCostumes(
         currentInstitution!.uid!, query);
   }
 

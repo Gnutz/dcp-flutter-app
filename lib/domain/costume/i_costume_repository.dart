@@ -19,7 +19,10 @@ abstract class ICostumeRepository {
 
   Future<List<String>> getTimePeriods();
 
-  Future<List<StorageLocation>> getStorageLocations();
+  Future<List<Location>> getStorageMainLocations();
+
+  Future<List<Location>> getStorageSubLocations(String mainId);
+
 
 //FutuaddImage(image, costume);
 
