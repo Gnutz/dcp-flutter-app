@@ -1,6 +1,6 @@
 import 'package:digtial_costume_platform/application/costume/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
-import 'package:digtial_costume_platform/domain/costume/status.dart';
+import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -289,8 +289,8 @@ class CostumeEditForm extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (context) => AlertDialog(
-              title: const Text('Are you sure?'),
-              content: const Text('Do you want to exit an App'),
+          title: const Text('Are you sure?'),
+              content: const Text('Do you want discard the changes'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),

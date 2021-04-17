@@ -121,7 +121,6 @@ mixin _$CostumeFormEvent {
     required TResult Function(Location location) subLocationSelected,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CostumeCategory category)? categorySelected,
@@ -142,7 +141,6 @@ mixin _$CostumeFormEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CategorySelected value) categorySelected,
@@ -162,7 +160,6 @@ mixin _$CostumeFormEvent {
     required TResult Function(SubLocationSelected value) subLocationSelected,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CategorySelected value)? categorySelected,
@@ -198,7 +195,6 @@ class _$CostumeFormEventCopyWithImpl<$Res>
   _$CostumeFormEventCopyWithImpl(this._value, this._then);
 
   final CostumeFormEvent _value;
-
   // ignore: unused_field
   final $Res Function(CostumeFormEvent) _then;
 }
@@ -208,7 +204,6 @@ abstract class $CategorySelectedCopyWith<$Res> {
   factory $CategorySelectedCopyWith(
           CategorySelected value, $Res Function(CategorySelected) then) =
       _$CategorySelectedCopyWithImpl<$Res>;
-
   $Res call({CostumeCategory category});
 }
 
@@ -367,7 +362,6 @@ abstract class CategorySelected implements CostumeFormEvent {
   const factory CategorySelected(CostumeCategory category) = _$CategorySelected;
 
   CostumeCategory get category => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $CategorySelectedCopyWith<CategorySelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -378,7 +372,6 @@ abstract class $TimePeriodSelectedCopyWith<$Res> {
   factory $TimePeriodSelectedCopyWith(
           TimePeriodSelected value, $Res Function(TimePeriodSelected) then) =
       _$TimePeriodSelectedCopyWithImpl<$Res>;
-
   $Res call({String time});
 }
 
@@ -536,7 +529,6 @@ abstract class TimePeriodSelected implements CostumeFormEvent {
   const factory TimePeriodSelected(String time) = _$TimePeriodSelected;
 
   String get time => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $TimePeriodSelectedCopyWith<TimePeriodSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -547,7 +539,6 @@ abstract class $FashionSelectedCopyWith<$Res> {
   factory $FashionSelectedCopyWith(
           FashionSelected value, $Res Function(FashionSelected) then) =
       _$FashionSelectedCopyWithImpl<$Res>;
-
   $Res call({Fashion fashion});
 }
 
@@ -705,7 +696,6 @@ abstract class FashionSelected implements CostumeFormEvent {
   const factory FashionSelected(Fashion fashion) = _$FashionSelected;
 
   Fashion get fashion => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $FashionSelectedCopyWith<FashionSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -716,7 +706,6 @@ abstract class $QuantityChangedCopyWith<$Res> {
   factory $QuantityChangedCopyWith(
           QuantityChanged value, $Res Function(QuantityChanged) then) =
       _$QuantityChangedCopyWithImpl<$Res>;
-
   $Res call({int quantity});
 }
 
@@ -875,7 +864,6 @@ abstract class QuantityChanged implements CostumeFormEvent {
   const factory QuantityChanged(int quantity) = _$QuantityChanged;
 
   int get quantity => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $QuantityChangedCopyWith<QuantityChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1297,7 +1285,6 @@ abstract class $ThemeValueChangedCopyWith<$Res> {
   factory $ThemeValueChangedCopyWith(
           ThemeValueChanged value, $Res Function(ThemeValueChanged) then) =
       _$ThemeValueChangedCopyWithImpl<$Res>;
-
   $Res call({String theme});
 }
 
@@ -1455,7 +1442,6 @@ abstract class ThemeValueChanged implements CostumeFormEvent {
   const factory ThemeValueChanged(String theme) = _$ThemeValueChanged;
 
   String get theme => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $ThemeValueChangedCopyWith<ThemeValueChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1602,7 +1588,6 @@ abstract class $ThemeRemovedCopyWith<$Res> {
   factory $ThemeRemovedCopyWith(
           ThemeRemoved value, $Res Function(ThemeRemoved) then) =
       _$ThemeRemovedCopyWithImpl<$Res>;
-
   $Res call({String theme});
 }
 
@@ -1760,7 +1745,6 @@ abstract class ThemeRemoved implements CostumeFormEvent {
   const factory ThemeRemoved(String theme) = _$ThemeRemoved;
 
   String get theme => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $ThemeRemovedCopyWith<ThemeRemoved> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1771,7 +1755,6 @@ abstract class $ColorValueChangedCopyWith<$Res> {
   factory $ColorValueChangedCopyWith(
           ColorValueChanged value, $Res Function(ColorValueChanged) then) =
       _$ColorValueChangedCopyWithImpl<$Res>;
-
   $Res call({String color});
 }
 
@@ -1929,7 +1912,6 @@ abstract class ColorValueChanged implements CostumeFormEvent {
   const factory ColorValueChanged(String color) = _$ColorValueChanged;
 
   String get color => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $ColorValueChangedCopyWith<ColorValueChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2076,7 +2058,6 @@ abstract class $ColorRemovedCopyWith<$Res> {
   factory $ColorRemovedCopyWith(
           ColorRemoved value, $Res Function(ColorRemoved) then) =
       _$ColorRemovedCopyWithImpl<$Res>;
-
   $Res call({String color});
 }
 
@@ -2234,7 +2215,6 @@ abstract class ColorRemoved implements CostumeFormEvent {
   const factory ColorRemoved(String color) = _$ColorRemoved;
 
   String get color => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $ColorRemovedCopyWith<ColorRemoved> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2245,7 +2225,6 @@ abstract class $MainLocationSelectedCopyWith<$Res> {
   factory $MainLocationSelectedCopyWith(MainLocationSelected value,
           $Res Function(MainLocationSelected) then) =
       _$MainLocationSelectedCopyWithImpl<$Res>;
-
   $Res call({Location main});
 }
 
@@ -2404,7 +2383,6 @@ abstract class MainLocationSelected implements CostumeFormEvent {
   const factory MainLocationSelected(Location main) = _$MainLocationSelected;
 
   Location get main => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $MainLocationSelectedCopyWith<MainLocationSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2415,7 +2393,6 @@ abstract class $SubLocationSelectedCopyWith<$Res> {
   factory $SubLocationSelectedCopyWith(
           SubLocationSelected value, $Res Function(SubLocationSelected) then) =
       _$SubLocationSelectedCopyWithImpl<$Res>;
-
   $Res call({Location location});
 }
 
@@ -2574,7 +2551,6 @@ abstract class SubLocationSelected implements CostumeFormEvent {
   const factory SubLocationSelected(Location location) = _$SubLocationSelected;
 
   Location get location => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $SubLocationSelectedCopyWith<SubLocationSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2630,40 +2606,24 @@ const $CostumeFormState = _$CostumeFormStateTearOff();
 /// @nodoc
 mixin _$CostumeFormState {
   bool get loading => throw _privateConstructorUsedError;
-
   List<String> get timePeriodOptions => throw _privateConstructorUsedError;
-
   List<CostumeCategory> get categoryOptions =>
       throw _privateConstructorUsedError;
-
   List<Location> get storageMainLocationOptions =>
       throw _privateConstructorUsedError;
-
   List<Location> get storageSubLocationOptions =>
       throw _privateConstructorUsedError;
-
   String get currentColor => throw _privateConstructorUsedError;
-
   String get currentTheme => throw _privateConstructorUsedError;
-
   String? get id => throw _privateConstructorUsedError;
-
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   CostumeCategory? get category => throw _privateConstructorUsedError;
-
   String? get timePeriod => throw _privateConstructorUsedError;
-
   List<String>? get themes => throw _privateConstructorUsedError;
-
   List<String>? get colors => throw _privateConstructorUsedError;
-
   List<Production>? get productions => throw _privateConstructorUsedError;
-
   int? get quantity => throw _privateConstructorUsedError;
-
   Location? get mainLocation => throw _privateConstructorUsedError;
-
   Location? get subLocation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -2676,7 +2636,6 @@ abstract class $CostumeFormStateCopyWith<$Res> {
   factory $CostumeFormStateCopyWith(
           CostumeFormState value, $Res Function(CostumeFormState) then) =
       _$CostumeFormStateCopyWithImpl<$Res>;
-
   $Res call(
       {bool loading,
       List<String> timePeriodOptions,
@@ -2703,7 +2662,6 @@ class _$CostumeFormStateCopyWithImpl<$Res>
   _$CostumeFormStateCopyWithImpl(this._value, this._then);
 
   final CostumeFormState _value;
-
   // ignore: unused_field
   final $Res Function(CostumeFormState) _then;
 
@@ -2806,7 +2764,6 @@ abstract class _$CostumeFormStateCopyWith<$Res>
   factory _$CostumeFormStateCopyWith(
           _CostumeFormState value, $Res Function(_CostumeFormState) then) =
       __$CostumeFormStateCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {bool loading,
@@ -3095,58 +3052,41 @@ abstract class _CostumeFormState implements CostumeFormState {
 
   @override
   bool get loading => throw _privateConstructorUsedError;
-
   @override
   List<String> get timePeriodOptions => throw _privateConstructorUsedError;
-
   @override
   List<CostumeCategory> get categoryOptions =>
       throw _privateConstructorUsedError;
-
   @override
   List<Location> get storageMainLocationOptions =>
       throw _privateConstructorUsedError;
-
   @override
   List<Location> get storageSubLocationOptions =>
       throw _privateConstructorUsedError;
-
   @override
   String get currentColor => throw _privateConstructorUsedError;
-
   @override
   String get currentTheme => throw _privateConstructorUsedError;
-
   @override
   String? get id => throw _privateConstructorUsedError;
-
   @override
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   @override
   CostumeCategory? get category => throw _privateConstructorUsedError;
-
   @override
   String? get timePeriod => throw _privateConstructorUsedError;
-
   @override
   List<String>? get themes => throw _privateConstructorUsedError;
-
   @override
   List<String>? get colors => throw _privateConstructorUsedError;
-
   @override
   List<Production>? get productions => throw _privateConstructorUsedError;
-
   @override
   int? get quantity => throw _privateConstructorUsedError;
-
   @override
   Location? get mainLocation => throw _privateConstructorUsedError;
-
   @override
   Location? get subLocation => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$CostumeFormStateCopyWith<_CostumeFormState> get copyWith =>

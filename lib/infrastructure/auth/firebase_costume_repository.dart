@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
-import 'package:digtial_costume_platform/domain/costume/status.dart';
+import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:flutter/material.dart';
 
@@ -69,7 +69,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .doc(id)
         .get();
 
-    return const Costume();
+    return Costume();
 
     /* final json = snapshot.data();
     if(json != null) {
