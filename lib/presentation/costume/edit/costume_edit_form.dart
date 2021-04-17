@@ -9,6 +9,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CostumeEditForm extends StatelessWidget {
   late final CostumeFormBloc _formBloc;
+  final _themeHolder = TextEditingController();
+  final _colorHolder = TextEditingController();
   late BuildContext _context;
   late CostumeFormState _state;
 
@@ -18,34 +20,33 @@ class CostumeEditForm extends StatelessWidget {
 
     return BlocBuilder<CostumeFormBloc, CostumeFormState>(
         builder: (context, state) {
-          _context = context;
-          _state = state;
+      _context = context;
+      _state = state;
 
-          return Container(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 20.0, horizontal: 50.0),
-              child: Form(
-                autovalidateMode: AutovalidateMode.always,
-                //TODO:
-                // autovalidate: state.showInputErrorMessages,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: SingleChildScrollView(
-                    child: Column(children: [
-                      _buildCategorySelection(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildTimeSelection(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildFashionSelection(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildThemesInput(),
-                      const SizedBox(height: 8.0),
+      return Container(
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          child: Form(
+            autovalidateMode: AutovalidateMode.always,
+            //TODO:
+            // autovalidate: state.showInputErrorMessages,
+            child: Container(
+              alignment: Alignment.center,
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  _buildCategorySelection(),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  _buildTimeSelection(),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  _buildFashionSelection(),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  _buildThemesInput(),
+                  const SizedBox(height: 8.0),
                   _buildThemesList(),
                   const SizedBox(
                     height: 20.0,
@@ -62,10 +63,10 @@ class CostumeEditForm extends StatelessWidget {
                   ),
                   _buildSubmitButton(),
                 ]),
-                  ),
-                ),
-              ));
-        });
+              ),
+            ),
+          ));
+    });
   }
 
   Widget _buildCategorySelection() {
@@ -73,12 +74,10 @@ class CostumeEditForm extends StatelessWidget {
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(_context)!.selectTheCostumeCategory),
         items: _state.categoryOptions
-            .map((category) =>
-            DropdownMenuItem(
+            .map((category) => DropdownMenuItem(
                 value: category, child: Text(category.category)))
             .toList(),
-        validator: (_) =>
-        _state.category == null
+        validator: (_) => _state.category == null
             ? AppLocalizations.of(_context)!.youMustSelectACategory
             : null,
         onChanged: (category) {
@@ -91,9 +90,8 @@ class CostumeEditForm extends StatelessWidget {
     return DropdownButtonFormField<String>(
         decoration: textInputDecorator.copyWith(
             hintText:
-            AppLocalizations.of(_context)!.selectTheCostumeTimePeriod),
-        validator: (val) =>
-        _state.timePeriod == null
+                AppLocalizations.of(_context)!.selectTheCostumeTimePeriod),
+        validator: (val) => _state.timePeriod == null
             ? AppLocalizations.of(_context)!.youMustSelectATimePeriod
             : null,
         items: _state.timePeriodOptions
@@ -110,7 +108,7 @@ class CostumeEditForm extends StatelessWidget {
       onPressed: () {},
       //color: Colors.pink[400],
       child: Text(AppLocalizations.of(_context)!.save,
-          style: TextStyle(color: Colors.white)),
+          style: const TextStyle(color: Colors.white)),
       //disabledColor: Colors.cyan,
     );
   }
@@ -128,7 +126,7 @@ class CostumeEditForm extends StatelessWidget {
             "Fashion Type",
             style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ), */
-        Row(
+            Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Row(children: [
@@ -160,6 +158,7 @@ class CostumeEditForm extends StatelessWidget {
         child: TextFormField(
           decoration: textInputDecorator.copyWith(
               hintText: AppLocalizations.of(_context)!.newTheme),
+          controller: _themeHolder,
           onChanged: (theme) =>
               _formBloc.add(CostumeFormEvent.themeValueChanged(theme)),
           onFieldSubmitted: (_) =>
@@ -183,6 +182,7 @@ class CostumeEditForm extends StatelessWidget {
               hintText: AppLocalizations.of(_context)!.newColor),
           onChanged: (color) =>
               _formBloc.add(CostumeFormEvent.colorValueChanged(color)),
+          controller: _colorHolder,
         ),
       ),
       const SizedBox(width: 8.0),
@@ -195,11 +195,17 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   void _submitTheme() {
-    _formBloc.add(const CostumeFormEvent.themeAdded());
+    if (_state.currentTheme.isNotEmpty) {
+      _formBloc.add(const CostumeFormEvent.themeAdded());
+      _themeHolder.clear();
+    }
   }
 
   void _submitColor() {
-    _formBloc.add(const CostumeFormEvent.colorAdded());
+    if (_state.currentColor.isNotEmpty) {
+      _formBloc.add(const CostumeFormEvent.colorAdded());
+      _colorHolder.clear();
+    }
   }
 
   Widget _buildThemesList() {
@@ -218,17 +224,16 @@ class CostumeEditForm extends StatelessWidget {
     _formBloc.add(CostumeFormEvent.colorRemoved(color));
   }
 
-  Widget _buildChipList(List<String> chips,
-      void Function(String val) removeCallback) {
+  Widget _buildChipList(
+      List<String> chips, void Function(String val) removeCallback) {
     return Wrap(
       children: chips
-          .map<Widget>((chip) =>
-          Chip(
-            label: Text(chip,
-                style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
-            deleteIcon: const Icon(Icons.close),
-            onDeleted: () => removeCallback(chip),
-          ))
+          .map<Widget>((chip) => Chip(
+                label: Text(chip,
+                    style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
+                deleteIcon: const Icon(Icons.close),
+                onDeleted: () => removeCallback(chip),
+              ))
           .toList(),
     );
   }

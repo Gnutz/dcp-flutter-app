@@ -27,29 +27,29 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     yield* event.map(
         categorySelected: (e) async* {
           yield _categorySelectedEventHandler(e);
-        },
-        timePeriodSelected: (e) async* {
-          yield _timePeriodSelectedHandler(e);
-        },
-        fashionSelected: (e) async* {
-          yield _fashionSelectedHandler(e);
-        },
-        quantityChanged: (e) async* {
-          yield _quantityChangedHandler(e);
-        },
-        colorAdded: (e) async* {
-          yield _colorAddedEventHandler(e);
-        },
-        loadFormOptions: (_) async* {
-          yield* _loadFormOptionsEventHandler();
-        },
-        saveChangesPressed: (_) async* {
-          _saveChangesPressedEventHandler();
-        },
-        saveCostume: (_) async* {
-          _saveCostumeEventHandler();
-        },
-        themeValueChanged: (ThemeValueChanged e) async* {
+      },
+      timePeriodSelected: (e) async* {
+        yield _timePeriodSelectedHandler(e);
+      },
+      fashionSelected: (e) async* {
+        yield _fashionSelectedHandler(e);
+      },
+      quantityChanged: (e) async* {
+        yield _quantityChangedHandler(e);
+      },
+      colorAdded: (_) async* {
+        yield _colorAddedEventHandler();
+      },
+      loadFormOptions: (_) async* {
+        yield* _loadFormOptionsEventHandler();
+      },
+      saveChangesPressed: (_) async* {
+        _saveChangesPressedEventHandler();
+      },
+      saveCostume: (_) async* {
+        _saveCostumeEventHandler();
+      },
+      themeValueChanged: (ThemeValueChanged e) async* {
           yield _themeValueEventHandler(e);
         },
         themeAdded: (ThemeAdded e) async* {
@@ -89,9 +89,11 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     return state.copyWith(quantity: e.quantity);
   }
 
-  CostumeFormState _colorAddedEventHandler(ColorAdded e) {
-    state.colors!.add(state.currentColor);
-    return state;
+  CostumeFormState _colorAddedEventHandler() {
+    var colors = state.colors!.toList();
+    colors.add(state.currentColor);
+
+    return state.copyWith(colors: colors, currentColor: "");
   }
 
   Stream<CostumeFormState> _loadFormOptionsEventHandler() async* {
@@ -117,22 +119,32 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   CostumeFormState _themeAdded() {
+    print(state.currentTheme);
     if (state.currentTheme.isNotEmpty) {
-      state.themes!.add(state.currentTheme);
-      return state.copyWith(currentTheme: "");
+      //TODO: fix
+      var themes = state.themes!.toList();
+      themes.add(state.currentTheme);
+
+      for (final theme in state.themes!) {
+        print(theme);
+      }
+
+      return state.copyWith(themes: themes, currentTheme: "");
     }
 
     return state;
   }
 
   CostumeFormState colorRemovedEventHandler(ColorRemoved e) {
-    state.colors!.remove(e.color);
-    return state;
+    var colors = state.colors!.toList();
+    colors.remove(e.color);
+    return state.copyWith(colors: colors);
   }
 
   CostumeFormState themeRemovedEventHandler(ThemeRemoved e) {
-    state.themes!.remove(e.theme);
-    return state;
+    var themes = state.themes!.toList();
+    themes.remove(e.theme);
+    return state.copyWith(themes: themes);
   }
 
   CostumeFormState colorValueChangedEventHandler(ColorValueChanged e) {
