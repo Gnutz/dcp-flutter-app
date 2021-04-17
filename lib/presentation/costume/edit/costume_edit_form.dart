@@ -23,49 +23,53 @@ class CostumeEditForm extends StatelessWidget {
       _context = context;
       _state = state;
 
-      return Container(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-          child: Form(
-            autovalidateMode: AutovalidateMode.always,
-            //TODO:
-            // autovalidate: state.showInputErrorMessages,
-            child: Container(
-              alignment: Alignment.center,
-              child: SingleChildScrollView(
-                child: Column(children: [
-                  _buildCategorySelection(),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  _buildTimeSelection(),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  _buildFashionSelection(),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  _buildThemesInput(),
-                  const SizedBox(height: 8.0),
-                  _buildThemesList(),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  _buildColorsInput(),
-                  const SizedBox(height: 8.0),
-                  _buildColorsList(),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  _buildStorageSelection(),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  _buildSubmitButton(),
-                ]),
+      return WillPopScope(
+        onWillPop: () => _return(),
+        child: Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+            child: Form(
+              autovalidateMode: AutovalidateMode.always,
+              //TODO:
+              // autovalidate: state.showInputErrorMessages,
+              child: Container(
+                alignment: Alignment.center,
+                child: SingleChildScrollView(
+                  child: Column(children: [
+                    _buildCategorySelection(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    _buildTimeSelection(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    _buildFashionSelection(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    _buildThemesInput(),
+                    const SizedBox(height: 8.0),
+                    _buildThemesList(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    _buildColorsInput(),
+                    const SizedBox(height: 8.0),
+                    _buildColorsList(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    _buildStorageSelection(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    _buildSubmitButton(),
+                  ]),
+                ),
               ),
-            ),
-          ));
+            )),
+      );
     });
   }
 
@@ -279,5 +283,24 @@ class CostumeEditForm extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  Future<bool> _return() async {
+    return await showDialog(
+        context: _context,
+        builder: (context) => AlertDialog(
+              title: const Text('Are you sure?'),
+              content: const Text('Do you want to exit an App'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text('No'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: const Text('Yes'),
+                ),
+              ],
+            )) as bool;
   }
 }
