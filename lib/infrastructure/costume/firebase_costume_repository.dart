@@ -4,7 +4,6 @@ import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
-import 'package:flutter/material.dart';
 
 class FirebaseCostumeRepository implements ICostumeRepository {
   final _store = FirebaseFirestore.instance;
@@ -95,8 +94,12 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   @override
   Future<void> updateCostume(String institutionId, Costume updated) async {
-    _store.collection(INSTITUTIONS_COLLECTION).doc(institutionId);
-    // .collection(COSTUMES_COLLECTION).doc(updated.id).update(costume.toJson());
+    _store
+        .collection(INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(COSTUMES_COLLECTION)
+        .doc(updated.id)
+        .update(updated.toJson());
   }
 
   Query queryFactoryMethod(CollectionReference collectionReference,
@@ -135,16 +138,27 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   @override
   Future<List<CostumeCategory>> getCategories() {
     final _categories = <CostumeCategory>[
-      CostumeCategory(category: "Dresses", iconUri: Icons.looks_one),
-      CostumeCategory(category: "Shoes", iconUri: Icons.looks_two),
-      CostumeCategory(category: "T-shirts", iconUri: Icons.looks_3),
-      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-      CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+      CostumeCategory(
+          category: "dresses",
+          iconUri: "images/icons/costume_categories/dress.png"),
+      CostumeCategory(
+          category: "shoes",
+          iconUri: "images/icons/costume_categories/dress.png"),
+      CostumeCategory(
+          category: "t-shirts",
+          iconUri: "images/icons/costume_categories/dress.png"),
+      CostumeCategory(
+          category: "skirts",
+          iconUri: "images/icons/costume_categories/dress.png"),
+      CostumeCategory(
+          category: "coats",
+          iconUri: "images/icons/costume_categories/dress.png"),
+      CostumeCategory(
+          category: "shirts",
+          iconUri: "images/icons/costume_categories/dress.png"),
+      CostumeCategory(
+          category: "pants",
+          iconUri: "images/icons/costume_categories/dress.png"),
     ];
     return Future.delayed(const Duration(seconds: 5))
         .then((value) => _categories);

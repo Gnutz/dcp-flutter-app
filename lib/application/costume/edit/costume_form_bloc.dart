@@ -8,7 +8,6 @@ import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 part 'costume_form_bloc.freezed.dart';
 part 'costume_form_event.dart';
@@ -93,7 +92,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   CostumeFormState _colorAddedEventHandler() {
-    var colors = state.colors!.toList();
+    final colors = state.colors!.toList();
     colors.add(state.currentColor);
 
     return state.copyWith(colors: colors, currentColor: "");
@@ -152,7 +151,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     print(state.currentTheme);
     if (state.currentTheme.isNotEmpty) {
       //TODO: fix
-      var themes = state.themes!.toList();
+      final themes = state.themes!.toList();
       themes.add(state.currentTheme);
 
       for (final theme in state.themes!) {
@@ -166,7 +165,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   CostumeFormState colorRemovedEventHandler(ColorRemoved e) {
-    var colors = state.colors!.toList();
+    final colors = state.colors!.toList();
     colors.remove(e.color);
     return state.copyWith(colors: colors);
   }

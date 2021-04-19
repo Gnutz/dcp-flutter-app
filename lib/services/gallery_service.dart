@@ -4,7 +4,6 @@ import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
-import 'package:flutter/material.dart';
 
 class GalleryService implements IGalleryService {
   Institution? _currentInstitution =
@@ -13,17 +12,29 @@ class GalleryService implements IGalleryService {
 
   GalleryService(this._costumeRepository);
 
+  //TODO change
   final _categories = <CostumeCategory>[
-    CostumeCategory(category: "Dresses", iconUri: Icons.looks_one),
-    CostumeCategory(category: "Shoes", iconUri: Icons.looks_two),
-    CostumeCategory(category: "T-shirts", iconUri: Icons.looks_3),
-    CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-    CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-    CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-    CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-    CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-    CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
-    CostumeCategory(category: "Skirts", iconUri: Icons.looks_4),
+    CostumeCategory(
+        category: "dresses",
+        iconUri: "images/icons/costume_categories/dress.png"),
+    CostumeCategory(
+        category: "shoes",
+        iconUri: "images/icons/costume_categories/dress.png"),
+    CostumeCategory(
+        category: "t-shirts",
+        iconUri: "images/icons/costume_categories/dress.png"),
+    CostumeCategory(
+        category: "skirts",
+        iconUri: "images/icons/costume_categories/dress.png"),
+    CostumeCategory(
+        category: "coats",
+        iconUri: "images/icons/costume_categories/dress.png"),
+    CostumeCategory(
+        category: "shirts",
+        iconUri: "images/icons/costume_categories/dress.png"),
+    CostumeCategory(
+        category: "pants",
+        iconUri: "images/icons/costume_categories/dress.png"),
   ];
 
   @override

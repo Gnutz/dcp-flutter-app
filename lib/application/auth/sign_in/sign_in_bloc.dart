@@ -6,7 +6,6 @@ import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/core/value_validators.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 part 'sign_in_bloc.freezed.dart';
 part 'sign_in_event.dart';

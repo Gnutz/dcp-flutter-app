@@ -1,4 +1,4 @@
-import 'package:digtial_costume_platform/application/costume/costume_form_bloc.dart';
+import 'package:digtial_costume_platform/application/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
@@ -84,7 +84,7 @@ class CostumeEditForm extends StatelessWidget {
             hintText: AppLocalizations.of(_context)!.selectTheCostumeCategory),
         items: _state.categoryOptions
             .map((category) => DropdownMenuItem(
-                value: category, child: Text(category.category)))
+                value: category, child: Center(child: Text(category.category))))
             .toList(),
         validator: (_) => _state.category == null
             ? AppLocalizations.of(_context)!.youMustSelectACategory
@@ -104,7 +104,8 @@ class CostumeEditForm extends StatelessWidget {
             ? AppLocalizations.of(_context)!.youMustSelectATimePeriod
             : null,
         items: _state.timePeriodOptions
-            .map((time) => DropdownMenuItem(value: time, child: Text(time)))
+            .map((time) =>
+                DropdownMenuItem(value: time, child: Center(child: Text(time))))
             .toList(),
         onChanged: (time) {
           _formBloc.add(CostumeFormEvent.timePeriodSelected(time!));
@@ -162,6 +163,7 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   Widget _buildThemesInput() {
+    //TODO: convert to lowercase
     return Row(children: [
       Flexible(
         child: TextFormField(
@@ -184,6 +186,7 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   Widget _buildColorsInput() {
+    //TODO convert to lowercase
     return Row(children: [
       Flexible(
         child: TextFormField(

@@ -1,4 +1,4 @@
-import 'package:digtial_costume_platform/application/costume/costume_form_bloc.dart';
+import 'package:digtial_costume_platform/application/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
