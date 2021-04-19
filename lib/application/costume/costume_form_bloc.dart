@@ -114,13 +114,13 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   void _saveChangesPressedEventHandler() {}
 
   void _saveCostumeEventHandler() async {
-    Costume costume;
+    Costume? result;
 
     if (state.id != null) {
-      costume = await _costumeService.getCostume(state.id!);
-    } else {
-      costume = Costume();
+      result = await _costumeService.getCostume(state.id!);
     }
+
+    final Costume costume = result ?? Costume();
 
     costume.edited = DateTime.now();
     costume.category = state.category!.category;

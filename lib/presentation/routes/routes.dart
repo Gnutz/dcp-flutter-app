@@ -2,8 +2,8 @@ import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/presentation/auth/register/register_page.dart';
 import 'package:digtial_costume_platform/presentation/auth/sign_in/sign_in_page.dart';
 import 'package:digtial_costume_platform/presentation/costume/edit/costume_edit_page.dart';
-import 'package:digtial_costume_platform/presentation/gallery/category_selection.dart';
-import 'package:digtial_costume_platform/presentation/gallery/gallery.dart';
+import 'package:digtial_costume_platform/presentation/costume/gallery/category_selection.dart';
+import 'package:digtial_costume_platform/presentation/costume/gallery/gallery.dart';
 import 'package:digtial_costume_platform/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 

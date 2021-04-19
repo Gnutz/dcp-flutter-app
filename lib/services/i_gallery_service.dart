@@ -14,7 +14,7 @@ abstract class IGalleryService {
 
   Future<void> deleteCostume(String id);
 
-  Future<Costume> getCostume(String id);
+  Future<Costume?> getCostume(String id);
 
   Future<List<Costume>> getCostumes(CostumeQuery query);
 

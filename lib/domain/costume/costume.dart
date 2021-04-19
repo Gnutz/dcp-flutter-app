@@ -40,7 +40,11 @@ class Costume {
       this.productions,
       this.quantity,
       this.storageLocation,
-      this.status});
+      this.status}) {
+    this.productions = productions ?? <Production>[];
+    this.themes = themes ?? <String>[];
+    this.colors = themes ?? <String>[];
+  }
 
   factory Costume.fromJson(Map<String, dynamic> json) =>
       _$CostumeFromJson(json);

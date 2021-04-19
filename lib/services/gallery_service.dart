@@ -7,7 +7,8 @@ import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:flutter/material.dart';
 
 class GalleryService implements IGalleryService {
-  Institution? _currentInstitution;
+  Institution? _currentInstitution =
+      Institution(name: "aarhus Teater", uid: "fHEEOUrR8ZcsqbH19dzC");
   final ICostumeRepository _costumeRepository;
 
   GalleryService(this._costumeRepository);
@@ -40,6 +41,8 @@ class GalleryService implements IGalleryService {
 
   @override
   Future<void> createCostume(Costume costume) async {
+    print(costume);
+    print(_currentInstitution!.uid);
     _costumeRepository.createCostume(_currentInstitution!.uid!, costume);
   }
 
@@ -49,7 +52,7 @@ class GalleryService implements IGalleryService {
   }
 
   @override
-  Future<Costume> getCostume(String id) async {
+  Future<Costume?> getCostume(String id) async {
     return _costumeRepository.getCostume(_currentInstitution!.uid!, id);
   }
 

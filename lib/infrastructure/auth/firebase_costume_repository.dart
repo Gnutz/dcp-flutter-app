@@ -44,8 +44,11 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   @override
   Future<void> createCostume(String institutionId, Costume costume) async {
-    _store.collection(INSTITUTIONS_COLLECTION).doc(institutionId);
-    // .collection(COSTUMES_COLLECTION).add(costume.toJson());
+    _store
+        .collection(INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(COSTUMES_COLLECTION)
+        .add(costume.toJson());
   }
 
   @override
@@ -61,7 +64,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<Costume> getCostume(String institutionId, String id) async {
+  Future<Costume?> getCostume(String institutionId, String id) async {
     final snapshot = await _store
         .collection(INSTITUTIONS_COLLECTION)
         .doc(institutionId)
@@ -69,13 +72,10 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .doc(id)
         .get();
 
-    return Costume();
-
-    /* final json = snapshot.data();
-    if(json != null) {
+    final json = snapshot.data();
+    if (json != null) {
       return Costume.fromJson(json);
     }
-    return null; */
   }
 
   @override

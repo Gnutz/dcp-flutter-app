@@ -13,6 +13,7 @@ class CostumeEditForm extends StatelessWidget {
   final _colorHolder = TextEditingController();
   late BuildContext _context;
   late CostumeFormState _state;
+  AppLocalizations? _appLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +23,12 @@ class CostumeEditForm extends StatelessWidget {
         builder: (context, state) {
       _context = context;
       _state = state;
+      _appLocation = AppLocalizations.of(_context);
 
       return WillPopScope(
         onWillPop: () => _return(),
         child: Container(
-            padding:
-                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
             child: Form(
               autovalidateMode: AutovalidateMode.always,
               //TODO:
@@ -61,6 +62,10 @@ class CostumeEditForm extends StatelessWidget {
                       height: 20.0,
                     ),
                     _buildStorageSelection(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    _buildQuantityInput(),
                     const SizedBox(
                       height: 20.0,
                     ),
@@ -287,20 +292,30 @@ class CostumeEditForm extends StatelessWidget {
 
   Future<bool> _return() async {
     return await showDialog(
+      //TODO need to track dirty
         context: _context,
         builder: (context) => AlertDialog(
-          title: const Text('Are you sure?'),
-              content: const Text('Do you want discard the changes'),
+              title: Text(AppLocalizations.of(_context)!.areYouSure),
+              content:
+                  Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text('No'),
+                  child: Text(AppLocalizations.of(_context)!.cancel),
                 ),
                 TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: const Text('Yes'),
-                ),
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: Text(AppLocalizations.of(_context)!.confirm)),
               ],
             )) as bool;
+  }
+
+  Widget _buildQuantityInput() {
+    return TextFormField(
+      decoration: textInputDecorator.copyWith(
+          hintText: AppLocalizations.of(_context)!.quantity),
+      onChanged: (quantity) =>
+          _formBloc.add(CostumeFormEvent.quantityChanged(int.parse(quantity))),
+    );
   }
 }

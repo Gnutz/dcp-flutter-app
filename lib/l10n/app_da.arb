@@ -39,5 +39,10 @@
   "errorServer": " A Server Fejl opstod",
   "errorEmailInUse": "Den indtastede emailadresse er allerede registreret",
   "errorInvalidCombination": "Forkert email og password kombination",
+  "confirm": "Ja",
+  "cancel": "Nej",
+  "areYouSure": "Er du sikker?",
+  "discardUnSavedChanges": "Vil du gemme dine ændringer?",
+  "quantity": "Antal",
   "selectWhereTheCostumeIsStored": "Vælg  hvor kostumet er opbevaret"
 }

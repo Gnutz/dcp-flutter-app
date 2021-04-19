@@ -7,7 +7,7 @@ import 'costume.dart';
 abstract class ICostumeRepository {
   Future<List<Costume>> getCostumes(String instituionId, CostumeQuery query);
 
-  Future<Costume> getCostume(String instituionId, String id);
+  Future<Costume?> getCostume(String instituionId, String id);
 
   Future<void> createCostume(String instituionId, Costume costume);
 

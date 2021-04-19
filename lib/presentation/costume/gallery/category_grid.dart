@@ -35,18 +35,17 @@ class CategoryGrid extends StatelessWidget {
   Widget _buildCategoryGrid(
       BuildContext context, CategorySelectionState state) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      //buttom insets work for navbar with floating action button
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
       child: GridView.count(
           crossAxisCount: 2,
           semanticChildCount: state.categories.length,
           children: [
             ...state.categories
-                .map<Widget>((category) =>
-                InkWell(
-                  onTap: () =>
-                      context.read<CategorySelectionBloc>().add(
+                .map<Widget>((category) => InkWell(
+                      onTap: () => context.read<CategorySelectionBloc>().add(
                           CategorySelectionEvent.categorySelected(category)),
-                  child: CategoryCard(costumeCategory: category),
+                      child: CategoryCard(costumeCategory: category),
                 ))
                 .toList(),
           ]),

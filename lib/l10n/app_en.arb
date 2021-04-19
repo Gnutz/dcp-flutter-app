@@ -175,6 +175,26 @@
   "@selectWhereTheCostumeIsStored": {
     "description": ""
   },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": ""
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": ""
+  },
+  "areYouSure": "Are you sure",
+  "@areYouSure": {
+    "description": ""
+  },
+  "discardUnSavedChanges": "Do you want to discard unsaved changes?",
+  "@discardUnSavedChanges": {
+    "description": ""
+  },
+  "quantity": "Quantity",
+  "@quantity": {
+    "description": ""
+  },
   "selectYourInstitution": "Select Your Institution",
   "@selectYourInstitution": {
     "description": ""

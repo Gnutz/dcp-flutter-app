@@ -91,20 +91,28 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) =>
-            Locator().locator<AuthBloc>()
-              ..add(const AuthEvent.checkRequested()))
-      ],
-      child: MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        navigatorKey: NavigationService.key,
-        onGenerateRoute: _router.onGeneratedRoute,
-      ),
-    );
+    //https://flutterigniter.com/dismiss-keyboard-form-lose-focus/
+    return GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+
+          if (!currentFocus.hasPrimaryFocus) {
+            WidgetsBinding.instance!.focusManager.primaryFocus?.unfocus();
+          }
+        },
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+                create: (context) => Locator().locator<AuthBloc>()
+                  ..add(const AuthEvent.checkRequested()))
+          ],
+          child: MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            debugShowCheckedModeBanner: false,
+            navigatorKey: NavigationService.key,
+            onGenerateRoute: _router.onGeneratedRoute,
+          ),
+        ));
   }
 }

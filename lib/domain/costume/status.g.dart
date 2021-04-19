@@ -13,8 +13,7 @@ InStorage _$InStorageFromJson(Map json) {
   );
 }
 
-Map<String, dynamic> _$InStorageToJson(InStorage instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$InStorageToJson(InStorage instance) => <String, dynamic>{
       'location': instance.location.toJson(),
     };
 

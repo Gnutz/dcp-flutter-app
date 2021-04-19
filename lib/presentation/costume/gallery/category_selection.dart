@@ -1,6 +1,6 @@
 import 'package:digtial_costume_platform/application/gallery/category_select/category_selection_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
-import 'package:digtial_costume_platform/presentation/gallery/category_grid.dart';
+import 'package:digtial_costume_platform/presentation/costume/gallery/category_grid.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
