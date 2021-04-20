@@ -2,7 +2,7 @@ import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/presentation/auth/register/register_page.dart';
 import 'package:digtial_costume_platform/presentation/auth/sign_in/sign_in_page.dart';
-import 'package:digtial_costume_platform/presentation/costume/details/details_page.dart';
+import 'package:digtial_costume_platform/presentation/costume/details/costume_details_page.dart';
 import 'package:digtial_costume_platform/presentation/costume/edit/costume_edit_page.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/category_selection.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/gallery_page.dart';
@@ -42,7 +42,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CostumeEditPage());
       case Routes.costumeDetails:
         final costume = settings.arguments as Costume;
-        return MaterialPageRoute(builder: (_) => DetailsPage(costume: costume));
+        return MaterialPageRoute(
+            builder: (_) => CostumeDetailsPage(costume: costume));
       case Routes.categorySelection:
         return MaterialPageRoute(builder: (_) => CategorySelectionPage());
       case Routes.gallery:

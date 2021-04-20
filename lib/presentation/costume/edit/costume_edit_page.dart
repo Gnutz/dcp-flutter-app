@@ -4,13 +4,14 @@ import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'costume_edit_form.dart';
 
 class CostumeEditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: MyColorTheme.backgroundColor,
       body: SafeArea(
         child: BlocProvider(
           create: (context) => Locator().locator<CostumeFormBloc>(),
