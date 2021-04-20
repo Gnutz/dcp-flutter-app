@@ -52,40 +52,10 @@ class CostumeDetailsDisplay extends StatelessWidget {
               _buildActionsRow(),
               _buildStatRow(),
               // Colors and themes, secondary information
-              const SizedBox(height: 25.0),
-              _buildThemeAndColorList(),
-              // user operations
               const SizedBox(height: 10.0),
-
-              //Productions:
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: const BorderRadius.all(Radius.circular(5.0))),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(children: [
-                    Text(
-                      AppLocalizations.of(context)!.productionLastTen,
-                      style: const TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
-                    ),
-                    Column(children: [
-                      ...costume.productions!
-                          .map<Widget>((production) =>
-                              ProductionCard(production: production))
-                          .toList(),
-                      ElevatedButton(
-                          onPressed: () {},
-                          child: Text(AppLocalizations.of(context)!.seeAll,
-                              style: TextStyle(
-                                  fontSize: 14.0, color: Colors.grey[600])))
-                      //TODO: Add link to fetch all productions
-                    ]),
-                  ]),
-                ),
-              )
-
+              _buildThemeAndColorList(),
+              const SizedBox(height: 10.0),
+              _buildProductionsList(),
               //TODO: Add images section
               //FloatingActionButton(onPressed: null)
             ],
@@ -169,5 +139,33 @@ class CostumeDetailsDisplay extends StatelessWidget {
               ))
           .toList()
     ]);
+  }
+
+  Widget _buildProductionsList() {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: const BorderRadius.all(Radius.circular(5.0))),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(children: [
+          Text(
+            _appLocation!.productionLastTen,
+            style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+          Column(children: [
+            ...costume.productions!
+                .map<Widget>(
+                    (production) => ProductionCard(production: production))
+                .toList(),
+            ElevatedButton(
+                onPressed: () {},
+                child: Text(_appLocation!.seeAll,
+                    style: TextStyle(fontSize: 14.0, color: Colors.grey[600])))
+            //TODO: Add link to fetch all productions
+          ]),
+        ]),
+      ),
+    );
   }
 }
