@@ -2,6 +2,7 @@ import 'package:digtial_costume_platform/application/gallery/category_select/cat
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/category_grid.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,7 +10,7 @@ class CategorySelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: MyColorTheme.backgroundColor,
       /*appBar:
           AppBar(backgroundColor: Colors.brown[400], elevation: 0.0, actions: [
         IconButton(
@@ -28,21 +29,26 @@ class CategorySelectionPage extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 4.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            ),
-          ],
+        child: Container(
+          decoration:
+              BoxDecoration(color: MyColorTheme.inputDecoratorFillColor),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: MyColorTheme.buttonColor,
         onPressed: () {
           NavigationService.instance!.pushNamed(Routes.costumesEdit);
         },

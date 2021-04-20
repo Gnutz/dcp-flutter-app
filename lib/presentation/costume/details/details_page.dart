@@ -39,7 +39,8 @@ class DetailsPage extends StatelessWidget {
                               fontSize: 24.0,
                               color: Colors.grey[600],
                               fontWeight: FontWeight.bold)),
-                      Text('${costume.timePeriod},',
+                      Text(
+                          '${AppLocalizations.of(context)!.productionLastTen}:${costume.timePeriod},',
                           style: TextStyle(
                               fontSize: 24.0,
                               color: Colors.grey[600],

@@ -22,6 +22,7 @@ import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,6 +79,7 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: MyColorTheme.inputDecoratorFocusedBorderOutlineSideColor,
       child: Center(
         child: Column(
           children: [
@@ -87,7 +89,10 @@ class CategoryCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: Text(costumeCategory.category.capitalize(),
-                  style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
+                  style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: MyColorTheme.buttonTextColor)),
             ),
           ],
         ),
