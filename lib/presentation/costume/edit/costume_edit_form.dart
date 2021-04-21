@@ -1,7 +1,6 @@
 import 'package:digtial_costume_platform/application/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
-import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +25,7 @@ class CostumeEditForm extends StatelessWidget {
       _appLocation = AppLocalizations.of(_context);
 
       return WillPopScope(
-        onWillPop: () => _return(),
+        onWillPop: () => _popPage(),
         child: Container(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
             child: Form(
@@ -79,12 +78,12 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   Widget _buildCategorySelection() {
-    return DropdownButtonFormField<CostumeCategory>(
+    return DropdownButtonFormField<String>(
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(_context)!.selectTheCostumeCategory),
         items: _state.categoryOptions
-            .map((category) => DropdownMenuItem(
-                value: category, child: Center(child: Text(category.category))))
+            .map((category) => DropdownMenuItem<String>(
+                value: category, child: Center(child: Text(category))))
             .toList(),
         validator: (_) => _state.category == null
             ? AppLocalizations.of(_context)!.youMustSelectACategory
@@ -92,7 +91,7 @@ class CostumeEditForm extends StatelessWidget {
         onChanged: (category) {
           _formBloc.add(CostumeFormEvent.categorySelected(category!));
         },
-        value: _state.category);
+        value: _state.categoryOptions.isNotEmpty ? _state.category : null);
   }
 
   Widget _buildTimeSelection() {
@@ -275,7 +274,9 @@ class CostumeEditForm extends StatelessWidget {
                       .toList(),
                   onChanged: (main) => _formBloc
                       .add(CostumeFormEvent.mainLocationSelected(main!)),
-                  value: _state.mainLocation),
+                  value: _state.storageMainLocationOptions.isNotEmpty
+                      ? _state.mainLocation
+                      : null),
               const SizedBox(height: 12.0),
               DropdownButtonFormField<Location>(
                   decoration: textInputDecorator.copyWith(
@@ -287,15 +288,17 @@ class CostumeEditForm extends StatelessWidget {
                       .toList(),
                   onChanged: (location) => _formBloc
                       .add(CostumeFormEvent.subLocationSelected(location!)),
-                  value: _state.subLocation),
+                  value: _state.storageSubLocationOptions.isNotEmpty
+                      ? _state.subLocation
+                      : null),
             ],
           ),
         ));
   }
 
-  Future<bool> _return() async {
+  Future<bool> _popPage() async {
     return await showDialog(
-      //TODO need to track dirty
+        //TODO need to track dirty
         context: _context,
         builder: (context) => AlertDialog(
               title: Text(AppLocalizations.of(_context)!.areYouSure),

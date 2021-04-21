@@ -3,7 +3,6 @@ import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
-import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 
 class FirebaseCostumeRepository implements ICostumeRepository {
   final _store = FirebaseFirestore.instance;
@@ -73,7 +72,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
     final json = snapshot.data();
     if (json != null) {
-      return Costume.fromJson(json);
+      final costume = Costume.fromJson(json);
+      costume.id = id;
+      return costume;
     }
   }
 
@@ -136,29 +137,15 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<List<CostumeCategory>> getCategories() {
-    final _categories = <CostumeCategory>[
-      CostumeCategory(
-          category: "dresses",
-          iconUri: "images/icons/costume_categories/dress.png"),
-      CostumeCategory(
-          category: "shoes",
-          iconUri: "images/icons/costume_categories/dress.png"),
-      CostumeCategory(
-          category: "t-shirts",
-          iconUri: "images/icons/costume_categories/dress.png"),
-      CostumeCategory(
-          category: "skirts",
-          iconUri: "images/icons/costume_categories/dress.png"),
-      CostumeCategory(
-          category: "coats",
-          iconUri: "images/icons/costume_categories/dress.png"),
-      CostumeCategory(
-          category: "shirts",
-          iconUri: "images/icons/costume_categories/dress.png"),
-      CostumeCategory(
-          category: "pants",
-          iconUri: "images/icons/costume_categories/dress.png"),
+  Future<List<String>> getCategories() {
+    final _categories = <String>[
+      "dresses",
+      "shoes",
+      "t-shirts",
+      "skirts",
+      "coats",
+      "shirts",
+      "pants",
     ];
     return Future.delayed(const Duration(seconds: 5))
         .then((value) => _categories);

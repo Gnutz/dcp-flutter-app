@@ -1,6 +1,5 @@
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
-import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 
 import 'costume.dart';
 
@@ -15,7 +14,7 @@ abstract class ICostumeRepository {
 
   Future<void> deleteCostume(String instituionId, String id);
 
-  Future<List<CostumeCategory>> getCategories();
+  Future<List<String>> getCategories();
 
   Future<List<String>> getTimePeriods();
 

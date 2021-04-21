@@ -2,7 +2,9 @@ part of 'costume_form_bloc.dart';
 
 @freezed
 class CostumeFormEvent with _$CostumeFormEvent {
-  const factory CostumeFormEvent.categorySelected(CostumeCategory category) =
+  const factory CostumeFormEvent.loadCostume(String? costumeId) = LoadCostume;
+
+  const factory CostumeFormEvent.categorySelected(String category) =
       CategorySelected;
 
   const factory CostumeFormEvent.timePeriodSelected(String time) =
@@ -12,7 +14,7 @@ class CostumeFormEvent with _$CostumeFormEvent {
       FashionSelected;
 
   const factory CostumeFormEvent.quantityChanged(int quantity) =
-  QuantityChanged;
+      QuantityChanged;
 
   const factory CostumeFormEvent.loadFormOptions() = LoadFormOptions;
 
@@ -39,6 +41,5 @@ class CostumeFormEvent with _$CostumeFormEvent {
 
   const factory CostumeFormEvent.subLocationSelected(Location location) =
   SubLocationSelected;
-
 
 }

@@ -57,7 +57,7 @@ class CategoryGrid extends StatelessWidget {
                       onTap: () async => NavigationService.instance!.pushNamed(
                           Routes.costumeDetails,
                           arguments: await galleryService
-                              .getCostume("fsFaDiWglT0dqYNwhtV6")),
+                              .getCostume("PXEqeKhOBIa5hAhhmYoE")),
                       child: CategoryCard(costumeCategory: category),
                     ))
                 .toList(),

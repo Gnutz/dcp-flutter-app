@@ -1,11 +1,15 @@
 import 'package:digtial_costume_platform/application/costume/details/costume_details_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/production_card.dart';
+import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'production_card.dart';
 
 class CostumeDetailsDisplay extends StatelessWidget {
   late final CostumeDetailsBloc _detailsBloc;
@@ -48,12 +52,12 @@ class CostumeDetailsDisplay extends StatelessWidget {
             children: <Widget>[
               buildImageCarousel(),
               //TODO: needs to change depending on user dependency injection
-              //TODO: add a add to list option
               _buildActionsRow(),
               _buildStatRow(),
               // Colors and themes, secondary information
               const SizedBox(height: 10.0),
               _buildThemeAndColorList(),
+              _buildStatusField(),
               const SizedBox(height: 10.0),
               _buildProductionsList(),
               //TODO: Add images section
@@ -93,20 +97,84 @@ class CostumeDetailsDisplay extends StatelessWidget {
             )));
   }
 
+  Widget _buildStatusField() {
+    Widget statusChild = Text("");
+    String label = "";
+
+    print(costume.status.runtimeType);
+
+    switch (costume.status.runtimeType) {
+      case InStorage:
+        final status = costume.status! as InStorage;
+        label = "In Storage at:";
+        statusChild = Text(
+            "${status.location.main.name}, ${status.location.subLocation.name}");
+        break;
+      case InUse:
+        final status = costume.status! as InUse;
+        label = "In use for:";
+        statusChild = ProductionCard(production: status.inUseFor!);
+        break;
+
+      case RentedOut:
+        label = "Rented Out";
+        statusChild = Text("");
+        break;
+    }
+
+    return Column(children: [Text(label), statusChild]);
+  }
+
   Widget _buildActionsRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const SizedBox(width: 20.0),
         const IconButton(icon: Icon(Icons.add), onPressed: null),
-        const IconButton(icon: Icon(Icons.edit), onPressed: null),
-        const IconButton(icon: Icon(Icons.delete_outline), onPressed: null),
+        IconButton(icon: const Icon(Icons.edit), onPressed: _editCostume),
+        IconButton(
+            icon: const Icon(Icons.delete_outline), onPressed: _deleteCostume),
         ElevatedButton(
             onPressed: null,
             child: Text(AppLocalizations.of(_context)!.checkOut)),
         const SizedBox(width: 20.0),
       ],
     );
+  }
+
+  void _deleteCostume() async {
+    final result = await _openDeleteConfirmationDialog();
+    //TODO: delete via bloc
+    NavigationService.instance!.pop();
+  }
+
+  void _checkOutCostume() {}
+
+  void _addToCostumeList() {}
+
+  void _editCostume() {
+    NavigationService.instance!
+        .pushNamed(Routes.costumesEdit, arguments: costume.id);
+  }
+
+  Future<bool> _openDeleteConfirmationDialog() async {
+    return await showDialog(
+        //TODO need to track dirty
+        context: _context,
+        builder: (context) => AlertDialog(
+              title: Text(AppLocalizations.of(_context)!.areYouSure),
+              content:
+                  Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text(AppLocalizations.of(_context)!.cancel),
+                ),
+                TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: Text(AppLocalizations.of(_context)!.confirm)),
+              ],
+            )) as bool;
   }
 
   Widget buildImageCarousel() {

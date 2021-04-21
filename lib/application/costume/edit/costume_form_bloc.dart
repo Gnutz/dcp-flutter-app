@@ -1,11 +1,11 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
-import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -72,6 +72,9 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
       subLocationSelected: (SubLocationSelected e) async* {
         yield subLocationSelectedEventHandler(e);
       },
+      loadCostume: (LoadCostume e) async* {
+        yield* _loadCostumeEventHandler(e);
+      },
     );
   }
 
@@ -122,7 +125,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     final Costume costume = result ?? Costume();
 
     costume.edited = DateTime.now();
-    costume.category = state.category!.category;
+    costume.category = state.category;
     costume.timePeriod = state.timePeriod;
     costume.fashion = state.fashion;
     costume.themes = state.themes;
@@ -171,7 +174,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   CostumeFormState themeRemovedEventHandler(ThemeRemoved e) {
-    var themes = state.themes!.toList();
+    final themes = state.themes!.toList();
     themes.remove(e.theme);
     return state.copyWith(themes: themes);
   }
@@ -196,5 +199,31 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
 
   CostumeFormState subLocationSelectedEventHandler(SubLocationSelected e) {
     return state.copyWith(subLocation: e.location);
+  }
+
+  Stream<CostumeFormState> _loadCostumeEventHandler(LoadCostume e) async* {
+    final costume = await _costumeService.getCostume(e.costumeId!);
+    if (costume != null) {
+      List<Location> subLocationsOptions = <Location>[];
+      if (costume.storageLocation != null) {
+        subLocationsOptions = await _costumeRepository
+                .getStorageSubLocations(costume.storageLocation!.main.id!) ??
+            <Location>[];
+      }
+
+      //TODO from costume
+      yield state.copyWith(
+          id: costume.id,
+          fashion: costume.fashion,
+          category: costume.category,
+          timePeriod: costume.timePeriod,
+          themes: costume.themes,
+          colors: costume.colors,
+          productions: costume.productions,
+          quantity: costume.quantity,
+          mainLocation: costume.storageLocation!.main,
+          storageSubLocationOptions: subLocationsOptions,
+          subLocation: costume.storageLocation!.subLocation);
+    }
   }
 }

@@ -22,10 +22,13 @@ Map<String, dynamic> _$StorageLocationToJson(StorageLocation instance) =>
 
 Location _$LocationFromJson(Map json) {
   return Location(
+    id: json['id'] as String?,
     name: json['name'] as String,
   );
 }
 
-Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
+Map<String, dynamic> _$LocationToJson(Location instance) =>
+    <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
     };

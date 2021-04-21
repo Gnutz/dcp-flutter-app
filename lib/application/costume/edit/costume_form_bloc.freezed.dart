@@ -16,7 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CostumeFormEventTearOff {
   const _$CostumeFormEventTearOff();
 
-  CategorySelected categorySelected(CostumeCategory category) {
+  LoadCostume loadCostume(String? costumeId) {
+    return LoadCostume(
+      costumeId,
+    );
+  }
+
+  CategorySelected categorySelected(String category) {
     return CategorySelected(
       category,
     );
@@ -104,7 +110,8 @@ const $CostumeFormEvent = _$CostumeFormEventTearOff();
 mixin _$CostumeFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -123,7 +130,8 @@ mixin _$CostumeFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -143,6 +151,7 @@ mixin _$CostumeFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -162,6 +171,7 @@ mixin _$CostumeFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -195,8 +205,183 @@ class _$CostumeFormEventCopyWithImpl<$Res>
   _$CostumeFormEventCopyWithImpl(this._value, this._then);
 
   final CostumeFormEvent _value;
+
   // ignore: unused_field
   final $Res Function(CostumeFormEvent) _then;
+}
+
+/// @nodoc
+abstract class $LoadCostumeCopyWith<$Res> {
+  factory $LoadCostumeCopyWith(
+          LoadCostume value, $Res Function(LoadCostume) then) =
+      _$LoadCostumeCopyWithImpl<$Res>;
+
+  $Res call({String? costumeId});
+}
+
+/// @nodoc
+class _$LoadCostumeCopyWithImpl<$Res>
+    extends _$CostumeFormEventCopyWithImpl<$Res>
+    implements $LoadCostumeCopyWith<$Res> {
+  _$LoadCostumeCopyWithImpl(
+      LoadCostume _value, $Res Function(LoadCostume) _then)
+      : super(_value, (v) => _then(v as LoadCostume));
+
+  @override
+  LoadCostume get _value => super._value as LoadCostume;
+
+  @override
+  $Res call({
+    Object? costumeId = freezed,
+  }) {
+    return _then(LoadCostume(
+      costumeId == freezed
+          ? _value.costumeId
+          : costumeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+class _$LoadCostume implements LoadCostume {
+  const _$LoadCostume(this.costumeId);
+
+  @override
+  final String? costumeId;
+
+  @override
+  String toString() {
+    return 'CostumeFormEvent.loadCostume(costumeId: $costumeId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is LoadCostume &&
+            (identical(other.costumeId, costumeId) ||
+                const DeepCollectionEquality()
+                    .equals(other.costumeId, costumeId)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(costumeId);
+
+  @JsonKey(ignore: true)
+  @override
+  $LoadCostumeCopyWith<LoadCostume> get copyWith =>
+      _$LoadCostumeCopyWithImpl<LoadCostume>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
+    required TResult Function(String time) timePeriodSelected,
+    required TResult Function(Fashion fashion) fashionSelected,
+    required TResult Function(int quantity) quantityChanged,
+    required TResult Function() loadFormOptions,
+    required TResult Function() saveChangesPressed,
+    required TResult Function() saveCostume,
+    required TResult Function(String theme) themeValueChanged,
+    required TResult Function() themeAdded,
+    required TResult Function(String theme) themeRemoved,
+    required TResult Function(String color) colorValueChanged,
+    required TResult Function() colorAdded,
+    required TResult Function(String color) colorRemoved,
+    required TResult Function(Location main) mainLocationSelected,
+    required TResult Function(Location location) subLocationSelected,
+  }) {
+    return loadCostume(costumeId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
+    TResult Function(String time)? timePeriodSelected,
+    TResult Function(Fashion fashion)? fashionSelected,
+    TResult Function(int quantity)? quantityChanged,
+    TResult Function()? loadFormOptions,
+    TResult Function()? saveChangesPressed,
+    TResult Function()? saveCostume,
+    TResult Function(String theme)? themeValueChanged,
+    TResult Function()? themeAdded,
+    TResult Function(String theme)? themeRemoved,
+    TResult Function(String color)? colorValueChanged,
+    TResult Function()? colorAdded,
+    TResult Function(String color)? colorRemoved,
+    TResult Function(Location main)? mainLocationSelected,
+    TResult Function(Location location)? subLocationSelected,
+    required TResult orElse(),
+  }) {
+    if (loadCostume != null) {
+      return loadCostume(costumeId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
+    required TResult Function(CategorySelected value) categorySelected,
+    required TResult Function(TimePeriodSelected value) timePeriodSelected,
+    required TResult Function(FashionSelected value) fashionSelected,
+    required TResult Function(QuantityChanged value) quantityChanged,
+    required TResult Function(LoadFormOptions value) loadFormOptions,
+    required TResult Function(SaveChangesPressed value) saveChangesPressed,
+    required TResult Function(SaveCostume value) saveCostume,
+    required TResult Function(ThemeValueChanged value) themeValueChanged,
+    required TResult Function(ThemeAdded value) themeAdded,
+    required TResult Function(ThemeRemoved value) themeRemoved,
+    required TResult Function(ColorValueChanged value) colorValueChanged,
+    required TResult Function(ColorAdded value) colorAdded,
+    required TResult Function(ColorRemoved value) colorRemoved,
+    required TResult Function(MainLocationSelected value) mainLocationSelected,
+    required TResult Function(SubLocationSelected value) subLocationSelected,
+  }) {
+    return loadCostume(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
+    TResult Function(CategorySelected value)? categorySelected,
+    TResult Function(TimePeriodSelected value)? timePeriodSelected,
+    TResult Function(FashionSelected value)? fashionSelected,
+    TResult Function(QuantityChanged value)? quantityChanged,
+    TResult Function(LoadFormOptions value)? loadFormOptions,
+    TResult Function(SaveChangesPressed value)? saveChangesPressed,
+    TResult Function(SaveCostume value)? saveCostume,
+    TResult Function(ThemeValueChanged value)? themeValueChanged,
+    TResult Function(ThemeAdded value)? themeAdded,
+    TResult Function(ThemeRemoved value)? themeRemoved,
+    TResult Function(ColorValueChanged value)? colorValueChanged,
+    TResult Function(ColorAdded value)? colorAdded,
+    TResult Function(ColorRemoved value)? colorRemoved,
+    TResult Function(MainLocationSelected value)? mainLocationSelected,
+    TResult Function(SubLocationSelected value)? subLocationSelected,
+    required TResult orElse(),
+  }) {
+    if (loadCostume != null) {
+      return loadCostume(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadCostume implements CostumeFormEvent {
+  const factory LoadCostume(String? costumeId) = _$LoadCostume;
+
+  String? get costumeId => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $LoadCostumeCopyWith<LoadCostume> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -204,7 +389,8 @@ abstract class $CategorySelectedCopyWith<$Res> {
   factory $CategorySelectedCopyWith(
           CategorySelected value, $Res Function(CategorySelected) then) =
       _$CategorySelectedCopyWithImpl<$Res>;
-  $Res call({CostumeCategory category});
+
+  $Res call({String category});
 }
 
 /// @nodoc
@@ -226,7 +412,7 @@ class _$CategorySelectedCopyWithImpl<$Res>
       category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as CostumeCategory,
+              as String,
     ));
   }
 }
@@ -236,7 +422,7 @@ class _$CategorySelected implements CategorySelected {
   const _$CategorySelected(this.category);
 
   @override
-  final CostumeCategory category;
+  final String category;
 
   @override
   String toString() {
@@ -264,7 +450,8 @@ class _$CategorySelected implements CategorySelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -286,7 +473,8 @@ class _$CategorySelected implements CategorySelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -312,6 +500,7 @@ class _$CategorySelected implements CategorySelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -334,6 +523,7 @@ class _$CategorySelected implements CategorySelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -359,9 +549,10 @@ class _$CategorySelected implements CategorySelected {
 }
 
 abstract class CategorySelected implements CostumeFormEvent {
-  const factory CategorySelected(CostumeCategory category) = _$CategorySelected;
+  const factory CategorySelected(String category) = _$CategorySelected;
 
-  CostumeCategory get category => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $CategorySelectedCopyWith<CategorySelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -431,7 +622,8 @@ class _$TimePeriodSelected implements TimePeriodSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -453,7 +645,8 @@ class _$TimePeriodSelected implements TimePeriodSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -479,6 +672,7 @@ class _$TimePeriodSelected implements TimePeriodSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -501,6 +695,7 @@ class _$TimePeriodSelected implements TimePeriodSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -598,7 +793,8 @@ class _$FashionSelected implements FashionSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -620,7 +816,8 @@ class _$FashionSelected implements FashionSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -646,6 +843,7 @@ class _$FashionSelected implements FashionSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -668,6 +866,7 @@ class _$FashionSelected implements FashionSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -766,7 +965,8 @@ class _$QuantityChanged implements QuantityChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -788,7 +988,8 @@ class _$QuantityChanged implements QuantityChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -814,6 +1015,7 @@ class _$QuantityChanged implements QuantityChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -836,6 +1038,7 @@ class _$QuantityChanged implements QuantityChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -908,7 +1111,8 @@ class _$LoadFormOptions implements LoadFormOptions {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -930,7 +1134,8 @@ class _$LoadFormOptions implements LoadFormOptions {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -956,6 +1161,7 @@ class _$LoadFormOptions implements LoadFormOptions {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -978,6 +1184,7 @@ class _$LoadFormOptions implements LoadFormOptions {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -1045,7 +1252,8 @@ class _$SaveChangesPressed implements SaveChangesPressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -1067,7 +1275,8 @@ class _$SaveChangesPressed implements SaveChangesPressed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -1093,6 +1302,7 @@ class _$SaveChangesPressed implements SaveChangesPressed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -1115,6 +1325,7 @@ class _$SaveChangesPressed implements SaveChangesPressed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -1182,7 +1393,8 @@ class _$SaveCostume implements SaveCostume {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -1204,7 +1416,8 @@ class _$SaveCostume implements SaveCostume {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -1230,6 +1443,7 @@ class _$SaveCostume implements SaveCostume {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -1252,6 +1466,7 @@ class _$SaveCostume implements SaveCostume {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -1344,7 +1559,8 @@ class _$ThemeValueChanged implements ThemeValueChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -1366,7 +1582,8 @@ class _$ThemeValueChanged implements ThemeValueChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -1392,6 +1609,7 @@ class _$ThemeValueChanged implements ThemeValueChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -1414,6 +1632,7 @@ class _$ThemeValueChanged implements ThemeValueChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -1485,7 +1704,8 @@ class _$ThemeAdded implements ThemeAdded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -1507,7 +1727,8 @@ class _$ThemeAdded implements ThemeAdded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -1533,6 +1754,7 @@ class _$ThemeAdded implements ThemeAdded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -1555,6 +1777,7 @@ class _$ThemeAdded implements ThemeAdded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -1647,7 +1870,8 @@ class _$ThemeRemoved implements ThemeRemoved {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -1669,7 +1893,8 @@ class _$ThemeRemoved implements ThemeRemoved {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -1695,6 +1920,7 @@ class _$ThemeRemoved implements ThemeRemoved {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -1717,6 +1943,7 @@ class _$ThemeRemoved implements ThemeRemoved {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -1814,7 +2041,8 @@ class _$ColorValueChanged implements ColorValueChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -1836,7 +2064,8 @@ class _$ColorValueChanged implements ColorValueChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -1862,6 +2091,7 @@ class _$ColorValueChanged implements ColorValueChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -1884,6 +2114,7 @@ class _$ColorValueChanged implements ColorValueChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -1955,7 +2186,8 @@ class _$ColorAdded implements ColorAdded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -1977,7 +2209,8 @@ class _$ColorAdded implements ColorAdded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -2003,6 +2236,7 @@ class _$ColorAdded implements ColorAdded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -2025,6 +2259,7 @@ class _$ColorAdded implements ColorAdded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -2117,7 +2352,8 @@ class _$ColorRemoved implements ColorRemoved {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -2139,7 +2375,8 @@ class _$ColorRemoved implements ColorRemoved {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -2165,6 +2402,7 @@ class _$ColorRemoved implements ColorRemoved {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -2187,6 +2425,7 @@ class _$ColorRemoved implements ColorRemoved {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -2285,7 +2524,8 @@ class _$MainLocationSelected implements MainLocationSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -2307,7 +2547,8 @@ class _$MainLocationSelected implements MainLocationSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -2333,6 +2574,7 @@ class _$MainLocationSelected implements MainLocationSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -2355,6 +2597,7 @@ class _$MainLocationSelected implements MainLocationSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -2453,7 +2696,8 @@ class _$SubLocationSelected implements SubLocationSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CostumeCategory category) categorySelected,
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
     required TResult Function(String time) timePeriodSelected,
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
@@ -2475,7 +2719,8 @@ class _$SubLocationSelected implements SubLocationSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CostumeCategory category)? categorySelected,
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
     TResult Function(String time)? timePeriodSelected,
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
@@ -2501,6 +2746,7 @@ class _$SubLocationSelected implements SubLocationSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
     required TResult Function(CategorySelected value) categorySelected,
     required TResult Function(TimePeriodSelected value) timePeriodSelected,
     required TResult Function(FashionSelected value) fashionSelected,
@@ -2523,6 +2769,7 @@ class _$SubLocationSelected implements SubLocationSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
     TResult Function(CategorySelected value)? categorySelected,
     TResult Function(TimePeriodSelected value)? timePeriodSelected,
     TResult Function(FashionSelected value)? fashionSelected,
@@ -2563,14 +2810,14 @@ class _$CostumeFormStateTearOff {
   _CostumeFormState call(
       {required bool loading,
       required List<String> timePeriodOptions,
-      required List<CostumeCategory> categoryOptions,
+      required List<String> categoryOptions,
       required List<Location> storageMainLocationOptions,
       required List<Location> storageSubLocationOptions,
       required String currentColor,
       required String currentTheme,
       String? id,
       Fashion? fashion,
-      CostumeCategory? category,
+      String? category,
       String? timePeriod,
       List<String>? themes,
       List<String>? colors,
@@ -2606,24 +2853,39 @@ const $CostumeFormState = _$CostumeFormStateTearOff();
 /// @nodoc
 mixin _$CostumeFormState {
   bool get loading => throw _privateConstructorUsedError;
+
   List<String> get timePeriodOptions => throw _privateConstructorUsedError;
-  List<CostumeCategory> get categoryOptions =>
-      throw _privateConstructorUsedError;
+
+  List<String> get categoryOptions => throw _privateConstructorUsedError;
+
   List<Location> get storageMainLocationOptions =>
       throw _privateConstructorUsedError;
+
   List<Location> get storageSubLocationOptions =>
       throw _privateConstructorUsedError;
+
   String get currentColor => throw _privateConstructorUsedError;
+
   String get currentTheme => throw _privateConstructorUsedError;
+
   String? get id => throw _privateConstructorUsedError;
+
   Fashion? get fashion => throw _privateConstructorUsedError;
-  CostumeCategory? get category => throw _privateConstructorUsedError;
+
+  String? get category => throw _privateConstructorUsedError;
+
   String? get timePeriod => throw _privateConstructorUsedError;
+
   List<String>? get themes => throw _privateConstructorUsedError;
+
   List<String>? get colors => throw _privateConstructorUsedError;
+
   List<Production>? get productions => throw _privateConstructorUsedError;
+
   int? get quantity => throw _privateConstructorUsedError;
+
   Location? get mainLocation => throw _privateConstructorUsedError;
+
   Location? get subLocation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -2639,14 +2901,14 @@ abstract class $CostumeFormStateCopyWith<$Res> {
   $Res call(
       {bool loading,
       List<String> timePeriodOptions,
-      List<CostumeCategory> categoryOptions,
+      List<String> categoryOptions,
       List<Location> storageMainLocationOptions,
       List<Location> storageSubLocationOptions,
       String currentColor,
       String currentTheme,
       String? id,
       Fashion? fashion,
-      CostumeCategory? category,
+      String? category,
       String? timePeriod,
       List<String>? themes,
       List<String>? colors,
@@ -2697,7 +2959,7 @@ class _$CostumeFormStateCopyWithImpl<$Res>
       categoryOptions: categoryOptions == freezed
           ? _value.categoryOptions
           : categoryOptions // ignore: cast_nullable_to_non_nullable
-              as List<CostumeCategory>,
+              as List<String>,
       storageMainLocationOptions: storageMainLocationOptions == freezed
           ? _value.storageMainLocationOptions
           : storageMainLocationOptions // ignore: cast_nullable_to_non_nullable
@@ -2725,7 +2987,7 @@ class _$CostumeFormStateCopyWithImpl<$Res>
       category: category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as CostumeCategory?,
+              as String?,
       timePeriod: timePeriod == freezed
           ? _value.timePeriod
           : timePeriod // ignore: cast_nullable_to_non_nullable
@@ -2768,14 +3030,14 @@ abstract class _$CostumeFormStateCopyWith<$Res>
   $Res call(
       {bool loading,
       List<String> timePeriodOptions,
-      List<CostumeCategory> categoryOptions,
+      List<String> categoryOptions,
       List<Location> storageMainLocationOptions,
       List<Location> storageSubLocationOptions,
       String currentColor,
       String currentTheme,
       String? id,
       Fashion? fashion,
-      CostumeCategory? category,
+      String? category,
       String? timePeriod,
       List<String>? themes,
       List<String>? colors,
@@ -2828,7 +3090,7 @@ class __$CostumeFormStateCopyWithImpl<$Res>
       categoryOptions: categoryOptions == freezed
           ? _value.categoryOptions
           : categoryOptions // ignore: cast_nullable_to_non_nullable
-              as List<CostumeCategory>,
+              as List<String>,
       storageMainLocationOptions: storageMainLocationOptions == freezed
           ? _value.storageMainLocationOptions
           : storageMainLocationOptions // ignore: cast_nullable_to_non_nullable
@@ -2856,7 +3118,7 @@ class __$CostumeFormStateCopyWithImpl<$Res>
       category: category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as CostumeCategory?,
+              as String?,
       timePeriod: timePeriod == freezed
           ? _value.timePeriod
           : timePeriod // ignore: cast_nullable_to_non_nullable
@@ -2915,7 +3177,7 @@ class _$_CostumeFormState implements _CostumeFormState {
   @override
   final List<String> timePeriodOptions;
   @override
-  final List<CostumeCategory> categoryOptions;
+  final List<String> categoryOptions;
   @override
   final List<Location> storageMainLocationOptions;
   @override
@@ -2929,7 +3191,7 @@ class _$_CostumeFormState implements _CostumeFormState {
   @override
   final Fashion? fashion;
   @override
-  final CostumeCategory? category;
+  final String? category;
   @override
   final String? timePeriod;
   @override
@@ -3034,14 +3296,14 @@ abstract class _CostumeFormState implements CostumeFormState {
   const factory _CostumeFormState(
       {required bool loading,
       required List<String> timePeriodOptions,
-      required List<CostumeCategory> categoryOptions,
+      required List<String> categoryOptions,
       required List<Location> storageMainLocationOptions,
       required List<Location> storageSubLocationOptions,
       required String currentColor,
       required String currentTheme,
       String? id,
       Fashion? fashion,
-      CostumeCategory? category,
+      String? category,
       String? timePeriod,
       List<String>? themes,
       List<String>? colors,
@@ -3052,35 +3314,48 @@ abstract class _CostumeFormState implements CostumeFormState {
 
   @override
   bool get loading => throw _privateConstructorUsedError;
+
   @override
   List<String> get timePeriodOptions => throw _privateConstructorUsedError;
+
   @override
-  List<CostumeCategory> get categoryOptions =>
-      throw _privateConstructorUsedError;
+  List<String> get categoryOptions => throw _privateConstructorUsedError;
+
   @override
   List<Location> get storageMainLocationOptions =>
       throw _privateConstructorUsedError;
+
   @override
   List<Location> get storageSubLocationOptions =>
       throw _privateConstructorUsedError;
+
   @override
   String get currentColor => throw _privateConstructorUsedError;
+
   @override
   String get currentTheme => throw _privateConstructorUsedError;
+
   @override
   String? get id => throw _privateConstructorUsedError;
+
   @override
   Fashion? get fashion => throw _privateConstructorUsedError;
+
   @override
-  CostumeCategory? get category => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
+
   @override
   String? get timePeriod => throw _privateConstructorUsedError;
+
   @override
   List<String>? get themes => throw _privateConstructorUsedError;
+
   @override
   List<String>? get colors => throw _privateConstructorUsedError;
+
   @override
   List<Production>? get productions => throw _privateConstructorUsedError;
+
   @override
   int? get quantity => throw _privateConstructorUsedError;
   @override
