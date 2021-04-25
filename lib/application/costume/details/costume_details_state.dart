@@ -1,6 +1,8 @@
 part of 'costume_details_bloc.dart';
 
-@immutable
-abstract class CostumeDetailsState {}
+@freezed
+class CostumeDetailsState with _$CostumeDetailsState {
+  const factory CostumeDetailsState({Costume? costume}) = _CostumeDetailState;
 
-class CostumeDetailsInitial extends CostumeDetailsState {}
+  factory CostumeDetailsState.inital() => const CostumeDetailsState();
+}

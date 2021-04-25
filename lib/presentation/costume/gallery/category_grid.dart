@@ -1,26 +1,5 @@
-/*
-class categoryGrid extends StatefulWidget {
-  @override
-  _categoryGridState createState() => _categoryGridState();
-}
-
-class _categoryGridState extends State<categoryGrid> {
-  List<CostumeCategory> _categories;
-  bool _loading;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<CategorySelectionBloc, CategorySelectionState>(listener: (context, state){
-      if(state.loading == true){
-
-      }
-  }
-} */
-
 import 'package:digtial_costume_platform/application/gallery/category_select/category_selection_bloc.dart';
-import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
 import 'package:digtial_costume_platform/locator.dart';
-import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
@@ -29,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryGrid extends StatelessWidget {
   late final CategorySelectionBloc _selectionBloc;
-  late BuildContext _context;
+  late final BuildContext _context;
   final IGalleryService galleryService = Locator().locator<IGalleryService>();
 
   @override
@@ -52,12 +31,10 @@ class CategoryGrid extends StatelessWidget {
           semanticChildCount: state.categories.length,
           children: [
             ...state.categories
-                .map<Widget>((category) => InkWell(
+                .map((String category) => InkWell(
                       //TODO change
-                      onTap: () async => NavigationService.instance!.pushNamed(
-                          Routes.costumeDetails,
-                          arguments: await galleryService
-                              .getCostume("PXEqeKhOBIa5hAhhmYoE")),
+                      onTap: () =>
+                          _selectionBloc.add(CategorySelected(category)),
                       child: CategoryCard(costumeCategory: category),
                     ))
                 .toList(),
@@ -65,13 +42,13 @@ class CategoryGrid extends StatelessWidget {
     );
   }
 
-  void selectCategory(CostumeCategory category) {
+  void selectCategory(String category) {
     _selectionBloc.add(CategorySelectionEvent.categorySelected(category));
   }
 }
 
 class CategoryCard extends StatelessWidget {
-  final CostumeCategory costumeCategory;
+  final String costumeCategory;
 
   const CategoryCard({Key? key, required this.costumeCategory})
       : super(key: key);
@@ -85,10 +62,10 @@ class CategoryCard extends StatelessWidget {
           children: [
             Expanded(
                 child: Image.asset(
-                    "images/icons/costume_categories/${costumeCategory.category}.png")),
+                    "images/icons/costume_categories/$costumeCategory.png")),
             Container(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: Text(costumeCategory.category.capitalize(),
+              child: Text(costumeCategory..capitalize(),
                   style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,

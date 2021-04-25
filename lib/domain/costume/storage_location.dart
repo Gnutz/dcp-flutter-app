@@ -4,10 +4,10 @@ part 'storage_location.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
 class StorageLocation {
-  final Location main;
-  final Location subLocation;
+  Location? main;
+  Location? subLocation;
 
-  StorageLocation({required this.main, required this.subLocation});
+  StorageLocation({this.main, this.subLocation});
 
   factory StorageLocation.fromJson(Map<String, dynamic> json) =>
       _$StorageLocationFromJson(json);
@@ -28,8 +28,8 @@ class StorageLocation {
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
 class Location {
-  final String? id;
-  final String name;
+  String? id;
+  String location;
 
   @override
   bool operator ==(Object other) =>
@@ -39,7 +39,7 @@ class Location {
   @override
   int get hashCode => id.hashCode;
 
-  Location({this.id, required this.name});
+  Location({this.id, required this.location});
 
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);

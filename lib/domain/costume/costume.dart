@@ -43,7 +43,7 @@ class Costume {
       this.status}) {
     this.productions = productions ?? <Production>[];
     this.themes = themes ?? <String>[];
-    this.colors = themes ?? <String>[];
+    this.colors = colors ?? <String>[];
   }
 
   factory Costume.fromJson(Map<String, dynamic> json) =>

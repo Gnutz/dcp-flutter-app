@@ -21,12 +21,16 @@ abstract class Routes {
 
 class NavigationService {
   static final GlobalKey<NavigatorState> _navigatorKey =
-  GlobalKey<NavigatorState>();
+      GlobalKey<NavigatorState>();
 
   static NavigatorState? get instance => _navigatorKey.currentState;
 
   static GlobalKey<NavigatorState> get key => _navigatorKey;
+}
 
+class DialogService extends NavigationService {
+  static BuildContext? get instance =>
+      NavigationService.key.currentState?.overlay?.context;
 }
 
 class AppRouter {

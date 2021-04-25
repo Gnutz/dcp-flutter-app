@@ -1,8 +1,10 @@
 import 'package:digtial_costume_platform/domain/core/institution.dart';
+import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
-import 'package:digtial_costume_platform/domain/gallery/costume_category.dart';
+import 'package:digtial_costume_platform/domain/costume/status.dart';
+import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 
 class GalleryService implements IGalleryService {
@@ -11,35 +13,6 @@ class GalleryService implements IGalleryService {
   final ICostumeRepository _costumeRepository;
 
   GalleryService(this._costumeRepository);
-
-  //TODO change
-  final _categories = <CostumeCategory>[
-    CostumeCategory(
-        category: "dresses",
-        iconUri: "images/icons/costume_categories/dress.png"),
-    CostumeCategory(
-        category: "shoes",
-        iconUri: "images/icons/costume_categories/dress.png"),
-    CostumeCategory(
-        category: "t-shirts",
-        iconUri: "images/icons/costume_categories/dress.png"),
-    CostumeCategory(
-        category: "skirts",
-        iconUri: "images/icons/costume_categories/dress.png"),
-    CostumeCategory(
-        category: "coats",
-        iconUri: "images/icons/costume_categories/dress.png"),
-    CostumeCategory(
-        category: "shirts",
-        iconUri: "images/icons/costume_categories/dress.png"),
-    CostumeCategory(
-        category: "pants",
-        iconUri: "images/icons/costume_categories/dress.png"),
-  ];
-
-  @override
-  // TODO: implement categories
-  List<CostumeCategory> get categories => _categories;
 
   @override
   // TODO: implement currentInstitution
@@ -69,12 +42,40 @@ class GalleryService implements IGalleryService {
 
   @override
   Future<List<Costume>> getCostumes(CostumeQuery query) async {
-    return _costumeRepository.getCostumes(
-        currentInstitution!.uid!, query);
+    return _costumeRepository.getCostumes(currentInstitution!.uid!, query);
   }
 
   @override
   Future<void> updateCostume(Costume updated) async {
     _costumeRepository.updateCostume(_currentInstitution!.uid!, updated);
+  }
+
+  @override
+  Future<Costume?> checkOut(Costume costume, Production production) {
+    costume.storageLocation = null;
+    costume.status = InUse(inUseFor: production);
+    updateCostume(costume);
+    return getCostume(costume.id!);
+  }
+
+  @override
+  Future<List<String>> getCategories() {
+    return _costumeRepository.getCategories(currentInstitution!.uid!);
+  }
+
+  @override
+  Future<List<Location>> getStorageMainLocations() {
+    return _costumeRepository.getStorageMainLocations(currentInstitution!.uid!);
+  }
+
+  @override
+  Future<List<Location>> getStorageSubLocations(String mainId) {
+    return _costumeRepository.getStorageSubLocations(
+        currentInstitution!.uid!, mainId);
+  }
+
+  @override
+  Future<List<String>> getTimePeriods() {
+    return _costumeRepository.getTimePeriods(currentInstitution!.uid!);
   }
 }

@@ -205,7 +205,6 @@ class _$CostumeFormEventCopyWithImpl<$Res>
   _$CostumeFormEventCopyWithImpl(this._value, this._then);
 
   final CostumeFormEvent _value;
-
   // ignore: unused_field
   final $Res Function(CostumeFormEvent) _then;
 }
@@ -215,7 +214,6 @@ abstract class $LoadCostumeCopyWith<$Res> {
   factory $LoadCostumeCopyWith(
           LoadCostume value, $Res Function(LoadCostume) then) =
       _$LoadCostumeCopyWithImpl<$Res>;
-
   $Res call({String? costumeId});
 }
 
@@ -378,7 +376,6 @@ abstract class LoadCostume implements CostumeFormEvent {
   const factory LoadCostume(String? costumeId) = _$LoadCostume;
 
   String? get costumeId => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $LoadCostumeCopyWith<LoadCostume> get copyWith =>
       throw _privateConstructorUsedError;
@@ -389,7 +386,6 @@ abstract class $CategorySelectedCopyWith<$Res> {
   factory $CategorySelectedCopyWith(
           CategorySelected value, $Res Function(CategorySelected) then) =
       _$CategorySelectedCopyWithImpl<$Res>;
-
   $Res call({String category});
 }
 
@@ -552,7 +548,6 @@ abstract class CategorySelected implements CostumeFormEvent {
   const factory CategorySelected(String category) = _$CategorySelected;
 
   String get category => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $CategorySelectedCopyWith<CategorySelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2853,39 +2848,23 @@ const $CostumeFormState = _$CostumeFormStateTearOff();
 /// @nodoc
 mixin _$CostumeFormState {
   bool get loading => throw _privateConstructorUsedError;
-
   List<String> get timePeriodOptions => throw _privateConstructorUsedError;
-
   List<String> get categoryOptions => throw _privateConstructorUsedError;
-
   List<Location> get storageMainLocationOptions =>
       throw _privateConstructorUsedError;
-
   List<Location> get storageSubLocationOptions =>
       throw _privateConstructorUsedError;
-
   String get currentColor => throw _privateConstructorUsedError;
-
   String get currentTheme => throw _privateConstructorUsedError;
-
   String? get id => throw _privateConstructorUsedError;
-
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   String? get category => throw _privateConstructorUsedError;
-
   String? get timePeriod => throw _privateConstructorUsedError;
-
   List<String>? get themes => throw _privateConstructorUsedError;
-
   List<String>? get colors => throw _privateConstructorUsedError;
-
   List<Production>? get productions => throw _privateConstructorUsedError;
-
   int? get quantity => throw _privateConstructorUsedError;
-
   Location? get mainLocation => throw _privateConstructorUsedError;
-
   Location? get subLocation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -3314,48 +3293,34 @@ abstract class _CostumeFormState implements CostumeFormState {
 
   @override
   bool get loading => throw _privateConstructorUsedError;
-
   @override
   List<String> get timePeriodOptions => throw _privateConstructorUsedError;
-
   @override
   List<String> get categoryOptions => throw _privateConstructorUsedError;
-
   @override
   List<Location> get storageMainLocationOptions =>
       throw _privateConstructorUsedError;
-
   @override
   List<Location> get storageSubLocationOptions =>
       throw _privateConstructorUsedError;
-
   @override
   String get currentColor => throw _privateConstructorUsedError;
-
   @override
   String get currentTheme => throw _privateConstructorUsedError;
-
   @override
   String? get id => throw _privateConstructorUsedError;
-
   @override
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   @override
   String? get category => throw _privateConstructorUsedError;
-
   @override
   String? get timePeriod => throw _privateConstructorUsedError;
-
   @override
   List<String>? get themes => throw _privateConstructorUsedError;
-
   @override
   List<String>? get colors => throw _privateConstructorUsedError;
-
   @override
   List<Production>? get productions => throw _privateConstructorUsedError;
-
   @override
   int? get quantity => throw _privateConstructorUsedError;
   @override

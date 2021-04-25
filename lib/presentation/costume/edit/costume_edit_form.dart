@@ -270,7 +270,7 @@ class CostumeEditForm extends StatelessWidget {
                           .selectWhereTheCostumeIsStored),
                   items: _state.storageMainLocationOptions
                       .map((main) => DropdownMenuItem<Location>(
-                          value: main, child: Text(main.name)))
+                          value: main, child: Text(main.location)))
                       .toList(),
                   onChanged: (main) => _formBloc
                       .add(CostumeFormEvent.mainLocationSelected(main!)),
@@ -284,7 +284,7 @@ class CostumeEditForm extends StatelessWidget {
                           .selectWhereTheCostumeIsStored),
                   items: _state.storageSubLocationOptions
                       .map((location) => DropdownMenuItem<Location>(
-                          value: location, child: Text(location.name)))
+                          value: location, child: Text(location.location)))
                       .toList(),
                   onChanged: (location) => _formBloc
                       .add(CostumeFormEvent.subLocationSelected(location!)),

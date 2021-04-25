@@ -102,15 +102,17 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   Stream<CostumeFormState> _loadFormOptionsEventHandler() async* {
-    final categoryOptions = await _costumeRepository.getCategories();
-    final timePeriodOptions = await _costumeRepository.getTimePeriods();
-    final storageOptions = await _costumeRepository.getStorageMainLocations();
+    final categoryOptions = await _costumeService.getCategories();
+    final timePeriodOptions = await _costumeService.getTimePeriods();
+    final storageOptions = await _costumeService.getStorageMainLocations();
 
     yield state.copyWith(
         loading: false,
         categoryOptions: categoryOptions,
         timePeriodOptions: timePeriodOptions,
         storageMainLocationOptions: storageOptions);
+
+    print("testing");
   }
 
   void _saveChangesPressedEventHandler() {}
@@ -132,9 +134,9 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     costume.colors = state.colors;
     costume.quantity = state.quantity;
     costume.storageLocation = StorageLocation(
-        main: state.mainLocation!, subLocation: state.subLocation!);
+        main: state.mainLocation, subLocation: state.subLocation);
 
-    if (costume.storageLocation!.subLocation != null ||
+    if (costume.storageLocation?.subLocation != null ||
         costume.storageLocation!.main != null) {
       costume.status = InStorage(costume.storageLocation!);
     }
@@ -190,7 +192,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     yield state.copyWith(mainLocation: mainLocation);
 
     final subLocationsOptions =
-        await _costumeRepository.getStorageSubLocations(mainLocation.id!);
+        await _costumeService.getStorageSubLocations(mainLocation.id!);
 
     if (subLocationsOptions != null) {
       yield state.copyWith(storageSubLocationOptions: subLocationsOptions);
@@ -205,10 +207,9 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     final costume = await _costumeService.getCostume(e.costumeId!);
     if (costume != null) {
       List<Location> subLocationsOptions = <Location>[];
-      if (costume.storageLocation != null) {
-        subLocationsOptions = await _costumeRepository
-                .getStorageSubLocations(costume.storageLocation!.main.id!) ??
-            <Location>[];
+      if (costume.storageLocation?.main != null) {
+        subLocationsOptions = await _costumeService
+            .getStorageSubLocations(costume.storageLocation!.main!.id!);
       }
 
       //TODO from costume
@@ -221,9 +222,11 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
           colors: costume.colors,
           productions: costume.productions,
           quantity: costume.quantity,
-          mainLocation: costume.storageLocation!.main,
+          mainLocation: costume.storageLocation?.main,
           storageSubLocationOptions: subLocationsOptions,
-          subLocation: costume.storageLocation!.subLocation);
+          subLocation: costume.storageLocation?.subLocation);
+
+      print("testing");
     }
   }
 }

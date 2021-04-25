@@ -27,7 +27,7 @@ class InStorage implements Status {
 class InUse implements Status {
   Production? inUseFor;
 
-  InUse(this.inUseFor) : super();
+  InUse({this.inUseFor}) : super();
 
   factory InUse.fromJson(Map<String, dynamic> json) => _$InUseFromJson(json);
 

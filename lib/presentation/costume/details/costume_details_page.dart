@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CostumeDetailsPage extends StatelessWidget {
   final Costume costume;
 
-  CostumeDetailsPage({required this.costume});
+  const CostumeDetailsPage({required this.costume});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,8 @@ class CostumeDetailsPage extends StatelessWidget {
       backgroundColor: MyColorTheme.backgroundColor,
       body: SafeArea(
         child: BlocProvider(
-          create: (context) => Locator().locator<CostumeDetailsBloc>(),
+          create: (context) => Locator().locator<CostumeDetailsBloc>()
+            ..add(CostumeDetailsEvent.initalize(costume)),
           child: CostumeDetailsDisplay(costume: costume),
         ),
       ),

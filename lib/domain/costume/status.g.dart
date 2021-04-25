@@ -19,7 +19,7 @@ Map<String, dynamic> _$InStorageToJson(InStorage instance) => <String, dynamic>{
 
 InUse _$InUseFromJson(Map json) {
   return InUse(
-    json['inUseFor'] == null
+    inUseFor: json['inUseFor'] == null
         ? null
         : Production.fromJson(
             Map<String, dynamic>.from(json['inUseFor'] as Map)),

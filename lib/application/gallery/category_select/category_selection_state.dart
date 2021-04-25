@@ -4,10 +4,10 @@ part of 'category_selection_bloc.dart';
 class CategorySelectionState with _$CategorySelectionState {
   const factory CategorySelectionState(
       {required bool loading,
-      required List<CostumeCategory> categories}) = _CategorySelectionState;
+      required List<String> categories}) = _CategorySelectionState;
 
   factory CategorySelectionState.initial() => const CategorySelectionState(
     loading: true,
-        categories: <CostumeCategory>[],
+        categories: <String>[],
       );
 }

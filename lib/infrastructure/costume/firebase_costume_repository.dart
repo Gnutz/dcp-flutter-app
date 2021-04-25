@@ -7,54 +7,30 @@ import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 class FirebaseCostumeRepository implements ICostumeRepository {
   final _store = FirebaseFirestore.instance;
 
-  static const String COSTUMES_COLLECTION = 'costumes';
-  static const String INSTITUTIONS_COLLECTION = "institutions";
-
-  static final _mainStorageLocations = <Location>[
-    Location(id: "1", name: "Loftet"),
-    Location(id: "8", name: "Den aden side")
-  ];
-
-  static final _subStorageLocations = <String, List<Location>>{
-    "1": <Location>[
-      Location(id: "2", name: "Lille Garderobe"),
-      Location(id: "3", name: "Stor Herregarderobe"),
-      Location(id: "4", name: "Laserum"),
-      Location(id: "5", name: "Lille Herregarderobe"),
-      Location(id: "6", name: "Stor Damegarderobe"),
-      Location(id: "7", name: "Holberg Garderobe")
-    ],
-    "8": <Location>[
-      Location(id: "9", name: "1"),
-      Location(id: "10", name: "2"),
-      Location(id: "11", name: "3"),
-      Location(id: "12", name: "4"),
-      Location(id: "13", name: "5"),
-      Location(id: "14", name: "6"),
-      Location(id: "15", name: "7"),
-      Location(id: "16", name: "8"),
-      Location(id: "17", name: "9"),
-      Location(id: "18", name: "10"),
-    ]
-  };
-
-  final _timePeriods = <String>["1920s", "1930s", "1940s"];
+  static const String _COSTUMES_COLLECTION = 'costumes';
+  static const String _INSTITUTIONS_COLLECTION = "institutions";
+  static const String _METADATA_COLLECTION = "metadata";
+  static const String _CATEGORIES_COLLECTION = "categories";
+  static const String _TIME_PERIODS_COLLECTION = "time_periods";
+  static const String _STORAGE_MAINLOCATION_COLLECTION = "storages";
+  static const String _STORAGE_SUBLOCATION_COLLECTION = "sublocations";
+  static const String _METADATA = "metadata";
 
   @override
   Future<void> createCostume(String institutionId, Costume costume) async {
     _store
-        .collection(INSTITUTIONS_COLLECTION)
+        .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
-        .collection(COSTUMES_COLLECTION)
+        .collection(_COSTUMES_COLLECTION)
         .add(costume.toJson());
   }
 
   @override
   Future<void> deleteCostume(String institutionId, String id) async {
     await _store
-        .collection(INSTITUTIONS_COLLECTION)
+        .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
-        .collection(COSTUMES_COLLECTION)
+        .collection(_COSTUMES_COLLECTION)
         .doc(id)
         .delete();
 
@@ -64,9 +40,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   @override
   Future<Costume?> getCostume(String institutionId, String id) async {
     final snapshot = await _store
-        .collection(INSTITUTIONS_COLLECTION)
+        .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
-        .collection(COSTUMES_COLLECTION)
+        .collection(_COSTUMES_COLLECTION)
         .doc(id)
         .get();
 
@@ -81,9 +57,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   @override
   Future<List<Costume>> getCostumes(String institutionId, CostumeQuery query) async {
     final collectionRef = _store
-        .collection(INSTITUTIONS_COLLECTION)
+        .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
-        .collection(COSTUMES_COLLECTION);
+        .collection(_COSTUMES_COLLECTION);
 
     final buildQuery = queryFactoryMethod(collectionRef, query);
 
@@ -96,9 +72,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   @override
   Future<void> updateCostume(String institutionId, Costume updated) async {
     _store
-        .collection(INSTITUTIONS_COLLECTION)
+        .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
-        .collection(COSTUMES_COLLECTION)
+        .collection(_COSTUMES_COLLECTION)
         .doc(updated.id)
         .update(updated.toJson());
   }
@@ -137,34 +113,80 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<List<String>> getCategories() {
-    final _categories = <String>[
-      "dresses",
-      "shoes",
-      "t-shirts",
-      "skirts",
-      "coats",
-      "shirts",
-      "pants",
-    ];
-    return Future.delayed(const Duration(seconds: 5))
-        .then((value) => _categories);
+  Future<List<String>> getCategories(String institutionId) async {
+    const CATEGORY_KEY = "category";
+    final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_METADATA_COLLECTION)
+        .doc("metadata")
+        .collection(_CATEGORIES_COLLECTION)
+        .orderBy(CATEGORY_KEY)
+        .get();
+    var categories = <String>[];
+    result.docs.forEach((doc) => categories.add(doc[CATEGORY_KEY] as String));
+
+    return categories;
   }
 
   @override
-  Future<List<String>> getTimePeriods() {
-    return Future.delayed(Duration(seconds: 3)).then((_) => _timePeriods);
+  Future<List<String>> getTimePeriods(String institutionId) async {
+    const TIME_KEY = "time";
+
+    final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_METADATA_COLLECTION)
+        .doc(_METADATA)
+        .collection(_TIME_PERIODS_COLLECTION)
+        .orderBy(TIME_KEY)
+        .get();
+
+    var timePeriods = <String>[];
+
+    result.docs.forEach((doc) => timePeriods.add(doc[TIME_KEY] as String));
+    return timePeriods;
   }
 
   @override
-  Future<List<Location>> getStorageMainLocations() {
-    return Future.delayed(Duration(seconds: 3))
-        .then((_) => _mainStorageLocations);
+  Future<List<Location>> getStorageMainLocations(String institutionId) async {
+    final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_STORAGE_MAINLOCATION_COLLECTION)
+        .orderBy("location")
+        .get();
+
+    var mainLocations = <Location>[];
+
+    result.docs.forEach((locationDoc) {
+      var location = Location.fromJson(locationDoc.data());
+      location.id = locationDoc.id;
+      mainLocations.add(location);
+    });
+
+    return mainLocations;
   }
 
   @override
-  Future<List<Location>?> getStorageSubLocations(String mainId) {
-    return Future.delayed(Duration(seconds: 3))
-        .then((_) => _subStorageLocations[mainId]);
+  Future<List<Location>> getStorageSubLocations(
+      String institutionId, String mainId) async {
+    final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_STORAGE_MAINLOCATION_COLLECTION)
+        .doc(mainId)
+        .collection(_STORAGE_SUBLOCATION_COLLECTION)
+        .orderBy("location")
+        .get();
+
+    var subLocations = <Location>[];
+
+    result.docs.forEach((locationDoc) {
+      var location = Location.fromJson(locationDoc.data());
+      location.id = locationDoc.id;
+      subLocations.add(location);
+    });
+    return subLocations;
   }
 }
