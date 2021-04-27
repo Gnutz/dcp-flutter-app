@@ -67,15 +67,15 @@ class GalleryPage extends StatelessWidget {
     );
   }
 
-
   void _showSearchForm() {
     showModalBottomSheet(
         context: _context,
         builder: (context) {
           return Container(
               child: BlocProvider(
-                create: (context) => Locator().locator<SearchFormBloc>(),
-                child: SearchForm(),
-              ));
+            create: (context) => Locator().locator<SearchFormBloc>(),
+            child: SearchForm(),
+          ));
         });
   }
+}

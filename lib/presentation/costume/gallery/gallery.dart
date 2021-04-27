@@ -19,9 +19,16 @@ class Gallery extends StatelessWidget {
       _appLocation = AppLocalizations.of(_context);
 
       return WillPopScope(
-        onWillPop: () => _popPage(),
-        child: Container(),
-      );
+          onWillPop: () => _popPage(),
+          child: Container(
+            child: Column(
+              children: _state.costumes != null
+                  ? _state.costumes!
+                      .map((costume) => Text(costume.id!))
+                      .toList()
+                  : [],
+            ),
+          ));
     });
   }
 
