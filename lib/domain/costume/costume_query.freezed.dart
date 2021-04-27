@@ -40,7 +40,6 @@ const $CostumeQuery = _$CostumeQueryTearOff();
 /// @nodoc
 mixin _$CostumeQuery {
   String? get production => throw _privateConstructorUsedError;
-
   Fashion? get fashion => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   String? get timePeriod => throw _privateConstructorUsedError;
@@ -254,7 +253,6 @@ abstract class _CostumeQuery implements CostumeQuery {
 
   @override
   String? get production => throw _privateConstructorUsedError;
-
   @override
   Fashion? get fashion => throw _privateConstructorUsedError;
   @override

@@ -1,6 +1,6 @@
 part of 'gallery_bloc.dart';
 
 @freezed
-abstract class GalleryEvent with _$GalleryEvent {
-  const factory GalleryEvent.perforQuery(CostumeQuery query) = PerformQuery;
+class GalleryEvent with _$GalleryEvent {
+  const factory GalleryEvent.performQuery(CostumeQuery query) = PerformQuery;
 }
