@@ -78,4 +78,9 @@ class GalleryService implements IGalleryService {
   Future<List<String>> getTimePeriods() {
     return _costumeRepository.getTimePeriods(currentInstitution!.uid!);
   }
+
+  @override
+  Future<List<String>> getProductions() {
+    return _costumeRepository.getProductions(currentInstitution!.uid!);
+  }
 }

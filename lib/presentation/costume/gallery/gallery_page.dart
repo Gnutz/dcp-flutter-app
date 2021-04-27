@@ -8,6 +8,10 @@ class GalleryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(query.category);
+    print(query.timePeriod);
+    print(query.production);
+    print(query.category);
     final String category = query.category ?? "test";
     return Text(category);
 

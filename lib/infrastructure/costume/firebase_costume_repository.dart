@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
@@ -15,6 +16,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   static const String _STORAGE_MAINLOCATION_COLLECTION = "storages";
   static const String _STORAGE_SUBLOCATION_COLLECTION = "sublocations";
   static const String _METADATA = "metadata";
+  static const String _PRODUCTIONS = "productions";
 
   @override
   Future<void> createCostume(String institutionId, Costume costume) async {
@@ -188,5 +190,28 @@ class FirebaseCostumeRepository implements ICostumeRepository {
       subLocations.add(location);
     });
     return subLocations;
+  }
+
+  @override
+  Future<List<String>> getProductions(String institutionId) async {
+    List<Production> productions = [
+      Production(
+          id: "",
+          title: "Jeg er jo lige her",
+          startDate: DateTime(2021, 8, 28),
+          endDate: DateTime(2021, 8, 28)),
+      Production(
+          id: "",
+          title: "Charlie & Chokoladefarbrikken",
+          startDate: DateTime(2021, 8, 28),
+          endDate: DateTime(2021, 8, 28)),
+      Production(
+          id: "",
+          title: "100 Sange",
+          startDate: DateTime(2021, 8, 28),
+          endDate: DateTime(2021, 8, 28)),
+    ];
+
+    return productions.map((e) => e.title ?? "").toList();
   }
 }

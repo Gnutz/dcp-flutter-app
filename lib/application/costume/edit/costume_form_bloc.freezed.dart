@@ -242,6 +242,7 @@ class _$LoadCostumeCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$LoadCostume implements LoadCostume {
   const _$LoadCostume(this.costumeId);
 
@@ -414,6 +415,7 @@ class _$CategorySelectedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$CategorySelected implements CategorySelected {
   const _$CategorySelected(this.category);
 
@@ -586,6 +588,7 @@ class _$TimePeriodSelectedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$TimePeriodSelected implements TimePeriodSelected {
   const _$TimePeriodSelected(this.time);
 
@@ -757,6 +760,7 @@ class _$FashionSelectedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$FashionSelected implements FashionSelected {
   const _$FashionSelected(this.fashion);
 
@@ -928,6 +932,7 @@ class _$QuantityChangedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$QuantityChanged implements QuantityChanged {
   const _$QuantityChanged(this.quantity);
 
@@ -1087,6 +1092,7 @@ class _$LoadFormOptionsCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$LoadFormOptions implements LoadFormOptions {
   const _$LoadFormOptions();
 
@@ -1228,6 +1234,7 @@ class _$SaveChangesPressedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$SaveChangesPressed implements SaveChangesPressed {
   const _$SaveChangesPressed();
 
@@ -1369,6 +1376,7 @@ class _$SaveCostumeCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$SaveCostume implements SaveCostume {
   const _$SaveCostume();
 
@@ -1523,6 +1531,7 @@ class _$ThemeValueChangedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ThemeValueChanged implements ThemeValueChanged {
   const _$ThemeValueChanged(this.theme);
 
@@ -1680,6 +1689,7 @@ class _$ThemeAddedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ThemeAdded implements ThemeAdded {
   const _$ThemeAdded();
 
@@ -1834,6 +1844,7 @@ class _$ThemeRemovedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ThemeRemoved implements ThemeRemoved {
   const _$ThemeRemoved(this.theme);
 
@@ -2005,6 +2016,7 @@ class _$ColorValueChangedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ColorValueChanged implements ColorValueChanged {
   const _$ColorValueChanged(this.color);
 
@@ -2162,6 +2174,7 @@ class _$ColorAddedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ColorAdded implements ColorAdded {
   const _$ColorAdded();
 
@@ -2316,6 +2329,7 @@ class _$ColorRemovedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ColorRemoved implements ColorRemoved {
   const _$ColorRemoved(this.color);
 
@@ -2487,6 +2501,7 @@ class _$MainLocationSelectedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$MainLocationSelected implements MainLocationSelected {
   const _$MainLocationSelected(this.main);
 
@@ -2659,6 +2674,7 @@ class _$SubLocationSelectedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$SubLocationSelected implements SubLocationSelected {
   const _$SubLocationSelected(this.location);
 
@@ -3131,6 +3147,7 @@ class __$CostumeFormStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_CostumeFormState implements _CostumeFormState {
   const _$_CostumeFormState(
       {required this.loading,

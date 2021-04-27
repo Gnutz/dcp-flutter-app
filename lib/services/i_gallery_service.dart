@@ -28,4 +28,6 @@ abstract class IGalleryService {
   Future<List<Location>> getStorageMainLocations();
 
   Future<List<Location>> getStorageSubLocations(String mainId);
+
+  Future<List<String>> getProductions();
 }

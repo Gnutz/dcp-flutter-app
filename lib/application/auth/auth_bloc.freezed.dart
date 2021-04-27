@@ -92,6 +92,7 @@ class _$CheckRequestedCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$CheckRequested implements CheckRequested {
   const _$CheckRequested();
 
@@ -174,6 +175,7 @@ class _$SignOutCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$SignOut implements SignOut {
   const _$SignOut();
 
@@ -325,6 +327,7 @@ class _$InitialCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$Initial implements Initial {
   const _$Initial();
 
@@ -413,6 +416,7 @@ class _$AuthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$Authenticated implements Authenticated {
   const _$Authenticated();
 
@@ -501,6 +505,7 @@ class _$UnauthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$Unauthenticated implements Unauthenticated {
   const _$Unauthenticated();
 

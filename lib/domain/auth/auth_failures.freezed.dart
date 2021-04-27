@@ -103,6 +103,7 @@ class _$ServerErrorCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ServerError implements ServerError {
   const _$ServerError();
 
@@ -192,6 +193,7 @@ class _$EmailInUseCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$EmailInUse implements EmailInUse {
   const _$EmailInUse();
 
@@ -286,6 +288,7 @@ class _$InvalidEmailAndPasswordCombinationCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$InvalidEmailAndPasswordCombination
     implements InvalidEmailAndPasswordCombination {
   const _$InvalidEmailAndPasswordCombination();

@@ -17,7 +17,7 @@ class _$CostumeQueryTearOff {
   const _$CostumeQueryTearOff();
 
   _CostumeQuery call(
-      {Production? production,
+      {String? production,
       Fashion? fashion,
       String? category,
       String? timePeriod,
@@ -39,7 +39,8 @@ const $CostumeQuery = _$CostumeQueryTearOff();
 
 /// @nodoc
 mixin _$CostumeQuery {
-  Production? get production => throw _privateConstructorUsedError;
+  String? get production => throw _privateConstructorUsedError;
+
   Fashion? get fashion => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   String? get timePeriod => throw _privateConstructorUsedError;
@@ -57,7 +58,7 @@ abstract class $CostumeQueryCopyWith<$Res> {
           CostumeQuery value, $Res Function(CostumeQuery) then) =
       _$CostumeQueryCopyWithImpl<$Res>;
   $Res call(
-      {Production? production,
+      {String? production,
       Fashion? fashion,
       String? category,
       String? timePeriod,
@@ -86,7 +87,7 @@ class _$CostumeQueryCopyWithImpl<$Res> implements $CostumeQueryCopyWith<$Res> {
       production: production == freezed
           ? _value.production
           : production // ignore: cast_nullable_to_non_nullable
-              as Production?,
+              as String?,
       fashion: fashion == freezed
           ? _value.fashion
           : fashion // ignore: cast_nullable_to_non_nullable
@@ -119,7 +120,7 @@ abstract class _$CostumeQueryCopyWith<$Res>
       __$CostumeQueryCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Production? production,
+      {String? production,
       Fashion? fashion,
       String? category,
       String? timePeriod,
@@ -150,7 +151,7 @@ class __$CostumeQueryCopyWithImpl<$Res> extends _$CostumeQueryCopyWithImpl<$Res>
       production: production == freezed
           ? _value.production
           : production // ignore: cast_nullable_to_non_nullable
-              as Production?,
+              as String?,
       fashion: fashion == freezed
           ? _value.fashion
           : fashion // ignore: cast_nullable_to_non_nullable
@@ -176,6 +177,7 @@ class __$CostumeQueryCopyWithImpl<$Res> extends _$CostumeQueryCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_CostumeQuery implements _CostumeQuery {
   const _$_CostumeQuery(
       {this.production,
@@ -186,7 +188,7 @@ class _$_CostumeQuery implements _CostumeQuery {
       this.colors});
 
   @override
-  final Production? production;
+  final String? production;
   @override
   final Fashion? fashion;
   @override
@@ -243,7 +245,7 @@ class _$_CostumeQuery implements _CostumeQuery {
 
 abstract class _CostumeQuery implements CostumeQuery {
   const factory _CostumeQuery(
-      {Production? production,
+      {String? production,
       Fashion? fashion,
       String? category,
       String? timePeriod,
@@ -251,7 +253,8 @@ abstract class _CostumeQuery implements CostumeQuery {
       List<String>? colors}) = _$_CostumeQuery;
 
   @override
-  Production? get production => throw _privateConstructorUsedError;
+  String? get production => throw _privateConstructorUsedError;
+
   @override
   Fashion? get fashion => throw _privateConstructorUsedError;
   @override

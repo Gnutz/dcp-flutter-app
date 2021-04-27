@@ -23,7 +23,17 @@ class NavigationService {
   static final GlobalKey<NavigatorState> _navigatorKey =
       GlobalKey<NavigatorState>();
 
+  static String? get currentRoute {
+    try {
+      return ModalRoute.of(currentContext!)!.settings.name;
+    } catch (e) {
+      return null;
+    }
+  }
+
   static NavigatorState? get instance => _navigatorKey.currentState;
+
+  static BuildContext? get currentContext => key.currentState?.overlay?.context;
 
   static GlobalKey<NavigatorState> get key => _navigatorKey;
 }
@@ -37,7 +47,7 @@ class AppRouter {
   Route onGeneratedRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splashPage:
-        return MaterialPageRoute(builder: (_) => SplashPage());
+        return MaterialPageRoute(builder: (_) => RouteGuard());
       case Routes.signIn:
         return MaterialPageRoute(builder: (_) => SignInPage());
       case Routes.register:

@@ -1,14 +1,20 @@
 import 'package:digtial_costume_platform/application/gallery/category_select/category_selection_bloc.dart';
+import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/category_grid.dart';
+import 'package:digtial_costume_platform/presentation/costume/gallery/search_form.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategorySelectionPage extends StatelessWidget {
+  late BuildContext _context;
+
   @override
   Widget build(BuildContext context) {
+    _context = context;
+
     return Scaffold(
       backgroundColor: MyColorTheme.backgroundColor,
       /*appBar:
@@ -31,7 +37,7 @@ class CategorySelectionPage extends StatelessWidget {
         notchMargin: 4.0,
         child: Container(
           decoration:
-              BoxDecoration(color: MyColorTheme.inputDecoratorFillColor),
+          BoxDecoration(color: MyColorTheme.inputDecoratorFillColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -41,7 +47,7 @@ class CategorySelectionPage extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(Icons.search),
-                onPressed: () {},
+                onPressed: () => _showSearchForm(),
               ),
             ],
           ),
@@ -56,51 +62,16 @@ class CategorySelectionPage extends StatelessWidget {
       ),
     );
   }
-}
 
-class DataSearch extends SearchDelegate<String> {
-  final colors = ["green", "blue", "red"];
-
-  final recentResult = <String>[];
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            query = "";
-          })
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-        icon: AnimatedIcon(
-          icon: AnimatedIcons.menu_arrow,
-          progress: transitionAnimation,
-        ),
-        onPressed: () {
-          close(context, "");
+  void _showSearchForm() {
+    showModalBottomSheet(
+        context: _context,
+        builder: (context) {
+          return Container(
+              child: BlocProvider(
+            create: (context) => Locator().locator<SearchFormBloc>(),
+            child: SearchForm(),
+          ));
         });
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isNotEmpty ? recentResult : colors;
-
-    return ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-          leading: const Icon(Icons.location_city),
-          title: Text(suggestionList[index]),
-            ),
-        itemCount: suggestionList.length);
   }
 }

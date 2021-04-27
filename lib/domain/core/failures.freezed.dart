@@ -185,6 +185,7 @@ class _$InvalidEmailCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
+
 class _$InvalidEmail<T> implements InvalidEmail<T> {
   const _$InvalidEmail({required this.failedValue});
 
@@ -329,6 +330,7 @@ class _$ShortPasswordCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
+
 class _$ShortPassword<T> implements ShortPassword<T> {
   const _$ShortPassword({required this.failedValue});
 
@@ -476,6 +478,7 @@ class _$PasswordMissingUppercaseCharacterCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
+
 class _$PasswordMissingUppercaseCharacter<T>
     implements PasswordMissingUppercaseCharacter<T> {
   const _$PasswordMissingUppercaseCharacter({required this.failedValue});
@@ -628,6 +631,7 @@ class _$PasswordMissingLowercaseCharacterCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
+
 class _$PasswordMissingLowercaseCharacter<T>
     implements PasswordMissingLowercaseCharacter<T> {
   const _$PasswordMissingLowercaseCharacter({required this.failedValue});
@@ -780,6 +784,7 @@ class _$PasswordMissingNumericCharacterCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
+
 class _$PasswordMissingNumericCharacter<T>
     implements PasswordMissingNumericCharacter<T> {
   const _$PasswordMissingNumericCharacter({required this.failedValue});
@@ -932,6 +937,7 @@ class _$PasswordMissingSpecialCharacterCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
+
 class _$PasswordMissingSpecialCharacter<T>
     implements PasswordMissingSpecialCharacter<T> {
   const _$PasswordMissingSpecialCharacter({required this.failedValue});
