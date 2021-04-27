@@ -1,7 +1,9 @@
 import 'package:digtial_costume_platform/application/gallery/gallery_bloc.dart';
+import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/gallery.dart';
+import 'package:digtial_costume_platform/presentation/costume/gallery/search_form.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class GalleryPage extends StatelessWidget {
   final CostumeQuery query;
 
-  const GalleryPage({required this.query});
+  late BuildContext _context;
+
+  GalleryPage({required this.query});
 
   @override
   Widget build(BuildContext context) {
@@ -62,4 +66,16 @@ class GalleryPage extends StatelessWidget {
       ),
     );
   }
-}
+
+
+  void _showSearchForm() {
+    showModalBottomSheet(
+        context: _context,
+        builder: (context) {
+          return Container(
+              child: BlocProvider(
+                create: (context) => Locator().locator<SearchFormBloc>(),
+                child: SearchForm(),
+              ));
+        });
+  }
