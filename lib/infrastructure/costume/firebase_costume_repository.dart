@@ -65,10 +65,11 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
     final buildQuery = queryFactoryMethod(collectionRef, query);
 
-    final results = await buildQuery.get();
+    final result = await buildQuery.get();
 
-    return <Costume>[];
-    //TODO: foreach
+    var costumes = <Costume>[];
+    result.docs.forEach((doc) => costumes.add(Costume.fromJson(doc.data())));
+    return costumes;
   }
 
   @override
@@ -103,12 +104,12 @@ class FirebaseCostumeRepository implements ICostumeRepository {
       seedQuery = seedQuery.where(FASHION_KEY, isEqualTo: query.fashion);
     }
 
-    if (query.colors != null) {
-      seedQuery = seedQuery.where(COLORS_KEY, arrayContains: query.colors);
+    if (query.colors != null && query.colors!.isNotEmpty) {
+      seedQuery = seedQuery.where(COLORS_KEY, arrayContainsAny: query.colors);
     }
 
-    if (query.themes != null) {
-      seedQuery = seedQuery.where(THEMES_KEY, arrayContains: query.themes);
+    if (query.themes != null && query.themes!.isNotEmpty) {
+      seedQuery = seedQuery.where(THEMES_KEY, arrayContainsAny: query.themes);
     }
 
     return seedQuery;

@@ -24,7 +24,7 @@ class Gallery extends StatelessWidget {
             child: Column(
               children: _state.costumes != null
                   ? _state.costumes!
-                      .map((costume) => Text(costume.id!))
+                      .map((costume) => Text(costume.category!))
                       .toList()
                   : [],
             ),
