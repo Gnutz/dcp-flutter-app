@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
+import 'package:digtial_costume_platform/presentation/routes/routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -28,6 +30,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }, signOut: (e) async* {
       await _authService.signOut();
       yield const AuthState.unauthenticated();
+      NavigationService.instance!.pushNamedAndRemoveUntil(
+          Routes.splashPage, ModalRoute.withName(Routes.splashPage));
     });
   }
 }
+

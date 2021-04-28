@@ -11,8 +11,7 @@ class RouteGuard extends StatelessWidget {
           state.map(
               initial: (_) {},
               authenticated: (_) {
-                Navigator.of(context)
-                    .pushReplacementNamed(Routes.categorySelection);
+                Navigator.of(context).pushNamed(Routes.categorySelection);
               },
               unauthenticated: (_) =>
                   Navigator.of(context).pushReplacementNamed(Routes.signIn));

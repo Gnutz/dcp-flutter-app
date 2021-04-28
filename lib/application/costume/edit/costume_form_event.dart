@@ -42,4 +42,5 @@ class CostumeFormEvent with _$CostumeFormEvent {
   const factory CostumeFormEvent.subLocationSelected(Location location) =
   SubLocationSelected;
 
+  const factory CostumeFormEvent.addImage(String imagePath) = AddImage;
 }

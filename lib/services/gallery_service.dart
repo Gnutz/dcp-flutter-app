@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
@@ -9,7 +11,7 @@ import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 
 class GalleryService implements IGalleryService {
   Institution? _currentInstitution =
-      Institution(name: "aarhus Teater", uid: "fHEEOUrR8ZcsqbH19dzC");
+  Institution(name: "aarhus Teater", uid: "fHEEOUrR8ZcsqbH19dzC");
   final ICostumeRepository _costumeRepository;
 
   GalleryService(this._costumeRepository);
@@ -83,4 +85,16 @@ class GalleryService implements IGalleryService {
   Future<List<String>> getProductions() {
     return _costumeRepository.getProductions(currentInstitution!.uid!);
   }
+
+  @override
+  void addImage(String image, String costumeId) {
+    _costumeRepository.addImage(image, currentInstitution!.uid!, costumeId);
+  }
+
+/*Future<String?> getFirstDownLoadLink(String institutionId ,String costumeId){
+    return _costumeRepository.getFirstImagePath(currentInstitution!.uid!, costumeId);
+  }
+
+  Future<List<String>> getAllDownloadLinks(String institutionId, String costumeId); */
+
 }

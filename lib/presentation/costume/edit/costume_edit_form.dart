@@ -5,6 +5,7 @@ import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CostumeEditForm extends StatelessWidget {
   late final CostumeFormBloc _formBloc;
@@ -65,6 +66,10 @@ class CostumeEditForm extends StatelessWidget {
                       height: 20.0,
                     ),
                     _buildQuantityInput(),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    _buildAddImageButton(),
                     const SizedBox(
                       height: 20.0,
                     ),
@@ -185,7 +190,6 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   Widget _buildColorsInput() {
-    //TODO convert to lowercase
     return Row(children: [
       Flexible(
         child: TextFormField(
@@ -323,5 +327,18 @@ class CostumeEditForm extends StatelessWidget {
       onChanged: (quantity) =>
           _formBloc.add(CostumeFormEvent.quantityChanged(int.parse(quantity))),
     );
+  }
+
+  Widget _buildAddImageButton() {
+    return IconButton(
+        icon: Icon(Icons.photo_library),
+        onPressed: () => _pickImage(ImageSource.gallery));
+  }
+
+  _pickImage(ImageSource source) async {
+    PickedFile? selected = await ImagePicker().getImage(source: source);
+    if (selected != null) {
+      _formBloc.add(CostumeFormEvent.addImage(selected.path));
+    }
   }
 }

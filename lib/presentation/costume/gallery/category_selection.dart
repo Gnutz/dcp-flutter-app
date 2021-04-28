@@ -1,3 +1,4 @@
+import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/category_select/category_selection_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
@@ -14,25 +15,36 @@ class CategorySelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _context = context;
-
+    AuthBloc _auth = context.read<AuthBloc>();
     return Scaffold(
       backgroundColor: MyColorTheme.backgroundColor,
-      /*appBar:
-          AppBar(backgroundColor: Colors.brown[400], elevation: 0.0, actions: [
-        IconButton(
+      appBar: AppBar(
+        actions: [
+          TextButton.icon(
+              onPressed: () {
+                _auth.add(AuthEvent.signOut());
+              },
+              icon: const Icon(
+                Icons.person,
+                color: MyColorTheme.buttonTextColor,
+              ),
+              label: Text(
+                "Sign Out",
+                style: const TextStyle(color: MyColorTheme.buttonTextColor),
+              )),
+          IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: DataSearch());
-            })
-      ]), */
+            onPressed: () => _showSearchForm(),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: BlocProvider(
           create: (context) => Locator().locator<CategorySelectionBloc>(),
           child: CategoryGrid(),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
+      /* bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 4.0,
         child: Container(
@@ -52,7 +64,7 @@ class CategorySelectionPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ), */
       floatingActionButton: FloatingActionButton(
         backgroundColor: MyColorTheme.buttonColor,
         onPressed: () {
@@ -69,9 +81,9 @@ class CategorySelectionPage extends StatelessWidget {
         builder: (context) {
           return Container(
               child: BlocProvider(
-            create: (context) => Locator().locator<SearchFormBloc>(),
-            child: SearchForm(),
-          ));
+                create: (context) => Locator().locator<SearchFormBloc>(),
+                child: SearchForm(),
+              ));
         });
   }
 }

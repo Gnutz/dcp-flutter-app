@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
@@ -30,4 +32,6 @@ abstract class IGalleryService {
   Future<List<Location>> getStorageSubLocations(String mainId);
 
   Future<List<String>> getProductions();
+
+  void addImage(String image, String costumeId);
 }

@@ -23,27 +23,31 @@ class Costume {
   List<String>? colors;
   List<Production>? productions;
   int? quantity;
+  @JsonKey(ignore: true)
+  List<CostumeImage>? images;
   StorageLocation? storageLocation;
-
   @JsonKey(fromJson: _statusToJsonMapper)
   Status? status;
 
-  Costume(
-      {this.id,
-      this.edited,
-      this.created,
-      this.fashion,
-      this.category,
-      this.timePeriod,
-      this.themes,
-      this.colors,
-      this.productions,
-      this.quantity,
-      this.storageLocation,
-      this.status}) {
+  Costume({
+    this.id,
+    this.edited,
+    this.created,
+    this.fashion,
+    this.category,
+    this.timePeriod,
+    this.themes,
+    this.colors,
+    this.productions,
+    this.quantity,
+    this.storageLocation,
+    this.status,
+    this.images,
+  }) {
     this.productions = productions ?? <Production>[];
     this.themes = themes ?? <String>[];
     this.colors = colors ?? <String>[];
+    this.images = images ?? <CostumeImage>[];
   }
 
   factory Costume.fromJson(Map<String, dynamic> json) =>
@@ -57,4 +61,20 @@ class Costume {
     if (json.containsKey('inUseFor')) return InUse.fromJson(json);
     if (json.containsKey('rentedFor')) return RentedOut.fromJson(json);
   }
+}
+
+@JsonSerializable(anyMap: true, explicitToJson: true)
+class CostumeImage {
+  String? id;
+  String? imagePath;
+  String? downloadUrl;
+  DateTime? uploaded;
+
+  CostumeImage({this.id, this.imagePath, this.downloadUrl, this.uploaded});
+
+  factory CostumeImage.fromJson(Map<String, dynamic> json) =>
+      _$CostumeImageFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$CostumeImageToJson(this);
 }

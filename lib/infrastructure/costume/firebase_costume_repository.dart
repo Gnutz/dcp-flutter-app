@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseCostumeRepository implements ICostumeRepository {
   final _store = FirebaseFirestore.instance;
+  final _storage = FirebaseStorage.instance;
 
   static const String _COSTUMES_COLLECTION = 'costumes';
   static const String _INSTITUTIONS_COLLECTION = "institutions";
@@ -17,6 +21,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   static const String _STORAGE_SUBLOCATION_COLLECTION = "sublocations";
   static const String _METADATA = "metadata";
   static const String _PRODUCTIONS = "productions";
+  static const String _IMAGES_COLLECTION = "images";
 
   @override
   Future<void> createCostume(String institutionId, Costume costume) async {
@@ -115,6 +120,13 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     return seedQuery;
   }
 
+  Query createQueryForTagsSet(Query seedQuery, String key, List<String>? tags) {
+    if (tags != null && tags.isNotEmpty) {
+      return seedQuery.where(key, arrayContainsAny: tags);
+    }
+    return seedQuery;
+  }
+
   @override
   Future<List<String>> getCategories(String institutionId) async {
     const CATEGORY_KEY = "category";
@@ -172,8 +184,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<List<Location>> getStorageSubLocations(
-      String institutionId, String mainId) async {
+  Future<List<Location>> getStorageSubLocations(String institutionId, String mainId) async {
     final result = await _store
         .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
@@ -215,4 +226,54 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
     return productions.map((e) => e.title ?? "").toList();
   }
+
+  /* @override
+  Future<bool> deleteImage(String institutionId, costume) async {
+    try {
+      await _storage.ref
+          .putString(dataUrl, format: firebase_storage.PutStringFormat.dataUrl);
+    } on firebase_core.FirebaseException catch (e) {
+      // e.g, e.code == 'canceled'
+    }
+  } */
+
+  @override
+  Future<List<String>> getImages(String institutionId, String costumeId) {
+    // TODO: implement getImages
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> deleteImage(String imagePath) {
+    // TODO: implement deleteImage
+    throw UnimplementedError();
+  }
+
+  @override
+  void addImage(String image, String institutionId, String costumeId) async {
+    final doc = _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_COSTUMES_COLLECTION)
+        .doc(costumeId)
+        .collection(_IMAGES_COLLECTION)
+        .doc();
+
+    String imagePath =
+        "${institutionId}/images/costumes/${costumeId}/${doc.id}.png";
+    await _storage.ref(imagePath).putFile(File(image));
+    String downloadUrl = await _storage.ref(imagePath).getDownloadURL();
+
+    doc.set(CostumeImage(
+            imagePath: imagePath,
+            downloadUrl: downloadUrl,
+            uploaded: DateTime.now())
+        .toJson());
+  }
+
+/*void deleteImage(CostumeImage imageId, institutionId, costumeId){
+    _storage.ref(institutionId)
+      .child(_IMAGES_COLLECTION).child(_COSTUMES_COLLECTION).child(costumeId)
+      .child(imageId).delete(); */
+
 }

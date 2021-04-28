@@ -101,6 +101,12 @@ class _$CostumeFormEventTearOff {
       location,
     );
   }
+
+  AddImage addImage(String imagePath) {
+    return AddImage(
+      imagePath,
+    );
+  }
 }
 
 /// @nodoc
@@ -126,6 +132,7 @@ mixin _$CostumeFormEvent {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -146,6 +153,7 @@ mixin _$CostumeFormEvent {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -167,6 +175,7 @@ mixin _$CostumeFormEvent {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -187,6 +196,7 @@ mixin _$CostumeFormEvent {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -291,6 +301,7 @@ class _$LoadCostume implements LoadCostume {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return loadCostume(costumeId);
   }
@@ -314,6 +325,7 @@ class _$LoadCostume implements LoadCostume {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (loadCostume != null) {
@@ -341,6 +353,7 @@ class _$LoadCostume implements LoadCostume {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return loadCostume(this);
   }
@@ -364,6 +377,7 @@ class _$LoadCostume implements LoadCostume {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (loadCostume != null) {
@@ -464,6 +478,7 @@ class _$CategorySelected implements CategorySelected {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return categorySelected(category);
   }
@@ -487,6 +502,7 @@ class _$CategorySelected implements CategorySelected {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (categorySelected != null) {
@@ -514,6 +530,7 @@ class _$CategorySelected implements CategorySelected {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return categorySelected(this);
   }
@@ -537,6 +554,7 @@ class _$CategorySelected implements CategorySelected {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (categorySelected != null) {
@@ -636,6 +654,7 @@ class _$TimePeriodSelected implements TimePeriodSelected {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return timePeriodSelected(time);
   }
@@ -659,6 +678,7 @@ class _$TimePeriodSelected implements TimePeriodSelected {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (timePeriodSelected != null) {
@@ -686,6 +706,7 @@ class _$TimePeriodSelected implements TimePeriodSelected {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return timePeriodSelected(this);
   }
@@ -709,6 +730,7 @@ class _$TimePeriodSelected implements TimePeriodSelected {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (timePeriodSelected != null) {
@@ -808,6 +830,7 @@ class _$FashionSelected implements FashionSelected {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return fashionSelected(fashion);
   }
@@ -831,6 +854,7 @@ class _$FashionSelected implements FashionSelected {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (fashionSelected != null) {
@@ -858,6 +882,7 @@ class _$FashionSelected implements FashionSelected {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return fashionSelected(this);
   }
@@ -881,6 +906,7 @@ class _$FashionSelected implements FashionSelected {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (fashionSelected != null) {
@@ -981,6 +1007,7 @@ class _$QuantityChanged implements QuantityChanged {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return quantityChanged(quantity);
   }
@@ -1004,6 +1031,7 @@ class _$QuantityChanged implements QuantityChanged {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (quantityChanged != null) {
@@ -1031,6 +1059,7 @@ class _$QuantityChanged implements QuantityChanged {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return quantityChanged(this);
   }
@@ -1054,6 +1083,7 @@ class _$QuantityChanged implements QuantityChanged {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (quantityChanged != null) {
@@ -1128,6 +1158,7 @@ class _$LoadFormOptions implements LoadFormOptions {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return loadFormOptions();
   }
@@ -1151,6 +1182,7 @@ class _$LoadFormOptions implements LoadFormOptions {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (loadFormOptions != null) {
@@ -1178,6 +1210,7 @@ class _$LoadFormOptions implements LoadFormOptions {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return loadFormOptions(this);
   }
@@ -1201,6 +1234,7 @@ class _$LoadFormOptions implements LoadFormOptions {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (loadFormOptions != null) {
@@ -1270,6 +1304,7 @@ class _$SaveChangesPressed implements SaveChangesPressed {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return saveChangesPressed();
   }
@@ -1293,6 +1328,7 @@ class _$SaveChangesPressed implements SaveChangesPressed {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (saveChangesPressed != null) {
@@ -1320,6 +1356,7 @@ class _$SaveChangesPressed implements SaveChangesPressed {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return saveChangesPressed(this);
   }
@@ -1343,6 +1380,7 @@ class _$SaveChangesPressed implements SaveChangesPressed {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (saveChangesPressed != null) {
@@ -1412,6 +1450,7 @@ class _$SaveCostume implements SaveCostume {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return saveCostume();
   }
@@ -1435,6 +1474,7 @@ class _$SaveCostume implements SaveCostume {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (saveCostume != null) {
@@ -1462,6 +1502,7 @@ class _$SaveCostume implements SaveCostume {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return saveCostume(this);
   }
@@ -1485,6 +1526,7 @@ class _$SaveCostume implements SaveCostume {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (saveCostume != null) {
@@ -1579,6 +1621,7 @@ class _$ThemeValueChanged implements ThemeValueChanged {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return themeValueChanged(theme);
   }
@@ -1602,6 +1645,7 @@ class _$ThemeValueChanged implements ThemeValueChanged {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (themeValueChanged != null) {
@@ -1629,6 +1673,7 @@ class _$ThemeValueChanged implements ThemeValueChanged {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return themeValueChanged(this);
   }
@@ -1652,6 +1697,7 @@ class _$ThemeValueChanged implements ThemeValueChanged {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (themeValueChanged != null) {
@@ -1725,6 +1771,7 @@ class _$ThemeAdded implements ThemeAdded {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return themeAdded();
   }
@@ -1748,6 +1795,7 @@ class _$ThemeAdded implements ThemeAdded {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (themeAdded != null) {
@@ -1775,6 +1823,7 @@ class _$ThemeAdded implements ThemeAdded {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return themeAdded(this);
   }
@@ -1798,6 +1847,7 @@ class _$ThemeAdded implements ThemeAdded {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (themeAdded != null) {
@@ -1892,6 +1942,7 @@ class _$ThemeRemoved implements ThemeRemoved {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return themeRemoved(theme);
   }
@@ -1915,6 +1966,7 @@ class _$ThemeRemoved implements ThemeRemoved {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (themeRemoved != null) {
@@ -1942,6 +1994,7 @@ class _$ThemeRemoved implements ThemeRemoved {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return themeRemoved(this);
   }
@@ -1965,6 +2018,7 @@ class _$ThemeRemoved implements ThemeRemoved {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (themeRemoved != null) {
@@ -2064,6 +2118,7 @@ class _$ColorValueChanged implements ColorValueChanged {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return colorValueChanged(color);
   }
@@ -2087,6 +2142,7 @@ class _$ColorValueChanged implements ColorValueChanged {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (colorValueChanged != null) {
@@ -2114,6 +2170,7 @@ class _$ColorValueChanged implements ColorValueChanged {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return colorValueChanged(this);
   }
@@ -2137,6 +2194,7 @@ class _$ColorValueChanged implements ColorValueChanged {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (colorValueChanged != null) {
@@ -2210,6 +2268,7 @@ class _$ColorAdded implements ColorAdded {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return colorAdded();
   }
@@ -2233,6 +2292,7 @@ class _$ColorAdded implements ColorAdded {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (colorAdded != null) {
@@ -2260,6 +2320,7 @@ class _$ColorAdded implements ColorAdded {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return colorAdded(this);
   }
@@ -2283,6 +2344,7 @@ class _$ColorAdded implements ColorAdded {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (colorAdded != null) {
@@ -2377,6 +2439,7 @@ class _$ColorRemoved implements ColorRemoved {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return colorRemoved(color);
   }
@@ -2400,6 +2463,7 @@ class _$ColorRemoved implements ColorRemoved {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (colorRemoved != null) {
@@ -2427,6 +2491,7 @@ class _$ColorRemoved implements ColorRemoved {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return colorRemoved(this);
   }
@@ -2450,6 +2515,7 @@ class _$ColorRemoved implements ColorRemoved {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (colorRemoved != null) {
@@ -2550,6 +2616,7 @@ class _$MainLocationSelected implements MainLocationSelected {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return mainLocationSelected(main);
   }
@@ -2573,6 +2640,7 @@ class _$MainLocationSelected implements MainLocationSelected {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (mainLocationSelected != null) {
@@ -2600,6 +2668,7 @@ class _$MainLocationSelected implements MainLocationSelected {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return mainLocationSelected(this);
   }
@@ -2623,6 +2692,7 @@ class _$MainLocationSelected implements MainLocationSelected {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (mainLocationSelected != null) {
@@ -2723,6 +2793,7 @@ class _$SubLocationSelected implements SubLocationSelected {
     required TResult Function(String color) colorRemoved,
     required TResult Function(Location main) mainLocationSelected,
     required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
   }) {
     return subLocationSelected(location);
   }
@@ -2746,6 +2817,7 @@ class _$SubLocationSelected implements SubLocationSelected {
     TResult Function(String color)? colorRemoved,
     TResult Function(Location main)? mainLocationSelected,
     TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
     required TResult orElse(),
   }) {
     if (subLocationSelected != null) {
@@ -2773,6 +2845,7 @@ class _$SubLocationSelected implements SubLocationSelected {
     required TResult Function(ColorRemoved value) colorRemoved,
     required TResult Function(MainLocationSelected value) mainLocationSelected,
     required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
   }) {
     return subLocationSelected(this);
   }
@@ -2796,6 +2869,7 @@ class _$SubLocationSelected implements SubLocationSelected {
     TResult Function(ColorRemoved value)? colorRemoved,
     TResult Function(MainLocationSelected value)? mainLocationSelected,
     TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
     required TResult orElse(),
   }) {
     if (subLocationSelected != null) {
@@ -2809,8 +2883,185 @@ abstract class SubLocationSelected implements CostumeFormEvent {
   const factory SubLocationSelected(Location location) = _$SubLocationSelected;
 
   Location get location => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $SubLocationSelectedCopyWith<SubLocationSelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AddImageCopyWith<$Res> {
+  factory $AddImageCopyWith(AddImage value, $Res Function(AddImage) then) =
+      _$AddImageCopyWithImpl<$Res>;
+
+  $Res call({String imagePath});
+}
+
+/// @nodoc
+class _$AddImageCopyWithImpl<$Res> extends _$CostumeFormEventCopyWithImpl<$Res>
+    implements $AddImageCopyWith<$Res> {
+  _$AddImageCopyWithImpl(AddImage _value, $Res Function(AddImage) _then)
+      : super(_value, (v) => _then(v as AddImage));
+
+  @override
+  AddImage get _value => super._value as AddImage;
+
+  @override
+  $Res call({
+    Object? imagePath = freezed,
+  }) {
+    return _then(AddImage(
+      imagePath == freezed
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddImage implements AddImage {
+  const _$AddImage(this.imagePath);
+
+  @override
+  final String imagePath;
+
+  @override
+  String toString() {
+    return 'CostumeFormEvent.addImage(imagePath: $imagePath)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is AddImage &&
+            (identical(other.imagePath, imagePath) ||
+                const DeepCollectionEquality()
+                    .equals(other.imagePath, imagePath)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(imagePath);
+
+  @JsonKey(ignore: true)
+  @override
+  $AddImageCopyWith<AddImage> get copyWith =>
+      _$AddImageCopyWithImpl<AddImage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? costumeId) loadCostume,
+    required TResult Function(String category) categorySelected,
+    required TResult Function(String time) timePeriodSelected,
+    required TResult Function(Fashion fashion) fashionSelected,
+    required TResult Function(int quantity) quantityChanged,
+    required TResult Function() loadFormOptions,
+    required TResult Function() saveChangesPressed,
+    required TResult Function() saveCostume,
+    required TResult Function(String theme) themeValueChanged,
+    required TResult Function() themeAdded,
+    required TResult Function(String theme) themeRemoved,
+    required TResult Function(String color) colorValueChanged,
+    required TResult Function() colorAdded,
+    required TResult Function(String color) colorRemoved,
+    required TResult Function(Location main) mainLocationSelected,
+    required TResult Function(Location location) subLocationSelected,
+    required TResult Function(String imagePath) addImage,
+  }) {
+    return addImage(imagePath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? costumeId)? loadCostume,
+    TResult Function(String category)? categorySelected,
+    TResult Function(String time)? timePeriodSelected,
+    TResult Function(Fashion fashion)? fashionSelected,
+    TResult Function(int quantity)? quantityChanged,
+    TResult Function()? loadFormOptions,
+    TResult Function()? saveChangesPressed,
+    TResult Function()? saveCostume,
+    TResult Function(String theme)? themeValueChanged,
+    TResult Function()? themeAdded,
+    TResult Function(String theme)? themeRemoved,
+    TResult Function(String color)? colorValueChanged,
+    TResult Function()? colorAdded,
+    TResult Function(String color)? colorRemoved,
+    TResult Function(Location main)? mainLocationSelected,
+    TResult Function(Location location)? subLocationSelected,
+    TResult Function(String imagePath)? addImage,
+    required TResult orElse(),
+  }) {
+    if (addImage != null) {
+      return addImage(imagePath);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadCostume value) loadCostume,
+    required TResult Function(CategorySelected value) categorySelected,
+    required TResult Function(TimePeriodSelected value) timePeriodSelected,
+    required TResult Function(FashionSelected value) fashionSelected,
+    required TResult Function(QuantityChanged value) quantityChanged,
+    required TResult Function(LoadFormOptions value) loadFormOptions,
+    required TResult Function(SaveChangesPressed value) saveChangesPressed,
+    required TResult Function(SaveCostume value) saveCostume,
+    required TResult Function(ThemeValueChanged value) themeValueChanged,
+    required TResult Function(ThemeAdded value) themeAdded,
+    required TResult Function(ThemeRemoved value) themeRemoved,
+    required TResult Function(ColorValueChanged value) colorValueChanged,
+    required TResult Function(ColorAdded value) colorAdded,
+    required TResult Function(ColorRemoved value) colorRemoved,
+    required TResult Function(MainLocationSelected value) mainLocationSelected,
+    required TResult Function(SubLocationSelected value) subLocationSelected,
+    required TResult Function(AddImage value) addImage,
+  }) {
+    return addImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCostume value)? loadCostume,
+    TResult Function(CategorySelected value)? categorySelected,
+    TResult Function(TimePeriodSelected value)? timePeriodSelected,
+    TResult Function(FashionSelected value)? fashionSelected,
+    TResult Function(QuantityChanged value)? quantityChanged,
+    TResult Function(LoadFormOptions value)? loadFormOptions,
+    TResult Function(SaveChangesPressed value)? saveChangesPressed,
+    TResult Function(SaveCostume value)? saveCostume,
+    TResult Function(ThemeValueChanged value)? themeValueChanged,
+    TResult Function(ThemeAdded value)? themeAdded,
+    TResult Function(ThemeRemoved value)? themeRemoved,
+    TResult Function(ColorValueChanged value)? colorValueChanged,
+    TResult Function(ColorAdded value)? colorAdded,
+    TResult Function(ColorRemoved value)? colorRemoved,
+    TResult Function(MainLocationSelected value)? mainLocationSelected,
+    TResult Function(SubLocationSelected value)? subLocationSelected,
+    TResult Function(AddImage value)? addImage,
+    required TResult orElse(),
+  }) {
+    if (addImage != null) {
+      return addImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddImage implements CostumeFormEvent {
+  const factory AddImage(String imagePath) = _$AddImage;
+
+  String get imagePath => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AddImageCopyWith<AddImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

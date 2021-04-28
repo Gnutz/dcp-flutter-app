@@ -75,6 +75,9 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
       loadCostume: (LoadCostume e) async* {
         yield* _loadCostumeEventHandler(e);
       },
+      addImage: (AddImage e) async* {
+        _addImageHandler(e);
+      },
     );
   }
 
@@ -155,7 +158,6 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   CostumeFormState _themeAdded() {
     print(state.currentTheme);
     if (state.currentTheme.isNotEmpty) {
-      //TODO: fix
       final themes = state.themes!.toList();
       themes.add(state.currentTheme);
 
@@ -228,5 +230,9 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
 
       print("testing");
     }
+  }
+
+  void _addImageHandler(AddImage e) {
+    _costumeService.addImage(e.imagePath, state.id!);
   }
 }

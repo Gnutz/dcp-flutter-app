@@ -68,6 +68,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         isSubmitting: false,
         showInputErrorMessages: true,
         authFailureOrSuccessOption: failureOrSuccess);
+
+    if (failureOrSuccess == null) {
+      NavigationService.instance!.pushReplacementNamed(Routes.splashPage);
+    }
   }
 
   void _registerNavEventHandler() {

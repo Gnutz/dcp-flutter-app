@@ -1,5 +1,6 @@
 import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -123,10 +124,14 @@ class SearchForm extends StatelessWidget {
 
   Widget _buildSubmitButton() {
     return ElevatedButton(
-      onPressed: () => _formBloc.add(SearchFormEvent.searchPressed()),
+      onPressed: () {
+        _formBloc.add(const SearchFormEvent.searchPressed());
+        NavigationService.instance!.pop();
+      },
       //color: Colors.pink[400],
       child: Text(AppLocalizations.of(_context)!.save,
           style: const TextStyle(color: Colors.white)),
+
       //disabledColor: Colors.cyan,
     );
   }
