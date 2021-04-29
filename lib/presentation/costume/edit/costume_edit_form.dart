@@ -301,23 +301,23 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   Future<bool> _popPage() async {
+    if (!_state.unSavedChanges) return true;
     return await showDialog(
-        //TODO need to track dirty
         context: _context,
         builder: (context) => AlertDialog(
-              title: Text(AppLocalizations.of(_context)!.areYouSure),
-              content:
-                  Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text(AppLocalizations.of(_context)!.cancel),
-                ),
-                TextButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: Text(AppLocalizations.of(_context)!.confirm)),
-              ],
-            )) as bool;
+          title: Text(AppLocalizations.of(_context)!.areYouSure),
+          content:
+          Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(AppLocalizations.of(_context)!.cancel),
+            ),
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text(AppLocalizations.of(_context)!.confirm)),
+          ],
+        )) as bool;
   }
 
   Widget _buildQuantityInput() {

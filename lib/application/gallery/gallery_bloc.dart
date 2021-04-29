@@ -21,11 +21,17 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
   ) async* {
     yield* event.map(performQuery: (e) async* {
       yield* _performQueryEventHandler(e);
+    }, selectCostumeForDisplay: (SelectCostumeForDisplay e) async* {
+      yield _selectCostumeForSwiperEventHandler(e);
     });
   }
 
   Stream<GalleryState> _performQueryEventHandler(PerformQuery e) async* {
     final costumes = await _costumeService.getCostumes(e.query);
     yield state.copyWith(costumes: costumes);
+  }
+
+  GalleryState _selectCostumeForSwiperEventHandler(SelectCostumeForDisplay e) {
+    return state.copyWith(selected: e.selected);
   }
 }

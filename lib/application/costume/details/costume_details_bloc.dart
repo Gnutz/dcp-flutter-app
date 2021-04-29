@@ -4,13 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_list.dart';
+import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'costume_details_bloc.freezed.dart';
-
 part 'costume_details_event.dart';
-
 part 'costume_details_state.dart';
 
 class CostumeDetailsBloc
@@ -28,7 +28,9 @@ class CostumeDetailsBloc
           (CheckOutToNewProductionPressed e) async* {},
       addCostumeToList: (AddCostumeToList e) async* {},
       editCostumePressed: (EditCostumePressed e) async* {},
-      deleteCostume: (DeleteCostume e) async* {},
+      deleteCostume: (_) async* {
+        deleteCostumeEventHandler();
+      },
       checkOutCostume: (CheckOutCostume e) async* {
         yield* _checkOutCostumeEventHandler(e);
       },
@@ -44,5 +46,11 @@ class CostumeDetailsBloc
     if (result != null) {
       yield state.copyWith(costume: result);
     }
+  }
+
+  void deleteCostumeEventHandler() {
+    _galleryService.deleteCostume(state.costume!.id!);
+    ScaffoldMessenger.of(NavigationService.currentContext!)
+        .showSnackBar(const SnackBar(content: Text("The costume was deleted")));
   }
 }

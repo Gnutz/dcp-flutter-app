@@ -65,7 +65,7 @@ class CategorySelectionPage extends StatelessWidget {
           ),
         ),
       ),  */
-      floatingActionButton: _auth.state.user!.isCreator
+        floatingActionButton: _auth.state.user!.isCreator
             ? FloatingActionButton(
                 backgroundColor: MyColorTheme.buttonColor,
                 onPressed: () {

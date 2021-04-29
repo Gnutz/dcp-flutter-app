@@ -129,6 +129,7 @@ import 'package:digtial_costume_platform/application/auth/sign_in/sign_in_bloc.d
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/auth/sign_in/sign_in_form.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -137,9 +138,9 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: MyColorTheme.backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: MyColorTheme.appBarBackgroundColor,
         elevation: 0.0,
         title: Text(AppLocalizations.of(context)!.signIn),
         actions: [
@@ -147,8 +148,14 @@ class SignInPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(Routes.register);
               },
-              icon: const Icon(Icons.person),
-              label: Text(AppLocalizations.of(context)!.signUp))
+              icon: const Icon(
+                Icons.person,
+                color: MyColorTheme.buttonTextColor,
+              ),
+              label: Text(
+                AppLocalizations.of(context)!.signUp,
+                style: TextStyle(color: MyColorTheme.buttonTextColor),
+              ))
         ],
       ),
       body: BlocProvider(

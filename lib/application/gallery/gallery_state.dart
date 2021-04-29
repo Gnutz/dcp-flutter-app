@@ -4,7 +4,7 @@ part of 'gallery_bloc.dart';
 class GalleryState with _$GalleryState {
   const factory GalleryState({
     List<Costume>? costumes,
-  }) = _GalleryState;
+    Costume? selected}) = _GalleryState;
 
   factory GalleryState.initial() => const GalleryState(costumes: <Costume>[]);
 }

@@ -49,7 +49,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
         _saveChangesPressedEventHandler();
       },
       saveCostume: (_) async* {
-        _saveCostumeEventHandler();
+        yield* _saveCostumeEventHandler();
       },
       themeValueChanged: (ThemeValueChanged e) async* {
         yield _themeValueEventHandler(e);
@@ -82,26 +82,27 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   CostumeFormState _categorySelectedEventHandler(CategorySelected e) {
-    return state.copyWith(category: e.category);
+    return state.copyWith(category: e.category, unSavedChanges: true);
   }
 
   CostumeFormState _timePeriodSelectedHandler(TimePeriodSelected e) {
-    return state.copyWith(timePeriod: e.time);
+    return state.copyWith(timePeriod: e.time, unSavedChanges: true);
   }
 
   CostumeFormState _fashionSelectedHandler(FashionSelected e) {
-    return state.copyWith(fashion: e.fashion);
+    return state.copyWith(fashion: e.fashion, unSavedChanges: true);
   }
 
   CostumeFormState _quantityChangedHandler(QuantityChanged e) {
-    return state.copyWith(quantity: e.quantity);
+    return state.copyWith(quantity: e.quantity, unSavedChanges: true);
   }
 
   CostumeFormState _colorAddedEventHandler() {
     final colors = state.colors!.toList();
     colors.add(state.currentColor);
 
-    return state.copyWith(colors: colors, currentColor: "");
+    return state.copyWith(
+        colors: colors, currentColor: "", unSavedChanges: true);
   }
 
   Stream<CostumeFormState> _loadFormOptionsEventHandler() async* {
@@ -113,21 +114,20 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
         loading: false,
         categoryOptions: categoryOptions,
         timePeriodOptions: timePeriodOptions,
-        storageMainLocationOptions: storageOptions);
-
-    print("testing");
+        storageMainLocationOptions: storageOptions,
+        unSavedChanges: true);
   }
 
   void _saveChangesPressedEventHandler() {}
 
-  void _saveCostumeEventHandler() async {
+  Stream<CostumeFormState> _saveCostumeEventHandler() async* {
     Costume? result;
 
     if (state.id != null) {
       result = await _costumeService.getCostume(state.id!);
     }
 
-    final Costume costume = result ?? Costume();
+    final Costume costume = result ?? Costume(created: DateTime.now());
 
     costume.edited = DateTime.now();
     costume.category = state.category;
@@ -149,10 +149,12 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     } else {
       _costumeService.createCostume(costume);
     }
+
+    yield state.copyWith(unSavedChanges: false);
   }
 
   CostumeFormState _themeValueEventHandler(ThemeValueChanged e) {
-    return state.copyWith(currentTheme: e.theme);
+    return state.copyWith(currentTheme: e.theme, unSavedChanges: true);
   }
 
   CostumeFormState _themeAdded() {
@@ -165,7 +167,8 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
         print(theme);
       }
 
-      return state.copyWith(themes: themes, currentTheme: "");
+      return state.copyWith(
+          themes: themes, currentTheme: "", unSavedChanges: true);
     }
 
     return state;
@@ -174,35 +177,36 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   CostumeFormState colorRemovedEventHandler(ColorRemoved e) {
     final colors = state.colors!.toList();
     colors.remove(e.color);
-    return state.copyWith(colors: colors);
+    return state.copyWith(colors: colors, unSavedChanges: true);
   }
 
   CostumeFormState themeRemovedEventHandler(ThemeRemoved e) {
     final themes = state.themes!.toList();
     themes.remove(e.theme);
-    return state.copyWith(themes: themes);
+    return state.copyWith(themes: themes, unSavedChanges: true);
   }
 
   CostumeFormState colorValueChangedEventHandler(ColorValueChanged e) {
-    return state.copyWith(currentColor: e.color);
+    return state.copyWith(currentColor: e.color, unSavedChanges: true);
   }
 
   Stream<CostumeFormState> mainLocationSelectedEventHandler(
       MainLocationSelected e) async* {
     final mainLocation = e.main;
 
-    yield state.copyWith(mainLocation: mainLocation);
+    yield state.copyWith(mainLocation: mainLocation, unSavedChanges: true);
 
     final subLocationsOptions =
         await _costumeService.getStorageSubLocations(mainLocation.id!);
 
     if (subLocationsOptions != null) {
-      yield state.copyWith(storageSubLocationOptions: subLocationsOptions);
+      yield state.copyWith(
+          storageSubLocationOptions: subLocationsOptions, unSavedChanges: true);
     }
   }
 
   CostumeFormState subLocationSelectedEventHandler(SubLocationSelected e) {
-    return state.copyWith(subLocation: e.location);
+    return state.copyWith(subLocation: e.location, unSavedChanges: true);
   }
 
   Stream<CostumeFormState> _loadCostumeEventHandler(LoadCostume e) async* {

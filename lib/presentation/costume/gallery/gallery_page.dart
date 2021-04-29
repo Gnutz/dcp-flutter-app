@@ -1,3 +1,4 @@
+import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/gallery_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
@@ -18,30 +19,43 @@ class GalleryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
+    AuthBloc _auth = context.read<AuthBloc>();
     return Scaffold(
-      backgroundColor: MyColorTheme.backgroundColor,
-      /*appBar:
-          AppBar(backgroundColor: Colors.brown[400], elevation: 0.0, actions: [
-        IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: DataSearch());
-            })
-      ]), */
-      body: SafeArea(
-        child: BlocProvider(
-          create: (context) => Locator().locator<GalleryBloc>()
-            ..add(GalleryEvent.performQuery(query)),
-          child: Gallery(),
+        backgroundColor: MyColorTheme.backgroundColor,
+        appBar: AppBar(
+          actions: [
+            TextButton.icon(
+                onPressed: () {
+                  _auth.add(AuthEvent.signOut());
+                },
+                icon: const Icon(
+                  Icons.person,
+                  color: MyColorTheme.buttonTextColor,
+                ),
+                label: Text(
+                  "Sign Out",
+                  style: const TextStyle(color: MyColorTheme.buttonTextColor),
+                )),
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () => _showSearchForm(),
+            ),
+          ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
+        body: SafeArea(
+          child: BlocProvider(
+            create: (context) => Locator().locator<GalleryBloc>()
+              ..add(GalleryEvent.performQuery(query)),
+            child: Gallery(query),
+          ),
+        ),
+        /* bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 4.0,
         child: Container(
           decoration:
-              BoxDecoration(color: MyColorTheme.inputDecoratorFillColor),
+          BoxDecoration(color: MyColorTheme.inputDecoratorFillColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -56,15 +70,16 @@ class GalleryPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: MyColorTheme.buttonColor,
-        onPressed: () {
-          NavigationService.instance!.pushNamed(Routes.costumesEdit);
-        },
-        child: const Icon(Icons.add),
-      ),
-    );
+      ),  */
+        floatingActionButton: _auth.state.user!.isCreator
+            ? FloatingActionButton(
+                backgroundColor: MyColorTheme.buttonColor,
+                onPressed: () {
+                  NavigationService.instance!.pushNamed(Routes.costumesEdit);
+                },
+                child: const Icon(Icons.add),
+              )
+            : null);
   }
 
   void _showSearchForm() {
@@ -73,9 +88,9 @@ class GalleryPage extends StatelessWidget {
         builder: (context) {
           return Container(
               child: BlocProvider(
-            create: (context) => Locator().locator<SearchFormBloc>(),
-            child: SearchForm(),
-          ));
+                create: (context) => Locator().locator<SearchFormBloc>(),
+                child: SearchForm(),
+              ));
         });
   }
 }

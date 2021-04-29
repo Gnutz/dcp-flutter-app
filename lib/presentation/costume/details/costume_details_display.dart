@@ -1,17 +1,20 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/application/costume/details/costume_details_bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_list.dart';
+import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
+import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/production_card.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 
 import 'production_card.dart';
 
@@ -44,21 +47,20 @@ class CostumeDetailsDisplay extends StatelessWidget {
     _auth = context.read<AuthBloc>();
     return BlocBuilder<CostumeDetailsBloc, CostumeDetailsState>(
         builder: (context, state) {
-      _context = context;
-      _state = state;
-      _appLocation = AppLocalizations.of(_context);
+          _context = context;
+          _state = state;
+          _appLocation = AppLocalizations.of(_context);
 
-      if (_state.costume != null) {
-        return Container(
-          margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
+          if (_state.costume != null) {
+            return Container(
+              margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       buildImageCarousel(),
-                      //TODO: needs to change depending on user dependency injection
                       _ActionsRow(),
                       _StatRow(),
                       // Colors and themes, secondary information
@@ -153,7 +155,8 @@ class CostumeDetailsDisplay extends StatelessWidget {
               icon: const Icon(Icons.delete_outline),
               onPressed: _deleteCostume),
           ElevatedButton(
-              onPressed: _checkOutCostume,
+              onPressed:
+                  _state.costume!.status is InStorage ? _checkOutCostume : null,
               child: Text(AppLocalizations.of(_context)!.checkOut)),
           const SizedBox(width: 20.0)
         ] else
@@ -167,8 +170,6 @@ class CostumeDetailsDisplay extends StatelessWidget {
     if (result) {
       _detailsBloc.add(const CostumeDetailsEvent.deleteCostume());
       NavigationService.instance!.pop();
-      ScaffoldMessenger.of(_context).showSnackBar(
-          const SnackBar(content: Text("The costume was deleted")));
     }
   }
 
@@ -176,19 +177,18 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (context) => AlertDialog(
-          title: Text(AppLocalizations.of(_context)!.areYouSure),
           content:
-          Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text(AppLocalizations.of(_context)!.cancel),
-            ),
-            TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text(AppLocalizations.of(_context)!.confirm)),
-          ],
-        )) as bool;
+                  const Text("Are you sure you want to delete this costume?"),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text(AppLocalizations.of(_context)!.cancel),
+                ),
+                TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: Text(AppLocalizations.of(_context)!.confirm)),
+              ],
+            )) as bool;
   }
 
   Future<void> _checkOutCostume() async {
@@ -200,35 +200,36 @@ class CostumeDetailsDisplay extends StatelessWidget {
 
   Future<Production?> _openCheckOutDialog() async {
     Production? selected;
-    final List<Production> productions = <Production>[
-      Production(
-          id: "ya",
-          title: "title",
-          startDate: DateTime.now(),
-          endDate: DateTime.now())
-    ];
+    final productionsTitles = await Locator()
+        .locator<ICostumeRepository>()
+        .getProductions('fHEEOUrR8ZcsqbH19dzC');
+    final productions = productionsTitles
+        .map((e) => Production(
+            title: e, startDate: DateTime.now(), endDate: DateTime.now()))
+        .toList();
+
     return await showDialog(
         context: _context,
         builder: (BuildContext context) => AlertDialog(
-            title: Text("Title"),
-            content: DropdownButtonFormField<Production>(
-                value: selected,
-                items: productions
-                    .map((production) => DropdownMenuItem<Production>(
-                    value: production,
-                    child: Text(
-                        '${production.title}, ${DateFormat('dd-MM-yyyy').format(production.startDate!)} - ${DateFormat('dd-MM-yyyy').format(production.endDate!)}')))
-                    .toList(),
-                onChanged: (val) => selected = val),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(null),
-                child: Text(AppLocalizations.of(_context)!.cancel),
-              ),
-              TextButton(
-                  onPressed: () => Navigator.of(context).pop(selected),
-                  child: Text(AppLocalizations.of(_context)!.confirm)),
-            ])) as Production?;
+                title: const Text("Select a production"),
+                content: DropdownButtonFormField<Production>(
+                    value: selected,
+                    items: productions
+                        .map((production) => DropdownMenuItem<Production>(
+                            value: production,
+                            child:
+                                Wrap(children: [Text('${production.title}')])))
+                        .toList(),
+                    onChanged: (val) => selected = val),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(null),
+                    child: Text(AppLocalizations.of(_context)!.cancel),
+                  ),
+                  TextButton(
+                      onPressed: () => Navigator.of(context).pop(selected),
+                      child: Text(AppLocalizations.of(_context)!.confirm)),
+                ])) as Production?;
   }
 
   void _editCostume() {
@@ -237,6 +238,37 @@ class CostumeDetailsDisplay extends StatelessWidget {
   }
 
   Widget buildImageCarousel() {
+    return Container(
+      child: CarouselSlider(
+        options: CarouselOptions(height: 400.0),
+        items: costume.images!.map((image) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                  child: ExtendedImage.network(
+                image.downloadUrl!,
+                loadStateChanged: (ExtendedImageState state) {
+                  switch (state.extendedImageLoadState) {
+                    case LoadState.loading:
+                      return CircularProgressIndicator();
+                    case LoadState.failed:
+                      return Text('failed');
+                    case LoadState.completed:
+                      return ExtendedRawImage(
+                          image: state.extendedImageInfo?.image,
+                          fit: BoxFit.fill);
+                  }
+                },
+                fit: BoxFit.fill,
+                cache: true,
+                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                //cancelToken: cancellationToken,
+              ));
+            },
+          );
+        }).toList(),
+      ),
+    );
     return Image.asset("images/test.jpg", width: 20, scale: 1.5);
   }
 
@@ -277,63 +309,19 @@ class CostumeDetailsDisplay extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Column(children: [
           Text(
-            _appLocation!.productionLastTen,
+            "Productions",
             style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           Column(children: [
             ..._state.costume!.productions!
                 .map<Widget>(
                     (production) => ProductionCard(production: production))
-                .toList(),
-            ElevatedButton(
-                onPressed: () {},
-                child: Text(_appLocation!.seeAll,
-                    style: TextStyle(fontSize: 14.0, color: Colors.grey[600])))
-            //TODO: Add link to fetch all productions
+                .toList()
           ]),
         ]),
       ),
     );
   }
-
-/* Future<Production> _openCheckoutDialog() async {
-    DateTime? startDate;
-    DateTime? endDate;
-    String? title;
-    final titleController = TextEditingController();
-    final result =  await showDialog(
-        context: _context,
-        builder: (context) => AlertDialog(
-          title: Text(AppLocalizations.of(_context)!.areYouSure),
-          content: Column( children: [
-          TextFormField(
-          decoration: textInputDecorator.copyWith(
-          hintText: "Production title"),
-          controller: titleController,
-          onChanged: (value) => title = value),
-          CalendarDatePicker(
-              firstDate: DateTime.now().subtract(const Duration(days: 365*5)),
-              onDateChanged: (DateTime value) { startDate = value;  },
-              lastDate:DateTime.now().add(const Duration(days: 365*5)) ,
-              initialDate: startDate?? DateTime.now()),
-            CalendarDatePicker(
-                firstDate: DateTime.now().subtract(const Duration(days: 365*5)),
-                onDateChanged: (DateTime value) { endDate = value;  },
-                lastDate:DateTime.now().add(const Duration(days: 365*5)) ,
-                initialDate: startDate?? DateTime.now()),
-          ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(null),
-              child: Text(AppLocalizations.of(_context)!.cancel),
-            ),
-            TextButton(
-                onPressed: () => Navigator.of(context).pop(Production(title: title, startDate: startDate, endDate: endDate)),
-                child: Text(AppLocalizations.of(_context)!.confirm)),
-          ],
-        )) as Production;
-  } */
 
   void _addCostumeToList() async {
     final selectedList = await _openSelectListDialog();

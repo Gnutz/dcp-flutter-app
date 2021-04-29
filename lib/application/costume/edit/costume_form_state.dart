@@ -10,6 +10,7 @@ class CostumeFormState with _$CostumeFormState {
       required List<Location> storageSubLocationOptions,
       required String currentColor,
       required String currentTheme,
+      required bool unSavedChanges,
       String? id,
       Fashion? fashion,
       String? category,
@@ -23,6 +24,7 @@ class CostumeFormState with _$CostumeFormState {
 
   factory CostumeFormState.initial() => const CostumeFormState(
       loading: true,
+      unSavedChanges: false,
       currentColor: "",
       currentTheme: "",
       categoryOptions: <String>[],

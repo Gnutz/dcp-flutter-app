@@ -183,7 +183,7 @@
   "@cancel": {
     "description": ""
   },
-  "areYouSure": "Are you sure",
+  "areYouSure": "Are you sure?",
   "@areYouSure": {
     "description": ""
   },

@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
@@ -55,6 +54,9 @@ class GalleryService implements IGalleryService {
   @override
   Future<Costume?> checkOut(Costume costume, Production production) {
     costume.storageLocation = null;
+    final productions = costume.productions ?? <Production>[];
+    productions.add(production);
+    costume.productions = productions;
     costume.status = InUse(inUseFor: production);
     updateCostume(costume);
     return getCostume(costume.id!);
