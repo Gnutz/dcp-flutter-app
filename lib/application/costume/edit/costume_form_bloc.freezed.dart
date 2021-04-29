@@ -2883,7 +2883,6 @@ abstract class SubLocationSelected implements CostumeFormEvent {
   const factory SubLocationSelected(Location location) = _$SubLocationSelected;
 
   Location get location => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $SubLocationSelectedCopyWith<SubLocationSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2893,7 +2892,6 @@ abstract class SubLocationSelected implements CostumeFormEvent {
 abstract class $AddImageCopyWith<$Res> {
   factory $AddImageCopyWith(AddImage value, $Res Function(AddImage) then) =
       _$AddImageCopyWithImpl<$Res>;
-
   $Res call({String imagePath});
 }
 
@@ -3059,7 +3057,6 @@ abstract class AddImage implements CostumeFormEvent {
   const factory AddImage(String imagePath) = _$AddImage;
 
   String get imagePath => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $AddImageCopyWith<AddImage> get copyWith =>
       throw _privateConstructorUsedError;

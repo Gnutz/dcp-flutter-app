@@ -64,7 +64,7 @@ class CategorySelectionPage extends StatelessWidget {
             ],
           ),
         ),
-      ), */
+      ),  */
       floatingActionButton: FloatingActionButton(
         backgroundColor: MyColorTheme.buttonColor,
         onPressed: () {

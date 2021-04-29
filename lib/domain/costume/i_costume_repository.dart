@@ -25,17 +25,7 @@ abstract class ICostumeRepository {
 
   Future<List<String>> getProductions(String institutionId);
 
-  Future<List<String>> getImages(String institutionId, String costumeId);
-
   Future<bool> deleteImage(String imagePath);
 
   void addImage(String image, String institutionId, String costumeId);
-
-//FutuaddImage(image, costume);
-
-//addAProduction
-
-//checkOut(production, id);
-//_setStatus()
-
 }

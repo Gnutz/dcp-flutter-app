@@ -6,5 +6,5 @@ class GalleryState with _$GalleryState {
     List<Costume>? costumes,
   }) = _GalleryState;
 
-  factory GalleryState.initial() => const GalleryState();
+  factory GalleryState.initial() => const GalleryState(costumes: <Costume>[]);
 }

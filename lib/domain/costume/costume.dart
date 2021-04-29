@@ -60,6 +60,7 @@ class Costume {
     if (json.containsKey('location')) return InStorage.fromJson(json);
     if (json.containsKey('inUseFor')) return InUse.fromJson(json);
     if (json.containsKey('rentedFor')) return RentedOut.fromJson(json);
+    if (json is Null) return null;
   }
 }
 

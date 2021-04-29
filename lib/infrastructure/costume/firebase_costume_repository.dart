@@ -73,7 +73,16 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     final result = await buildQuery.get();
 
     var costumes = <Costume>[];
-    result.docs.forEach((doc) => costumes.add(Costume.fromJson(doc.data())));
+    result.docs.forEach((doc) {
+      final costume = Costume.fromJson(doc.data())..id = doc.id;
+      costumes.add(costume);
+    });
+
+    await Future.wait(costumes.map((costume) async {
+      final images = await _getImages(institutionId, costume.id!);
+      costume.images = images;
+    }));
+
     return costumes;
   }
 
@@ -238,9 +247,24 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   } */
 
   @override
-  Future<List<String>> getImages(String institutionId, String costumeId) {
-    // TODO: implement getImages
-    throw UnimplementedError();
+  Future<List<CostumeImage>> _getImages(
+      String institutionId, String costumeId) async {
+    final results = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_COSTUMES_COLLECTION)
+        .doc(costumeId)
+        .collection(_IMAGES_COLLECTION)
+        .get();
+
+    var images = <CostumeImage>[];
+
+    results.docs.forEach((imageDoc) {
+      var image = CostumeImage.fromJson(imageDoc.data());
+      image.id = imageDoc.id;
+      images.add(image);
+    });
+    return images;
   }
 
   @override
