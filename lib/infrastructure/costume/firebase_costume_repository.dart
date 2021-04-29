@@ -118,14 +118,6 @@ class FirebaseCostumeRepository implements ICostumeRepository {
       seedQuery = seedQuery.where(FASHION_KEY, isEqualTo: query.fashion);
     }
 
-    if (query.colors != null && query.colors!.isNotEmpty) {
-      seedQuery = seedQuery.where(COLORS_KEY, arrayContainsAny: query.colors);
-    }
-
-    if (query.themes != null && query.themes!.isNotEmpty) {
-      seedQuery = seedQuery.where(THEMES_KEY, arrayContainsAny: query.themes);
-    }
-
     return seedQuery;
   }
 

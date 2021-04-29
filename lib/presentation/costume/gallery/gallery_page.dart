@@ -24,6 +24,7 @@ class GalleryPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: MyColorTheme.backgroundColor,
         appBar: AppBar(
+          backgroundColor: MyColorTheme.appBarBackgroundColor,
           actions: [
             TextButton.icon(
                 onPressed: () {

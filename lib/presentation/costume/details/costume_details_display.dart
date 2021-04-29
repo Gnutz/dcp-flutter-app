@@ -60,18 +60,20 @@ class CostumeDetailsDisplay extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      buildImageCarousel(),
-                      _ActionsRow(),
-                      _StatRow(),
-                      // Colors and themes, secondary information
-                      const SizedBox(height: 10.0),
-                      _buildThemeAndColorList(),
-                      _StatusField(),
-                      const SizedBox(height: 10.0),
-                      _buildProductionsList(),
-                      //TODO: Add images section
-                      //FloatingActionButton(onPressed: null)
-                    ],
+                  if (state.costume!.images != null &&
+                      state.costume!.images!.isNotEmpty)
+                    buildImageCarousel(),
+                  _ActionsRow(),
+                  _StatRow(),
+                  // Colors and themes, secondary information
+                  const SizedBox(height: 10.0),
+                  _buildThemeAndColorList(),
+                  _StatusField(),
+                  const SizedBox(height: 10.0),
+                  _buildProductionsList(),
+                  //TODO: Add images section
+                  //FloatingActionButton(onPressed: null)
+                ],
                   ),
                 ),
               ),
@@ -252,7 +254,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
                     case LoadState.loading:
                       return CircularProgressIndicator();
                     case LoadState.failed:
-                      return Text('failed');
+                      return Text('');
                     case LoadState.completed:
                       return ExtendedRawImage(
                           image: state.extendedImageInfo?.image,

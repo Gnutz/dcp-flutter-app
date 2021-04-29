@@ -6,6 +6,7 @@ import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
+import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -151,6 +152,8 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     }
 
     yield state.copyWith(unSavedChanges: false);
+
+    NavigationService.instance!.pop();
   }
 
   CostumeFormState _themeValueEventHandler(ThemeValueChanged e) {

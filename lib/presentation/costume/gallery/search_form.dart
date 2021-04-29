@@ -129,8 +129,7 @@ class SearchForm extends StatelessWidget {
         NavigationService.instance!.pop();
       },
       //color: Colors.pink[400],
-      child: Text(AppLocalizations.of(_context)!.save,
-          style: const TextStyle(color: Colors.white)),
+      child: Text("Search", style: const TextStyle(color: Colors.white)),
 
       //disabledColor: Colors.cyan,
     );
@@ -144,11 +143,6 @@ class SearchForm extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child:
-            /*Column(children: [
-          Text(
-            "Fashion Type",
-            style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          ), */
             Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

@@ -26,7 +26,7 @@ class Costume {
   @JsonKey(ignore: true)
   List<CostumeImage>? images;
   StorageLocation? storageLocation;
-  @JsonKey(fromJson: _statusToJsonMapper)
+  @JsonKey(ignore: true)
   Status? status;
 
   Costume({
@@ -60,7 +60,7 @@ class Costume {
     if (json.containsKey('location')) return InStorage.fromJson(json);
     if (json.containsKey('inUseFor')) return InUse.fromJson(json);
     if (json.containsKey('rentedFor')) return RentedOut.fromJson(json);
-    if (json is Null) return null;
+    if (json.isEmpty) return Undefined.fromJson(json);
   }
 }
 

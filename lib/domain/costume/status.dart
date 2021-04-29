@@ -11,6 +11,17 @@ abstract class Status {
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
+class Undefined implements Status {
+  Undefined() : super();
+
+  factory Undefined.fromJson(Map<String, dynamic> json) =>
+      _$UndefinedFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$UndefinedToJson(this);
+}
+
+@JsonSerializable(anyMap: true, explicitToJson: true)
 class InStorage implements Status {
   StorageLocation location;
 

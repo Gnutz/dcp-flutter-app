@@ -59,8 +59,8 @@ class _GalleryState extends State<Gallery> {
                       onTap: () => NavigationService.instance!.pushNamed(
                           Routes.costumeDetails,
                           arguments: _state.costumes![index]),
-                      child: _state.costumes != null &&
-                              _state.costumes!.isNotEmpty
+                      child: state.costumes![index].images != null &&
+                              state.costumes![index].images!.isNotEmpty
                           ? ExtendedImage.network(
                               _state
                                   .costumes![index].images!.first.downloadUrl!,

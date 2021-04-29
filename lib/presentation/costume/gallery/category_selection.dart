@@ -19,17 +19,18 @@ class CategorySelectionPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColorTheme.backgroundColor,
       appBar: AppBar(
-        actions: [
-          TextButton.icon(
-              onPressed: () {
-                _auth.add(AuthEvent.signOut());
-              },
-              icon: const Icon(
-                Icons.person,
-                color: MyColorTheme.buttonTextColor,
-              ),
-              label: Text(
-                "Sign Out",
+        backgroundColor: MyColorTheme.appBarBackgroundColor,
+          actions: [
+            TextButton.icon(
+                onPressed: () {
+                  _auth.add(AuthEvent.signOut());
+                },
+                icon: const Icon(
+                  Icons.person,
+                  color: MyColorTheme.buttonTextColor,
+                ),
+                label: Text(
+                  "Sign Out",
                 style: const TextStyle(color: MyColorTheme.buttonTextColor),
               )),
           IconButton(
@@ -44,27 +45,6 @@ class CategorySelectionPage extends StatelessWidget {
           child: CategoryGrid(),
         ),
       ),
-      /* bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 4.0,
-        child: Container(
-          decoration:
-          BoxDecoration(color: MyColorTheme.inputDecoratorFillColor),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () => _showSearchForm(),
-              ),
-            ],
-          ),
-        ),
-      ),  */
         floatingActionButton: _auth.state.user!.isCreator
             ? FloatingActionButton(
                 backgroundColor: MyColorTheme.buttonColor,
