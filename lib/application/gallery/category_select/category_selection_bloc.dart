@@ -8,9 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
 part 'category_selection_bloc.freezed.dart';
-
 part 'category_selection_event.dart';
-
 part 'category_selection_state.dart';
 
 ///A Bloc handling events on the [CategorySelectionPage] by mapping [CategorySelectionEvent]
@@ -38,12 +36,8 @@ class CategorySelectionBloc
 
   ///Navigates to [GalleryPage] with a [CostumeQuery] based on the selected category
   void _categorySelectedEventHandler(CategorySelected e) async {
-    // NavigationService.instance!
-    //   .pushNamed(
-    //   Routes.gallery, arguments: CostumeQuery(category: e.selectedCategory));
-
-    NavigationService.instance!.pushNamed(Routes.costumeDetails,
-        arguments: await _galleryService.getCostume("Sinj5ma1ofeSaZ392YC3"));
+    NavigationService.instance!.pushNamed(Routes.gallery,
+        arguments: CostumeQuery(category: e.selectedCategory));
   }
 
   ///pushes a [CategorySelectionState] into the stream with the available categories

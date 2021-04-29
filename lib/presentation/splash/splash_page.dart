@@ -8,13 +8,11 @@ class RouteGuard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          state.map(
-              initial: (_) {},
-              authenticated: (_) {
-                Navigator.of(context).pushNamed(Routes.categorySelection);
-              },
-              unauthenticated: (_) =>
-                  Navigator.of(context).pushReplacementNamed(Routes.signIn));
+          if (state is MyAuthenticated) {
+            Navigator.of(context).pushNamed(Routes.categorySelection);
+          } else if (state is UnAuthenticated) {
+            Navigator.of(context).pushReplacementNamed(Routes.signIn);
+          }
         },
         child: const Scaffold(
           body: Center(

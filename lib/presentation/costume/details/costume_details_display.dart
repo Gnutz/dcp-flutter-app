@@ -1,3 +1,4 @@
+import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/application/costume/details/costume_details_bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
@@ -16,6 +17,7 @@ import 'production_card.dart';
 
 class CostumeDetailsDisplay extends StatelessWidget {
   late final CostumeDetailsBloc _detailsBloc;
+  late final AuthBloc _auth;
   late BuildContext _context;
   late CostumeDetailsState _state;
   AppLocalizations? _appLocation;
@@ -39,9 +41,10 @@ class CostumeDetailsDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _detailsBloc = context.read<CostumeDetailsBloc>();
+    _auth = context.read<AuthBloc>();
     return BlocBuilder<CostumeDetailsBloc, CostumeDetailsState>(
         builder: (context, state) {
-          _context = context;
+      _context = context;
       _state = state;
       _appLocation = AppLocalizations.of(_context);
 
@@ -50,31 +53,31 @@ class CostumeDetailsDisplay extends StatelessWidget {
           margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  buildImageCarousel(),
-                  //TODO: needs to change depending on user dependency injection
-                  _ActionsRow(),
-                  _StatRow(),
-                  // Colors and themes, secondary information
-                  const SizedBox(height: 10.0),
-                  _buildThemeAndColorList(),
-                  _StatusField(),
-                  const SizedBox(height: 10.0),
-                  _buildProductionsList(),
-                  //TODO: Add images section
-                  //FloatingActionButton(onPressed: null)
-                ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      buildImageCarousel(),
+                      //TODO: needs to change depending on user dependency injection
+                      _ActionsRow(),
+                      _StatRow(),
+                      // Colors and themes, secondary information
+                      const SizedBox(height: 10.0),
+                      _buildThemeAndColorList(),
+                      _StatusField(),
+                      const SizedBox(height: 10.0),
+                      _buildProductionsList(),
+                      //TODO: Add images section
+                      //FloatingActionButton(onPressed: null)
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-        );
-      } else {
-        return Container();
-      }
-    });
+            );
+          } else {
+            return Container();
+          }
+        });
   }
 
   Widget _StatRow() {
@@ -144,13 +147,17 @@ class CostumeDetailsDisplay extends StatelessWidget {
       children: [
         const SizedBox(width: 20.0),
         IconButton(icon: Icon(Icons.add), onPressed: _addCostumeToList),
-        IconButton(icon: const Icon(Icons.edit), onPressed: _editCostume),
-        IconButton(
-            icon: const Icon(Icons.delete_outline), onPressed: _deleteCostume),
-        ElevatedButton(
-            onPressed: _checkOutCostume,
-            child: Text(AppLocalizations.of(_context)!.checkOut)),
-        const SizedBox(width: 20.0),
+        if (_auth.state.user!.isCreator) ...[
+          IconButton(icon: const Icon(Icons.edit), onPressed: _editCostume),
+          IconButton(
+              icon: const Icon(Icons.delete_outline),
+              onPressed: _deleteCostume),
+          ElevatedButton(
+              onPressed: _checkOutCostume,
+              child: Text(AppLocalizations.of(_context)!.checkOut)),
+          const SizedBox(width: 20.0)
+        ] else
+          ...[]
       ],
     );
   }
@@ -169,19 +176,19 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (context) => AlertDialog(
-              title: Text(AppLocalizations.of(_context)!.areYouSure),
-              content:
-                  Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text(AppLocalizations.of(_context)!.cancel),
-                ),
-                TextButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: Text(AppLocalizations.of(_context)!.confirm)),
-              ],
-            )) as bool;
+          title: Text(AppLocalizations.of(_context)!.areYouSure),
+          content:
+          Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(AppLocalizations.of(_context)!.cancel),
+            ),
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text(AppLocalizations.of(_context)!.confirm)),
+          ],
+        )) as bool;
   }
 
   Future<void> _checkOutCostume() async {
@@ -203,25 +210,25 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (BuildContext context) => AlertDialog(
-                title: Text("Title"),
-                content: DropdownButtonFormField<Production>(
-                    value: selected,
-                    items: productions
-                        .map((production) => DropdownMenuItem<Production>(
-                            value: production,
-                            child: Text(
-                                '${production.title}, ${DateFormat('dd-MM-yyyy').format(production.startDate!)} - ${DateFormat('dd-MM-yyyy').format(production.endDate!)}')))
-                        .toList(),
-                    onChanged: (val) => selected = val),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(null),
-                    child: Text(AppLocalizations.of(_context)!.cancel),
-                  ),
-                  TextButton(
-                      onPressed: () => Navigator.of(context).pop(selected),
-                      child: Text(AppLocalizations.of(_context)!.confirm)),
-                ])) as Production?;
+            title: Text("Title"),
+            content: DropdownButtonFormField<Production>(
+                value: selected,
+                items: productions
+                    .map((production) => DropdownMenuItem<Production>(
+                    value: production,
+                    child: Text(
+                        '${production.title}, ${DateFormat('dd-MM-yyyy').format(production.startDate!)} - ${DateFormat('dd-MM-yyyy').format(production.endDate!)}')))
+                    .toList(),
+                onChanged: (val) => selected = val),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(null),
+                child: Text(AppLocalizations.of(_context)!.cancel),
+              ),
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(selected),
+                  child: Text(AppLocalizations.of(_context)!.confirm)),
+            ])) as Production?;
   }
 
   void _editCostume() {
@@ -254,9 +261,9 @@ class CostumeDetailsDisplay extends StatelessWidget {
       ),
       ...list
           .map<Widget>((tag) => Text(
-                '$tag, ',
-                style: TextStyle(fontSize: 18.0, color: Colors.grey[600]),
-              ))
+        '$tag, ',
+        style: TextStyle(fontSize: 18.0, color: Colors.grey[600]),
+      ))
           .toList()
     ]);
   }
@@ -343,22 +350,22 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (BuildContext context) => AlertDialog(
-                title: Text("Title"),
-                content: DropdownButtonFormField<CostumeList>(
-                    value: selected,
-                    items: productions
-                        .map((list) => DropdownMenuItem<CostumeList>(
-                            value: list, child: Text(list.title)))
-                        .toList(),
-                    onChanged: (val) => selected = val),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(null),
-                    child: Text(AppLocalizations.of(_context)!.cancel),
-                  ),
-                  TextButton(
-                      onPressed: () => Navigator.of(context).pop(selected),
-                      child: Text(AppLocalizations.of(_context)!.confirm)),
-                ])) as CostumeList?;
+            title: Text("Title"),
+            content: DropdownButtonFormField<CostumeList>(
+                value: selected,
+                items: productions
+                    .map((list) => DropdownMenuItem<CostumeList>(
+                    value: list, child: Text(list.title)))
+                    .toList(),
+                onChanged: (val) => selected = val),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(null),
+                child: Text(AppLocalizations.of(_context)!.cancel),
+              ),
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(selected),
+                  child: Text(AppLocalizations.of(_context)!.confirm)),
+            ])) as CostumeList?;
   }
 }

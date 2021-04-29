@@ -65,14 +65,15 @@ class CategorySelectionPage extends StatelessWidget {
           ),
         ),
       ),  */
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: MyColorTheme.buttonColor,
-        onPressed: () {
-          NavigationService.instance!.pushNamed(Routes.costumesEdit);
-        },
-        child: const Icon(Icons.add),
-      ),
-    );
+      floatingActionButton: _auth.state.user!.isCreator
+            ? FloatingActionButton(
+                backgroundColor: MyColorTheme.buttonColor,
+                onPressed: () {
+                  NavigationService.instance!.pushNamed(Routes.costumesEdit);
+                },
+                child: const Icon(Icons.add),
+              )
+            : null);
   }
 
   void _showSearchForm() {

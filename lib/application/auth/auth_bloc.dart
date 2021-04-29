@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
+import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,7 +15,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthService _authService;
 
-  AuthBloc(this._authService) : super(const AuthState.initial());
+  AuthBloc(this._authService) : super(UnAuthenticated());
 
   @override
   Stream<AuthState> mapEventToState(
@@ -22,12 +23,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async* {
     yield* event.map(checkRequested: (e) async* {
       final user = await _authService.getCurrentUser();
-      yield user != null
-          ? const AuthState.authenticated()
-          : const AuthState.unauthenticated();
+      yield user != null ? MyAuthenticated(user: user) : UnAuthenticated();
     }, signOut: (e) async* {
       await _authService.signOut();
-      yield const AuthState.unauthenticated();
+      yield UnAuthenticated();
       NavigationService.instance!.pushNamedAndRemoveUntil(
           Routes.splashPage, ModalRoute.withName(Routes.splashPage));
     });

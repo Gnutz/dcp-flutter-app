@@ -1,10 +1,15 @@
 part of 'auth_bloc.dart';
 
-@freezed
-class AuthState with _$AuthState {
-  const factory AuthState.initial() = Initial;
+class AuthState {
+  User? user;
 
-  const factory AuthState.authenticated() = Authenticated;
+  AuthState(this.user);
+}
 
-  const factory AuthState.unauthenticated() = Unauthenticated;
+class UnAuthenticated extends AuthState {
+  UnAuthenticated() : super(null);
+}
+
+class MyAuthenticated extends AuthState {
+  MyAuthenticated({required User user}) : super(user);
 }
