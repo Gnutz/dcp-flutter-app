@@ -91,9 +91,9 @@ class CostumeDetailsDisplay extends StatelessWidget {
       _IconCard(fashionToIconPath(_state.costume!.fashion)!),
       _IconCard(
           "images/icons/costume_categories/${_state.costume!.category}.png"),
-       if(costume?.category != null) _getTextSegment('${costume?.category.capitalize()},'),
-      if(costume?.timePeriod != null) _getTextSegment('${_state.costume!.timePeriod},'),
-      if(costume?.quantity != null ) _getTextSegment( '${_state.costume!.quantity}')
+       if(costume.category.isNotEmpty) _getTextSegment('${costume.category.capitalize()},'),
+      if(costume.timePeriod.isNotEmpty) _getTextSegment('${_state.costume!.timePeriod},'),
+      _getTextSegment( '${_state.costume!.quantity}')
     ]);
   }
 

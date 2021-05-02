@@ -6,8 +6,11 @@ import 'package:digtial_costume_platform/presentation/costume/details/costume_de
 import 'package:digtial_costume_platform/presentation/costume/edit/costume_edit_page.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/category_selection.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/gallery_page.dart';
+import 'package:digtial_costume_platform/presentation/costume/page_holder.dart';
 import 'package:digtial_costume_platform/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
+
+import '../page_factory.dart';
 
 abstract class Routes {
   static const splashPage = '/';
@@ -52,10 +55,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => SignInPage());
       case Routes.register:
         return MaterialPageRoute(builder: (_) => RegisterPage());
-      case Routes.costumesEdit:
-        final costumeId = settings.arguments as String?;
-        return MaterialPageRoute(
-            builder: (_) => CostumeEditPage(costumeId: costumeId));
+      case Routes.costumesEdit: return MaterialPageRoute(builder: (_) => PageHolder(settings.name!, settings.arguments));
       case Routes.costumeDetails:
         final costume = settings.arguments as Costume;
         return MaterialPageRoute(
