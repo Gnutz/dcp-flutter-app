@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
-import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
@@ -146,14 +145,14 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   CostumeFormState _themeAdded() {
-    print(state.currentTheme);
-    if (state.currentTheme.isNotEmpty) {
-      final themes = state.themes!.toList();
-      themes.add(state.currentTheme);
 
-      for (final theme in state.themes!) {
-        print(theme);
-      }
+    if (state.currentTheme.isNotEmpty) {
+
+      final themeToAdd = state.currentTheme.toLowerCase();
+      final themes = state.themes!.toList();
+      final alreadyAdded = themes.contains(themeToAdd);
+
+      if(!alreadyAdded) themes.add(state.currentTheme);
 
       return state.copyWith(
           themes: themes, currentTheme: "", unSavedChanges: true);
