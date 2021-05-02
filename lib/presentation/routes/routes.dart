@@ -55,7 +55,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => SignInPage());
       case Routes.register:
         return MaterialPageRoute(builder: (_) => RegisterPage());
-      case Routes.costumesEdit: return MaterialPageRoute(builder: (_) => PageHolder(settings.name!, settings.arguments));
+      case Routes.costumesEdit:
+        final costumeId = settings.arguments as String?;
+        return MaterialPageRoute(builder: (_) => CostumeEditPage(costumeId: costumeId));
       case Routes.costumeDetails:
         final costume = settings.arguments as Costume;
         return MaterialPageRoute(
