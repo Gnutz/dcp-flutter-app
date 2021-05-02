@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
 
+class Constants {
+  static final StringsConstants _strings = StringsConstants();
+
+  StringsConstants get strings => _strings;
+}
+
+class StringsConstants {
+  static const costumeWasDeleted = 'costume was deleted';
+  static const empty = '';
+}
+
+class ErrorCodeConstants {
+  static const wrongPassword = "wrong-password";
+  static const userNotFound = "user-not-found";
+}
+
 class ColorSwatch {
   static const blue = Color.fromRGBO(52, 69, 141, 1.0);
   static const deepBlue = Color.fromRGBO(26, 18, 57, 1.0);

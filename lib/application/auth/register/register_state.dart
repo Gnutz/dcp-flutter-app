@@ -3,7 +3,8 @@ part of 'register_bloc.dart';
 @freezed
 class RegisterState with _$RegisterState {
   const factory RegisterState(
-      {required String name,
+      {required List<Institution> institutions,
+      required String name,
       required String emailAddress,
       required String password,
       required String passwordConfirmation,
@@ -22,5 +23,6 @@ class RegisterState with _$RegisterState {
       role: UserRole.creative,
       userAgreementAccepted: false,
       isSubmitting: false,
-      showInputErrorMessages: false);
+      showInputErrorMessages: false,
+      institutions: <Institution>[]);
 }

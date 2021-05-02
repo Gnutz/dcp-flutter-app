@@ -4,13 +4,13 @@ part 'institution.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
 class Institution {
-  String? uid;
+  String? id;
   String name;
   String? domain;
   String? alias;
 
   Institution(
-      {@JsonKey(ignore: true) this.uid,
+      {@JsonKey(ignore: true) this.id,
       required this.name,
       this.domain,
       this.alias});

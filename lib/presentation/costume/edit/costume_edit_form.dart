@@ -2,6 +2,7 @@ import 'package:digtial_costume_platform/application/costume/edit/costume_form_b
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -26,59 +27,95 @@ class CostumeEditForm extends StatelessWidget {
       _appLocation = AppLocalizations.of(_context);
 
       return WillPopScope(
-        onWillPop: () => _popPage(),
-        child: Container(
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
-            child: Form(
-              autovalidateMode: AutovalidateMode.always,
-              //TODO:
-              // autovalidate: state.showInputErrorMessages,
-              child: Container(
-                alignment: Alignment.center,
-                child: SingleChildScrollView(
-                  child: Column(children: [
-                    _buildCategorySelection(),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    _buildTimeSelection(),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    _buildFashionSelection(),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    _buildThemesInput(),
-                    const SizedBox(height: 8.0),
-                    _buildThemesList(),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    _buildColorsInput(),
-                    const SizedBox(height: 8.0),
-                    _buildColorsList(),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    _buildStorageSelection(),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    _buildQuantityInput(),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    _buildAddImageButton(),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    _buildSubmitButton(),
-                  ]),
-                ),
-              ),
-            )),
-      );
+          onWillPop: () => _popPage(),
+          child: Container(
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
+              child: Form(
+                  autovalidateMode: AutovalidateMode.always,
+                  //TODO:
+                  // autovalidate: state.showInputErrorMessages,
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: CustomScrollView(slivers: [
+                        SliverList(
+                            delegate: SliverChildListDelegate([
+                          _buildCategorySelection(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          _buildTimeSelection(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          _buildFashionSelection(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          _buildThemesInput(),
+                          const SizedBox(height: 8.0),
+                          _buildThemesList(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          _buildColorsInput(),
+                          const SizedBox(height: 8.0),
+                          _buildColorsList(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          _buildStorageSelection(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          _buildQuantityInput(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          _buildAddImageButton(),
+                          const SizedBox(
+                            height: 20.0,
+                          )
+                        ])),
+                        SliverGrid(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 4),
+                          delegate:
+                              SliverChildBuilderDelegate((context, index) {
+                            return InkWell(
+                                child: ExtendedImage.network(
+                                    _state.images[index].downloadUrl,
+                                    loadStateChanged:
+                                        (ExtendedImageState state) {
+                                  switch (state.extendedImageLoadState) {
+                                    case LoadState.loading:
+                                      return CircularProgressIndicator();
+                                    case LoadState.failed:
+                                      return Text('failed');
+                                    case LoadState.completed:
+                                      return ExtendedRawImage(
+                                          image: state.extendedImageInfo?.image,
+                                          fit: BoxFit.fill);
+                                  }
+                                },
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.fill,
+                                    cache: true,
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.0))),
+                                onTap: () => _formBloc.add(
+                                    CostumeFormEvent.deleteImage(
+                                        _state.images[index])));
+                          }, childCount: state.images.length),
+                        ),
+                        SliverList(
+                            delegate: SliverChildListDelegate(
+                          [
+                            _buildSubmitButton(),
+                          ],
+                        ))
+                      ])))));
     });
   }
 
@@ -305,19 +342,19 @@ class CostumeEditForm extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (context) => AlertDialog(
-          title: Text(AppLocalizations.of(_context)!.areYouSure),
-          content:
-          Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text(AppLocalizations.of(_context)!.cancel),
-            ),
-            TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text(AppLocalizations.of(_context)!.confirm)),
-          ],
-        )) as bool;
+              title: Text(AppLocalizations.of(_context)!.areYouSure),
+              content:
+                  Text(AppLocalizations.of(_context)!.discardUnSavedChanges),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text(AppLocalizations.of(_context)!.cancel),
+                ),
+                TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: Text(AppLocalizations.of(_context)!.confirm)),
+              ],
+            )) as bool;
   }
 
   Widget _buildQuantityInput() {
@@ -335,10 +372,48 @@ class CostumeEditForm extends StatelessWidget {
         onPressed: () => _pickImage(ImageSource.gallery));
   }
 
-  _pickImage(ImageSource source) async {
+  void _pickImage(ImageSource source) async {
     PickedFile? selected = await ImagePicker().getImage(source: source);
     if (selected != null) {
       _formBloc.add(CostumeFormEvent.addImage(selected.path));
     }
   }
+
+/* Widget _buildImageGrid() {
+    return Container(
+        child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemBuilder: (context, index) => Stack(children: [
+                  ExtendedImage.network(
+                    _state.images[index].downloadUrl,
+                    loadStateChanged: (ExtendedImageState state) {
+                      switch (state.extendedImageLoadState) {
+                        case LoadState.loading:
+                          return CircularProgressIndicator();
+                        case LoadState.failed:
+                          return Text('failed');
+                        case LoadState.completed:
+                          return ExtendedRawImage(
+                              image: state.extendedImageInfo?.image,
+                              fit: BoxFit.fill);
+                      }
+                    },
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.fill,
+                    cache: true,
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    //cancelToken: cancellationToken,
+                  ),
+                  IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () => _formBloc.add(
+                          CostumeFormEvent.deleteImage(_state.images[index])))
+                ]),
+            itemCount: _state.images.length));
+  } */
 }

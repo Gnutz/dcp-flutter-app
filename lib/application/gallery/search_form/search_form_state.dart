@@ -20,8 +20,8 @@ class SearchFormState with _$SearchFormState {
       productionOptions: <String>[],
       categoryOptions: <String>[],
       timePeriodOptions: <String>[],
-      currentColor: "",
-      currentTheme: "",
+      currentColor: StringsConstants.empty,
+      currentTheme: StringsConstants.empty,
       themes: <String>[],
       colors: <String>[]);
 }

@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
-import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'costume_form_bloc.freezed.dart';
@@ -66,20 +67,17 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
       },
       colorValueChanged: (ColorValueChanged e) async* {
         yield colorValueChangedEventHandler(e);
-      },
-      mainLocationSelected: (MainLocationSelected e) async* {
-        yield* mainLocationSelectedEventHandler(e);
-      },
-      subLocationSelected: (SubLocationSelected e) async* {
-        yield subLocationSelectedEventHandler(e);
-      },
-      loadCostume: (LoadCostume e) async* {
-        yield* _loadCostumeEventHandler(e);
-      },
-      addImage: (AddImage e) async* {
-        _addImageHandler(e);
-      },
-    );
+      }, mainLocationSelected: (MainLocationSelected e) async* {
+      yield* mainLocationSelectedEventHandler(e);
+    }, subLocationSelected: (SubLocationSelected e) async* {
+      yield subLocationSelectedEventHandler(e);
+    }, loadCostume: (LoadCostume e) async* {
+      yield* _loadCostumeEventHandler(e);
+    }, addImage: (AddImage e) async* {
+      yield* _addImageHandler(e);
+    }, deleteImage: (DeleteImage e) async* {
+      yield* _deleteImageEventHandler(e);
+    });
   }
 
   CostumeFormState _categorySelectedEventHandler(CategorySelected e) {
@@ -103,7 +101,9 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     colors.add(state.currentColor);
 
     return state.copyWith(
-        colors: colors, currentColor: "", unSavedChanges: true);
+        colors: colors,
+        currentColor: StringsConstants.empty,
+        unSavedChanges: true);
   }
 
   Stream<CostumeFormState> _loadFormOptionsEventHandler() async* {
@@ -122,38 +122,24 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   void _saveChangesPressedEventHandler() {}
 
   Stream<CostumeFormState> _saveCostumeEventHandler() async* {
-    Costume? result;
-
     if (state.id != null) {
-      result = await _costumeService.getCostume(state.id!);
-    }
-
-    final Costume costume = result ?? Costume(created: DateTime.now());
-
-    costume.edited = DateTime.now();
-    costume.category = state.category;
-    costume.timePeriod = state.timePeriod;
-    costume.fashion = state.fashion;
-    costume.themes = state.themes;
-    costume.colors = state.colors;
-    costume.quantity = state.quantity;
-    costume.storageLocation = StorageLocation(
-        main: state.mainLocation, subLocation: state.subLocation);
-
-    if (costume.storageLocation?.subLocation != null ||
-        costume.storageLocation!.main != null) {
-      costume.status = InStorage(costume.storageLocation!);
-    }
-
-    if (state.id != null) {
-      _costumeService.updateCostume(costume);
+      _updateCostume();
+      yield state.copyWith(unSavedChanges: false);
     } else {
-      _costumeService.createCostume(costume);
+      String? id = await createCostume();
+      yield state.copyWith(id: id, unSavedChanges: false);
     }
-
-    yield state.copyWith(unSavedChanges: false);
-
     NavigationService.instance!.pop();
+  }
+
+  Future<String?> createCostume() async {
+    Costume costume = costumeFromState();
+    return await _costumeService.createCostume(costume);
+  }
+
+  void _updateCostume() {
+    Costume costume = costumeFromState();
+    _costumeService.updateCostume(costume);
   }
 
   CostumeFormState _themeValueEventHandler(ThemeValueChanged e) {
@@ -214,32 +200,69 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
 
   Stream<CostumeFormState> _loadCostumeEventHandler(LoadCostume e) async* {
     final costume = await _costumeService.getCostume(e.costumeId!);
+
     if (costume != null) {
-      List<Location> subLocationsOptions = <Location>[];
+      List<Location> subLocationOptions = <Location>[];
       if (costume.storageLocation?.main != null) {
-        subLocationsOptions = await _costumeService
+        final options = await _costumeService
             .getStorageSubLocations(costume.storageLocation!.main!.id!);
+        subLocationOptions = options;
       }
 
-      //TODO from costume
-      yield state.copyWith(
-          id: costume.id,
-          fashion: costume.fashion,
-          category: costume.category,
-          timePeriod: costume.timePeriod,
-          themes: costume.themes,
-          colors: costume.colors,
-          productions: costume.productions,
-          quantity: costume.quantity,
-          mainLocation: costume.storageLocation?.main,
-          storageSubLocationOptions: subLocationsOptions,
-          subLocation: costume.storageLocation?.subLocation);
-
-      print("testing");
+      yield _statefromCostume(costume)
+          .copyWith(storageSubLocationOptions: subLocationOptions);
     }
   }
 
-  void _addImageHandler(AddImage e) {
-    _costumeService.addImage(e.imagePath, state.id!);
+  Stream<CostumeFormState> _addImageHandler(AddImage e) async* {
+    String? id = state.id;
+    if (id == null) {
+      id = await createCostume();
+      _costumeService.addImage(e.imagePath, id!);
+      yield state.copyWith(id: id);
+    } else {
+      _costumeService.addImage(e.imagePath, id);
+    }
+  }
+
+  CostumeFormState _statefromCostume(Costume costume) {
+    return state.copyWith(
+        id: costume.id,
+        fashion: costume.fashion,
+        category: costume.category,
+        timePeriod: costume.timePeriod,
+        themes: costume.themes,
+        colors: costume.colors,
+        productions: costume.productions,
+        quantity: costume.quantity,
+        mainLocation: costume.storageLocation?.main,
+        subLocation: costume.storageLocation?.subLocation,
+        images: costume.images);
+  }
+
+  Costume costumeFromState() {
+    final storage = StorageLocation(
+        main: state.mainLocation, subLocation: state.subLocation);
+
+    return Costume(
+        id: state.id,
+        fashion: state.fashion,
+        category: state.category,
+        timePeriod: state.timePeriod,
+        created: state.created ?? DateTime.now(),
+        edited: DateTime.now(),
+        themes: state.themes,
+        colors: state.colors,
+        productions: state.productions,
+        storageLocation: storage,
+        images: state.images);
+  }
+
+  Stream<CostumeFormState> _deleteImageEventHandler(DeleteImage e) async* {
+    final images = state.images;
+    images.remove(e.image);
+
+    yield state.copyWith(images: images);
+    _costumeService.deleteImage(state.id!, e.image);
   }
 }

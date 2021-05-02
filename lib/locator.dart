@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/application/auth/register/register_bloc.dart';
 import 'package:digtial_costume_platform/application/auth/sign_in/sign_in_bloc.dart';
@@ -14,17 +15,26 @@ import 'package:digtial_costume_platform/infrastructure/auth/firebase_user_repos
 import 'package:digtial_costume_platform/infrastructure/costume/firebase_costume_repository.dart';
 import 'package:digtial_costume_platform/services/gallery_service.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 
 class Locator {
   final locator = GetIt.instance;
 
   void setUp() {
+    locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+    locator.registerLazySingleton<FirebaseFirestore>(
+        () => FirebaseFirestore.instance);
+    locator
+        .registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
+
     //Services
     //TODO
     locator.registerLazySingleton<IUserService>(() => FirebaseUserRepository());
-    locator.registerLazySingleton<ICostumeRepository>(
-        () => FirebaseCostumeRepository());
+    locator.registerLazySingleton<ICostumeRepository>(() =>
+        FirebaseCostumeRepository(
+            locator<FirebaseFirestore>(), locator<FirebaseStorage>()));
     locator.registerLazySingleton<IAuthService>(
         () => FirebaseAuthRepository(locator<IUserService>()));
     locator.registerLazySingleton<IGalleryService>(
@@ -37,16 +47,16 @@ class Locator {
         () => RegisterBloc(locator<IAuthService>()));
     locator.registerFactory<AuthBloc>(() => AuthBloc(locator<IAuthService>()));
     locator.registerFactory<CategorySelectionBloc>(
-        () => CategorySelectionBloc(locator<IGalleryService>()));
+            () => CategorySelectionBloc(locator<IGalleryService>()));
     //CostumeListBLoc
     locator.registerFactory<CostumeFormBloc>(() => CostumeFormBloc(
         locator<ICostumeRepository>(), locator<IGalleryService>()));
     locator.registerFactory<CostumeDetailsBloc>(
-        () => CostumeDetailsBloc(locator<IGalleryService>()));
+            () => CostumeDetailsBloc(locator<IGalleryService>()));
     locator.registerFactory<SearchFormBloc>(
-        () => SearchFormBloc(locator<IGalleryService>()));
+            () => SearchFormBloc(locator<IGalleryService>()));
     locator.registerFactory<GalleryBloc>(
-        () => GalleryBloc(locator<IGalleryService>()));
+            () => GalleryBloc(locator<IGalleryService>()));
     //ImageBloc
   }
 }

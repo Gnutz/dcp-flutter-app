@@ -1,8 +1,8 @@
-import 'dart:io';
 
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 
@@ -11,7 +11,7 @@ abstract class IGalleryService {
 
   void setCurrentInstitution(Institution institution);
 
-  Future<void> createCostume(Costume costume);
+  Future<String?> createCostume(Costume costume);
 
   Future<void> deleteCostume(String id);
 
@@ -34,4 +34,6 @@ abstract class IGalleryService {
   Future<List<String>> getProductions();
 
   void addImage(String image, String costumeId);
+
+  Future<void> deleteImage(String costumeId, CostumeImage image);
 }

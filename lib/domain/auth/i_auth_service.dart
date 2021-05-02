@@ -13,6 +13,8 @@ abstract class IAuthService {
   Future<AuthFailure?> signInWithEmailAndPassword(
       {required String email, required String password});
 
+  Future<List<Institution>> getInstitutions();
+
   Future<User?> getCurrentUser();
 
   Future<void> signOut();

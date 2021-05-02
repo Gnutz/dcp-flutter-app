@@ -3,14 +3,18 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseCostumeRepository implements ICostumeRepository {
-  final _store = FirebaseFirestore.instance;
-  final _storage = FirebaseStorage.instance;
+  final FirebaseFirestore _store;
+  final FirebaseStorage _storage;
+
+  FirebaseCostumeRepository(this._store, this._storage);
 
   static const String _COSTUMES_COLLECTION = 'costumes';
   static const String _INSTITUTIONS_COLLECTION = "institutions";
@@ -23,25 +27,87 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   static const String _PRODUCTIONS = "productions";
   static const String _IMAGES_COLLECTION = "images";
 
+  /* @override
+  Future<bool> deleteImageSource(String imagePath) async {
+    try {
+      await _storage.ref(imagePath).delete();
+      return true;
+
+    } on FirebaseException{
+
+      return false;
+    }
+
+  } */
+
   @override
-  Future<void> createCostume(String institutionId, Costume costume) async {
-    _store
+  Future<bool> _deleteImageSource(
+      String instution, String costume, String id) async {
+    try {
+      var ref =
+          "/$instution/$_IMAGES_COLLECTION/$_COSTUMES_COLLECTION/$costume/$id";
+      print(ref);
+      await _storage
+          .ref(
+              "/$instution/$_IMAGES_COLLECTION/$_COSTUMES_COLLECTION/$costume/$id")
+          .delete();
+      return true;
+    } on FirebaseException {
+      return false;
+    }
+  }
+
+  @override
+  void addImage(String image, String institutionId, String costumeId) async {
+    final doc = _store
         .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
         .collection(_COSTUMES_COLLECTION)
-        .add(costume.toJson());
+        .doc(costumeId)
+        .collection(_IMAGES_COLLECTION)
+        .doc();
+
+    String imagePath =
+        "${institutionId}/images/costumes/${costumeId}/${doc.id}";
+    await _storage.ref(imagePath).putFile(File(image));
+    String downloadUrl = await _storage.ref(imagePath).getDownloadURL();
+
+    doc.set(CostumeImage(
+            imagePath: imagePath,
+            downloadUrl: downloadUrl,
+            uploaded: DateTime.now())
+        .toJson());
+  }
+
+  @override
+  Future<String?> createCostume(String institutionId, Costume costume) async {
+    try {
+      return (await _store
+              .collection(_INSTITUTIONS_COLLECTION)
+              .doc(institutionId)
+              .collection(_COSTUMES_COLLECTION)
+              .add(costume.toJson()))
+          .id;
+    } on FirebaseException {}
   }
 
   @override
   Future<void> deleteCostume(String institutionId, String id) async {
-    await _store
+    final costumeDocRef = _store
         .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
         .collection(_COSTUMES_COLLECTION)
-        .doc(id)
-        .delete();
+        .doc(id);
 
-    //TODO: DELETE ALL IMAGES and productions
+    //delete images
+    final imagesDocCollection =
+        await costumeDocRef.collection(_IMAGES_COLLECTION).get();
+    await Future.forEach(
+        imagesDocCollection.docs,
+        (QueryDocumentSnapshot image) async =>
+            await _deleteImage(institutionId, id, image.id));
+
+    costumeDocRef.delete();
   }
 
   @override
@@ -57,12 +123,16 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     if (json != null) {
       final costume = Costume.fromJson(json);
       costume.id = id;
+
+      final images = await _getImages(institutionId, costume.id!);
+      costume.images = images;
       return costume;
     }
   }
 
   @override
-  Future<List<Costume>> getCostumes(String institutionId, CostumeQuery query) async {
+  Future<List<Costume>> getCostumes(
+      String institutionId, CostumeQuery query) async {
     final collectionRef = _store
         .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
@@ -93,11 +163,11 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .doc(institutionId)
         .collection(_COSTUMES_COLLECTION)
         .doc(updated.id)
-        .update(updated.toJson());
+        .set(updated.toJson());
   }
 
-  Query queryFactoryMethod(CollectionReference collectionReference,
-      CostumeQuery query) {
+  Query queryFactoryMethod(
+      CollectionReference collectionReference, CostumeQuery query) {
     const PRODUCTION_KEY = "production";
     const CATEGORY_KEY = "category";
     const FASHION_KEY = "fashion";
@@ -185,7 +255,8 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<List<Location>> getStorageSubLocations(String institutionId, String mainId) async {
+  Future<List<Location>> getStorageSubLocations(
+      String institutionId, String mainId) async {
     final result = await _store
         .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
@@ -228,16 +299,6 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     return productions.map((e) => e.title ?? "").toList();
   }
 
-  /* @override
-  Future<bool> deleteImage(String institutionId, costume) async {
-    try {
-      await _storage.ref
-          .putString(dataUrl, format: firebase_storage.PutStringFormat.dataUrl);
-    } on firebase_core.FirebaseException catch (e) {
-      // e.g, e.code == 'canceled'
-    }
-  } */
-
   @override
   Future<List<CostumeImage>> _getImages(
       String institutionId, String costumeId) async {
@@ -260,36 +321,28 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<bool> deleteImage(String imagePath) {
-    // TODO: implement deleteImage
-    throw UnimplementedError();
+  Future<bool> _deleteImage(
+      String institutionId, String costumeId, String imageId) async {
+    try {
+      await _deleteImageSource(institutionId, costumeId, imageId);
+      await _store
+          .collection(_INSTITUTIONS_COLLECTION)
+          .doc(institutionId)
+          .collection(_COSTUMES_COLLECTION)
+          .doc(costumeId)
+          .collection(_IMAGES_COLLECTION)
+          .doc(imageId)
+          .delete();
+      return true;
+    } on FirebaseException {
+      return false;
+    }
   }
 
   @override
-  void addImage(String image, String institutionId, String costumeId) async {
-    final doc = _store
-        .collection(_INSTITUTIONS_COLLECTION)
-        .doc(institutionId)
-        .collection(_COSTUMES_COLLECTION)
-        .doc(costumeId)
-        .collection(_IMAGES_COLLECTION)
-        .doc();
-
-    String imagePath =
-        "${institutionId}/images/costumes/${costumeId}/${doc.id}.png";
-    await _storage.ref(imagePath).putFile(File(image));
-    String downloadUrl = await _storage.ref(imagePath).getDownloadURL();
-
-    doc.set(CostumeImage(
-            imagePath: imagePath,
-            downloadUrl: downloadUrl,
-            uploaded: DateTime.now())
-        .toJson());
+  Future<void> deleteImage(
+      String institutionId, String costumeId, CostumeImage image) {
+    // TODO: implement deleteImage
+    throw UnimplementedError();
   }
-
-/*void deleteImage(CostumeImage imageId, institutionId, costumeId){
-    _storage.ref(institutionId)
-      .child(_IMAGES_COLLECTION).child(_COSTUMES_COLLECTION).child(costumeId)
-      .child(imageId).delete(); */
-
 }

@@ -33,9 +33,9 @@ class _GalleryState extends State<Gallery> {
       _localization = AppLocalizations.of(_context);
       _state.costumes!.forEach((e) {
         print("category: ${e.category}");
-        print("images: ${e.images?.length}");
+        print("images: ${e.images.length}");
 
-        e.images!.forEach((element) {
+        e.images.forEach((element) {
           print(element.downloadUrl);
         });
       });
@@ -60,10 +60,9 @@ class _GalleryState extends State<Gallery> {
                           Routes.costumeDetails,
                           arguments: _state.costumes![index]),
                       child: state.costumes![index].images != null &&
-                              state.costumes![index].images!.isNotEmpty
+                          state.costumes![index].images.isNotEmpty
                           ? ExtendedImage.network(
-                              _state
-                                  .costumes![index].images!.first.downloadUrl!,
+                        _state.costumes![index].images.first.downloadUrl,
                               loadStateChanged: (ExtendedImageState state) {
                                 switch (state.extendedImageLoadState) {
                                   case LoadState.loading:

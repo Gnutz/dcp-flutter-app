@@ -6,6 +6,7 @@ import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_list.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -50,7 +51,7 @@ class CostumeDetailsBloc
 
   void deleteCostumeEventHandler() {
     _galleryService.deleteCostume(state.costume!.id!);
-    ScaffoldMessenger.of(NavigationService.currentContext!)
-        .showSnackBar(const SnackBar(content: Text("The costume was deleted")));
+    ScaffoldMessenger.of(NavigationService.currentContext!).showSnackBar(
+        const SnackBar(content: Text(StringsConstants.costumeWasDeleted)));
   }
 }

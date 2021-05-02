@@ -3,6 +3,7 @@ import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/i_user_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 
 class FirebaseAuthRepository implements IAuthService {
@@ -27,7 +28,8 @@ class FirebaseAuthRepository implements IAuthService {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on fba.FirebaseException catch (e) {
-      if (e.code == "wrong-password" || e.code == "user-not-found") {
+      if (e.code == ErrorCodeConstants.wrongPassword ||
+          e.code == ErrorCodeConstants.userNotFound) {
         return const AuthFailure.invalidEmailAndPasswordCombination();
       } else {
         return const AuthFailure.serverError();
@@ -78,7 +80,8 @@ class FirebaseAuthRepository implements IAuthService {
         _userRepository.addCreatorRequest(user);
       }
     } on fba.FirebaseException catch (e) {
-      if (e.code == "wrong-password" || e.code == "user-not-found") {
+      if (e.code == ErrorCodeConstants.wrongPassword ||
+          e.code == ErrorCodeConstants.userNotFound) {
         return const AuthFailure.invalidEmailAndPasswordCombination();
       } else {
         return const AuthFailure.serverError();
@@ -95,5 +98,10 @@ class FirebaseAuthRepository implements IAuthService {
     } else {
       return _userRepository.getUser(authenticatedUser.uid);
     }
+  }
+
+  @override
+  Future<List<Institution>> getInstitutions() async {
+    return _userRepository.getInstitution();
   }
 }

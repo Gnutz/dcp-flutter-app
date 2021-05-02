@@ -5,12 +5,11 @@ import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'search_form_bloc.freezed.dart';
-
 part 'search_form_event.dart';
-
 part 'search_form_state.dart';
 
 class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {

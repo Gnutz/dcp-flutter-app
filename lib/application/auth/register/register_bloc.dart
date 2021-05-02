@@ -16,7 +16,9 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final IAuthService _auth;
 
-  RegisterBloc(this._auth) : super(RegisterState.initial());
+  RegisterBloc(this._auth) : super(RegisterState.initial()) {
+    add(const RegisterEvent.loadInstitutions());
+  }
 
   @override
   Stream<RegisterState> mapEventToState(
@@ -40,6 +42,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       _signInNavEventHandler();
     }, registerWithFormFilledPressed: (e) async* {
       yield* _registerSubmitEventHandler(e);
+    }, loadInstitutions: (LoadInstitutions e) async* {
+      yield* _loadInstitutionsEventHandler();
     });
   }
 
@@ -105,9 +109,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         EmailDomainValidator.validateEmailAddress(state.emailAddress);
     final isPasswordValid =
         PasswordDomainValidator.validatePassword(state.password);
-    //TODO: validate domain
-    //TODO: validate name?
-    //
+
     final institutionSelected = state.institution != null;
 
     if (isEmailValid && isPasswordValid && institutionSelected) {
@@ -124,9 +126,18 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           isSubmitting: false, authFailureOrSuccessOption: failureOrSuccess);
     }
 
+    if (failureOrSuccess == null) {
+      add(RegisterEvent.signInNavPressed());
+    }
+
     yield state.copyWith(
         isSubmitting: false,
         showInputErrorMessages: true,
         authFailureOrSuccessOption: failureOrSuccess);
+  }
+
+  Stream<RegisterState> _loadInstitutionsEventHandler() async* {
+    final institutions = await _auth.getInstitutions();
+    yield state.copyWith(institutions: institutions);
   }
 }

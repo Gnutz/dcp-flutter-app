@@ -11,7 +11,7 @@ class RegisterForm extends StatelessWidget {
   //TODO: GRAP FROM SERVER
   final _institutions = <Institution>[
     Institution(
-        uid: "fHEEOUrR8ZcsqbH19dzC",
+        id: "fHEEOUrR8ZcsqbH19dzC",
         alias: "AT",
         domain: "@at",
         name: "Aarhus Teater")

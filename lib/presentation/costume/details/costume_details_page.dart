@@ -49,27 +49,6 @@ class CostumeDetailsPage extends StatelessWidget {
           child: CostumeDetailsDisplay(costume: costume),
         ),
       ),
-      /* bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 4.0,
-        child: Container(
-          decoration:
-          BoxDecoration(color: MyColorTheme.inputDecoratorFillColor),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () => _showSearchForm(),
-              ),
-            ],
-          ),
-        ),
-      ),  */
     );
   }
 

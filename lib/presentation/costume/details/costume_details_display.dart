@@ -61,7 +61,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                   if (state.costume!.images != null &&
-                      state.costume!.images!.isNotEmpty)
+                      state.costume!.images.isNotEmpty)
                     buildImageCarousel(),
                   _ActionsRow(),
                   _StatRow(),
@@ -86,11 +86,11 @@ class CostumeDetailsDisplay extends StatelessWidget {
 
   Widget _StatRow() {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      _IconCard(fashionToIconPath(_state.costume!.fashion!)!),
+      _IconCard(fashionToIconPath(_state.costume!.fashion)!),
       _IconCard(
           "images/icons/costume_categories/${_state.costume!.category}.png"),
       Text(
-          '${_state.costume!.category!.capitalize()}, ${_state.costume!.timePeriod}, x${_state.costume!.quantity}',
+          '${_state.costume!.category.capitalize()}, ${_state.costume!.timePeriod}, x${_state.costume!.quantity}',
           style: TextStyle(
               fontSize: 24.0,
               color: Colors.grey[600],
@@ -158,7 +158,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
               onPressed: _deleteCostume),
           ElevatedButton(
               onPressed:
-                  _state.costume!.status is InStorage ? _checkOutCostume : null,
+                  _state.costume!.status is InUse ? null : _checkOutCostume,
               child: Text(AppLocalizations.of(_context)!.checkOut)),
           const SizedBox(width: 20.0)
         ] else
@@ -243,12 +243,12 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return Container(
       child: CarouselSlider(
         options: CarouselOptions(height: 400.0),
-        items: costume.images!.map((image) {
+        items: costume.images.map((image) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
                   child: ExtendedImage.network(
-                image.downloadUrl!,
+                image.downloadUrl,
                 loadStateChanged: (ExtendedImageState state) {
                   switch (state.extendedImageLoadState) {
                     case LoadState.loading:
@@ -279,10 +279,10 @@ class CostumeDetailsDisplay extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         createWrappedTagList(
-            AppLocalizations.of(_context)!.themes, _state.costume!.themes!),
+            AppLocalizations.of(_context)!.themes, _state.costume!.themes),
         const SizedBox(height: 10.0),
         createWrappedTagList(
-            AppLocalizations.of(_context)!.colors, _state.costume!.colors!),
+            AppLocalizations.of(_context)!.colors, _state.costume!.colors),
       ],
     );
   }
@@ -315,7 +315,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
             style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           Column(children: [
-            ..._state.costume!.productions!
+            ..._state.costume!.productions
                 .map<Widget>(
                     (production) => ProductionCard(production: production))
                 .toList()

@@ -24,4 +24,6 @@ class RegisterEvent with _$RegisterEvent {
 
   const factory RegisterEvent.registerWithFormFilledPressed() =
       RegisterWithFormFilledPressed;
+
+  const factory RegisterEvent.loadInstitutions() = LoadInstitutions;
 }

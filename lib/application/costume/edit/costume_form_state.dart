@@ -11,9 +11,11 @@ class CostumeFormState with _$CostumeFormState {
       required String currentColor,
       required String currentTheme,
       required bool unSavedChanges,
+      required List<CostumeImage> images,
       String? id,
       Fashion? fashion,
       String? category,
+      DateTime? created,
       String? timePeriod,
       List<String>? themes,
       List<String>? colors,
@@ -25,12 +27,15 @@ class CostumeFormState with _$CostumeFormState {
   factory CostumeFormState.initial() => const CostumeFormState(
       loading: true,
       unSavedChanges: false,
-      currentColor: "",
-      currentTheme: "",
+      currentColor: StringsConstants.empty,
+      currentTheme: StringsConstants.empty,
+      fashion: Fashion.mens,
+      quantity: 1,
       categoryOptions: <String>[],
       timePeriodOptions: <String>[],
       storageMainLocationOptions: <Location>[],
       storageSubLocationOptions: <Location>[],
       themes: <String>[],
-      colors: <String>[]);
+      colors: <String>[],
+      images: <CostumeImage>[]);
 }

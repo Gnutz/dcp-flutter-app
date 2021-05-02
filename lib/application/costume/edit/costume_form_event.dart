@@ -36,11 +36,13 @@ class CostumeFormEvent with _$CostumeFormEvent {
 
   const factory CostumeFormEvent.colorRemoved(String color) = ColorRemoved;
 
-  const factory CostumeFormEvent.mainLocationSelected(Location main)
-  = MainLocationSelected;
+  const factory CostumeFormEvent.mainLocationSelected(Location main) =
+      MainLocationSelected;
 
   const factory CostumeFormEvent.subLocationSelected(Location location) =
-  SubLocationSelected;
+      SubLocationSelected;
 
   const factory CostumeFormEvent.addImage(String imagePath) = AddImage;
+
+  const factory CostumeFormEvent.deleteImage(CostumeImage image) = DeleteImage;
 }

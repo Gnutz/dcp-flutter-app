@@ -1,13 +1,7 @@
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-
-class Constants {
-  Constants._();
-
-  static const double padding = 20;
-  static const double avatarRadius = 45;
-}
 
 class CostumeCheckOutDialog extends StatefulWidget {
   final String title, descriptions, text;
@@ -63,18 +57,18 @@ class _CostumeCheckOutDialogState extends State<CostumeCheckOutDialog> {
               RaisedButton(
                 color: Colors.blue,
                 onPressed: () => Navigator.of(context).pop(selected),
-                child: const Text(
-                  "Submit",
-                  style: TextStyle(color: Colors.white),
+                child: Text(
+                  AppLocalizations.of(context)!.confirm,
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
               // ignore: deprecated_member_use
               RaisedButton(
                 color: Colors.blue,
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  "Cancel",
-                  style: TextStyle(color: Colors.white),
+                child: Text(
+                  AppLocalizations.of(context)!.cancel,
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ],
