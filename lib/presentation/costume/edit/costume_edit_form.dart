@@ -1,6 +1,7 @@
 import 'package:digtial_costume_platform/application/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
+import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class CostumeEditForm extends StatelessWidget {
           child: Container(
               padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
               child: Form(
-                  autovalidateMode: AutovalidateMode.always,
+                  //autovalidateMode: AutovalidateMode.always,
                   //TODO:
                   // autovalidate: state.showInputErrorMessages,
                   child: Container(
@@ -91,7 +92,7 @@ class CostumeEditForm extends StatelessWidget {
                                     case LoadState.loading:
                                       return CircularProgressIndicator();
                                     case LoadState.failed:
-                                      return Text('failed');
+                                      return Text('');
                                     case LoadState.completed:
                                       return ExtendedRawImage(
                                           image: state.extendedImageInfo?.image,

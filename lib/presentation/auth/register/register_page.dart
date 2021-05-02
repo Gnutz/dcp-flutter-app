@@ -1,6 +1,7 @@
 import 'package:digtial_costume_platform/application/auth/register/register_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/auth/register/register_form.dart';
+import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';

@@ -7,15 +7,16 @@ import 'package:digtial_costume_platform/domain/costume/costume_list.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/locator.dart';
+import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/production_card.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
-import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../shared/constants.dart';
 import 'production_card.dart';
 
 class CostumeDetailsDisplay extends StatelessWidget {
@@ -85,17 +86,24 @@ class CostumeDetailsDisplay extends StatelessWidget {
   }
 
   Widget _StatRow() {
+    Costume costume = _state.costume!;
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
       _IconCard(fashionToIconPath(_state.costume!.fashion)!),
       _IconCard(
           "images/icons/costume_categories/${_state.costume!.category}.png"),
-      Text(
-          '${_state.costume!.category.capitalize()}, ${_state.costume!.timePeriod}, x${_state.costume!.quantity}',
-          style: TextStyle(
-              fontSize: 24.0,
-              color: Colors.grey[600],
-              fontWeight: FontWeight.bold)),
+       if(costume?.category != null) _getTextSegment('${costume?.category.capitalize()},'),
+      if(costume?.timePeriod != null) _getTextSegment('${_state.costume!.timePeriod},'),
+      if(costume?.quantity != null ) _getTextSegment( '${_state.costume!.quantity}')
     ]);
+  }
+
+
+  Widget _getTextSegment(String text){
+    return  Text(text,
+        style: TextStyle(
+            fontSize: 24.0,
+            color: Colors.grey[600],
+            fontWeight: FontWeight.bold));
   }
 
   Widget _IconCard(String imagePath) {
@@ -137,11 +145,6 @@ class CostumeDetailsDisplay extends StatelessWidget {
         statusChild = const Text("");
         break;
     }
-
-    print(_state.costume!.status.runtimeType == InStorage ? "storage" : "nej");
-    print(_state.costume!.status.runtimeType == InUse ? "inUse" : "nej");
-    print(_state.costume!.status.runtimeType);
-
     return Column(children: [Text(label), statusChild]);
   }
 
@@ -202,6 +205,8 @@ class CostumeDetailsDisplay extends StatelessWidget {
 
   Future<Production?> _openCheckOutDialog() async {
     Production? selected;
+
+    //TODO
     final productionsTitles = await Locator()
         .locator<ICostumeRepository>()
         .getProductions('fHEEOUrR8ZcsqbH19dzC');
@@ -213,7 +218,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (BuildContext context) => AlertDialog(
-                title: const Text("Select a production"),
+                title: const Text(StringsConstants.selectAProduction),
                 content: DropdownButtonFormField<Production>(
                     value: selected,
                     items: productions
@@ -310,8 +315,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(children: [
-          Text(
-            "Productions",
+          Text(StringsConstants.productions,
             style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           Column(children: [

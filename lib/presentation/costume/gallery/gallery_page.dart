@@ -3,6 +3,7 @@ import 'package:digtial_costume_platform/application/gallery/gallery_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/locator.dart';
+import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/gallery.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/search_form.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
@@ -51,27 +52,6 @@ class GalleryPage extends StatelessWidget {
             child: Gallery(query),
           ),
         ),
-        /* bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 4.0,
-        child: Container(
-          decoration:
-          BoxDecoration(color: MyColorTheme.inputDecoratorFillColor),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () => _showSearchForm(),
-              ),
-            ],
-          ),
-        ),
-      ),  */
         floatingActionButton: _auth.state.user!.isCreator
             ? FloatingActionButton(
                 backgroundColor: MyColorTheme.buttonColor,

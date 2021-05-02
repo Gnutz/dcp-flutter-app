@@ -2,6 +2,7 @@ import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/application/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
+import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/search_form.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ import 'costume_edit_form.dart';
 class CostumeEditPage extends StatelessWidget {
   final String? costumeId;
   late BuildContext _context;
+  late BlocProvider provider;
+  late Widget childWidget;
 
   CostumeEditPage({this.costumeId});
 
@@ -32,8 +35,7 @@ class CostumeEditPage extends StatelessWidget {
                 Icons.person,
                 color: MyColorTheme.buttonTextColor,
               ),
-              label: Text(
-                "Sign Out",
+              label: Text(StringsConstants.signOut,
                   style: const TextStyle(color: MyColorTheme.buttonTextColor),
                 )),
             IconButton(

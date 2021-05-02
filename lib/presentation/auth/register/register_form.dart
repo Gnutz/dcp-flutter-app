@@ -2,6 +2,7 @@ import 'package:digtial_costume_platform/application/auth/register/register_bloc
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/presentation/auth/validators.dart';
+import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

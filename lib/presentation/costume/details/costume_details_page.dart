@@ -3,11 +3,14 @@ import 'package:digtial_costume_platform/application/costume/details/costume_det
 import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/locator.dart';
+import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/costume_details_display.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/search_form.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../shared/constants.dart';
 
 class CostumeDetailsPage extends StatelessWidget {
   final Costume costume;
@@ -32,8 +35,7 @@ class CostumeDetailsPage extends StatelessWidget {
                 Icons.person,
                 color: MyColorTheme.buttonTextColor,
               ),
-              label: Text(
-                "Sign Out",
+              label: Text(StringsConstants.signOut,
                 style: const TextStyle(color: MyColorTheme.buttonTextColor),
               )),
           IconButton(
