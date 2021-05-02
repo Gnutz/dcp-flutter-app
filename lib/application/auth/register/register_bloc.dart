@@ -127,7 +127,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
 
     if (failureOrSuccess == null) {
-      add(RegisterEvent.signInNavPressed());
+      add(const RegisterEvent.signInNavPressed());
     }
 
     yield state.copyWith(

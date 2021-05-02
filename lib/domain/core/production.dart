@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'production.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class Production {
+class Production extends Equatable {
   @JsonKey(ignore: true)
   String? id;
   String? title;
@@ -16,4 +17,8 @@ class Production {
       _$ProductionFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductionToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id, title, startDate, endDate];
 }

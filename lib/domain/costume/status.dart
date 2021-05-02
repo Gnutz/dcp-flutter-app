@@ -2,11 +2,12 @@ import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'status.g.dart';
 
-abstract class Status {
+abstract class Status{
   Map<String, dynamic> toJson();
 }
 
@@ -22,7 +23,7 @@ class Undefined implements Status {
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class InStorage implements Status {
+class InStorage extends Equatable implements Status{
   StorageLocation location;
 
   InStorage(this.location) : super();
@@ -32,10 +33,14 @@ class InStorage implements Status {
 
   @override
   Map<String, dynamic> toJson() => _$InStorageToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [location];
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class InUse implements Status {
+class InUse extends Equatable implements Status{
   Production? inUseFor;
 
   InUse({this.inUseFor}) : super();
@@ -44,10 +49,14 @@ class InUse implements Status {
 
   @override
   Map<String, dynamic> toJson() => _$InUseToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [inUseFor];
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class RentedOut implements Status {
+class RentedOut  extends Equatable implements Status{
   Institution? rentedOutTo;
   User? rentedBy;
   Production? rentedFor;
@@ -59,4 +68,9 @@ class RentedOut implements Status {
 
   @override
   Map<String, dynamic> toJson() => _$RentedOutToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [rentedBy, rentedFor, rentedOutTo];
+
 }

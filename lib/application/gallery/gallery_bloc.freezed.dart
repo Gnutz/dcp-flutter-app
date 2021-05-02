@@ -40,7 +40,6 @@ mixin _$GalleryEvent {
     required TResult Function(Costume selected) selectCostumeForDisplay,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CostumeQuery query)? performQuery,
@@ -48,7 +47,6 @@ mixin _$GalleryEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PerformQuery value) performQuery,
@@ -56,7 +54,6 @@ mixin _$GalleryEvent {
         selectCostumeForDisplay,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PerformQuery value)? performQuery,
@@ -78,7 +75,6 @@ class _$GalleryEventCopyWithImpl<$Res> implements $GalleryEventCopyWith<$Res> {
   _$GalleryEventCopyWithImpl(this._value, this._then);
 
   final GalleryEvent _value;
-
   // ignore: unused_field
   final $Res Function(GalleryEvent) _then;
 }
@@ -88,7 +84,6 @@ abstract class $PerformQueryCopyWith<$Res> {
   factory $PerformQueryCopyWith(
           PerformQuery value, $Res Function(PerformQuery) then) =
       _$PerformQueryCopyWithImpl<$Res>;
-
   $Res call({CostumeQuery query});
 
   $CostumeQueryCopyWith<$Res> get query;
@@ -204,7 +199,6 @@ abstract class PerformQuery implements GalleryEvent {
   const factory PerformQuery(CostumeQuery query) = _$PerformQuery;
 
   CostumeQuery get query => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $PerformQueryCopyWith<PerformQuery> get copyWith =>
       throw _privateConstructorUsedError;
@@ -215,7 +209,6 @@ abstract class $SelectCostumeForDisplayCopyWith<$Res> {
   factory $SelectCostumeForDisplayCopyWith(SelectCostumeForDisplay value,
           $Res Function(SelectCostumeForDisplay) then) =
       _$SelectCostumeForDisplayCopyWithImpl<$Res>;
-
   $Res call({Costume selected});
 }
 
@@ -326,7 +319,6 @@ abstract class SelectCostumeForDisplay implements GalleryEvent {
       _$SelectCostumeForDisplay;
 
   Costume get selected => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $SelectCostumeForDisplayCopyWith<SelectCostumeForDisplay> get copyWith =>
       throw _privateConstructorUsedError;
@@ -350,7 +342,6 @@ const $GalleryState = _$GalleryStateTearOff();
 /// @nodoc
 mixin _$GalleryState {
   List<Costume>? get costumes => throw _privateConstructorUsedError;
-
   Costume? get selected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -363,7 +354,6 @@ abstract class $GalleryStateCopyWith<$Res> {
   factory $GalleryStateCopyWith(
           GalleryState value, $Res Function(GalleryState) then) =
       _$GalleryStateCopyWithImpl<$Res>;
-
   $Res call({List<Costume>? costumes, Costume? selected});
 }
 
@@ -372,7 +362,6 @@ class _$GalleryStateCopyWithImpl<$Res> implements $GalleryStateCopyWith<$Res> {
   _$GalleryStateCopyWithImpl(this._value, this._then);
 
   final GalleryState _value;
-
   // ignore: unused_field
   final $Res Function(GalleryState) _then;
 
@@ -400,7 +389,6 @@ abstract class _$GalleryStateCopyWith<$Res>
   factory _$GalleryStateCopyWith(
           _GalleryState value, $Res Function(_GalleryState) then) =
       __$GalleryStateCopyWithImpl<$Res>;
-
   @override
   $Res call({List<Costume>? costumes, Costume? selected});
 }
@@ -478,10 +466,8 @@ abstract class _GalleryState implements GalleryState {
 
   @override
   List<Costume>? get costumes => throw _privateConstructorUsedError;
-
   @override
   Costume? get selected => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$GalleryStateCopyWith<_GalleryState> get copyWith =>

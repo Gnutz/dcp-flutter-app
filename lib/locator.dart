@@ -49,8 +49,7 @@ class Locator {
     locator.registerFactory<CategorySelectionBloc>(
             () => CategorySelectionBloc(locator<IGalleryService>()));
     //CostumeListBLoc
-    locator.registerFactory<CostumeFormBloc>(() => CostumeFormBloc(
-        locator<ICostumeRepository>(), locator<IGalleryService>()));
+    locator.registerFactory<CostumeFormBloc>(() => CostumeFormBloc(locator<IGalleryService>()));
     locator.registerFactory<CostumeDetailsBloc>(
             () => CostumeDetailsBloc(locator<IGalleryService>()));
     locator.registerFactory<SearchFormBloc>(

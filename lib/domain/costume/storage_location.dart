@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'storage_location.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class StorageLocation {
+class StorageLocation extends Equatable{
   Location? main;
   Location? subLocation;
 
@@ -12,22 +13,15 @@ class StorageLocation {
   factory StorageLocation.fromJson(Map<String, dynamic> json) =>
       _$StorageLocationFromJson(json);
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is StorageLocation &&
-          runtimeType == other.runtimeType &&
-          main == other.main &&
-          subLocation == other.subLocation;
-
-  @override
-  int get hashCode => main.hashCode ^ subLocation.hashCode;
-
   Map<String, dynamic> toJson() => _$StorageLocationToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [main, subLocation];
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class Location {
+class Location extends Equatable {
   String? id;
   String location;
 
@@ -45,4 +39,8 @@ class Location {
       _$LocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id, location];
 }

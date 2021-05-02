@@ -50,7 +50,6 @@ mixin _$SignInEvent {
     required TResult Function() signInWithEmailAndPasswordPressed,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email)? emailChanged,
@@ -60,7 +59,6 @@ mixin _$SignInEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(EmailChanged value) emailChanged,
@@ -70,7 +68,6 @@ mixin _$SignInEvent {
         signInWithEmailAndPasswordPressed,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(EmailChanged value)? emailChanged,
@@ -95,7 +92,6 @@ class _$SignInEventCopyWithImpl<$Res> implements $SignInEventCopyWith<$Res> {
   _$SignInEventCopyWithImpl(this._value, this._then);
 
   final SignInEvent _value;
-
   // ignore: unused_field
   final $Res Function(SignInEvent) _then;
 }
@@ -105,7 +101,6 @@ abstract class $EmailChangedCopyWith<$Res> {
   factory $EmailChangedCopyWith(
           EmailChanged value, $Res Function(EmailChanged) then) =
       _$EmailChangedCopyWithImpl<$Res>;
-
   $Res call({String email});
 }
 
@@ -221,7 +216,6 @@ abstract class EmailChanged implements SignInEvent {
   const factory EmailChanged(String email) = _$EmailChanged;
 
   String get email => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $EmailChangedCopyWith<EmailChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -232,7 +226,6 @@ abstract class $PasswordChangedCopyWith<$Res> {
   factory $PasswordChangedCopyWith(
           PasswordChanged value, $Res Function(PasswordChanged) then) =
       _$PasswordChangedCopyWithImpl<$Res>;
-
   $Res call({String password});
 }
 
@@ -350,7 +343,6 @@ abstract class PasswordChanged implements SignInEvent {
   const factory PasswordChanged(String password) = _$PasswordChanged;
 
   String get password => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -580,14 +572,10 @@ const $SignInState = _$SignInStateTearOff();
 /// @nodoc
 mixin _$SignInState {
   String get emailAddress => throw _privateConstructorUsedError;
-
   String get password => throw _privateConstructorUsedError;
-
   bool get isSubmitting => throw _privateConstructorUsedError;
-
   AuthFailure? get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
-
   bool get showInputErrorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -600,7 +588,6 @@ abstract class $SignInStateCopyWith<$Res> {
   factory $SignInStateCopyWith(
           SignInState value, $Res Function(SignInState) then) =
       _$SignInStateCopyWithImpl<$Res>;
-
   $Res call(
       {String emailAddress,
       String password,
@@ -616,7 +603,6 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
   _$SignInStateCopyWithImpl(this._value, this._then);
 
   final SignInState _value;
-
   // ignore: unused_field
   final $Res Function(SignInState) _then;
 
@@ -671,7 +657,6 @@ abstract class _$SignInStateCopyWith<$Res>
   factory _$SignInStateCopyWith(
           _SignInState value, $Res Function(_SignInState) then) =
       __$SignInStateCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {String emailAddress,
@@ -801,20 +786,15 @@ abstract class _SignInState implements SignInState {
 
   @override
   String get emailAddress => throw _privateConstructorUsedError;
-
   @override
   String get password => throw _privateConstructorUsedError;
-
   @override
   bool get isSubmitting => throw _privateConstructorUsedError;
-
   @override
   AuthFailure? get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
-
   @override
   bool get showInputErrorMessages => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$SignInStateCopyWith<_SignInState> get copyWith =>

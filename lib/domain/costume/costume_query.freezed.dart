@@ -40,15 +40,10 @@ const $CostumeQuery = _$CostumeQueryTearOff();
 /// @nodoc
 mixin _$CostumeQuery {
   String? get production => throw _privateConstructorUsedError;
-
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   String? get category => throw _privateConstructorUsedError;
-
   String? get timePeriod => throw _privateConstructorUsedError;
-
   List<String>? get themes => throw _privateConstructorUsedError;
-
   List<String>? get colors => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -61,7 +56,6 @@ abstract class $CostumeQueryCopyWith<$Res> {
   factory $CostumeQueryCopyWith(
           CostumeQuery value, $Res Function(CostumeQuery) then) =
       _$CostumeQueryCopyWithImpl<$Res>;
-
   $Res call(
       {String? production,
       Fashion? fashion,
@@ -76,7 +70,6 @@ class _$CostumeQueryCopyWithImpl<$Res> implements $CostumeQueryCopyWith<$Res> {
   _$CostumeQueryCopyWithImpl(this._value, this._then);
 
   final CostumeQuery _value;
-
   // ignore: unused_field
   final $Res Function(CostumeQuery) _then;
 
@@ -124,7 +117,6 @@ abstract class _$CostumeQueryCopyWith<$Res>
   factory _$CostumeQueryCopyWith(
           _CostumeQuery value, $Res Function(_CostumeQuery) then) =
       __$CostumeQueryCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {String? production,
@@ -261,22 +253,16 @@ abstract class _CostumeQuery implements CostumeQuery {
 
   @override
   String? get production => throw _privateConstructorUsedError;
-
   @override
   Fashion? get fashion => throw _privateConstructorUsedError;
-
   @override
   String? get category => throw _privateConstructorUsedError;
-
   @override
   String? get timePeriod => throw _privateConstructorUsedError;
-
   @override
   List<String>? get themes => throw _privateConstructorUsedError;
-
   @override
   List<String>? get colors => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$CostumeQueryCopyWith<_CostumeQuery> get copyWith =>

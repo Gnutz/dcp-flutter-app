@@ -62,7 +62,6 @@ mixin _$CostumeDetailsEvent {
     required TResult Function(Costume costume) initalize,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? deleteCostume,
@@ -74,7 +73,6 @@ mixin _$CostumeDetailsEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DeleteCostume value) deleteCostume,
@@ -86,7 +84,6 @@ mixin _$CostumeDetailsEvent {
     required TResult Function(Initalize value) initalize,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DeleteCostume value)? deleteCostume,
@@ -114,7 +111,6 @@ class _$CostumeDetailsEventCopyWithImpl<$Res>
   _$CostumeDetailsEventCopyWithImpl(this._value, this._then);
 
   final CostumeDetailsEvent _value;
-
   // ignore: unused_field
   final $Res Function(CostumeDetailsEvent) _then;
 }
@@ -332,7 +328,6 @@ abstract class $CheckOutCostumeCopyWith<$Res> {
   factory $CheckOutCostumeCopyWith(
           CheckOutCostume value, $Res Function(CheckOutCostume) then) =
       _$CheckOutCostumeCopyWithImpl<$Res>;
-
   $Res call({Production production});
 }
 
@@ -458,7 +453,6 @@ abstract class CheckOutCostume implements CostumeDetailsEvent {
   const factory CheckOutCostume(Production production) = _$CheckOutCostume;
 
   Production get production => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $CheckOutCostumeCopyWith<CheckOutCostume> get copyWith =>
       throw _privateConstructorUsedError;
@@ -469,7 +463,6 @@ abstract class $AddCostumeToListCopyWith<$Res> {
   factory $AddCostumeToListCopyWith(
           AddCostumeToList value, $Res Function(AddCostumeToList) then) =
       _$AddCostumeToListCopyWithImpl<$Res>;
-
   $Res call({CostumeList list});
 }
 
@@ -594,7 +587,6 @@ abstract class AddCostumeToList implements CostumeDetailsEvent {
   const factory AddCostumeToList(CostumeList list) = _$AddCostumeToList;
 
   CostumeList get list => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $AddCostumeToListCopyWith<AddCostumeToList> get copyWith =>
       throw _privateConstructorUsedError;
@@ -713,7 +705,6 @@ abstract class CheckOutToNewProductionPressed implements CostumeDetailsEvent {
 abstract class $InitalizeCopyWith<$Res> {
   factory $InitalizeCopyWith(Initalize value, $Res Function(Initalize) then) =
       _$InitalizeCopyWithImpl<$Res>;
-
   $Res call({Costume costume});
 }
 
@@ -837,7 +828,6 @@ abstract class Initalize implements CostumeDetailsEvent {
   const factory Initalize(Costume costume) = _$Initalize;
 
   Costume get costume => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $InitalizeCopyWith<Initalize> get copyWith =>
       throw _privateConstructorUsedError;
@@ -871,7 +861,6 @@ abstract class $CostumeDetailsStateCopyWith<$Res> {
   factory $CostumeDetailsStateCopyWith(
           CostumeDetailsState value, $Res Function(CostumeDetailsState) then) =
       _$CostumeDetailsStateCopyWithImpl<$Res>;
-
   $Res call({Costume? costume});
 }
 
@@ -881,7 +870,6 @@ class _$CostumeDetailsStateCopyWithImpl<$Res>
   _$CostumeDetailsStateCopyWithImpl(this._value, this._then);
 
   final CostumeDetailsState _value;
-
   // ignore: unused_field
   final $Res Function(CostumeDetailsState) _then;
 
@@ -904,7 +892,6 @@ abstract class _$CostumeDetailStateCopyWith<$Res>
   factory _$CostumeDetailStateCopyWith(
           _CostumeDetailState value, $Res Function(_CostumeDetailState) then) =
       __$CostumeDetailStateCopyWithImpl<$Res>;
-
   @override
   $Res call({Costume? costume});
 }
@@ -969,7 +956,6 @@ abstract class _CostumeDetailState implements CostumeDetailsState {
 
   @override
   Costume? get costume => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$CostumeDetailStateCopyWith<_CostumeDetailState> get copyWith =>

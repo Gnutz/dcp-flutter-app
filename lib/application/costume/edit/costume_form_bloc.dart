@@ -16,10 +16,9 @@ part 'costume_form_event.dart';
 part 'costume_form_state.dart';
 
 class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
-  final ICostumeRepository _costumeRepository;
   final IGalleryService _costumeService;
 
-  CostumeFormBloc(this._costumeRepository, this._costumeService)
+  CostumeFormBloc(this._costumeService)
       : super(CostumeFormState.initial()) {
     add(const CostumeFormEvent.loadFormOptions());
   }
@@ -218,6 +217,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     String? id = state.id;
     if (id == null) {
       id = await createCostume();
+      print(e.imagePath);
       _costumeService.addImage(e.imagePath, id!);
       yield state.copyWith(id: id);
     } else {

@@ -1,17 +1,16 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'costume_image.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class CostumeImage {
+class CostumeImage extends Equatable{
   String? id;
-  String imagePath;
   String downloadUrl;
   DateTime uploaded;
 
   CostumeImage(
       {this.id,
-      required this.imagePath,
       required this.downloadUrl,
       required this.uploaded});
 
@@ -20,4 +19,10 @@ class CostumeImage {
 
   @override
   Map<String, dynamic> toJson() => _$CostumeImageToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw [id, downloadUrl, uploaded];
+
+
 }

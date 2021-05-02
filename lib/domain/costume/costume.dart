@@ -3,6 +3,7 @@ import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'costume.g.dart';
@@ -14,7 +15,7 @@ enum Fashion {
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
 @_StatusConverter()
-class Costume {
+class Costume extends Equatable {
   @JsonKey(ignore: true)
   String? id;
   DateTime edited;
@@ -82,6 +83,61 @@ class Costume {
 
   @override
   Map<String, dynamic> toJson() => _$CostumeToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        id,
+        edited,
+        created,
+        fashion,
+        category,
+        quantity,
+        timePeriod,
+        themes,
+        colors,
+        productions,
+        images,
+        storageLocation,
+        status
+      ];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is Costume &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          edited == other.edited &&
+          created == other.created &&
+          fashion == other.fashion &&
+          category == other.category &&
+          quantity == other.quantity &&
+          timePeriod == other.timePeriod &&
+          themes == other.themes &&
+          colors == other.colors &&
+          productions == other.productions &&
+          images == other.images &&
+          _storageLocation == other._storageLocation &&
+          _status == other._status;
+
+  @override
+  int get hashCode =>
+      super.hashCode ^
+      id.hashCode ^
+      edited.hashCode ^
+      created.hashCode ^
+      fashion.hashCode ^
+      category.hashCode ^
+      quantity.hashCode ^
+      timePeriod.hashCode ^
+      themes.hashCode ^
+      colors.hashCode ^
+      productions.hashCode ^
+      images.hashCode ^
+      _storageLocation.hashCode ^
+      _status.hashCode;
 }
 
 class _StatusConverter<T> implements JsonConverter<Status?, Object?> {
