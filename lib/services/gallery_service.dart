@@ -1,6 +1,4 @@
 
-import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
-import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
@@ -17,7 +15,7 @@ class GalleryService implements IGalleryService {
 
   GalleryService(this._costumeRepository);
 
-  Institution? _currentInstitution;
+  late Institution? _currentInstitution;
 
   @override
   Future<String?> createCostume(Costume costume) async {

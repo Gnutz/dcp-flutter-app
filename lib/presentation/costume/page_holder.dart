@@ -1,5 +1,4 @@
 import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
-import 'package:digtial_costume_platform/application/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
@@ -20,7 +19,7 @@ class PageHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    AuthBloc _auth = context.read<AuthBloc>();
+    final AuthBloc _auth = context.read<AuthBloc>();
     return Scaffold(
       backgroundColor: MyColorTheme.backgroundColor,
       appBar: AppBar(
@@ -28,14 +27,14 @@ class PageHolder extends StatelessWidget {
         actions: [
           TextButton.icon(
               onPressed: () {
-                _auth.add(AuthEvent.signOut());
+                _auth.add(const AuthEvent.signOut());
               },
               icon: const Icon(
                 Icons.person,
                 color: MyColorTheme.buttonTextColor,
               ),
-              label: Text(StringsConstants.signOut,
-                style: const TextStyle(color: MyColorTheme.buttonTextColor),
+              label: const Text(StringsConstants.signOut,
+                style: TextStyle(color: MyColorTheme.buttonTextColor),
               )),
           IconButton(
             icon: const Icon(Icons.search),
@@ -51,11 +50,10 @@ class PageHolder extends StatelessWidget {
     showModalBottomSheet(
         context: _context,
         builder: (context) {
-          return Container(
-              child: BlocProvider(
+          return BlocProvider(
                 create: (context) => Locator().locator<SearchFormBloc>(),
                 child: SearchForm(),
-              ));
+              );
         });
   }
 }

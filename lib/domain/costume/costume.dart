@@ -81,7 +81,6 @@ class Costume extends Equatable {
   factory Costume.fromJson(Map<String, dynamic> json) =>
       _$CostumeFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$CostumeToJson(this);
 
   @override
@@ -145,10 +144,11 @@ class _StatusConverter<T> implements JsonConverter<Status?, Object?> {
 
   @override
   Status? fromJson(Object? json) {
-    if (json is Map<String, dynamic> && json.containsKey('location'))
+    if (json is Map<String, dynamic> && json.containsKey('location')) {
       return InStorage.fromJson(json);
-    else if (json is Map<String, dynamic> && json.containsKey('inUseFor'))
+    } else if (json is Map<String, dynamic> && json.containsKey('inUseFor')) {
       return InUse.fromJson(json);
+    }
   }
 
   @override

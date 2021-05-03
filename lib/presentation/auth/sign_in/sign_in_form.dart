@@ -12,10 +12,14 @@ class SignInForm extends StatelessWidget {
     return BlocConsumer<SignInBloc, SignInState>(listener: (context, state) {
       if (state.authFailureOrSuccessOption != null) {
         state.authFailureOrSuccessOption!.map(
-          serverError: (_) => print("serverError"),
-          emailInUse: (_) => (){},
-          invalidEmailAndPasswordCombination: (_) => print("wrongCombination"),
-        );
+            serverError: (_) => ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text(AppLocalizations.of(context)!.errorServer))),
+            emailInUse: (_) => ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content:
+                        Text(AppLocalizations.of(context)!.errorEmailInUse))),
+            invalidEmailAndPasswordCombination: (_) => () {});
       } else {
         context.read<AuthBloc>().add(const AuthEvent.checkRequested());
       }

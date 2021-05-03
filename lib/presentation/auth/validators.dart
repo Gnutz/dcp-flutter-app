@@ -13,30 +13,34 @@ String? validatePassword(BuildContext context, String input) {
 
   var errorMessage = "";
 
+  // ignore: unnecessary_raw_strings
   const atLeastOneLowerCaseCharacterRegex = r"""^(?=.*[a-z])""";
   if (!RegExp(atLeastOneLowerCaseCharacterRegex).hasMatch(input)) {
     errorMessage +=
         "* ${AppLocalizations.of(context)!.passwordMustContainOneLowercaseCharacter}\n";
   }
 
+  // ignore: unnecessary_raw_strings
   const atLeastOneUpperCaseCharacterRegex = r"""^(?=.*[A-Z])""";
   if (!RegExp(atLeastOneUpperCaseCharacterRegex).hasMatch(input)) {
     errorMessage +=
         "* ${AppLocalizations.of(context)!.passwordMustContainOneUppercaseCharacter}\n";
   }
 
+  // ignore: unnecessary_raw_strings
   const atLeastOneNumericCharacterRegex = r"""^(?=.*[0-9])""";
   if (!RegExp(atLeastOneNumericCharacterRegex).hasMatch(input)) {
     errorMessage +=
         "* ${AppLocalizations.of(context)!.passwordMustContainOneNumericCharacter}\n";
   }
 
-  const atLeastOneSpecialCharacterRegex = r"""^(?=.*[!@#\$%\^&\*])""";
+  const atLeastOneSpecialCharacterRegex = r'''^(?=.*[!@#\$%\^&\*])''';
   if (!RegExp(atLeastOneSpecialCharacterRegex).hasMatch(input)) {
     errorMessage +=
         "* ${AppLocalizations.of(context)!.passwordMustContainOneOneSpecialCharacter}\n";
   }
 
+  // ignore: unnecessary_raw_strings
   const atLeastEightCharacterLongRegex = r"""^(?=.{8,})""";
   if (!RegExp(atLeastEightCharacterLongRegex).hasMatch(input)) {
     errorMessage +=

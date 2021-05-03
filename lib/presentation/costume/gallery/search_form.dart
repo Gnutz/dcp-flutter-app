@@ -32,8 +32,6 @@ class SearchForm extends StatelessWidget {
       _timeController.text = _state.timePeriod ?? "";
       _productionController.text = _state.productionTitle ?? "";
 
-      print(_categoryController.text);
-
       return Container(
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
           child: Form(
@@ -101,7 +99,7 @@ class SearchForm extends StatelessWidget {
       itemBuilder: (context, suggestion) => ListTile(title: Text(suggestion!)),
       suggestionsCallback: (query) => List.of(suggestions.where((suggestion) =>
           suggestion.toLowerCase().contains(query.toLowerCase()))),
-      noItemsFoundBuilder: (_) => Text("Matches no available suggestions"),
+      noItemsFoundBuilder: (_) => const Text("Matches no available suggestions"),
       onSaved: (suggestion) => selectSuggestionCallBack(suggestion!),
     );
   }
@@ -130,7 +128,7 @@ class SearchForm extends StatelessWidget {
         NavigationService.instance!.pop();
       },
       //color: Colors.pink[400],
-      child: Text("Search", style: const TextStyle(color: Colors.white)),
+      child: const Text(StringsConstants.search, style: TextStyle(color: Colors.white)),
 
       //disabledColor: Colors.cyan,
     );
@@ -180,7 +178,7 @@ class SearchForm extends StatelessWidget {
           controller: _themeController,
           onChanged: (theme) =>
               _formBloc.add(SearchFormEvent.themeValueChanged(theme)),
-          onFieldSubmitted: (_) => _formBloc.add(SearchFormEvent.themeAdded()),
+          onFieldSubmitted: (_) => _formBloc.add(const SearchFormEvent.themeAdded()),
         ),
       ),
       const SizedBox(width: 8.0),

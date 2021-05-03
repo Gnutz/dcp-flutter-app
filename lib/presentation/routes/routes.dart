@@ -6,11 +6,9 @@ import 'package:digtial_costume_platform/presentation/costume/details/costume_de
 import 'package:digtial_costume_platform/presentation/costume/edit/costume_edit_page.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/category_selection.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/gallery_page.dart';
-import 'package:digtial_costume_platform/presentation/costume/page_holder.dart';
 import 'package:digtial_costume_platform/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
-import '../page_factory.dart';
 
 abstract class Routes {
   static const splashPage = '/';
@@ -22,6 +20,7 @@ abstract class Routes {
   static const gallery = "costume/gallery";
 }
 
+// ignore: avoid_classes_with_only_static_members
 class NavigationService {
   static final GlobalKey<NavigatorState> _navigatorKey =
       GlobalKey<NavigatorState>();
@@ -41,6 +40,7 @@ class NavigationService {
   static GlobalKey<NavigatorState> get key => _navigatorKey;
 }
 
+// ignore: avoid_classes_with_only_static_members
 class DialogService extends NavigationService {
   static BuildContext? get instance =>
       NavigationService.key.currentState?.overlay?.context;
@@ -59,6 +59,7 @@ class AppRouter {
         final costumeId = settings.arguments as String?;
         return MaterialPageRoute(builder: (_) => CostumeEditPage(costumeId: costumeId));
       case Routes.costumeDetails:
+        // ignore: cast_nullable_to_non_nullable
         final costume = settings.arguments as Costume;
         return MaterialPageRoute(
             builder: (_) => CostumeDetailsPage(costume: costume));
@@ -66,6 +67,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CategorySelectionPage());
       case Routes.gallery:
         {
+          // ignore: cast_nullable_to_non_nullable
           final query = settings.arguments as CostumeQuery;
           return MaterialPageRoute(builder: (_) => GalleryPage(query: query));
         }

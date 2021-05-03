@@ -32,9 +32,6 @@ class CostumeEditForm extends StatelessWidget {
           child: Container(
               padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
               child: Form(
-                  //autovalidateMode: AutovalidateMode.always,
-                  //TODO:
-                  // autovalidate: state.showInputErrorMessages,
                   child: Container(
                       alignment: Alignment.center,
                       child: CustomScrollView(slivers: [
@@ -79,20 +76,23 @@ class CostumeEditForm extends StatelessWidget {
                         ])),
                         SliverGrid(
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 4),
                           delegate:
                               SliverChildBuilderDelegate((context, index) {
                             return InkWell(
+                                onTap: () => _formBloc.add(
+                                    CostumeFormEvent.deleteImage(
+                                        _state.images[index])),
                                 child: ExtendedImage.network(
                                     _state.images[index].downloadUrl,
                                     loadStateChanged:
                                         (ExtendedImageState state) {
                                   switch (state.extendedImageLoadState) {
                                     case LoadState.loading:
-                                      return CircularProgressIndicator();
+                                      return const CircularProgressIndicator();
                                     case LoadState.failed:
-                                      return Text('');
+                                      return const Text('');
                                     case LoadState.completed:
                                       return ExtendedRawImage(
                                           image: state.extendedImageInfo?.image,
@@ -102,12 +102,8 @@ class CostumeEditForm extends StatelessWidget {
                                     width: 100,
                                     height: 100,
                                     fit: BoxFit.fill,
-                                    cache: true,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(30.0))),
-                                onTap: () => _formBloc.add(
-                                    CostumeFormEvent.deleteImage(
-                                        _state.images[index])));
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(30.0))));
                           }, childCount: state.images.length),
                         ),
                         SliverList(
@@ -157,11 +153,9 @@ class CostumeEditForm extends StatelessWidget {
 
   Widget _buildSubmitButton() {
     return ElevatedButton(
-      onPressed: () => _formBloc.add(CostumeFormEvent.saveCostume()),
-      //color: Colors.pink[400],
+      onPressed: () => _formBloc.add(const CostumeFormEvent.saveCostume()),
       child: Text(AppLocalizations.of(_context)!.save,
           style: const TextStyle(color: Colors.white)),
-      //disabledColor: Colors.cyan,
     );
   }
 
@@ -173,11 +167,6 @@ class CostumeEditForm extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child:
-        /*Column(children: [
-          Text(
-            "Fashion Type",
-            style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          ), */
             Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -205,7 +194,6 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   Widget _buildThemesInput() {
-    //TODO: convert to lowercase
     return Row(children: [
       Flexible(
         child: TextFormField(
@@ -294,7 +282,7 @@ class CostumeEditForm extends StatelessWidget {
   Widget _buildStorageSelection() {
     return Container(
         decoration: BoxDecoration(
-            border: Border.all(width: 1),
+            border: Border.all(),
             borderRadius: const BorderRadius.all(Radius.circular(5.0))),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -369,12 +357,12 @@ class CostumeEditForm extends StatelessWidget {
 
   Widget _buildAddImageButton() {
     return IconButton(
-        icon: Icon(Icons.photo_library),
+        icon: const Icon(Icons.photo_library),
         onPressed: () => _pickImage(ImageSource.gallery));
   }
 
   void _pickImage(ImageSource source) async {
-    PickedFile? selected = await ImagePicker().getImage(source: source);
+    final PickedFile? selected = await ImagePicker().getImage(source: source);
     if (selected != null) {
       _formBloc.add(CostumeFormEvent.addImage(selected.path));
     }

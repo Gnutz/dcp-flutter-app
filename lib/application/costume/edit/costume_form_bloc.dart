@@ -133,19 +133,19 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
       _updateCostume();
       yield state.copyWith(unSavedChanges: false);
     } else {
-      String? id = await createCostume();
+      final String? id = await createCostume();
       yield state.copyWith(id: id, unSavedChanges: false);
     }
     NavigationService.instance!.pop();
   }
 
   Future<String?> createCostume() async {
-    Costume costume = costumeFromState();
-    return await _costumeService.createCostume(costume);
+    final Costume costume = costumeFromState();
+    return _costumeService.createCostume(costume);
   }
 
   void _updateCostume() {
-    Costume costume = costumeFromState();
+    final Costume costume = costumeFromState();
     _costumeService.updateCostume(costume);
   }
 
@@ -197,10 +197,8 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     final subLocationsOptions =
         await _costumeService.getStorageSubLocations(mainLocation.id!);
 
-    if (subLocationsOptions != null) {
-      yield state.copyWith(
-          storageSubLocationOptions: subLocationsOptions, unSavedChanges: true);
-    }
+    yield state.copyWith(
+        storageSubLocationOptions: subLocationsOptions, unSavedChanges: true);
   }
 
   CostumeFormState subLocationSelectedEventHandler(SubLocationSelected e) {
@@ -227,7 +225,6 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     String? id = state.id;
     if (id == null) {
       id = await createCostume();
-      print(e.imagePath);
       _costumeService.addImage(e.imagePath, id!);
       yield state.copyWith(id: id);
     } else {

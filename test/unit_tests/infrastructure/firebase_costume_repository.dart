@@ -31,11 +31,11 @@ main(){
 
       final mockImageDocRef = MockDocumentReference();
       final mockStorageRef = MockReference();
-      final imagePath = "/data/user/0/kga.digtial_costume_platform/cache/image_picker7961270983189305822.jpg";
-      final institutionId = "3wjLzZ6VjYIJRV64hSLh";
-      final costumeId = "9JDwbdTL5yUqpwiJrhAP";
-      final expectedImageRefId = 'mmQ5e13pfk4sbrqXHeBh';
-      final expectedDownloadUrl = "https://firebasestorage.googleapis.com/v0/b/theater-resource-platform.appspot.com/o/eDDNM6LeSWVzj52ThQtO%2Fimages%2Fcostumes%2FjuhrvCR0tiEjZ5fDdrJO%2FmmQ5e13pfk4sbrqXHeBh?alt=media&token=a9f5d1a9-54b9-4d33-95a4-fc5d8bf38153";
+      const imagePath = "/data/user/0/kga.digtial_costume_platform/cache/image_picker7961270983189305822.jpg";
+      const institutionId = "3wjLzZ6VjYIJRV64hSLh";
+      const costumeId = "9JDwbdTL5yUqpwiJrhAP";
+      const expectedImageRefId = 'mmQ5e13pfk4sbrqXHeBh';
+      const expectedDownloadUrl = "https://firebasestorage.googleapis.com/v0/b/theater-resource-platform.appspot.com/o/eDDNM6LeSWVzj52ThQtO%2Fimages%2Fcostumes%2FjuhrvCR0tiEjZ5fDdrJO%2FmmQ5e13pfk4sbrqXHeBh?alt=media&token=a9f5d1a9-54b9-4d33-95a4-fc5d8bf38153";
 
     final mockDate = DateTime.now();
 
@@ -45,7 +45,7 @@ main(){
           .collection("costumes")
           .doc(costumeId)).thenReturn(mockImageDocRef);
       when(mockImageDocRef.id).thenReturn(expectedImageRefId);
-      when(mockStorage.ref("${institutionId}/images/costumes/${costumeId}/$expectedImageRefId")
+      when(mockStorage.ref("$institutionId/images/costumes/$costumeId/$expectedImageRefId")
           .getDownloadURL()).thenAnswer((_) async => expectedDownloadUrl);
 
 
@@ -63,7 +63,7 @@ main(){
             "costumes").doc(costumeId).collection("images")
             .doc(),
         mockStorage.ref(
-            "${institutionId}/images/costumes/${costumeId}/mmQ5e13pfk4sbrqXHeBh")
+            "$institutionId/images/costumes/$costumeId/mmQ5e13pfk4sbrqXHeBh")
             .putFile(File(imagePath)),
        mockStore.collection("institutions").doc(institutionId).collection(
             "costumes").doc(costumeId).collection("images")

@@ -7,16 +7,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../routes/routes.dart';
 
-class Gallery extends StatefulWidget {
+class Gallery extends StatelessWidget {
   CostumeQuery query;
 
   Gallery(this.query);
 
-  @override
-  _GalleryState createState() => _GalleryState();
-}
-
-class _GalleryState extends State<Gallery> {
   late BuildContext _context;
   late List<String> downLoadLinks = <String>[];
   late GalleryBloc _bloc;
@@ -31,26 +26,16 @@ class _GalleryState extends State<Gallery> {
       _context = context;
       _state = state;
       _localization = AppLocalizations.of(_context);
-      _state.costumes!.forEach((e) {
-        print("category: ${e.category}");
-        print("images: ${e.images.length}");
-
-        e.images.forEach((element) {
-          print(element.downloadUrl);
-        });
-      });
-      print('test');
 
       return RefreshIndicator(
-          onRefresh: () async =>
-              _bloc.add(GalleryEvent.performQuery(widget.query)),
+          onRefresh: () async => _bloc.add(GalleryEvent.performQuery(query)),
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 20,
               vertical: 30,
             ),
             child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
@@ -59,16 +44,15 @@ class _GalleryState extends State<Gallery> {
                       onTap: () => NavigationService.instance!.pushNamed(
                           Routes.costumeDetails,
                           arguments: _state.costumes![index]),
-                      child: state.costumes![index].images != null &&
-                          state.costumes![index].images.isNotEmpty
+                      child: state.costumes![index].images.isNotEmpty
                           ? ExtendedImage.network(
-                        _state.costumes![index].images.first.downloadUrl,
+                              _state.costumes![index].images.first.downloadUrl,
                               loadStateChanged: (ExtendedImageState state) {
                                 switch (state.extendedImageLoadState) {
                                   case LoadState.loading:
-                                    return CircularProgressIndicator();
+                                    return const CircularProgressIndicator();
                                   case LoadState.failed:
-                                    return Text('failed');
+                                    return const Text('failed');
                                   case LoadState.completed:
                                     return ExtendedRawImage(
                                         image: state.extendedImageInfo?.image,
@@ -78,9 +62,8 @@ class _GalleryState extends State<Gallery> {
                               width: 100,
                               height: 100,
                               fit: BoxFit.fill,
-                              cache: true,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(30.0)),
+                                  const BorderRadius.all(Radius.circular(30.0)),
                               //cancelToken: cancellationToken,
                             )
                           : Container(
@@ -90,19 +73,5 @@ class _GalleryState extends State<Gallery> {
                 itemCount: _state.costumes?.length ?? 0),
           ));
     });
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-}
-
-class ImagePreview extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
   }
 }

@@ -1,8 +1,6 @@
 
 
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
-import 'package:digtial_costume_platform/presentation/costume/page_holder.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../application/costume/details/costume_details_bloc.dart';
@@ -21,7 +19,7 @@ class PageFactory {
           final String? costumeId = arguments as String?;
           return BlocProvider(
             create: (context) {
-              CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
+              final CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
               if (costumeId != null) {
                 bloc.add(CostumeFormEvent.loadCostume(costumeId));
               }
@@ -35,7 +33,7 @@ class PageFactory {
           final String? costumeId = arguments as String?;
           return BlocProvider(
             create: (context) {
-              CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
+              final CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
               if (costumeId != null) {
                 bloc.add(CostumeFormEvent.loadCostume(costumeId));
               }
@@ -49,7 +47,7 @@ class PageFactory {
           final String? costumeId = arguments as String?;
           return BlocProvider(
             create: (context) {
-              CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
+              final CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
               if (costumeId != null) {
                 bloc.add(CostumeFormEvent.loadCostume(costumeId));
               }
@@ -63,7 +61,7 @@ class PageFactory {
           final String? costumeId = arguments as String?;
           return BlocProvider(
             create: (context) {
-              CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
+              final CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
               if (costumeId != null) {
                 bloc.add(CostumeFormEvent.loadCostume(costumeId));
               }
@@ -74,7 +72,7 @@ class PageFactory {
         }
       case Routes.costumeDetails:
         {
-          Costume costume = arguments as Costume;
+          final Costume costume = arguments as Costume;
           return BlocProvider(
               create: (context) =>
               Locator().locator<CostumeDetailsBloc>()
@@ -83,7 +81,7 @@ class PageFactory {
         }
       case Routes.categorySelection:
         {
-          Costume costume = arguments as Costume;
+          final Costume costume = arguments as Costume;
           return BlocProvider(
               create: (context) =>
               Locator().locator<CostumeDetailsBloc>()
@@ -92,7 +90,8 @@ class PageFactory {
         }
       case Routes.gallery:
         {
-          Costume costume = arguments as Costume;
+          // ignore: prefer_final_locals
+          final Costume costume = arguments as Costume;
           return BlocProvider(
               create: (context) =>
               Locator().locator<CostumeDetailsBloc>()
@@ -101,13 +100,13 @@ class PageFactory {
         }
       default:
         {
-          Costume costume = arguments as Costume;
+          final Costume costume = arguments as Costume;
           return BlocProvider(
               create: (context) =>
               Locator().locator<CostumeDetailsBloc>()
                 ..add(CostumeDetailsEvent.initalize(costume)),
               child: CostumeDetailsDisplay(costume: costume));
         }
-    };
+    }
   }
 }

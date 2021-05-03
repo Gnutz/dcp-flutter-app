@@ -13,6 +13,9 @@ class StringsConstants {
   static const selectAProduction = "Select a production";
   static const signOut = "Sign Out";
   static const productions = "Productions";
+  static const areYouSureYouWantToDeleteThisCostume = "Are you sure you want to delete this costume?";
+  static const search = "Search";
+  static const selectAListToAddCostumeTo = "Select one of your list to add the costume to";
 }
 
 class ErrorCodeConstants {

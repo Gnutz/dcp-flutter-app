@@ -15,10 +15,14 @@ class PasswordDomainValidator {
     //https://dzone.com/articles/use-regex-test-password
 
     final regrexes = <String>[
+      // ignore: unnecessary_raw_strings
       r"""^(?=.*[a-z])""",
+      // ignore: unnecessary_raw_strings
       r"""^(?=.*[A-Z])""",
+      // ignore: unnecessary_raw_strings
       r"""^(?=.*[0-9])""",
-      r"""^(?=.*[!@#\$%\^&\*])""",
+      r'''^(?=.*[!@#\$%\^&\*])''',
+      // ignore: unnecessary_raw_strings
       r"""^(?=.{8,})"""
     ];
 

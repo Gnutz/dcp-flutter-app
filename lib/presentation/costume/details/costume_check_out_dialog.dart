@@ -30,51 +30,49 @@ class _CostumeCheckOutDialogState extends State<CostumeCheckOutDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: Container(
-          child: Column(
-        children: <Widget>[
-          const Text(
-            "Zone Selection",
-            style: TextStyle(
-                color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 22),
-          ),
-          DropdownButtonFormField<Production>(
-            value: selected,
-            items: productions
-                .map((production) => DropdownMenuItem<Production>(
-                    value: production,
-                    child: Text(
-                        '${production.title}, ${DateFormat('dd-MM-yyyy').format(production.startDate!)} - ${DateFormat('dd-MM-yyyy').format(production.endDate!)}')))
-                .toList(),
-            onChanged: (val) => setState(() {
-              selected = val;
-            }),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              // ignore: deprecated_member_use
-              RaisedButton(
-                color: Colors.blue,
-                onPressed: () => Navigator.of(context).pop(selected),
-                child: Text(
-                  AppLocalizations.of(context)!.confirm,
-                  style: const TextStyle(color: Colors.white),
-                ),
+        child: Column(
+      children: <Widget>[
+        const Text(
+          "Zone Selection",
+          style: TextStyle(
+              color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 22),
+        ),
+        DropdownButtonFormField<Production>(
+          value: selected,
+          onChanged: (val) => setState(() {
+            selected = val;
+          }),
+          items: productions
+              .map((production) => DropdownMenuItem<Production>(
+                  value: production,
+                  child: Text(
+                      '${production.title}, ${DateFormat('dd-MM-yyyy').format(production.startDate)} - ${DateFormat('dd-MM-yyyy').format(production.endDate)}')))
+              .toList(),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            // ignore: deprecated_member_use
+            RaisedButton(
+              color: Colors.blue,
+              onPressed: () => Navigator.of(context).pop(selected),
+              child: Text(
+                AppLocalizations.of(context)!.confirm,
+                style: const TextStyle(color: Colors.white),
               ),
-              // ignore: deprecated_member_use
-              RaisedButton(
-                color: Colors.blue,
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  AppLocalizations.of(context)!.cancel,
-                  style: const TextStyle(color: Colors.white),
-                ),
+            ),
+            // ignore: deprecated_member_use
+            RaisedButton(
+              color: Colors.blue,
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                AppLocalizations.of(context)!.cancel,
+                style: const TextStyle(color: Colors.white),
               ),
-            ],
-          )
-        ],
-      )),
-    );
+            ),
+          ],
+        )
+      ],
+    ));
   }
 }

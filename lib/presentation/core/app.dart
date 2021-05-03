@@ -13,7 +13,7 @@ class App extends StatelessWidget {
     //https://flutterigniter.com/dismiss-keyboard-form-lose-focus/
     return GestureDetector(
         onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
+          final FocusScopeNode currentFocus = FocusScope.of(context);
 
           if (!currentFocus.hasPrimaryFocus) {
             WidgetsBinding.instance!.focusManager.primaryFocus?.unfocus();

@@ -39,12 +39,7 @@ class AuthOldService {
     return _auth.authStateChanges();
   }
 
-  Future signOut() async {
-    try {
-      return await _auth.signOut();
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
+  Future<void> signOut() async {
+       await _auth.signOut();
   }
 }

@@ -17,7 +17,6 @@ class CostumeImage extends Equatable{
   factory CostumeImage.fromJson(Map<String, dynamic> json) =>
       _$CostumeImageFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$CostumeImageToJson(this);
 
   @override

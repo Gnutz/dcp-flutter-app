@@ -88,10 +88,6 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
       final themes = state.themes!.toList();
       themes.add(state.currentTheme);
 
-      for (final theme in state.themes!) {
-        print(theme);
-      }
-
       return state.copyWith(themes: themes, currentTheme: "");
     }
 

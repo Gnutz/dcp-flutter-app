@@ -40,7 +40,7 @@ class CategorySelectionBloc
     // NavigationService.instance!.pushNamed(Routes.gallery,
     //     arguments: CostumeQuery(category: e.selectedCategory));
 
-    var testCostume = await _galleryService.getCostume('1KcSgp3JGlJnUn5x6g4m');
+    final testCostume = await _galleryService.getCostume('1KcSgp3JGlJnUn5x6g4m');
     NavigationService.instance!
         .pushNamed(Routes.costumeDetails, arguments: testCostume);
   }

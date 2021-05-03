@@ -3,7 +3,6 @@ import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/auth/register/register_form.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
-import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -32,7 +31,7 @@ class RegisterPage extends StatelessWidget {
               )),
         ],
       ),
-      body: BlocProvider(create: (context) => Locator().locator<RegisterBloc>()..add(RegisterEvent.loadInstitutions()),
+      body: BlocProvider(create: (context) => Locator().locator<RegisterBloc>()..add(const RegisterEvent.loadInstitutions()),
           child: RegisterForm()),
 
     );

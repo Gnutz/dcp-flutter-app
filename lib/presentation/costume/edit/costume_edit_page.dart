@@ -21,33 +21,34 @@ class CostumeEditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    AuthBloc _auth = context.read<AuthBloc>();
+    final AuthBloc _auth = context.read<AuthBloc>();
     return Scaffold(
-        backgroundColor: MyColorTheme.backgroundColor,
-        appBar: AppBar(
-          backgroundColor: MyColorTheme.appBarBackgroundColor,
+      backgroundColor: MyColorTheme.backgroundColor,
+      appBar: AppBar(
+        backgroundColor: MyColorTheme.appBarBackgroundColor,
         actions: [
           TextButton.icon(
               onPressed: () {
-                _auth.add(AuthEvent.signOut());
+                _auth.add(const AuthEvent.signOut());
               },
               icon: const Icon(
                 Icons.person,
                 color: MyColorTheme.buttonTextColor,
               ),
-              label: Text(StringsConstants.signOut,
-                  style: const TextStyle(color: MyColorTheme.buttonTextColor),
-                )),
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () => _showSearchForm(),
-            ),
-          ],
-        ),
-        body: SafeArea(
-          child: BlocProvider(
+              label: const Text(
+                StringsConstants.signOut,
+                style: TextStyle(color: MyColorTheme.buttonTextColor),
+              )),
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () => _showSearchForm(),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: BlocProvider(
           create: (context) {
-            CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
+            final CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
             if (costumeId != null) {
               bloc.add(CostumeFormEvent.loadCostume(costumeId));
             }
@@ -63,11 +64,10 @@ class CostumeEditPage extends StatelessWidget {
     showModalBottomSheet(
         context: _context,
         builder: (context) {
-          return Container(
-              child: BlocProvider(
+          return BlocProvider(
             create: (context) => Locator().locator<SearchFormBloc>(),
             child: SearchForm(),
-          ));
+          );
         });
   }
 }

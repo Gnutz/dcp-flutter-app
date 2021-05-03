@@ -10,7 +10,7 @@ class Institution {
   String? alias;
 
   Institution(
-      {thisuid,
+      {this.id,
       required this.name,
       this.domain,
       this.alias});

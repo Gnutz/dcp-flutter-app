@@ -21,7 +21,7 @@ class GalleryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    AuthBloc _auth = context.read<AuthBloc>();
+    final AuthBloc _auth = context.read<AuthBloc>();
     return Scaffold(
         backgroundColor: MyColorTheme.backgroundColor,
         appBar: AppBar(
@@ -29,15 +29,15 @@ class GalleryPage extends StatelessWidget {
           actions: [
             TextButton.icon(
                 onPressed: () {
-                  _auth.add(AuthEvent.signOut());
+                  _auth.add(const AuthEvent.signOut());
                 },
                 icon: const Icon(
                   Icons.person,
                   color: MyColorTheme.buttonTextColor,
                 ),
-                label: Text(
-                  "Sign Out",
-                  style: const TextStyle(color: MyColorTheme.buttonTextColor),
+                label: const Text(
+                  StringsConstants.signOut,
+                  style: TextStyle(color: MyColorTheme.buttonTextColor),
                 )),
             IconButton(
               icon: const Icon(Icons.search),
@@ -67,11 +67,10 @@ class GalleryPage extends StatelessWidget {
     showModalBottomSheet(
         context: _context,
         builder: (context) {
-          return Container(
-              child: BlocProvider(
-                create: (context) => Locator().locator<SearchFormBloc>(),
-                child: SearchForm(),
-              ));
+          return BlocProvider(
+            create: (context) => Locator().locator<SearchFormBloc>(),
+            child: SearchForm(),
+          );
         });
   }
 }

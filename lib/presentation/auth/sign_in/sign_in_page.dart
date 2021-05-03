@@ -27,7 +27,7 @@ class SignInPage extends StatelessWidget {
               ),
               label: Text(
                 AppLocalizations.of(context)!.signUp,
-                style: TextStyle(color: MyColorTheme.buttonTextColor),
+                style: const TextStyle(color: MyColorTheme.buttonTextColor),
               ))
         ],
       ),

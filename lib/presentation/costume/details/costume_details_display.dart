@@ -4,13 +4,10 @@ import 'package:digtial_costume_platform/application/costume/details/costume_det
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_list.dart';
-import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
-import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/production_card.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
-import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +22,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
   late final AuthBloc _auth;
   late BuildContext _context;
   late CostumeDetailsState _state;
-  AppLocalizations? _appLocation;
+  AppLocalizations? _appLocalzation;
   Costume costume;
 
   CostumeDetailsDisplay({required this.costume});
@@ -51,7 +48,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
         builder: (context, state) {
           _context = context;
           _state = state;
-          _appLocation = AppLocalizations.of(_context);
+          _appLocalzation = AppLocalizations.of(_context);
 
           if (_state.costume != null) {
             return Container(
@@ -62,15 +59,14 @@ class CostumeDetailsDisplay extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                  if (state.costume!.images != null &&
-                      state.costume!.images.isNotEmpty)
+                  if (state.costume!.images.isNotEmpty)
                     buildImageCarousel(),
-                  _ActionsRow(),
-                  _StatRow(),
+                  _buildActionsRow(),
+                  _buildStatRow(),
                   // Colors and themes, secondary information
                   const SizedBox(height: 10.0),
                   _buildThemeAndColorList(),
-                  _StatusField(),
+                  _buildStatusField(),
                   const SizedBox(height: 10.0),
                   _buildProductionsList(),
                   //TODO: Add images section
@@ -86,11 +82,11 @@ class CostumeDetailsDisplay extends StatelessWidget {
         });
   }
 
-  Widget _StatRow() {
-    Costume costume = _state.costume!;
+  Widget _buildStatRow() {
+    final Costume costume = _state.costume!;
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      _IconCard(fashionToIconPath(_state.costume!.fashion)!),
-      _IconCard(
+      _buildIconCard(fashionToIconPath(_state.costume!.fashion)!),
+      _buildIconCard(
           "images/icons/costume_categories/${_state.costume!.category}.png"),
        if(costume.category.isNotEmpty) _getTextSegment('${costume.category.capitalize()},'),
       if(costume.timePeriod.isNotEmpty) _getTextSegment('${_state.costume!.timePeriod},'),
@@ -107,7 +103,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
             fontWeight: FontWeight.bold));
   }
 
-  Widget _IconCard(String imagePath) {
+  Widget _buildIconCard(String imagePath) {
     return Card(
         color: MyColorTheme.inputDecoratorEnabledBorderOutlineSideColor,
         shape: const RoundedRectangleBorder(
@@ -122,7 +118,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
             )));
   }
 
-  Widget _StatusField() {
+  Widget _buildStatusField() {
     Widget statusChild = const Text("");
     String label = "";
 
@@ -149,12 +145,12 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return Column(children: [Text(label), statusChild]);
   }
 
-  Widget _ActionsRow() {
+  Widget _buildActionsRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const SizedBox(width: 20.0),
-        IconButton(icon: Icon(Icons.add), onPressed: _addCostumeToList),
+        IconButton(icon: const Icon(Icons.add), onPressed: _addCostumeToList),
         if (_auth.state.user!.isCreator) ...[
           IconButton(icon: const Icon(Icons.edit), onPressed: _editCostume),
           IconButton(
@@ -184,7 +180,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
         context: _context,
         builder: (context) => AlertDialog(
           content:
-                  const Text("Are you sure you want to delete this costume?"),
+                  const Text(StringsConstants.areYouSureYouWantToDeleteThisCostume),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
@@ -218,7 +214,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
                         .map((production) => DropdownMenuItem<Production>(
                             value: production,
                             child:
-                                Wrap(children: [Text('${production.title}')])))
+                                Wrap(children: [Text(production.title)])))
                         .toList(),
                     onChanged: (val) => selected = val),
                 actions: <Widget>[
@@ -238,21 +234,19 @@ class CostumeDetailsDisplay extends StatelessWidget {
   }
 
   Widget buildImageCarousel() {
-    return Container(
-      child: CarouselSlider(
+    return CarouselSlider(
         options: CarouselOptions(height: 400.0),
         items: costume.images.map((image) {
           return Builder(
             builder: (BuildContext context) {
-              return Container(
-                  child: ExtendedImage.network(
+              return ExtendedImage.network(
                 image.downloadUrl,
                 loadStateChanged: (ExtendedImageState state) {
                   switch (state.extendedImageLoadState) {
                     case LoadState.loading:
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     case LoadState.failed:
-                      return Text('');
+                      return const Text('');
                     case LoadState.completed:
                       return ExtendedRawImage(
                           image: state.extendedImageInfo?.image,
@@ -260,16 +254,13 @@ class CostumeDetailsDisplay extends StatelessWidget {
                   }
                 },
                 fit: BoxFit.fill,
-                cache: true,
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                 //cancelToken: cancellationToken,
-              ));
+              );
             },
           );
         }).toList(),
-      ),
-    );
-    return Image.asset("images/test.jpg", width: 20, scale: 1.5);
+      );
   }
 
   Widget _buildThemeAndColorList() {
@@ -308,8 +299,8 @@ class CostumeDetailsDisplay extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(children: [
-          Text(StringsConstants.productions,
-            style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          const Text(StringsConstants.productions,
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           Column(children: [
             ..._state.costume!.productions
@@ -337,7 +328,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (BuildContext context) => AlertDialog(
-            title: Text("Title"),
+            title: const Text(StringsConstants.selectAListToAddCostumeTo),
             content: DropdownButtonFormField<CostumeList>(
                 value: selected,
                 items: productions

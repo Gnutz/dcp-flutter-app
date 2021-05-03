@@ -17,11 +17,11 @@ class ProductionCard extends StatelessWidget {
         child: Wrap(children: [
           Text('${production.title},',
               style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
-          Text(DateFormat('dd-MM-yyyy').format(production.startDate!),
+          Text(DateFormat('dd-MM-yyyy').format(production.startDate),
               style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
           Text(' - ',
               style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
-          Text(DateFormat('dd-MM-yyyy').format(production.endDate!),
+          Text(DateFormat('dd-MM-yyyy').format(production.endDate),
               style: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
         ]),
       ),

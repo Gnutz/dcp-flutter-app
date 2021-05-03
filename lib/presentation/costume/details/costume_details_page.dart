@@ -29,14 +29,14 @@ class CostumeDetailsPage extends StatelessWidget {
         actions: [
           TextButton.icon(
               onPressed: () {
-                _auth.add(AuthEvent.signOut());
+                _auth.add(const AuthEvent.signOut());
               },
               icon: const Icon(
                 Icons.person,
                 color: MyColorTheme.buttonTextColor,
               ),
-              label: Text(StringsConstants.signOut,
-                style: const TextStyle(color: MyColorTheme.buttonTextColor),
+              label: const Text(StringsConstants.signOut,
+                style: TextStyle(color: MyColorTheme.buttonTextColor),
               )),
           IconButton(
             icon: const Icon(Icons.search),

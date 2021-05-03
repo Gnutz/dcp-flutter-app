@@ -16,42 +16,34 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   FirebaseCostumeRepository(this._store, this._storage);
 
-  static const String _COSTUMES_COLLECTION = 'costumes';
-  static const String _INSTITUTIONS_COLLECTION = "institutions";
-  static const String _METADATA_COLLECTION = "metadata";
-  static const String _CATEGORIES_COLLECTION = "categories";
-  static const String _TIME_PERIODS_COLLECTION = "time_periods";
-  static const String _STORAGE_MAINLOCATION_COLLECTION = "storages";
-  static const String _STORAGE_SUBLOCATION_COLLECTION = "sublocations";
-  static const String _METADATA = "metadata";
-  static const String _PRODUCTIONS = "productions";
-  static const String _CURRENT_PRODUDTIONS = "current";
-  static const String _IMAGES_COLLECTION = "images";
+  static const _COSTUMES_COLLECTION = 'costumes';
+  // ignore: constant_identifier_names
+  static const _INSTITUTIONS_COLLECTION = "institutions";
+  // ignore: constant_identifier_names
+  static const _METADATA_COLLECTION = "metadata";
+  // ignore: constant_identifier_names
+  static const _CATEGORIES_COLLECTION = "categories";
+  // ignore: constant_identifier_names
+  static const _TIME_PERIODS_COLLECTION = "time_periods";
+  // ignore: constant_identifier_names
+  static const _STORAGE_MAINLOCATION_COLLECTION = "storages";
+  // ignore: constant_identifier_names
+  static const _STORAGE_SUBLOCATION_COLLECTION = "sublocations";
+  // ignore: constant_identifier_names
+  static const _METADATA = "metadata";
+  // ignore: constant_identifier_names
+  static const _PRODUCTIONS = "productions";
+  // ignore: constant_identifier_names
+  static const _CURRENT_PRODUCTIONS = "current";
+  // ignore: constant_identifier_names
+  static const _IMAGES_COLLECTION = "images";
 
-
-  /* @override
-  Future<bool> deleteImageSource(String imagePath) async {
-    try {
-      await _storage.ref(imagePath).delete();
-      return true;
-
-    } on FirebaseException{
-
-      return false;
-    }
-
-  } */
-
-  @override
   Future<bool> _deleteImageSource(
-      String instution, String costume, String id) async {
+      String institution, String costume, String id) async {
     try {
-      var ref =
-          "/$instution/$_IMAGES_COLLECTION/$_COSTUMES_COLLECTION/$costume/$id";
-      print(ref);
       await _storage
           .ref(
-              "/$instution/$_IMAGES_COLLECTION/$_COSTUMES_COLLECTION/$costume/$id")
+              "/$institution/$_IMAGES_COLLECTION/$_COSTUMES_COLLECTION/$costume/$id")
           .delete();
       return true;
     } on FirebaseException {
@@ -65,10 +57,10 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .collection(_IMAGES_COLLECTION)
         .doc();
 
-    String imagePath =
-        "${institutionId}/images/costumes/${costumeId}/${doc.id}";
+    final String imagePath =
+        "$institutionId/images/costumes/$costumeId/${doc.id}";
     await _storage.ref(imagePath).putFile(File(image));
-    String downloadUrl = await _storage.ref(imagePath).getDownloadURL();
+    final String downloadUrl = await _storage.ref(imagePath).getDownloadURL();
 
     doc.set(CostumeImage(
             downloadUrl: downloadUrl,
@@ -78,14 +70,12 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   @override
   Future<String?> createCostume(String institutionId, Costume costume) async {
-    try {
-      return (await _store
+    return (await _store
               .collection(_INSTITUTIONS_COLLECTION)
               .doc(institutionId)
               .collection(_COSTUMES_COLLECTION)
               .add(costume.toJson()))
           .id;
-    } on FirebaseException {}
   }
 
   @override
@@ -97,8 +87,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         await costumeDocRef.collection(_IMAGES_COLLECTION).get();
     await Future.forEach(
         imagesDocCollection.docs,
-        (QueryDocumentSnapshot image) async =>
-            await _deleteImage(institutionId, id, image.id));
+        (QueryDocumentSnapshot image) async => _deleteImage(institutionId, id, image.id));
 
     costumeDocRef.delete();
   }
@@ -139,7 +128,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
     final result = await buildQuery.get();
 
-    var costumes = <Costume>[];
+    final costumes = <Costume>[];
     result.docs.forEach((doc) {
       final costume = Costume.fromJson(doc.data())..id = doc.id;
       costumes.add(costume);
@@ -161,8 +150,11 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   Query queryFactoryMethod(
       CollectionReference collectionReference, CostumeQuery query) {
+    // ignore: constant_identifier_names
     const PRODUCTION_KEY = "production";
+    // ignore: constant_identifier_names
     const CATEGORY_KEY = "category";
+    // ignore: constant_identifier_names
     const FASHION_KEY = "fashion";
     const COLORS_KEY = "colors";
     const THEMES_KEY = "themes";
@@ -202,7 +194,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .collection(_CATEGORIES_COLLECTION)
         .orderBy(CATEGORY_KEY)
         .get();
-    var categories = <String>[];
+    final categories = <String>[];
     result.docs.forEach((doc) => categories.add(doc[CATEGORY_KEY] as String));
 
     return categories;
@@ -221,7 +213,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .orderBy(TIME_KEY)
         .get();
 
-    var timePeriods = <String>[];
+    final timePeriods = <String>[];
 
     result.docs.forEach((doc) => timePeriods.add(doc[TIME_KEY] as String));
     return timePeriods;
@@ -236,10 +228,10 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .orderBy("location")
         .get();
 
-    var mainLocations = <Location>[];
+    final mainLocations = <Location>[];
 
     result.docs.forEach((locationDoc) {
-      var location = Location.fromJson(locationDoc.data());
+      final location = Location.fromJson(locationDoc.data());
       location.id = locationDoc.id;
       mainLocations.add(location);
     });
@@ -259,10 +251,10 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .orderBy("location")
         .get();
 
-    var subLocations = <Location>[];
+    final subLocations = <Location>[];
 
     result.docs.forEach((locationDoc) {
-      var location = Location.fromJson(locationDoc.data());
+      final location = Location.fromJson(locationDoc.data());
       location.id = locationDoc.id;
       subLocations.add(location);
     });
@@ -276,14 +268,14 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .doc(institutionId)
         .collection(_PRODUCTIONS)
         .doc(_PRODUCTIONS)
-        .collection(_CURRENT_PRODUDTIONS)
+        .collection(_CURRENT_PRODUCTIONS)
         .orderBy("title")
         .get();
 
-    var productions = <Production>[];
+    final productions = <Production>[];
 
     result.docs.forEach((doc) {
-      var production = Production.fromJson(doc.data())..id = doc.id;
+      final production = Production.fromJson(doc.data())..id = doc.id;
       productions.add(production);
     });
 
@@ -291,24 +283,22 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   }
 
-  @override
   Future<List<CostumeImage>> _getImages(
       String institutionId, String costumeId) async {
     final results = await _costumeReferenceFactory(institutionId, costumeId)
         .collection(_IMAGES_COLLECTION)
         .get();
 
-    var images = <CostumeImage>[];
+    final images = <CostumeImage>[];
 
     results.docs.forEach((imageDoc) {
-      var image = CostumeImage.fromJson(imageDoc.data());
+      final image = CostumeImage.fromJson(imageDoc.data());
       image.id = imageDoc.id;
       images.add(image);
     });
     return images;
   }
 
-  @override
   Future<bool> _deleteImage(
       String institutionId, String costumeId, String imageId) async {
     try {

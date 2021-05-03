@@ -2,7 +2,6 @@ import 'package:digtial_costume_platform/application/gallery/category_select/cat
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
-import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
