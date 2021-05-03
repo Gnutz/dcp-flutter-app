@@ -9,15 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterForm extends StatelessWidget {
-  //TODO: GRAP FROM SERVER
-  final _institutions = <Institution>[
-    Institution(
-        id: "fHEEOUrR8ZcsqbH19dzC",
-        alias: "AT",
-        domain: "@at",
-        name: "Aarhus Teater")
-  ];
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterBloc, RegisterState>(
@@ -36,8 +27,6 @@ class RegisterForm extends StatelessWidget {
                     content: Text(AppLocalizations.of(context)!
                         .errorInvalidCombination))),
           );
-        } else {
-          //TODO: navigate
         }
       },
       builder: (context, state) {
@@ -174,10 +163,10 @@ class RegisterForm extends StatelessWidget {
         validator: (val) => state.institution == null
             ? AppLocalizations.of(context)!.youMustSelectYourInstitution
             : null,
-        items: _institutions
+        items: state.institutions
             .map((Institution institution) => DropdownMenuItem<Institution>(
                   value: institution,
-                  child: Text(institution.name),
+                  child: Text('${institution.alias != null ? "${institution.alias} - " : ""}${institution.name}'),
                 ))
             .toList(),
         onChanged: (val) => bloc.add(RegisterEvent.institutionSelected(val!)),

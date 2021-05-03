@@ -7,9 +7,6 @@ import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 
 abstract class IGalleryService {
-  Institution? get currentInstitution;
-
-  void setCurrentInstitution(Institution institution);
 
   Future<String?> createCostume(Costume costume);
 
@@ -36,4 +33,6 @@ abstract class IGalleryService {
   void addImage(String image, String costumeId);
 
   Future<void> deleteImage(String costumeId, CostumeImage image);
+
+  void setInstitution(Institution institution);
 }

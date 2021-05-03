@@ -1,4 +1,5 @@
 import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
+import 'package:digtial_costume_platform/application/auth/register/register_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/category_select/category_selection_bloc.dart';
 import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';

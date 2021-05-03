@@ -32,7 +32,7 @@ class RegisterPage extends StatelessWidget {
               )),
         ],
       ),
-      body: BlocProvider(create: (context) => Locator().locator<RegisterBloc>(),
+      body: BlocProvider(create: (context) => Locator().locator<RegisterBloc>()..add(RegisterEvent.loadInstitutions()),
           child: RegisterForm()),
 
     );

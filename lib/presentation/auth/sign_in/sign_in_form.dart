@@ -13,7 +13,7 @@ class SignInForm extends StatelessWidget {
       if (state.authFailureOrSuccessOption != null) {
         state.authFailureOrSuccessOption!.map(
           serverError: (_) => print("serverError"),
-          emailInUse: (_) => print("mailInUse"),
+          emailInUse: (_) => (){},
           invalidEmailAndPasswordCombination: (_) => print("wrongCombination"),
         );
       } else {

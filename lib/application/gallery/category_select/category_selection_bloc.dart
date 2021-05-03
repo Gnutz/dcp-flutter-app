@@ -31,7 +31,8 @@ class CategorySelectionBloc
       _categorySelectedEventHandler(e);
     }, loadCategories: (_) async* {
       yield* _loadCategories();
-    });
+    },
+    );
   }
 
   ///Navigates to [GalleryPage] with a [CostumeQuery] based on the selected category

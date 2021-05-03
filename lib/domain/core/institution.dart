@@ -10,7 +10,7 @@ class Institution {
   String? alias;
 
   Institution(
-      {@JsonKey(ignore: true) this.id,
+      {thisuid,
       required this.name,
       this.domain,
       this.alias});

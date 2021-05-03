@@ -1,4 +1,6 @@
 
+import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
+import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
@@ -10,20 +12,12 @@ import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 
 class GalleryService implements IGalleryService {
-  Institution? _currentInstitution =
-      Institution(name: "aarhus Teater", id: "eDDNM6LeSWVzj52ThQtO");
+
   final ICostumeRepository _costumeRepository;
 
   GalleryService(this._costumeRepository);
 
-  @override
-  // TODO: implement currentInstitution
-  Institution? get currentInstitution => _currentInstitution;
-
-  @override
-  void setCurrentInstitution(Institution institution) {
-    _currentInstitution = institution;
-  }
+  Institution? _currentInstitution;
 
   @override
   Future<String?> createCostume(Costume costume) async {
@@ -42,7 +36,7 @@ class GalleryService implements IGalleryService {
 
   @override
   Future<List<Costume>> getCostumes(CostumeQuery query) async {
-    return _costumeRepository.getCostumes(currentInstitution!.id!, query);
+    return _costumeRepository.getCostumes(_currentInstitution!.id!, query);
   }
 
   @override
@@ -59,38 +53,48 @@ class GalleryService implements IGalleryService {
   }
 
   @override
-  Future<List<String>> getCategories() {
-    return _costumeRepository.getCategories(currentInstitution!.id!);
+  Future<List<String>> getCategories() async {
+    try {
+      return _costumeRepository.getCategories(_currentInstitution!.id!);
+    } catch (e){
+      return <String>[];
+    }
   }
 
   @override
-  Future<List<Location>> getStorageMainLocations() {
-    return _costumeRepository.getStorageMainLocations(currentInstitution!.id!);
+  Future<List<Location>> getStorageMainLocations() async {
+    return _costumeRepository.getStorageMainLocations(_currentInstitution!.id!);
   }
 
   @override
-  Future<List<Location>> getStorageSubLocations(String mainId) {
+  Future<List<Location>> getStorageSubLocations(String mainId) async {
     return _costumeRepository.getStorageSubLocations(
-        currentInstitution!.id!, mainId);
+        _currentInstitution!.id!, mainId);
   }
 
   @override
-  Future<List<String>> getTimePeriods() {
-    return _costumeRepository.getTimePeriods(currentInstitution!.id!);
+  Future<List<String>> getTimePeriods() async {
+    return _costumeRepository.getTimePeriods(_currentInstitution!.id!);
   }
 
   @override
-  Future<List<String>> getProductions() {
-    return _costumeRepository.getProductions(currentInstitution!.id!);
+  Future<List<String>> getProductions() async {
+    return _costumeRepository.getProductions(_currentInstitution!.id!);
   }
 
   @override
-  void addImage(String image, String costumeId) {
-    _costumeRepository.addImage(image, currentInstitution!.id!, costumeId);
+  void addImage(String image, String costumeId)  {
+    _costumeRepository.addImage(image, _currentInstitution!.id!, costumeId);
   }
 
   @override
   Future<void> deleteImage(String costumeId, CostumeImage image) async {
-    _costumeRepository.deleteImage(currentInstitution!.id!, costumeId, image);
+    _costumeRepository.deleteImage(_currentInstitution!.id!, costumeId, image);
   }
+
+  @override
+  void setInstitution(Institution institution) {
+    _currentInstitution = institution;
+  }
+
 }

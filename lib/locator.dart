@@ -30,7 +30,6 @@ class Locator {
         .registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
 
     //Services
-    //TODO
     locator.registerLazySingleton<IUserService>(() => FirebaseUserRepository());
     locator.registerLazySingleton<ICostumeRepository>(() =>
         FirebaseCostumeRepository(
@@ -38,14 +37,16 @@ class Locator {
     locator.registerLazySingleton<IAuthService>(
         () => FirebaseAuthRepository(locator<IUserService>()));
     locator.registerLazySingleton<IGalleryService>(
-        () => GalleryService(locator<ICostumeRepository>()));
+            () => GalleryService(locator<ICostumeRepository>()));
 
     //BLoCs
+    locator.registerFactory<GalleryBloc>(
+            () => GalleryBloc(locator<IGalleryService>()));
+    locator.registerFactory<AuthBloc>(() => AuthBloc(locator<IAuthService>(), locator<IGalleryService>()));
     locator
         .registerFactory<SignInBloc>(() => SignInBloc(locator<IAuthService>()));
     locator.registerFactory<RegisterBloc>(
         () => RegisterBloc(locator<IAuthService>()));
-    locator.registerFactory<AuthBloc>(() => AuthBloc(locator<IAuthService>()));
     locator.registerFactory<CategorySelectionBloc>(
             () => CategorySelectionBloc(locator<IGalleryService>()));
     //CostumeListBLoc
@@ -54,8 +55,6 @@ class Locator {
             () => CostumeDetailsBloc(locator<IGalleryService>()));
     locator.registerFactory<SearchFormBloc>(
             () => SearchFormBloc(locator<IGalleryService>()));
-    locator.registerFactory<GalleryBloc>(
-            () => GalleryBloc(locator<IGalleryService>()));
     //ImageBloc
   }
 }

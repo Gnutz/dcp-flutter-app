@@ -5,6 +5,7 @@ import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
 import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/core/value_validators.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
+import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sign_in_bloc.freezed.dart';
@@ -59,6 +60,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
       failureOrSuccess = await _auth.signInWithEmailAndPassword(
           email: state.emailAddress, password: state.password);
+
+
 
       yield state.copyWith(
           isSubmitting: false, authFailureOrSuccessOption: failureOrSuccess);

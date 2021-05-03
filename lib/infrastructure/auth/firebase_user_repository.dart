@@ -29,7 +29,7 @@ class FirebaseUserRepository implements IUserService {
     final snapshot = await _store.collection(USERS_COLLECTION).doc(id).get();
     final json = snapshot.data();
     if (json != null) {
-      return User.fromJson(json);
+      return User.fromJson(json)..uid = id;
     }
     return null;
   }

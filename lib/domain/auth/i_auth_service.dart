@@ -3,6 +3,7 @@ import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 
 abstract class IAuthService {
+
   Future<AuthFailure?> registerUser(
       {required String name,
       required String email,
