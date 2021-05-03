@@ -27,7 +27,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
 
   CostumeDetailsDisplay({required this.costume});
 
-  String? fashionToIconPath(Fashion fashion) {
+  String fashionToIconPath(Fashion? fashion) {
     const basePath = "images/icons/fashion_types";
 
     switch (fashion) {
@@ -36,8 +36,12 @@ class CostumeDetailsDisplay extends StatelessWidget {
       case Fashion.womens:
         return "$basePath/womens.png";
       default:
-        return null;
+        return "";
     }
+  }
+
+  String categoryToIconPath(category) {
+    return "images/icons/costume_categories/$category.png";
   }
 
   @override
@@ -46,21 +50,20 @@ class CostumeDetailsDisplay extends StatelessWidget {
     _auth = context.read<AuthBloc>();
     return BlocBuilder<CostumeDetailsBloc, CostumeDetailsState>(
         builder: (context, state) {
-          _context = context;
-          _state = state;
-          _appLocalzation = AppLocalizations.of(_context);
+      _context = context;
+      _state = state;
+      _appLocalzation = AppLocalizations.of(_context);
 
-          if (_state.costume != null) {
-            return Container(
-              margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                  if (state.costume!.images.isNotEmpty)
-                    buildImageCarousel(),
+      if (_state.costume != null) {
+        return Container(
+          margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  if (state.costume!.images.isNotEmpty) buildImageCarousel(),
                   _buildActionsRow(),
                   _buildStatRow(),
                   // Colors and themes, secondary information
@@ -70,33 +73,37 @@ class CostumeDetailsDisplay extends StatelessWidget {
                   const SizedBox(height: 10.0),
                   _buildProductionsList(),
                   //TODO: Add images section
-                  //FloatingActionButton(onPressed: null)
                 ],
-                  ),
-                ),
               ),
-            );
-          } else {
-            return Container();
-          }
-        });
+            ),
+          ),
+        );
+      } else {
+        return Container();
+      }
+    });
   }
 
   Widget _buildStatRow() {
-    final Costume costume = _state.costume!;
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      _buildIconCard(fashionToIconPath(_state.costume!.fashion)!),
-      _buildIconCard(
-          "images/icons/costume_categories/${_state.costume!.category}.png"),
-       if(costume.category.isNotEmpty) _getTextSegment('${costume.category.capitalize()},'),
-      if(costume.timePeriod.isNotEmpty) _getTextSegment('${_state.costume!.timePeriod},'),
-      _getTextSegment( '${_state.costume!.quantity}')
-    ]);
+    final Costume? costume = _state.costume;
+    if (costume != null) {
+      return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _buildIconCard(fashionToIconPath(costume?.fashion)),
+            _buildIconCard(categoryToIconPath(costume?.category)),
+            if (costume.category.isNotEmpty)
+              _getTextSegment('${costume?.category.capitalize()},'),
+            if (costume.timePeriod.isNotEmpty)
+              _getTextSegment('${_state.costume!.timePeriod.capitalize()},'),
+              _getTextSegment('x${_state.costume!.quantity}')
+          ]);
+    }
+    return Row();
   }
 
-
-  Widget _getTextSegment(String text){
-    return  Text(text,
+  Widget _getTextSegment(String  text) {
+    return Text(text,
         style: TextStyle(
             fontSize: 24.0,
             color: Colors.grey[600],
@@ -171,7 +178,6 @@ class CostumeDetailsDisplay extends StatelessWidget {
     final result = await _openDeleteConfirmationDialog();
     if (result) {
       _detailsBloc.add(const CostumeDetailsEvent.deleteCostume());
-      NavigationService.instance!.pop();
     }
   }
 
@@ -179,8 +185,8 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (context) => AlertDialog(
-          content:
-                  const Text(StringsConstants.areYouSureYouWantToDeleteThisCostume),
+              content: const Text(
+                  StringsConstants.areYouSureYouWantToDeleteThisCostume),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
@@ -213,8 +219,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
                     items: productions
                         .map((production) => DropdownMenuItem<Production>(
                             value: production,
-                            child:
-                                Wrap(children: [Text(production.title)])))
+                            child: Wrap(children: [Text(production.title)])))
                         .toList(),
                     onChanged: (val) => selected = val),
                 actions: <Widget>[
@@ -229,38 +234,37 @@ class CostumeDetailsDisplay extends StatelessWidget {
   }
 
   void _editCostume() {
-    NavigationService.instance!.pushReplacementNamed(Routes.costumesEdit,
-        arguments: _state.costume!.id);
+    _detailsBloc.add(const CostumeDetailsEvent.editCostumePressed());
   }
 
   Widget buildImageCarousel() {
     return CarouselSlider(
-        options: CarouselOptions(height: 400.0),
-        items: costume.images.map((image) {
-          return Builder(
-            builder: (BuildContext context) {
-              return ExtendedImage.network(
-                image.downloadUrl,
-                loadStateChanged: (ExtendedImageState state) {
-                  switch (state.extendedImageLoadState) {
-                    case LoadState.loading:
-                      return const CircularProgressIndicator();
-                    case LoadState.failed:
-                      return const Text('');
-                    case LoadState.completed:
-                      return ExtendedRawImage(
-                          image: state.extendedImageInfo?.image,
-                          fit: BoxFit.fill);
-                  }
-                },
-                fit: BoxFit.fill,
-                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                //cancelToken: cancellationToken,
-              );
-            },
-          );
-        }).toList(),
-      );
+      options: CarouselOptions(height: 400.0),
+      items: costume.images.map((image) {
+        return Builder(
+          builder: (BuildContext context) {
+            return ExtendedImage.network(
+              image.downloadUrl,
+              loadStateChanged: (ExtendedImageState state) {
+                switch (state.extendedImageLoadState) {
+                  case LoadState.loading:
+                    return const CircularProgressIndicator();
+                  case LoadState.failed:
+                    return const Text('');
+                  case LoadState.completed:
+                    return ExtendedRawImage(
+                        image: state.extendedImageInfo?.image,
+                        fit: BoxFit.fill);
+                }
+              },
+              fit: BoxFit.fill,
+              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+              //cancelToken: cancellationToken,
+            );
+          },
+        );
+      }).toList(),
+    );
   }
 
   Widget _buildThemeAndColorList() {
@@ -284,9 +288,9 @@ class CostumeDetailsDisplay extends StatelessWidget {
       ),
       ...list
           .map<Widget>((tag) => Text(
-        '$tag, ',
-        style: TextStyle(fontSize: 18.0, color: Colors.grey[600]),
-      ))
+                '$tag, ',
+                style: TextStyle(fontSize: 18.0, color: Colors.grey[600]),
+              ))
           .toList()
     ]);
   }
@@ -299,7 +303,8 @@ class CostumeDetailsDisplay extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(children: [
-          const Text(StringsConstants.productions,
+          const Text(
+            StringsConstants.productions,
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           Column(children: [
@@ -328,22 +333,22 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (BuildContext context) => AlertDialog(
-            title: const Text(StringsConstants.selectAListToAddCostumeTo),
-            content: DropdownButtonFormField<CostumeList>(
-                value: selected,
-                items: productions
-                    .map((list) => DropdownMenuItem<CostumeList>(
-                    value: list, child: Text(list.title)))
-                    .toList(),
-                onChanged: (val) => selected = val),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(null),
-                child: Text(AppLocalizations.of(_context)!.cancel),
-              ),
-              TextButton(
-                  onPressed: () => Navigator.of(context).pop(selected),
-                  child: Text(AppLocalizations.of(_context)!.confirm)),
-            ])) as CostumeList?;
+                title: const Text(StringsConstants.selectAListToAddCostumeTo),
+                content: DropdownButtonFormField<CostumeList>(
+                    value: selected,
+                    items: productions
+                        .map((list) => DropdownMenuItem<CostumeList>(
+                            value: list, child: Text(list.title)))
+                        .toList(),
+                    onChanged: (val) => selected = val),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(null),
+                    child: Text(AppLocalizations.of(_context)!.cancel),
+                  ),
+                  TextButton(
+                      onPressed: () => Navigator.of(context).pop(selected),
+                      child: Text(AppLocalizations.of(_context)!.confirm)),
+                ])) as CostumeList?;
   }
 }

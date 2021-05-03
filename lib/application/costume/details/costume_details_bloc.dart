@@ -28,9 +28,14 @@ class CostumeDetailsBloc
       CostumeDetailsEvent event) async* {
     yield* event.map(
       checkOutToNewProductionPressed:
-          (CheckOutToNewProductionPressed e) async* {},
+          (CheckOutToNewProductionPressed e) async* {
+
+          },
       addCostumeToList: (AddCostumeToList e) async* {},
-      editCostumePressed: (EditCostumePressed e) async* {},
+      editCostumePressed: (EditCostumePressed e) async* {
+        NavigationService.instance!.pushReplacementNamed(Routes.costumesEdit,
+            arguments: state.costume!.id);
+      },
       deleteCostume: (_) async* {
         deleteCostumeEventHandler();
       },
@@ -55,6 +60,7 @@ class CostumeDetailsBloc
 
   void deleteCostumeEventHandler() {
     _galleryService.deleteCostume(state.costume!.id!);
+    NavigationService.instance!.pop();
     ScaffoldMessenger.of(NavigationService.currentContext!).showSnackBar(
         const SnackBar(content: Text(StringsConstants.costumeWasDeleted)));
   }
