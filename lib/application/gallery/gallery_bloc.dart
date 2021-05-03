@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
+import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,7 +23,7 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
     yield* event.map(performQuery: (e) async* {
       yield* _performQueryEventHandler(e);
     }, selectCostumeForDisplay: (SelectCostumeForDisplay e) async* {
-      yield _selectCostumeForSwiperEventHandler(e);
+      yield _selectCostumeEventHandler(e);
     });
   }
 
@@ -31,7 +32,8 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
     yield state.copyWith(costumes: costumes);
   }
 
-  GalleryState _selectCostumeForSwiperEventHandler(SelectCostumeForDisplay e) {
+  GalleryState _selectCostumeEventHandler(SelectCostumeForDisplay e) {
+    NavigationService.instance!.pushNamed(Routes.costumeDetails, arguments: e.selected);
     return state.copyWith(selected: e.selected);
   }
 }

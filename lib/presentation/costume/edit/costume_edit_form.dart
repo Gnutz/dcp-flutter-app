@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../costume_image_holder.dart';
+
 class CostumeEditForm extends StatelessWidget {
   late final CostumeFormBloc _formBloc;
   final _themeHolder = TextEditingController();
@@ -77,33 +79,20 @@ class CostumeEditForm extends StatelessWidget {
                         SliverGrid(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisSpacing: 4,
                                   crossAxisCount: 4),
                           delegate:
                               SliverChildBuilderDelegate((context, index) {
-                            return InkWell(
-                                onTap: () => _formBloc.add(
-                                    CostumeFormEvent.deleteImage(
-                                        _state.images[index])),
-                                child: ExtendedImage.network(
-                                    _state.images[index].downloadUrl,
-                                    loadStateChanged:
-                                        (ExtendedImageState state) {
-                                  switch (state.extendedImageLoadState) {
-                                    case LoadState.loading:
-                                      return const CircularProgressIndicator();
-                                    case LoadState.failed:
-                                      return const Text('');
-                                    case LoadState.completed:
-                                      return ExtendedRawImage(
-                                          image: state.extendedImageInfo?.image,
-                                          fit: BoxFit.fill);
-                                  }
-                                },
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.fill,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(30.0))));
+                            return GridTile(
+                                    header: GridTileBar(
+                                        trailing: IconButton(
+                                      icon: const Icon(Icons.close),
+                                      onPressed: () {
+                                        _formBloc.add(CostumeFormEvent.deleteImage(state.images[index]));
+                                      },
+                                    )),
+                                    child: CostumeImageHolder(
+                                        image: _state.images[index]));
                           }, childCount: state.images.length),
                         ),
                         SliverList(
@@ -160,8 +149,7 @@ class CostumeEditForm extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5.0))),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child:
-            Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Row(children: [
@@ -288,19 +276,7 @@ class CostumeEditForm extends StatelessWidget {
                     fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12.0),
-              DropdownButtonFormField<Location>(
-                  decoration: textInputDecorator.copyWith(
-                      hintText: AppLocalizations.of(_context)!
-                          .selectWhereTheCostumeIsStored),
-                  items: _state.storageMainLocationOptions
-                      .map((main) => DropdownMenuItem<Location>(
-                          value: main, child: Text(main.location)))
-                      .toList(),
-                  onChanged: (main) => _formBloc
-                      .add(CostumeFormEvent.mainLocationSelected(main!)),
-                  value: _state.storageMainLocationOptions.isNotEmpty
-                      ? _state.mainLocation
-                      : null),
+              _buildLocationDropDown()
               const SizedBox(height: 12.0),
               DropdownButtonFormField<Location>(
                   decoration: textInputDecorator.copyWith(
@@ -362,41 +338,4 @@ class CostumeEditForm extends StatelessWidget {
     }
   }
 
-/* Widget _buildImageGrid() {
-    return Container(
-        child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
-            itemBuilder: (context, index) => Stack(children: [
-                  ExtendedImage.network(
-                    _state.images[index].downloadUrl,
-                    loadStateChanged: (ExtendedImageState state) {
-                      switch (state.extendedImageLoadState) {
-                        case LoadState.loading:
-                          return CircularProgressIndicator();
-                        case LoadState.failed:
-                          return Text('failed');
-                        case LoadState.completed:
-                          return ExtendedRawImage(
-                              image: state.extendedImageInfo?.image,
-                              fit: BoxFit.fill);
-                      }
-                    },
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.fill,
-                    cache: true,
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    //cancelToken: cancellationToken,
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.close),
-                      onPressed: () => _formBloc.add(
-                          CostumeFormEvent.deleteImage(_state.images[index])))
-                ]),
-            itemCount: _state.images.length));
-  } */
 }
