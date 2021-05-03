@@ -6,12 +6,9 @@ import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'costume.g.dart';
+import 'fashion.dart';
 
-enum Fashion {
-  mens,
-  womens,
-}
+part 'costume.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
 @_StatusConverter()

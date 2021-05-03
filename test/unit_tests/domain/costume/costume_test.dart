@@ -1,3 +1,4 @@
+import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';

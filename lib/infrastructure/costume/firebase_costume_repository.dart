@@ -5,6 +5,7 @@ import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
+import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -170,7 +171,8 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     }
 
     if (query.fashion != null) {
-      seedQuery = seedQuery.where(FASHION_KEY, isEqualTo: query.fashion);
+      seedQuery = seedQuery.where(FASHION_KEY,
+          isEqualTo: FashionEnumToStringMapper.fashionToString(query.fashion!));
     }
 
     return seedQuery;

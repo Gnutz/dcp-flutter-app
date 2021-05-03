@@ -1,5 +1,6 @@
 import 'package:digtial_costume_platform/application/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
@@ -276,7 +277,19 @@ class CostumeEditForm extends StatelessWidget {
                     fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12.0),
-              _buildLocationDropDown()
+              DropdownButtonFormField<Location>(
+                  decoration: textInputDecorator.copyWith(
+                      hintText: AppLocalizations.of(_context)!
+                          .selectWhereTheCostumeIsStored),
+                  items: _state.storageMainLocationOptions
+                      .map((main) => DropdownMenuItem<Location>(
+                          value: main, child: Text(main.location)))
+                      .toList(),
+                  onChanged: (main) => _formBloc
+                      .add(CostumeFormEvent.mainLocationSelected(main!)),
+                  value: _state.storageMainLocationOptions.isNotEmpty
+                      ? _state.mainLocation
+                      : null),
               const SizedBox(height: 12.0),
               DropdownButtonFormField<Location>(
                   decoration: textInputDecorator.copyWith(
@@ -337,5 +350,4 @@ class CostumeEditForm extends StatelessWidget {
       _formBloc.add(CostumeFormEvent.addImage(selected.path));
     }
   }
-
 }

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'costume.dart';
+import 'fashion.dart';
 
 part 'costume_query.freezed.dart';
 

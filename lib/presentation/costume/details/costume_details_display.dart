@@ -4,6 +4,7 @@ import 'package:digtial_costume_platform/application/costume/details/costume_det
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_list.dart';
+import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/production_card.dart';
@@ -29,16 +30,9 @@ class CostumeDetailsDisplay extends StatelessWidget {
 
   String fashionToIconPath(Fashion? fashion) {
     const basePath = "images/icons/fashion_types";
-
-    switch (fashion) {
-      case Fashion.mens:
-        return "$basePath/mens.png";
-      case Fashion.womens:
-        return "$basePath/womens.png";
-      default:
-        return "";
+    return '$basePath/${FashionEnumToStringMapper.fashionToString(fashion!)}.png';
     }
-  }
+
 
   String categoryToIconPath(category) {
     return "images/icons/costume_categories/$category.png";
