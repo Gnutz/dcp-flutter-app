@@ -25,7 +25,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   static const String _STORAGE_SUBLOCATION_COLLECTION = "sublocations";
   static const String _METADATA = "metadata";
   static const String _PRODUCTIONS = "productions";
+  static const String _CURRENT_PRODUDTIONS = "current";
   static const String _IMAGES_COLLECTION = "images";
+
 
   /* @override
   Future<bool> deleteImageSource(String imagePath) async {
@@ -268,26 +270,25 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<List<String>> getProductions(String institutionId) async {
-    List<Production> productions = [
-      Production(
-          id: "",
-          title: "Jeg er jo lige her",
-          startDate: DateTime(2021, 8, 28),
-          endDate: DateTime(2021, 8, 28)),
-      Production(
-          id: "",
-          title: "Charlie & Chokoladefarbrikken",
-          startDate: DateTime(2021, 8, 28),
-          endDate: DateTime(2021, 8, 28)),
-      Production(
-          id: "",
-          title: "100 Sange",
-          startDate: DateTime(2021, 8, 28),
-          endDate: DateTime(2021, 8, 28)),
-    ];
+  Future<List<Production>> getProductions(String institutionId) async {
+    final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_PRODUCTIONS)
+        .doc(_PRODUCTIONS)
+        .collection(_CURRENT_PRODUDTIONS)
+        .orderBy("title")
+        .get();
 
-    return productions.map((e) => e.title ?? "").toList();
+    var productions = <Production>[];
+
+    result.docs.forEach((doc) {
+      var production = Production.fromJson(doc.data())..id = doc.id;
+      productions.add(production);
+    });
+
+    return productions;
+
   }
 
   @override

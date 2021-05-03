@@ -10,6 +10,7 @@ import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/production_card.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
+import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -205,15 +206,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
 
   Future<Production?> _openCheckOutDialog() async {
     Production? selected;
-
-    //TODO
-    final productionsTitles = await Locator()
-        .locator<ICostumeRepository>()
-        .getProductions('fHEEOUrR8ZcsqbH19dzC');
-    final productions = productionsTitles
-        .map((e) => Production(
-            title: e, startDate: DateTime.now(), endDate: DateTime.now()))
-        .toList();
+    final productions = _state.productionOptions;
 
     return await showDialog(
         context: _context,

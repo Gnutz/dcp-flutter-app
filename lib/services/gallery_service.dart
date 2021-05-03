@@ -78,7 +78,7 @@ class GalleryService implements IGalleryService {
   }
 
   @override
-  Future<List<String>> getProductions() async {
+  Future<List<Production>> getProductions() async {
     return _costumeRepository.getProductions(_currentInstitution!.id!);
   }
 

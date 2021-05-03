@@ -70,7 +70,8 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
   Stream<SearchFormState> _loadFormOptionsEventHandler() async* {
     final categoryOptions = await _galleryService.getCategories();
     final timePeriodOptions = await _galleryService.getTimePeriods();
-    final productionOptions = await _galleryService.getProductions();
+    final productions = await _galleryService.getProductions();
+    final productionOptions = productions.map((e) => e.title).toList();
 
     yield state.copyWith(
         categoryOptions: categoryOptions,

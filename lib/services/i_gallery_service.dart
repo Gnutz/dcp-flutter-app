@@ -28,7 +28,7 @@ abstract class IGalleryService {
 
   Future<List<Location>> getStorageSubLocations(String mainId);
 
-  Future<List<String>> getProductions();
+  Future<List<Production>> getProductions();
 
   void addImage(String image, String costumeId);
 

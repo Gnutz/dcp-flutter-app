@@ -16,6 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CostumeDetailsEventTearOff {
   const _$CostumeDetailsEventTearOff();
 
+  LoadProductionOptions loadProductionOptions() {
+    return const LoadProductionOptions();
+  }
+
   DeleteCostume deleteCostume() {
     return const DeleteCostume();
   }
@@ -54,6 +58,7 @@ const $CostumeDetailsEvent = _$CostumeDetailsEventTearOff();
 mixin _$CostumeDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadProductionOptions,
     required TResult Function() deleteCostume,
     required TResult Function() editCostumePressed,
     required TResult Function(Production production) checkOutCostume,
@@ -64,6 +69,7 @@ mixin _$CostumeDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProductionOptions,
     TResult Function()? deleteCostume,
     TResult Function()? editCostumePressed,
     TResult Function(Production production)? checkOutCostume,
@@ -75,6 +81,8 @@ mixin _$CostumeDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadProductionOptions value)
+        loadProductionOptions,
     required TResult Function(DeleteCostume value) deleteCostume,
     required TResult Function(EditCostumePressed value) editCostumePressed,
     required TResult Function(CheckOutCostume value) checkOutCostume,
@@ -86,6 +94,7 @@ mixin _$CostumeDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProductionOptions value)? loadProductionOptions,
     TResult Function(DeleteCostume value)? deleteCostume,
     TResult Function(EditCostumePressed value)? editCostumePressed,
     TResult Function(CheckOutCostume value)? checkOutCostume,
@@ -113,6 +122,115 @@ class _$CostumeDetailsEventCopyWithImpl<$Res>
   final CostumeDetailsEvent _value;
   // ignore: unused_field
   final $Res Function(CostumeDetailsEvent) _then;
+}
+
+/// @nodoc
+abstract class $LoadProductionOptionsCopyWith<$Res> {
+  factory $LoadProductionOptionsCopyWith(LoadProductionOptions value,
+          $Res Function(LoadProductionOptions) then) =
+      _$LoadProductionOptionsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$LoadProductionOptionsCopyWithImpl<$Res>
+    extends _$CostumeDetailsEventCopyWithImpl<$Res>
+    implements $LoadProductionOptionsCopyWith<$Res> {
+  _$LoadProductionOptionsCopyWithImpl(
+      LoadProductionOptions _value, $Res Function(LoadProductionOptions) _then)
+      : super(_value, (v) => _then(v as LoadProductionOptions));
+
+  @override
+  LoadProductionOptions get _value => super._value as LoadProductionOptions;
+}
+
+/// @nodoc
+
+class _$LoadProductionOptions implements LoadProductionOptions {
+  const _$LoadProductionOptions();
+
+  @override
+  String toString() {
+    return 'CostumeDetailsEvent.loadProductionOptions()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is LoadProductionOptions);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadProductionOptions,
+    required TResult Function() deleteCostume,
+    required TResult Function() editCostumePressed,
+    required TResult Function(Production production) checkOutCostume,
+    required TResult Function(CostumeList list) addCostumeToList,
+    required TResult Function() checkOutToNewProductionPressed,
+    required TResult Function(Costume costume) initalize,
+  }) {
+    return loadProductionOptions();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProductionOptions,
+    TResult Function()? deleteCostume,
+    TResult Function()? editCostumePressed,
+    TResult Function(Production production)? checkOutCostume,
+    TResult Function(CostumeList list)? addCostumeToList,
+    TResult Function()? checkOutToNewProductionPressed,
+    TResult Function(Costume costume)? initalize,
+    required TResult orElse(),
+  }) {
+    if (loadProductionOptions != null) {
+      return loadProductionOptions();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadProductionOptions value)
+        loadProductionOptions,
+    required TResult Function(DeleteCostume value) deleteCostume,
+    required TResult Function(EditCostumePressed value) editCostumePressed,
+    required TResult Function(CheckOutCostume value) checkOutCostume,
+    required TResult Function(AddCostumeToList value) addCostumeToList,
+    required TResult Function(CheckOutToNewProductionPressed value)
+        checkOutToNewProductionPressed,
+    required TResult Function(Initalize value) initalize,
+  }) {
+    return loadProductionOptions(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProductionOptions value)? loadProductionOptions,
+    TResult Function(DeleteCostume value)? deleteCostume,
+    TResult Function(EditCostumePressed value)? editCostumePressed,
+    TResult Function(CheckOutCostume value)? checkOutCostume,
+    TResult Function(AddCostumeToList value)? addCostumeToList,
+    TResult Function(CheckOutToNewProductionPressed value)?
+        checkOutToNewProductionPressed,
+    TResult Function(Initalize value)? initalize,
+    required TResult orElse(),
+  }) {
+    if (loadProductionOptions != null) {
+      return loadProductionOptions(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadProductionOptions implements CostumeDetailsEvent {
+  const factory LoadProductionOptions() = _$LoadProductionOptions;
 }
 
 /// @nodoc
@@ -155,6 +273,7 @@ class _$DeleteCostume implements DeleteCostume {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadProductionOptions,
     required TResult Function() deleteCostume,
     required TResult Function() editCostumePressed,
     required TResult Function(Production production) checkOutCostume,
@@ -168,6 +287,7 @@ class _$DeleteCostume implements DeleteCostume {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProductionOptions,
     TResult Function()? deleteCostume,
     TResult Function()? editCostumePressed,
     TResult Function(Production production)? checkOutCostume,
@@ -185,6 +305,8 @@ class _$DeleteCostume implements DeleteCostume {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadProductionOptions value)
+        loadProductionOptions,
     required TResult Function(DeleteCostume value) deleteCostume,
     required TResult Function(EditCostumePressed value) editCostumePressed,
     required TResult Function(CheckOutCostume value) checkOutCostume,
@@ -199,6 +321,7 @@ class _$DeleteCostume implements DeleteCostume {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProductionOptions value)? loadProductionOptions,
     TResult Function(DeleteCostume value)? deleteCostume,
     TResult Function(EditCostumePressed value)? editCostumePressed,
     TResult Function(CheckOutCostume value)? checkOutCostume,
@@ -259,6 +382,7 @@ class _$EditCostumePressed implements EditCostumePressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadProductionOptions,
     required TResult Function() deleteCostume,
     required TResult Function() editCostumePressed,
     required TResult Function(Production production) checkOutCostume,
@@ -272,6 +396,7 @@ class _$EditCostumePressed implements EditCostumePressed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProductionOptions,
     TResult Function()? deleteCostume,
     TResult Function()? editCostumePressed,
     TResult Function(Production production)? checkOutCostume,
@@ -289,6 +414,8 @@ class _$EditCostumePressed implements EditCostumePressed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadProductionOptions value)
+        loadProductionOptions,
     required TResult Function(DeleteCostume value) deleteCostume,
     required TResult Function(EditCostumePressed value) editCostumePressed,
     required TResult Function(CheckOutCostume value) checkOutCostume,
@@ -303,6 +430,7 @@ class _$EditCostumePressed implements EditCostumePressed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProductionOptions value)? loadProductionOptions,
     TResult Function(DeleteCostume value)? deleteCostume,
     TResult Function(EditCostumePressed value)? editCostumePressed,
     TResult Function(CheckOutCostume value)? checkOutCostume,
@@ -389,6 +517,7 @@ class _$CheckOutCostume implements CheckOutCostume {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadProductionOptions,
     required TResult Function() deleteCostume,
     required TResult Function() editCostumePressed,
     required TResult Function(Production production) checkOutCostume,
@@ -402,6 +531,7 @@ class _$CheckOutCostume implements CheckOutCostume {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProductionOptions,
     TResult Function()? deleteCostume,
     TResult Function()? editCostumePressed,
     TResult Function(Production production)? checkOutCostume,
@@ -419,6 +549,8 @@ class _$CheckOutCostume implements CheckOutCostume {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadProductionOptions value)
+        loadProductionOptions,
     required TResult Function(DeleteCostume value) deleteCostume,
     required TResult Function(EditCostumePressed value) editCostumePressed,
     required TResult Function(CheckOutCostume value) checkOutCostume,
@@ -433,6 +565,7 @@ class _$CheckOutCostume implements CheckOutCostume {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProductionOptions value)? loadProductionOptions,
     TResult Function(DeleteCostume value)? deleteCostume,
     TResult Function(EditCostumePressed value)? editCostumePressed,
     TResult Function(CheckOutCostume value)? checkOutCostume,
@@ -523,6 +656,7 @@ class _$AddCostumeToList implements AddCostumeToList {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadProductionOptions,
     required TResult Function() deleteCostume,
     required TResult Function() editCostumePressed,
     required TResult Function(Production production) checkOutCostume,
@@ -536,6 +670,7 @@ class _$AddCostumeToList implements AddCostumeToList {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProductionOptions,
     TResult Function()? deleteCostume,
     TResult Function()? editCostumePressed,
     TResult Function(Production production)? checkOutCostume,
@@ -553,6 +688,8 @@ class _$AddCostumeToList implements AddCostumeToList {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadProductionOptions value)
+        loadProductionOptions,
     required TResult Function(DeleteCostume value) deleteCostume,
     required TResult Function(EditCostumePressed value) editCostumePressed,
     required TResult Function(CheckOutCostume value) checkOutCostume,
@@ -567,6 +704,7 @@ class _$AddCostumeToList implements AddCostumeToList {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProductionOptions value)? loadProductionOptions,
     TResult Function(DeleteCostume value)? deleteCostume,
     TResult Function(EditCostumePressed value)? editCostumePressed,
     TResult Function(CheckOutCostume value)? checkOutCostume,
@@ -636,6 +774,7 @@ class _$CheckOutToNewProductionPressed
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadProductionOptions,
     required TResult Function() deleteCostume,
     required TResult Function() editCostumePressed,
     required TResult Function(Production production) checkOutCostume,
@@ -649,6 +788,7 @@ class _$CheckOutToNewProductionPressed
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProductionOptions,
     TResult Function()? deleteCostume,
     TResult Function()? editCostumePressed,
     TResult Function(Production production)? checkOutCostume,
@@ -666,6 +806,8 @@ class _$CheckOutToNewProductionPressed
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadProductionOptions value)
+        loadProductionOptions,
     required TResult Function(DeleteCostume value) deleteCostume,
     required TResult Function(EditCostumePressed value) editCostumePressed,
     required TResult Function(CheckOutCostume value) checkOutCostume,
@@ -680,6 +822,7 @@ class _$CheckOutToNewProductionPressed
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProductionOptions value)? loadProductionOptions,
     TResult Function(DeleteCostume value)? deleteCostume,
     TResult Function(EditCostumePressed value)? editCostumePressed,
     TResult Function(CheckOutCostume value)? checkOutCostume,
@@ -764,6 +907,7 @@ class _$Initalize implements Initalize {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() loadProductionOptions,
     required TResult Function() deleteCostume,
     required TResult Function() editCostumePressed,
     required TResult Function(Production production) checkOutCostume,
@@ -777,6 +921,7 @@ class _$Initalize implements Initalize {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadProductionOptions,
     TResult Function()? deleteCostume,
     TResult Function()? editCostumePressed,
     TResult Function(Production production)? checkOutCostume,
@@ -794,6 +939,8 @@ class _$Initalize implements Initalize {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadProductionOptions value)
+        loadProductionOptions,
     required TResult Function(DeleteCostume value) deleteCostume,
     required TResult Function(EditCostumePressed value) editCostumePressed,
     required TResult Function(CheckOutCostume value) checkOutCostume,
@@ -808,6 +955,7 @@ class _$Initalize implements Initalize {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadProductionOptions value)? loadProductionOptions,
     TResult Function(DeleteCostume value)? deleteCostume,
     TResult Function(EditCostumePressed value)? editCostumePressed,
     TResult Function(CheckOutCostume value)? checkOutCostume,
@@ -837,9 +985,11 @@ abstract class Initalize implements CostumeDetailsEvent {
 class _$CostumeDetailsStateTearOff {
   const _$CostumeDetailsStateTearOff();
 
-  _CostumeDetailState call({Costume? costume}) {
+  _CostumeDetailState call(
+      {Costume? costume, required List<Production> productionOptions}) {
     return _CostumeDetailState(
       costume: costume,
+      productionOptions: productionOptions,
     );
   }
 }
@@ -850,6 +1000,7 @@ const $CostumeDetailsState = _$CostumeDetailsStateTearOff();
 /// @nodoc
 mixin _$CostumeDetailsState {
   Costume? get costume => throw _privateConstructorUsedError;
+  List<Production> get productionOptions => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CostumeDetailsStateCopyWith<CostumeDetailsState> get copyWith =>
@@ -861,7 +1012,7 @@ abstract class $CostumeDetailsStateCopyWith<$Res> {
   factory $CostumeDetailsStateCopyWith(
           CostumeDetailsState value, $Res Function(CostumeDetailsState) then) =
       _$CostumeDetailsStateCopyWithImpl<$Res>;
-  $Res call({Costume? costume});
+  $Res call({Costume? costume, List<Production> productionOptions});
 }
 
 /// @nodoc
@@ -876,12 +1027,17 @@ class _$CostumeDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? costume = freezed,
+    Object? productionOptions = freezed,
   }) {
     return _then(_value.copyWith(
       costume: costume == freezed
           ? _value.costume
           : costume // ignore: cast_nullable_to_non_nullable
               as Costume?,
+      productionOptions: productionOptions == freezed
+          ? _value.productionOptions
+          : productionOptions // ignore: cast_nullable_to_non_nullable
+              as List<Production>,
     ));
   }
 }
@@ -893,7 +1049,7 @@ abstract class _$CostumeDetailStateCopyWith<$Res>
           _CostumeDetailState value, $Res Function(_CostumeDetailState) then) =
       __$CostumeDetailStateCopyWithImpl<$Res>;
   @override
-  $Res call({Costume? costume});
+  $Res call({Costume? costume, List<Production> productionOptions});
 }
 
 /// @nodoc
@@ -910,12 +1066,17 @@ class __$CostumeDetailStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? costume = freezed,
+    Object? productionOptions = freezed,
   }) {
     return _then(_CostumeDetailState(
       costume: costume == freezed
           ? _value.costume
           : costume // ignore: cast_nullable_to_non_nullable
               as Costume?,
+      productionOptions: productionOptions == freezed
+          ? _value.productionOptions
+          : productionOptions // ignore: cast_nullable_to_non_nullable
+              as List<Production>,
     ));
   }
 }
@@ -923,14 +1084,16 @@ class __$CostumeDetailStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CostumeDetailState implements _CostumeDetailState {
-  const _$_CostumeDetailState({this.costume});
+  const _$_CostumeDetailState({this.costume, required this.productionOptions});
 
   @override
   final Costume? costume;
+  @override
+  final List<Production> productionOptions;
 
   @override
   String toString() {
-    return 'CostumeDetailsState(costume: $costume)';
+    return 'CostumeDetailsState(costume: $costume, productionOptions: $productionOptions)';
   }
 
   @override
@@ -938,12 +1101,18 @@ class _$_CostumeDetailState implements _CostumeDetailState {
     return identical(this, other) ||
         (other is _CostumeDetailState &&
             (identical(other.costume, costume) ||
-                const DeepCollectionEquality().equals(other.costume, costume)));
+                const DeepCollectionEquality()
+                    .equals(other.costume, costume)) &&
+            (identical(other.productionOptions, productionOptions) ||
+                const DeepCollectionEquality()
+                    .equals(other.productionOptions, productionOptions)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(costume);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(costume) ^
+      const DeepCollectionEquality().hash(productionOptions);
 
   @JsonKey(ignore: true)
   @override
@@ -952,10 +1121,14 @@ class _$_CostumeDetailState implements _CostumeDetailState {
 }
 
 abstract class _CostumeDetailState implements CostumeDetailsState {
-  const factory _CostumeDetailState({Costume? costume}) = _$_CostumeDetailState;
+  const factory _CostumeDetailState(
+      {Costume? costume,
+      required List<Production> productionOptions}) = _$_CostumeDetailState;
 
   @override
   Costume? get costume => throw _privateConstructorUsedError;
+  @override
+  List<Production> get productionOptions => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CostumeDetailStateCopyWith<_CostumeDetailState> get copyWith =>

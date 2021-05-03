@@ -19,7 +19,9 @@ class CostumeDetailsBloc
   final IGalleryService _galleryService;
 
   CostumeDetailsBloc(this._galleryService)
-      : super(CostumeDetailsState.inital());
+      : super(CostumeDetailsState.inital()){
+    add(const CostumeDetailsEvent.loadProductionOptions());
+  }
 
   @override
   Stream<CostumeDetailsState> mapEventToState(
@@ -37,7 +39,9 @@ class CostumeDetailsBloc
       },
       initalize: (Initalize e) async* {
         yield state.copyWith(costume: e.costume);
-      },
+      }, loadProductionOptions: (_) async* {
+       yield* _loadProductionOptionsEventHandler();
+    },
     );
   }
 
@@ -53,5 +57,11 @@ class CostumeDetailsBloc
     _galleryService.deleteCostume(state.costume!.id!);
     ScaffoldMessenger.of(NavigationService.currentContext!).showSnackBar(
         const SnackBar(content: Text(StringsConstants.costumeWasDeleted)));
+  }
+
+  Stream<CostumeDetailsState> _loadProductionOptionsEventHandler() async* {
+    final productionOptions = await _galleryService.getProductions();
+    yield state.copyWith(productionOptions: productionOptions);
+
   }
 }

@@ -1,3 +1,4 @@
+import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
@@ -24,7 +25,7 @@ abstract class ICostumeRepository {
   Future<List<Location>> getStorageSubLocations(
       String institutionId, String mainId);
 
-  Future<List<String>> getProductions(String institutionId);
+  Future<List<Production>> getProductions(String institutionId);
 
   void addImage(String image, String institutionId, String costumeId);
 
