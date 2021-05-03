@@ -90,12 +90,12 @@ class CostumeDetailsDisplay extends StatelessWidget {
       return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _buildIconCard(fashionToIconPath(costume?.fashion)),
-            _buildIconCard(categoryToIconPath(costume?.category)),
-            if (costume.category.isNotEmpty)
-              _getTextSegment('${costume?.category.capitalize()},'),
-            if (costume.timePeriod.isNotEmpty)
-              _getTextSegment('${_state.costume!.timePeriod.capitalize()},'),
+            _buildIconCard(fashionToIconPath(costume.fashion)),
+            _buildIconCard(categoryToIconPath(costume.category)),
+            if (costume.category != null && costume.category!.isNotEmpty)
+              _getTextSegment('${costume.category!.capitalize()},'),
+            if (costume.timePeriod != null && costume.category!.isNotEmpty)
+              _getTextSegment('${_state.costume!.timePeriod!.capitalize()},'),
               _getTextSegment('x${_state.costume!.quantity}')
           ]);
     }

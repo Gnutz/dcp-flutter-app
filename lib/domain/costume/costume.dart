@@ -21,9 +21,9 @@ class Costume extends Equatable {
   DateTime edited;
   DateTime created;
   Fashion fashion;
-  String category;
+  String? category;
   int quantity;
-  String timePeriod;
+  String? timePeriod;
   List<String> themes;
   List<String> colors;
   List<Production> productions;
@@ -57,8 +57,8 @@ class Costume extends Equatable {
   Costume(
       {this.id,
       Fashion? fashion,
-      String? category,
-      String? timePeriod,
+      this.category,
+      this.timePeriod,
       required this.created,
       int? quantity,
       required this.edited,
@@ -68,8 +68,6 @@ class Costume extends Equatable {
       List<CostumeImage>? images,
       StorageLocation? storageLocation})
       : this.fashion = fashion ?? Fashion.mens,
-        this.category = category ?? StringsConstants.empty,
-        this.timePeriod = timePeriod ?? StringsConstants.empty,
         this.quantity = quantity ?? 1,
         this.themes = themes ?? <String>[],
         this.colors = colors ?? <String>[],

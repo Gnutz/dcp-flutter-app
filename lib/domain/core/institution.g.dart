@@ -8,10 +8,11 @@ part of 'institution.dart';
 
 Institution _$InstitutionFromJson(Map json) {
   return Institution(
+    id: json['id'] as String?,
     name: json['name'] as String,
     domain: json['domain'] as String?,
     alias: json['alias'] as String?,
-  )..id = json['id'] as String?;
+  );
 }
 
 Map<String, dynamic> _$InstitutionToJson(Institution instance) =>

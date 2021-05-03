@@ -328,7 +328,7 @@ abstract class SelectCostumeForDisplay implements GalleryEvent {
 class _$GalleryStateTearOff {
   const _$GalleryStateTearOff();
 
-  _GalleryState call({List<Costume>? costumes, Costume? selected}) {
+  _GalleryState call({required List<Costume> costumes, Costume? selected}) {
     return _GalleryState(
       costumes: costumes,
       selected: selected,
@@ -341,7 +341,7 @@ const $GalleryState = _$GalleryStateTearOff();
 
 /// @nodoc
 mixin _$GalleryState {
-  List<Costume>? get costumes => throw _privateConstructorUsedError;
+  List<Costume> get costumes => throw _privateConstructorUsedError;
   Costume? get selected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -354,7 +354,7 @@ abstract class $GalleryStateCopyWith<$Res> {
   factory $GalleryStateCopyWith(
           GalleryState value, $Res Function(GalleryState) then) =
       _$GalleryStateCopyWithImpl<$Res>;
-  $Res call({List<Costume>? costumes, Costume? selected});
+  $Res call({List<Costume> costumes, Costume? selected});
 }
 
 /// @nodoc
@@ -374,7 +374,7 @@ class _$GalleryStateCopyWithImpl<$Res> implements $GalleryStateCopyWith<$Res> {
       costumes: costumes == freezed
           ? _value.costumes
           : costumes // ignore: cast_nullable_to_non_nullable
-              as List<Costume>?,
+              as List<Costume>,
       selected: selected == freezed
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
@@ -390,7 +390,7 @@ abstract class _$GalleryStateCopyWith<$Res>
           _GalleryState value, $Res Function(_GalleryState) then) =
       __$GalleryStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Costume>? costumes, Costume? selected});
+  $Res call({List<Costume> costumes, Costume? selected});
 }
 
 /// @nodoc
@@ -412,7 +412,7 @@ class __$GalleryStateCopyWithImpl<$Res> extends _$GalleryStateCopyWithImpl<$Res>
       costumes: costumes == freezed
           ? _value.costumes
           : costumes // ignore: cast_nullable_to_non_nullable
-              as List<Costume>?,
+              as List<Costume>,
       selected: selected == freezed
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
@@ -424,10 +424,10 @@ class __$GalleryStateCopyWithImpl<$Res> extends _$GalleryStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GalleryState implements _GalleryState {
-  const _$_GalleryState({this.costumes, this.selected});
+  const _$_GalleryState({required this.costumes, this.selected});
 
   @override
-  final List<Costume>? costumes;
+  final List<Costume> costumes;
   @override
   final Costume? selected;
 
@@ -461,11 +461,11 @@ class _$_GalleryState implements _GalleryState {
 }
 
 abstract class _GalleryState implements GalleryState {
-  const factory _GalleryState({List<Costume>? costumes, Costume? selected}) =
-      _$_GalleryState;
+  const factory _GalleryState(
+      {required List<Costume> costumes, Costume? selected}) = _$_GalleryState;
 
   @override
-  List<Costume>? get costumes => throw _privateConstructorUsedError;
+  List<Costume> get costumes => throw _privateConstructorUsedError;
   @override
   Costume? get selected => throw _privateConstructorUsedError;
   @override

@@ -87,7 +87,7 @@ class GalleryService implements IGalleryService {
 
   @override
   Future<void> deleteImage(String costumeId, CostumeImage image) async {
-    _costumeRepository.deleteImage(_currentInstitution!.id!, costumeId, image);
+    _costumeRepository.deleteImage(_currentInstitution!.id!, costumeId, image.id!);
   }
 
   @override

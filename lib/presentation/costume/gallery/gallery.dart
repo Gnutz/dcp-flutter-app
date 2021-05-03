@@ -1,11 +1,12 @@
 import 'package:digtial_costume_platform/application/gallery/gallery_bloc.dart';
+import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
+import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../routes/routes.dart';
 
 class Gallery extends StatelessWidget {
   CostumeQuery query;
@@ -40,38 +41,40 @@ class Gallery extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemBuilder: (context, index) => InkWell(
-                      onTap: () => NavigationService.instance!.pushNamed(
-                          Routes.costumeDetails,
-                          arguments: _state.costumes![index]),
-                      child: state.costumes![index].images.isNotEmpty
-                          ? ExtendedImage.network(
-                              _state.costumes![index].images.first.downloadUrl,
-                              loadStateChanged: (ExtendedImageState state) {
-                                switch (state.extendedImageLoadState) {
-                                  case LoadState.loading:
-                                    return const CircularProgressIndicator();
-                                  case LoadState.failed:
-                                    return const Text('failed');
-                                  case LoadState.completed:
-                                    return ExtendedRawImage(
-                                        image: state.extendedImageInfo?.image,
-                                        fit: BoxFit.fill);
-                                }
-                              },
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.fill,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(30.0)),
-                              //cancelToken: cancellationToken,
-                            )
-                          : Container(
-                              color: Colors.red,
-                            ),
-                    ),
-                itemCount: _state.costumes?.length ?? 0),
+                itemBuilder: (context, index) =>
+                    _buildCostumeGridTile(_state.costumes[index]),
+                itemCount: _state.costumes.length),
           ));
     });
+  }
+
+  Widget _buildCostumeGridTile(Costume costume) {
+    return InkWell(
+        onTap: () => _bloc.add(GalleryEvent.selectCostumeForDisplay(costume)),
+        child: _buildCostumeImage(costume.images.first));
+  }
+
+  Widget _buildCostumeImage(CostumeImage? image) {
+    return image != null
+        ? ExtendedImage.network(
+            image.downloadUrl,
+            loadStateChanged: (ExtendedImageState state) {
+              switch (state.extendedImageLoadState) {
+                case LoadState.loading:
+                  return const CircularProgressIndicator();
+                case LoadState.failed:
+                  return const Center(child: Text(StringsConstants.error));
+                case LoadState.completed:
+                  return ExtendedRawImage(
+                      image: state.extendedImageInfo?.image, fit: BoxFit.fill);
+              }
+            },
+            width: 100,
+            height: 100,
+            fit: BoxFit.fill,
+            borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+            //cancelToken: cancellationToken,
+          )
+        : const Placeholder();
   }
 }

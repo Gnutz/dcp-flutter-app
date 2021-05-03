@@ -16,6 +16,7 @@ class StringsConstants {
   static const areYouSureYouWantToDeleteThisCostume = "Are you sure you want to delete this costume?";
   static const search = "Search";
   static const selectAListToAddCostumeTo = "Select one of your list to add the costume to";
+  static const error = "Error";
 }
 
 class ErrorCodeConstants {

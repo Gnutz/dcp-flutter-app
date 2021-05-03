@@ -87,7 +87,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         await costumeDocRef.collection(_IMAGES_COLLECTION).get();
     await Future.forEach(
         imagesDocCollection.docs,
-        (QueryDocumentSnapshot image) async => _deleteImage(institutionId, id, image.id));
+        (QueryDocumentSnapshot image) async => deleteImage(institutionId, id, image.id));
 
     costumeDocRef.delete();
   }
@@ -299,7 +299,8 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     return images;
   }
 
-  Future<bool> _deleteImage(
+  @override
+  Future<void> deleteImage(
       String institutionId, String costumeId, String imageId) async {
     try {
       await _deleteImageSource(institutionId, costumeId, imageId);
@@ -307,16 +308,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
           .collection(_IMAGES_COLLECTION)
           .doc(imageId)
           .delete();
-      return true;
     } on FirebaseException {
-      return false;
     }
   }
 
-  @override
-  Future<void> deleteImage(
-      String institutionId, String costumeId, CostumeImage image) {
-    // TODO: implement deleteImage
-    throw UnimplementedError();
-  }
+
 }

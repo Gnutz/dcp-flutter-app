@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'costume_image.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class CostumeImage extends Equatable{
+class CostumeImage {
   String? id;
   String downloadUrl;
   DateTime uploaded;
@@ -20,8 +21,14 @@ class CostumeImage extends Equatable{
   Map<String, dynamic> toJson() => _$CostumeImageToJson(this);
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw [id, downloadUrl, uploaded];
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CostumeImage &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          downloadUrl == other.downloadUrl &&
+          uploaded == other.uploaded;
 
-
+  @override
+  int get hashCode => id.hashCode ^ downloadUrl.hashCode ^ uploaded.hashCode;
 }

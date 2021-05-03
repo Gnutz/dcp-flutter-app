@@ -124,9 +124,6 @@ class CostumeEditForm extends StatelessWidget {
             .map((category) => DropdownMenuItem<String>(
                 value: category, child: Center(child: Text(category))))
             .toList(),
-        validator: (_) => _state.category == null
-            ? AppLocalizations.of(_context)!.youMustSelectACategory
-            : null,
         onChanged: (category) {
           _formBloc.add(CostumeFormEvent.categorySelected(category!));
         },
@@ -138,9 +135,6 @@ class CostumeEditForm extends StatelessWidget {
         decoration: textInputDecorator.copyWith(
             hintText:
                 AppLocalizations.of(_context)!.selectTheCostumeTimePeriod),
-        validator: (val) => _state.timePeriod == null
-            ? AppLocalizations.of(_context)!.youMustSelectATimePeriod
-            : null,
         items: _state.timePeriodOptions
             .map((time) =>
                 DropdownMenuItem(value: time, child: Center(child: Text(time))))

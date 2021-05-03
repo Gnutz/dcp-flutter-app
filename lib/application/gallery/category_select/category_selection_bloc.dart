@@ -37,12 +37,8 @@ class CategorySelectionBloc
 
   ///Navigates to [GalleryPage] with a [CostumeQuery] based on the selected category
   void _categorySelectedEventHandler(CategorySelected e) async {
-    // NavigationService.instance!.pushNamed(Routes.gallery,
-    //     arguments: CostumeQuery(category: e.selectedCategory));
-
-    final testCostume = await _galleryService.getCostume('1KcSgp3JGlJnUn5x6g4m');
-    NavigationService.instance!
-        .pushNamed(Routes.costumeDetails, arguments: testCostume);
+     NavigationService.instance!.pushNamed(Routes.gallery,
+         arguments: CostumeQuery(category: e.selectedCategory));
   }
 
   ///pushes a [CategorySelectionState] into the stream with the available categories
