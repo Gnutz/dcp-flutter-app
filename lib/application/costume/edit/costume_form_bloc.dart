@@ -55,7 +55,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
         yield _themeValueEventHandler(e);
       },
       themeAdded: (ThemeAdded e) async* {
-        yield _themeAdded();
+        yield _addTheme();
       },
       colorRemoved: (ColorRemoved e) async* {
         yield colorRemovedEventHandler(e);
@@ -95,13 +95,22 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   CostumeFormState _colorAddedEventHandler() {
-    final colors = state.colors!.toList();
-    colors.add(state.currentColor);
+    if (state.currentColor.isNotEmpty) {
 
-    return state.copyWith(
-        colors: colors,
-        currentColor: StringsConstants.empty,
-        unSavedChanges: true);
+      final colorToAdd = state.currentColor.toLowerCase();
+      final colors = state.colors!.toList();
+      final alreadyAdded = colors.contains(colorToAdd);
+
+      if(!alreadyAdded) {
+        colors.add(colorToAdd);
+
+        return state.copyWith(
+            colors: colors, currentColor: "", unSavedChanges: true);
+      }
+    }
+
+    return state;
+
   }
 
   Stream<CostumeFormState> _loadFormOptionsEventHandler() async* {
@@ -144,7 +153,7 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     return state.copyWith(currentTheme: e.theme, unSavedChanges: true);
   }
 
-  CostumeFormState _themeAdded() {
+  CostumeFormState _addTheme() {
 
     if (state.currentTheme.isNotEmpty) {
 
@@ -152,10 +161,12 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
       final themes = state.themes!.toList();
       final alreadyAdded = themes.contains(themeToAdd);
 
-      if(!alreadyAdded) themes.add(state.currentTheme);
+      if(!alreadyAdded) {
+        themes.add(themeToAdd);
 
-      return state.copyWith(
-          themes: themes, currentTheme: "", unSavedChanges: true);
+        return state.copyWith(
+            themes: themes, currentTheme: "", unSavedChanges: true);
+      }
     }
 
     return state;
