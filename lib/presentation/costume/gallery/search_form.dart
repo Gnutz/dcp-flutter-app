@@ -1,5 +1,4 @@
 import 'package:digtial_costume_platform/bloc/gallery/search_form/search_form_bloc.dart';
-import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
@@ -79,46 +78,54 @@ class SearchForm extends StatelessWidget {
 
   Widget _buildCategorySelection() {
     return _buildSuggestionsFormField(
-        _categoryController,
-        _state.categoryOptions,
-        StringsConstants.category,
-        (String category) =>
+        controller: _categoryController,
+        suggestions: _state.categoryOptions,
+        hintText: StringsConstants.category,
+        onSuggestionSelected: (String category) =>
             _formBloc.add(SearchFormEvent.categorySelected(category)));
   }
 
   Widget _buildSuggestionsFormField(
-      TextEditingController controller,
-      List<String> suggestions,
-      String hintText,
-      void Function(String) selectSuggestionCallBack) {
+      {required TextEditingController controller,
+      required List<String> suggestions,
+      required String hintText,
+      required void Function(String) onSuggestionSelected,
+      void Function(String?)? onChanged,
+      void Function()? onSubmitted}) {
     return TypeAheadFormField<String?>(
       textFieldConfiguration: TextFieldConfiguration(
-          controller: controller,
-          decoration: textInputDecorator.copyWith(hintText: hintText)),
+        controller: controller,
+        decoration: textInputDecorator.copyWith(hintText: hintText),
+        onChanged: onChanged,
+       onEditingComplete: onSubmitted,
+      ),
       onSuggestionSelected: (suggestion) =>
-          selectSuggestionCallBack(suggestion!),
+          onSuggestionSelected(suggestion!),
       itemBuilder: (context, suggestion) => ListTile(title: Text(suggestion!)),
       suggestionsCallback: (query) => List.of(suggestions.where((suggestion) =>
           suggestion.toLowerCase().contains(query.toLowerCase()))),
-      noItemsFoundBuilder: (_) => const ListTile(title: Text(StringsConstants.noMatchesFound)),
-      onSaved: (suggestion) => selectSuggestionCallBack(suggestion!),
+      noItemsFoundBuilder: (_) =>
+          const ListTile(title: Text(StringsConstants.noMatchesFound)),
     );
   }
 
   Widget _buildTimeSelection() {
     return _buildSuggestionsFormField(
-        _timeController,
-        _state.timePeriodOptions,
-        StringsConstants.timePeriod,
-        (time) => _formBloc.add(SearchFormEvent.timePeriodSelected(time)));
+        controller: _timeController,
+        suggestions: _state.timePeriodOptions,
+        hintText: StringsConstants.timePeriod,
+        onSuggestionSelected: (time) =>
+            _formBloc.add(SearchFormEvent.timePeriodSelected(time)));
   }
 
   Widget _buildProductionSelection() {
     return _buildSuggestionsFormField(
-        _productionController,
-        _state.productionOptions.map((production) => production.title).toList(),
-        StringsConstants.productionTitle,
-        (productionTitle) {
+        controller: _productionController,
+        suggestions: _state.productionOptions
+            .map((production) => production.title)
+            .toList(),
+        hintText: StringsConstants.productionTitle,
+        onSuggestionSelected: (productionTitle) {
           final selected = _state.productionOptions
               .where((production) => production.title == productionTitle)
               .first;
@@ -133,7 +140,8 @@ class SearchForm extends StatelessWidget {
         NavigationService.instance!.pop();
       },
       //color: Colors.pink[400],
-      child: const Text(StringsConstants.search, style: TextStyle(color: Colors.white)),
+      child: const Text(StringsConstants.search,
+          style: TextStyle(color: Colors.white)),
 
       //disabledColor: Colors.cyan,
     );
@@ -146,8 +154,7 @@ class SearchForm extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5.0))),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child:
-            Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Row(children: [
@@ -174,58 +181,45 @@ class SearchForm extends StatelessWidget {
   }
 
   Widget _buildThemesInput() {
-    //TODO: convert to lowercase
-    return Row(children: [
-      Flexible(
-        child: TextFormField(
-          decoration: textInputDecorator.copyWith(
-              hintText: AppLocalizations.of(_context)!.newTheme),
-          controller: _themeController,
-          onChanged: (theme) =>
-              _formBloc.add(SearchFormEvent.themeValueChanged(theme)),
-          onFieldSubmitted: (_) => _formBloc.add(const SearchFormEvent.themeAdded()),
-        ),
-      ),
-      const SizedBox(width: 8.0),
-      ElevatedButton(
-        onPressed: _submitTheme,
-        child: Text(AppLocalizations.of(_context)!.add,
-            style: const TextStyle(color: Colors.white)),
-      ),
-    ]);
+    TextFormField(
+      decoration: textInputDecorator.copyWith(
+          hintText: AppLocalizations.of(_context)!.newTheme),
+      controller: _themeController,
+      onChanged: (theme) =>
+          _formBloc.add(SearchFormEvent.themeValueChanged(theme)),
+      onFieldSubmitted: (_) =>
+          _formBloc.add(const SearchFormEvent.themeSubmitted()),
+    );
+
+    return _buildSuggestionsFormField(
+        hintText: AppLocalizations.of(_context)!.newTheme,
+        controller: _themeController,
+        onSuggestionSelected: (_) {},
+        onChanged: (theme) => _formBloc.add(SearchFormEvent.themeValueChanged(theme!)),
+        onSubmitted: () => _submitTheme(),
+        suggestions: _state.themeOptions);
   }
 
   Widget _buildColorsInput() {
-    //TODO convert to lowercase
-    return Row(children: [
-      Flexible(
-        child: TextFormField(
-          decoration: textInputDecorator.copyWith(
-              hintText: AppLocalizations.of(_context)!.newColor),
-          onChanged: (color) =>
-              _formBloc.add(SearchFormEvent.colorValueChanged(color)),
-          controller: _colorController,
-        ),
-      ),
-      const SizedBox(width: 8.0),
-      ElevatedButton(
-        onPressed: _submitColor,
-        child: Text(AppLocalizations.of(_context)!.add,
-            style: const TextStyle(color: Colors.white)),
-      ),
-    ]);
+    return _buildSuggestionsFormField(
+               controller:_colorController,
+                suggestions:_state.colorOptions,
+                hintText: AppLocalizations.of(_context)!.newColor,
+                  onSuggestionSelected: (color) => _colorSuggestionSelected(color),
+              onChanged: (color) => _formBloc.add(SearchFormEvent.colorValueChanged(color!)),
+              onSubmitted: () => _submitColor());
   }
 
   void _submitTheme() {
     if (_state.currentTheme.isNotEmpty) {
-      _formBloc.add(const SearchFormEvent.themeAdded());
+      _formBloc.add(const SearchFormEvent.themeSubmitted());
       _themeController.clear();
     }
   }
 
   void _submitColor() {
     if (_state.currentColor.isNotEmpty) {
-      _formBloc.add(const SearchFormEvent.colorAdded());
+      _formBloc.add(const SearchFormEvent.colorSubmitted());
       _colorController.clear();
     }
   }
@@ -258,5 +252,10 @@ class SearchForm extends StatelessWidget {
               ))
           .toList(),
     );
+  }
+
+  _colorSuggestionSelected(String color) {
+    _formBloc.add(SearchFormEvent.colorValueChanged(color));
+    _submitColor();
   }
 }

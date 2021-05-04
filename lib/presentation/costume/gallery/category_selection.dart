@@ -57,7 +57,8 @@ class CategorySelectionPage extends StatelessWidget {
             : null);
   }
 
-  void _showSearchForm() {
+
+void _showSearchForm() {
     showModalBottomSheet(
         context: _context,
         builder: (context) {

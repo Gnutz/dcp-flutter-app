@@ -98,7 +98,9 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   CostumeFormState _colorAddedEventHandler() {
     if (state.currentColor.isNotEmpty) {
 
-      final colorToAdd = state.currentColor.toLowerCase();
+      var colorToAdd = state.currentColor.toLowerCase();
+      colorToAdd = colorToAdd.trim();
+
       final colors = state.colors!.toList();
       final alreadyAdded = colors.contains(colorToAdd);
 
@@ -158,7 +160,9 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
 
     if (state.currentTheme.isNotEmpty) {
 
-      final themeToAdd = state.currentTheme.toLowerCase();
+      var themeToAdd = state.currentTheme.toLowerCase();
+      themeToAdd = themeToAdd.trim();
+
       final themes = state.themes!.toList();
       final alreadyAdded = themes.contains(themeToAdd);
 

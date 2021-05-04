@@ -21,14 +21,14 @@ class SearchFormEvent with _$SearchFormEvent {
   const factory SearchFormEvent.themeValueChanged(String theme) =
       ThemeValueChanged;
 
-  const factory SearchFormEvent.themeAdded() = ThemeAdded;
+  const factory SearchFormEvent.themeSubmitted() = ThemeSubmitted;
 
   const factory SearchFormEvent.themeRemoved(String theme) = ThemeRemoved;
 
   const factory SearchFormEvent.colorValueChanged(String color) =
       ColorValueChanged;
 
-  const factory SearchFormEvent.colorAdded() = ColorAdded;
+  const factory SearchFormEvent.colorSubmitted() = ColorSubmitted;
 
   const factory SearchFormEvent.colorRemoved(String color) = ColorRemoved;
 }

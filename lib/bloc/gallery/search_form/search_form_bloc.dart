@@ -28,14 +28,14 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
       yield _timePeriodSelectedHandler(e);
     }, fashionSelected: (e) async* {
       yield _fashionSelectedHandler(e);
-    }, colorAdded: (_) async* {
-      yield _colorAddedEventHandler();
+    }, colorSubmitted: (e) async* {
+      yield _colorSubmittedEventHandler(e);
     }, loadFormOptions: (_) async* {
       yield* _loadFormOptionsEventHandler();
     }, themeValueChanged: (ThemeValueChanged e) async* {
       yield _themeValueEventHandler(e);
-    }, themeAdded: (ThemeAdded e) async* {
-      yield _themeAdded();
+    }, themeSubmitted: (ThemeSubmitted e) async* {
+      yield _themeSubmitted();
     }, colorRemoved: (ColorRemoved e) async* {
       yield colorRemovedEventHandler(e);
     }, themeRemoved: (ThemeRemoved e) async* {
@@ -61,11 +61,30 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
     return state.copyWith(fashion: e.fashion);
   }
 
-  SearchFormState _colorAddedEventHandler() {
-    final colors = state.colors!.toList();
+  SearchFormState _colorSubmittedEventHandler(ColorSubmitted e) {
+
+    if(state.currentColor.isNotEmpty) {
+      String colorToAdd = state.currentColor.toLowerCase();
+      colorToAdd = colorToAdd.trim();
+      final colors = state.colors!.toList();
+      final alreadyAdded = colors.contains(colorToAdd);
+
+      if (!alreadyAdded) {
+        colors.add(colorToAdd);
+
+        return state.copyWith(
+            colors: colors, currentColor: "");
+      }
+    }
+
+    return state;
+
+    /*final colors = state.colors!.toList();
+    final colorToAdd = e.color.toLowerCase();
+    colo
     colors.add(state.currentColor);
 
-    return state.copyWith(colors: colors, currentColor: "");
+    return state.copyWith(colors: colors, currentColor: ""); */
   }
 
   Stream<SearchFormState> _loadFormOptionsEventHandler() async* {
@@ -83,7 +102,7 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
     return state.copyWith(currentTheme: e.theme);
   }
 
-  SearchFormState _themeAdded() {
+  SearchFormState _themeSubmitted() {
     if (state.currentTheme.isNotEmpty) {
       final themes = state.themes!.toList();
       themes.add(state.currentTheme);

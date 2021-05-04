@@ -126,39 +126,6 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
     Query firebaseQuery = baseQueryBuilder(collectionRef, query);
 
-   /* final anyThemeTerms = query.themes == null || query.themes!.isNotEmpty;
-    final anyColorTerms = query.colors == null || query.colors!.isNotEmpty;
-
-    if(!anyThemeTerms && !anyColorTerms){
-      final costumes = await _getCostumes(baseQuery);
-
-      await Future.wait(costumes.map((costume) async {
-        final images = await _getImages(institutionId, costume.id!);
-        costume.images = images;
-      }));
-
-      return costumes;
-    }
-
-    List<Costume>? resultsFromColorSet;
-    if(query.colors != null && query.colors!.isNotEmpty) {
-      resultsFromColorSet = await _performQueryForTagsSet(baseQuery, COLORS_KEY, query.colors);
-    }
-
-    List<Costume>? resultsFromThemesSet;
-    if(query.themes != null && query.themes!.isNotEmpty) {
-      resultsFromThemesSet = await _performQueryForTagsSet(baseQuery, THEMES_KEY, query.themes);
-    }
-
-    late List<Costume> costumes;
-    if(resultsFromThemesSet != null && resultsFromColorSet != null){
-      costumes = resultsFromThemesSet.where((costume) => resultsFromColorSet!.contains(costume)
-      ).toList();
-    }
-    else{
-      costumes = (resultsFromThemesSet ?? resultsFromColorSet)!;
-    } */
-
     final costumes = await _getCostumes(firebaseQuery);
 
     await Future.wait(costumes.map((costume) async {

@@ -2,6 +2,7 @@ import 'package:digtial_costume_platform/bloc/gallery/category_select/category_s
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
+import 'package:digtial_costume_platform/presentation/costume/gallery/category_card.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,7 @@ class CategoryGrid extends StatelessWidget {
   Widget _buildCategoryGrid(BuildContext context, CategorySelectionState state) {
     return Container(
       //buttom insets work for navbar with floating action button
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
       child: GridView.count(
           crossAxisCount: 2,
           semanticChildCount: state.categories.length,
@@ -47,33 +48,3 @@ class CategoryGrid extends StatelessWidget {
   }
 }
 
-class CategoryCard extends StatelessWidget {
-  final String costumeCategory;
-
-  const CategoryCard({Key? key, required this.costumeCategory})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: MyColorTheme.inputDecoratorFocusedBorderOutlineSideColor,
-      child: Center(
-        child: Column(
-          children: [
-            Expanded(
-                child: Image.asset(
-                    "images/icons/costume_categories/$costumeCategory.png")),
-            Container(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: Text(costumeCategory..capitalize(),
-                  style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: MyColorTheme.buttonTextColor)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
