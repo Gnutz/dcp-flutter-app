@@ -1,5 +1,5 @@
-import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
-import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
+import 'package:digtial_costume_platform/bloc/auth/auth_bloc.dart';
+import 'package:digtial_costume_platform/bloc/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/search_form.dart';

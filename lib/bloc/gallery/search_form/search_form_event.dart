@@ -13,7 +13,7 @@ class SearchFormEvent with _$SearchFormEvent {
   const factory SearchFormEvent.fashionSelected(Fashion fashion) =
       FashionSelected;
 
-  const factory SearchFormEvent.productionSelected(String productionTitle) =
+  const factory SearchFormEvent.productionSelected(Production production) =
       ProductionSelected;
 
   const factory SearchFormEvent.searchPressed() = SearchPressed;

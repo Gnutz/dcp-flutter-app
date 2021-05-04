@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
-import 'package:digtial_costume_platform/services/i_gallery_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
+
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';

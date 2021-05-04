@@ -1,7 +1,7 @@
 part of 'costume_details_bloc.dart';
 
 @freezed
-abstract class CostumeDetailsEvent with _$CostumeDetailsEvent {
+class CostumeDetailsEvent with _$CostumeDetailsEvent {
   const factory CostumeDetailsEvent.loadProductionOptions() = LoadProductionOptions;
 
   const factory CostumeDetailsEvent.deleteCostume() = DeleteCostume;
@@ -16,6 +16,6 @@ abstract class CostumeDetailsEvent with _$CostumeDetailsEvent {
 
   const factory CostumeDetailsEvent.checkOutToNewProductionPressed() = CheckOutToNewProductionPressed;
 
-  const factory CostumeDetailsEvent.initalize(Costume costume) = Initalize;
+  const factory CostumeDetailsEvent.initialize(Costume costume) = Initialize;
 }
 

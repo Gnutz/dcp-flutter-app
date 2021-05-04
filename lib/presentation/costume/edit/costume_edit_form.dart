@@ -1,10 +1,8 @@
-import 'package:digtial_costume_platform/application/costume/edit/costume_form_bloc.dart';
-import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/bloc/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

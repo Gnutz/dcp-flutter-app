@@ -1,13 +1,13 @@
+import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'fashion.dart';
+import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 
 part 'costume_query.freezed.dart';
 
 @freezed
 class CostumeQuery with _$CostumeQuery {
   const factory CostumeQuery({
-    String? production,
+    Production? production,
     Fashion? fashion,
     String? category,
     String? timePeriod,

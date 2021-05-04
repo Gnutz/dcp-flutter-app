@@ -3,8 +3,8 @@
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../application/costume/details/costume_details_bloc.dart';
-import '../application/costume/edit/costume_form_bloc.dart';
+import '../bloc/costume/details/costume_details_bloc.dart';
+import '../bloc/costume/edit/costume_form_bloc.dart';
 import '../locator.dart';
 import 'costume/details/costume_details_display.dart';
 import 'costume/edit/costume_edit_form.dart';
@@ -76,7 +76,7 @@ class PageFactory {
           return BlocProvider(
               create: (context) =>
               Locator().locator<CostumeDetailsBloc>()
-                ..add(CostumeDetailsEvent.initalize(costume)),
+                ..add(CostumeDetailsEvent.initialize(costume)),
               child: CostumeDetailsDisplay(costume: costume));
         }
       case Routes.categorySelection:
@@ -85,7 +85,7 @@ class PageFactory {
           return BlocProvider(
               create: (context) =>
               Locator().locator<CostumeDetailsBloc>()
-                ..add(CostumeDetailsEvent.initalize(costume)),
+                ..add(CostumeDetailsEvent.initialize(costume)),
               child: CostumeDetailsDisplay(costume: costume));
         }
       case Routes.gallery:
@@ -95,7 +95,7 @@ class PageFactory {
           return BlocProvider(
               create: (context) =>
               Locator().locator<CostumeDetailsBloc>()
-                ..add(CostumeDetailsEvent.initalize(costume)),
+                ..add(CostumeDetailsEvent.initialize(costume)),
               child: CostumeDetailsDisplay(costume: costume));
         }
       default:
@@ -104,7 +104,7 @@ class PageFactory {
           return BlocProvider(
               create: (context) =>
               Locator().locator<CostumeDetailsBloc>()
-                ..add(CostumeDetailsEvent.initalize(costume)),
+                ..add(CostumeDetailsEvent.initialize(costume)),
               child: CostumeDetailsDisplay(costume: costume));
         }
     }

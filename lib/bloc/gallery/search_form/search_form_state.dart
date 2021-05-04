@@ -3,12 +3,14 @@ part of 'search_form_bloc.dart';
 @freezed
 class SearchFormState with _$SearchFormState {
   const factory SearchFormState({
-    required List<String> productionOptions,
+    required List<String> colorOptions,
+    required List<String> themeOptions,
+    required List<Production> productionOptions,
     required List<String> categoryOptions,
     required List<String> timePeriodOptions,
     required String currentColor,
     required String currentTheme,
-    String? productionTitle,
+    Production? production,
     Fashion? fashion,
     String? category,
     String? timePeriod,
@@ -17,7 +19,9 @@ class SearchFormState with _$SearchFormState {
   }) = _SearchFormState;
 
   factory SearchFormState.initial() => const SearchFormState(
-      productionOptions: <String>[],
+      themeOptions: <String>[],
+      colorOptions: <String>[],
+      productionOptions: <Production>[],
       categoryOptions: <String>[],
       timePeriodOptions: <String>[],
       currentColor: StringsConstants.empty,

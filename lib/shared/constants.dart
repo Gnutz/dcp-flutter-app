@@ -17,6 +17,7 @@ class StringsConstants {
   static const search = "Search";
   static const selectAListToAddCostumeTo = "Select one of your list to add the costume to";
   static const error = "Error";
+  static const noMatchesFound = "Matches no available suggestions";
 }
 
 class ErrorCodeConstants {

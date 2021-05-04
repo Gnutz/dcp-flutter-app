@@ -23,6 +23,7 @@ class Costume extends Equatable {
   String? timePeriod;
   @JsonKey(fromJson: tagsFromJson, toJson: tagsToJson)
   List<String> themes;
+  @JsonKey(fromJson: tagsFromJson, toJson: tagsToJson)
   List<String> colors;
   List<Production> productions;
 
@@ -80,7 +81,6 @@ class Costume extends Equatable {
   Map<String, dynamic> toJson() => _$CostumeToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         id,
         edited,
@@ -158,7 +158,7 @@ class _StatusConverter<T> implements JsonConverter<Status?, Object?> {
 }
 
 List<String> tagsFromJson(Object? json) {
-  if (json is Map<String, bool>) {
+  if (json is Map<String, dynamic>) {
     List<String> tags = <String>[];
     json.forEach((key, value) {
       if (value == true) {

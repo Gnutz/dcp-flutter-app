@@ -1,6 +1,6 @@
-import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
-import 'package:digtial_costume_platform/application/costume/details/costume_details_bloc.dart';
-import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
+import 'package:digtial_costume_platform/bloc/auth/auth_bloc.dart';
+import 'package:digtial_costume_platform/bloc/costume/details/costume_details_bloc.dart';
+import 'package:digtial_costume_platform/bloc/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
@@ -47,7 +47,7 @@ class CostumeDetailsPage extends StatelessWidget {
       body: SafeArea(
         child: BlocProvider(
           create: (context) => Locator().locator<CostumeDetailsBloc>()
-            ..add(CostumeDetailsEvent.initalize(costume)),
+            ..add(CostumeDetailsEvent.initialize(costume)),
           child: CostumeDetailsDisplay(costume: costume),
         ),
       ),

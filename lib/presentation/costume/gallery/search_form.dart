@@ -1,5 +1,4 @@
-import 'package:digtial_costume_platform/application/gallery/search_form/search_form_bloc.dart';
-import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/bloc/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
@@ -31,7 +30,7 @@ class SearchForm extends StatelessWidget {
       _appLocation = AppLocalizations.of(_context);
       _categoryController.text = _state.category ?? "";
       _timeController.text = _state.timePeriod ?? "";
-      _productionController.text = _state.productionTitle ?? "";
+      _productionController.text = _state.production?.title ?? "";
 
       return Container(
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 42),
@@ -100,7 +99,7 @@ class SearchForm extends StatelessWidget {
       itemBuilder: (context, suggestion) => ListTile(title: Text(suggestion!)),
       suggestionsCallback: (query) => List.of(suggestions.where((suggestion) =>
           suggestion.toLowerCase().contains(query.toLowerCase()))),
-      noItemsFoundBuilder: (_) => const Text("Matches no available suggestions"),
+      noItemsFoundBuilder: (_) => const ListTile(title: Text(StringsConstants.noMatchesFound)),
       onSaved: (suggestion) => selectSuggestionCallBack(suggestion!),
     );
   }
@@ -116,10 +115,14 @@ class SearchForm extends StatelessWidget {
   Widget _buildProductionSelection() {
     return _buildSuggestionsFormField(
         _productionController,
-        _state.productionOptions,
+       [],
         "Production Titel",
-        (productionTitle) =>
-            _formBloc.add(SearchFormEvent.productionSelected(productionTitle)));
+        (productionTitle) {
+          final selected = _state.productionOptions
+              .where((production) => production.title == productionTitle)
+              .first;
+          _formBloc.add(SearchFormEvent.productionSelected(selected));
+        });
   }
 
   Widget _buildSubmitButton() {

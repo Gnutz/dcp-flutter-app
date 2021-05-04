@@ -1,4 +1,4 @@
-import 'package:digtial_costume_platform/application/auth/sign_in/sign_in_bloc.dart';
+import 'package:digtial_costume_platform/bloc/auth/sign_in/sign_in_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/auth/sign_in/sign_in_form.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';

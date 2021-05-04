@@ -1,4 +1,4 @@
-import 'package:digtial_costume_platform/application/auth/register/register_bloc.dart';
+import 'package:digtial_costume_platform/bloc/auth/register/register_bloc.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/presentation/auth/validators.dart';

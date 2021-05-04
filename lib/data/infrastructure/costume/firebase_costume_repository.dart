@@ -124,12 +124,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .doc(institutionId)
         .collection(_COSTUMES_COLLECTION);
 
-    const COLORS_KEY = "colors";
-    const THEMES_KEY = "themes";
+    Query firebaseQuery = baseQueryBuilder(collectionRef, query);
 
-    Query baseQuery = baseQueryBuilder(collectionRef, query);
-
-    final anyThemeTerms = query.themes == null || query.themes!.isNotEmpty;
+   /* final anyThemeTerms = query.themes == null || query.themes!.isNotEmpty;
     final anyColorTerms = query.colors == null || query.colors!.isNotEmpty;
 
     if(!anyThemeTerms && !anyColorTerms){
@@ -160,7 +157,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     }
     else{
       costumes = (resultsFromThemesSet ?? resultsFromColorSet)!;
-    }
+    } */
+
+    final costumes = await _getCostumes(firebaseQuery);
 
     await Future.wait(costumes.map((costume) async {
       final images = await _getImages(institutionId, costume.id!);
@@ -179,17 +178,19 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   Query baseQueryBuilder(
       CollectionReference collectionReference, CostumeQuery query) {
     // ignore: constant_identifier_names
-    const PRODUCTION_KEY = "production";
+    const PRODUCTIONS_KEY = "productions";
     // ignore: constant_identifier_names
     const CATEGORY_KEY = "category";
     // ignore: constant_identifier_names
     const FASHION_KEY = "fashion";
+    const COLORS_KEY = "colors";
+    const THEMES_KEY = "themes";
 
 
     Query seedQuery = collectionReference;
 
     if (query.production != null) {
-      seedQuery = seedQuery.where(PRODUCTION_KEY, isEqualTo: query.production);
+      seedQuery = seedQuery.where(PRODUCTIONS_KEY, arrayContains: query.production);
     }
 
     if (query.category != null) {
@@ -201,17 +202,18 @@ class FirebaseCostumeRepository implements ICostumeRepository {
           isEqualTo: FashionEnumToStringMapper.fashionToString(query.fashion!));
     }
 
-    return seedQuery;
-  }
-
-  Future<List<Costume>> _performQueryForTagsSet(Query seedQuery, String key, List<String>? tags) async {
-    Query query = seedQuery;
-
-    if (tags != null && tags.isNotEmpty) {
-      query = seedQuery.where(key, arrayContains: tags);
+    if (query.themes != null ) {
+      query.themes!.forEach((theme) {
+        seedQuery = seedQuery.where('$THEMES_KEY.$theme', isEqualTo: true);
+      });
     }
 
-    return _getCostumes(query);
+      if (query.colors != null ) {
+        query.colors!.forEach((color) {
+          seedQuery = seedQuery.where('$COLORS_KEY.$color',isEqualTo: true);
+        });
+      }
+        return seedQuery;
   }
 
   Future<List<Costume>> _getCostumes(Query query) async {

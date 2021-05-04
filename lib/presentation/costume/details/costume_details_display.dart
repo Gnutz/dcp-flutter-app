@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:digtial_costume_platform/application/auth/auth_bloc.dart';
-import 'package:digtial_costume_platform/application/costume/details/costume_details_bloc.dart';
+import 'package:digtial_costume_platform/bloc/auth/auth_bloc.dart';
+import 'package:digtial_costume_platform/bloc/costume/details/costume_details_bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_list.dart';
@@ -8,7 +8,6 @@ import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/production_card.dart';
-import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';

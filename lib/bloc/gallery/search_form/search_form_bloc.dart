@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:digtial_costume_platform/domain/costume/costume.dart';
+import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
-import 'package:digtial_costume_platform/services/i_gallery_service.dart';
+import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -71,8 +71,7 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
   Stream<SearchFormState> _loadFormOptionsEventHandler() async* {
     final categoryOptions = await _galleryService.getCategories();
     final timePeriodOptions = await _galleryService.getTimePeriods();
-    final productions = await _galleryService.getProductions();
-    final productionOptions = productions.map((e) => e.title).toList();
+    final productionOptions = await _galleryService.getProductions();
 
     yield state.copyWith(
         categoryOptions: categoryOptions,
@@ -113,7 +112,7 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
 
   void _searchPressed() {
     final query = CostumeQuery(
-        production: state.productionTitle,
+        production: state.production,
         themes: state.themes,
         colors: state.colors,
         category: state.category,
@@ -130,6 +129,6 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
   }
 
   SearchFormState _productionSelectedEventHandler(ProductionSelected e) {
-    return state.copyWith(productionTitle: e.productionTitle);
+    return state.copyWith(production: e.production);
   }
 }

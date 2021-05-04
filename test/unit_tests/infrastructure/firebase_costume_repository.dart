@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:digtial_costume_platform/infrastructure/costume/firebase_costume_repository.dart';
+import 'package:digtial_costume_platform/data/infrastructure/costume/firebase_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 
 import 'firebase_costume_repository.mocks.dart';

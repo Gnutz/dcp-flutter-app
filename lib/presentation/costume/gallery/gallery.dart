@@ -1,9 +1,6 @@
-import 'package:digtial_costume_platform/application/gallery/gallery_bloc.dart';
-import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
+import 'package:digtial_costume_platform/bloc/gallery/gallery_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
-import 'package:digtial_costume_platform/shared/constants.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
