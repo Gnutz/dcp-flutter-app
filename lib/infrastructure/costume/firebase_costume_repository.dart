@@ -118,22 +118,49 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   @override
-  Future<List<Costume>> getCostumes(
-      String institutionId, CostumeQuery query) async {
+  Future<List<Costume>> getCostumes(String institutionId, CostumeQuery query) async {
     final collectionRef = _store
         .collection(_INSTITUTIONS_COLLECTION)
         .doc(institutionId)
         .collection(_COSTUMES_COLLECTION);
 
-    final buildQuery = queryFactoryMethod(collectionRef, query);
+    const COLORS_KEY = "colors";
+    const THEMES_KEY = "themes";
 
-    final result = await buildQuery.get();
+    Query baseQuery = baseQueryBuilder(collectionRef, query);
 
-    final costumes = <Costume>[];
-    result.docs.forEach((doc) {
-      final costume = Costume.fromJson(doc.data())..id = doc.id;
-      costumes.add(costume);
-    });
+    final anyThemeTerms = query.themes == null || query.themes!.isNotEmpty;
+    final anyColorTerms = query.colors == null || query.colors!.isNotEmpty;
+
+    if(!anyThemeTerms && !anyColorTerms){
+      final costumes = await _getCostumes(baseQuery);
+
+      await Future.wait(costumes.map((costume) async {
+        final images = await _getImages(institutionId, costume.id!);
+        costume.images = images;
+      }));
+
+      return costumes;
+    }
+
+    List<Costume>? resultsFromColorSet;
+    if(query.colors != null && query.colors!.isNotEmpty) {
+      resultsFromColorSet = await _performQueryForTagsSet(baseQuery, COLORS_KEY, query.colors);
+    }
+
+    List<Costume>? resultsFromThemesSet;
+    if(query.themes != null && query.themes!.isNotEmpty) {
+      resultsFromThemesSet = await _performQueryForTagsSet(baseQuery, THEMES_KEY, query.themes);
+    }
+
+    late List<Costume> costumes;
+    if(resultsFromThemesSet != null && resultsFromColorSet != null){
+      costumes = resultsFromThemesSet.where((costume) => resultsFromColorSet!.contains(costume)
+      ).toList();
+    }
+    else{
+      costumes = (resultsFromThemesSet ?? resultsFromColorSet)!;
+    }
 
     await Future.wait(costumes.map((costume) async {
       final images = await _getImages(institutionId, costume.id!);
@@ -149,7 +176,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .set(updated.toJson());
   }
 
-  Query queryFactoryMethod(
+  Query baseQueryBuilder(
       CollectionReference collectionReference, CostumeQuery query) {
     // ignore: constant_identifier_names
     const PRODUCTION_KEY = "production";
@@ -157,8 +184,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     const CATEGORY_KEY = "category";
     // ignore: constant_identifier_names
     const FASHION_KEY = "fashion";
-    const COLORS_KEY = "colors";
-    const THEMES_KEY = "themes";
+
 
     Query seedQuery = collectionReference;
 
@@ -178,11 +204,22 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     return seedQuery;
   }
 
-  Query createQueryForTagsSet(Query seedQuery, String key, List<String>? tags) {
+  Future<List<Costume>> _performQueryForTagsSet(Query seedQuery, String key, List<String>? tags) async {
+    Query query = seedQuery;
+
     if (tags != null && tags.isNotEmpty) {
-      return seedQuery.where(key, arrayContainsAny: tags);
+      query = seedQuery.where(key, arrayContains: tags);
     }
-    return seedQuery;
+
+    return _getCostumes(query);
+  }
+
+  Future<List<Costume>> _getCostumes(Query query) async {
+    final results = await query.get();
+    final costumes = <Costume>[];
+
+    results.docs.forEach((doc) => costumes.add(Costume.fromJson(doc.data())..id = doc.id));
+    return costumes;
   }
 
   @override

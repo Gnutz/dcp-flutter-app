@@ -14,8 +14,7 @@ Costume _$CostumeFromJson(Map json) {
     created: DateTime.parse(json['created'] as String),
     quantity: json['quantity'] as int?,
     edited: DateTime.parse(json['edited'] as String),
-    themes:
-        (json['themes'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    themes: tagsFromJson(json['themes']),
     colors:
         (json['colors'] as List<dynamic>?)?.map((e) => e as String).toList(),
     productions: (json['productions'] as List<dynamic>?)
@@ -35,7 +34,7 @@ Map<String, dynamic> _$CostumeToJson(Costume instance) => <String, dynamic>{
       'category': instance.category,
       'quantity': instance.quantity,
       'timePeriod': instance.timePeriod,
-      'themes': instance.themes,
+      'themes': tagsToJson(instance.themes),
       'colors': instance.colors,
       'productions': instance.productions.map((e) => e.toJson()).toList(),
       'storageLocation': instance.storageLocation?.toJson(),

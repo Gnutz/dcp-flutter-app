@@ -21,6 +21,7 @@ class Costume extends Equatable {
   String? category;
   int quantity;
   String? timePeriod;
+  @JsonKey(fromJson: tagsFromJson, toJson: tagsToJson)
   List<String> themes;
   List<String> colors;
   List<Production> productions;
@@ -155,3 +156,58 @@ class _StatusConverter<T> implements JsonConverter<Status?, Object?> {
     }
   }
 }
+
+List<String> tagsFromJson(Object? json) {
+  if (json is Map<String, bool>) {
+    List<String> tags = <String>[];
+    json.forEach((key, value) {
+      if (value == true) {
+        tags.add(key);
+      }
+    });
+    return tags;
+  }
+
+  return <String>[];
+}
+
+Map<String, dynamic>? tagsToJson(List<String>? tags) {
+  final json = <String, bool>{};
+  if (tags != null) {
+    tags.forEach((tag) {
+      json[tag] = true;
+    });
+    return json;
+  }
+
+}
+
+ /*
+class _TagsConverter<T> implements JsonConverter<List<String>?, Object?> {
+  const _TagsConverter();
+
+  @override
+  List<String>? fromJson(Object? json) {
+    if (json is Map<String, bool>) {
+      List<String> tags = <String>[];
+      json.forEach((key, value) {
+        if (value == true) {
+          tags.add(key);
+        }
+      });
+      return tags;
+    }
+  }
+
+  @override
+  Object? toJson(List<String>? tags) {
+    final json = <String, dynamic>{};
+    if (tags != null) {
+      tags.forEach((tag) {
+        json[tag] = true;
+      });
+      return json;
+    }
+  }
+}
+ */

@@ -24,10 +24,7 @@ class CostumeImage {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is CostumeImage &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          downloadUrl == other.downloadUrl &&
-          uploaded == other.uploaded;
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode ^ downloadUrl.hashCode ^ uploaded.hashCode;

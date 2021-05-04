@@ -185,8 +185,7 @@ class CostumeEditForm extends StatelessWidget {
           controller: _themeHolder,
           onChanged: (theme) =>
               _formBloc.add(CostumeFormEvent.themeValueChanged(theme)),
-          onFieldSubmitted: (_) =>
-              _formBloc.add(const CostumeFormEvent.themeAdded()),
+          onFieldSubmitted: (_) => _submitTheme()
         ),
       ),
       const SizedBox(width: 8.0),
@@ -207,6 +206,7 @@ class CostumeEditForm extends StatelessWidget {
           onChanged: (color) =>
               _formBloc.add(CostumeFormEvent.colorValueChanged(color)),
           controller: _colorHolder,
+          onFieldSubmitted: (_) => _submitColor(),
         ),
       ),
       const SizedBox(width: 8.0),
