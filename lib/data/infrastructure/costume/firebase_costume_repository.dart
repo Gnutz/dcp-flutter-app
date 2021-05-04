@@ -190,7 +190,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     Query seedQuery = collectionReference;
 
     if (query.production != null) {
-      seedQuery = seedQuery.where(PRODUCTIONS_KEY, arrayContains: query.production);
+      seedQuery = seedQuery.where(PRODUCTIONS_KEY, arrayContains: query.production?.toJson());
     }
 
     if (query.category != null) {

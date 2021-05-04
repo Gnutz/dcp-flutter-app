@@ -18,6 +18,10 @@ class StringsConstants {
   static const selectAListToAddCostumeTo = "Select one of your list to add the costume to";
   static const error = "Error";
   static const noMatchesFound = "Matches no available suggestions";
+  static const category = "Category";
+  static const timePeriod = "Time Period";
+  static const productionTitle = "Production Title";
+
 }
 
 class ErrorCodeConstants {

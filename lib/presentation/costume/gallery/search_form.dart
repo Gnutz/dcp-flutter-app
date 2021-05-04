@@ -1,4 +1,5 @@
 import 'package:digtial_costume_platform/bloc/gallery/search_form/search_form_bloc.dart';
+import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
@@ -80,7 +81,7 @@ class SearchForm extends StatelessWidget {
     return _buildSuggestionsFormField(
         _categoryController,
         _state.categoryOptions,
-        "Category",
+        StringsConstants.category,
         (String category) =>
             _formBloc.add(SearchFormEvent.categorySelected(category)));
   }
@@ -108,15 +109,15 @@ class SearchForm extends StatelessWidget {
     return _buildSuggestionsFormField(
         _timeController,
         _state.timePeriodOptions,
-        "TimePeriod",
+        StringsConstants.timePeriod,
         (time) => _formBloc.add(SearchFormEvent.timePeriodSelected(time)));
   }
 
   Widget _buildProductionSelection() {
     return _buildSuggestionsFormField(
         _productionController,
-       [],
-        "Production Titel",
+        _state.productionOptions.map((production) => production.title).toList(),
+        StringsConstants.productionTitle,
         (productionTitle) {
           final selected = _state.productionOptions
               .where((production) => production.title == productionTitle)
