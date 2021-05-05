@@ -8,6 +8,5 @@ class CreatorRoleRequest {
   User requestedBy;
 
   CreatorRoleRequest({required this.requestedBy});
-
   Map<String, dynamic> toJson() => _$CreatorRoleRequestToJson(this);
 }

@@ -72,7 +72,7 @@ class FirebaseAuthRepository implements IAuthService {
       final result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       final firebaseUser = result.user;
-      user.uid = firebaseUser?.uid;
+      user.id = firebaseUser?.uid;
 
       await _userRepository.addUser(user);
 

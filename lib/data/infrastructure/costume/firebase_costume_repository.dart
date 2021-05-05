@@ -6,7 +6,7 @@ import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
-import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
+import 'package:digtial_costume_platform/data/infrastructure/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';

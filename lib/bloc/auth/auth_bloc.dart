@@ -36,7 +36,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthState _authenticate(User? user) {
     if (user != null) {
-      _galleryService.setInstitution(user.institution!);
+      _galleryService.setInstitution(user.institution);
       return MyAuthenticated(user: user);
     } else {
       return UnAuthenticated();

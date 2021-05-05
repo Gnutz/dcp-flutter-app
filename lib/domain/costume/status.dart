@@ -51,7 +51,6 @@ class InUse extends Equatable implements Status{
   Map<String, dynamic> toJson() => _$InUseToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [inUseFor];
 }
 
@@ -70,7 +69,6 @@ class RentedOut  extends Equatable implements Status{
   Map<String, dynamic> toJson() => _$RentedOutToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [rentedBy, rentedFor, rentedOutTo];
 
 }

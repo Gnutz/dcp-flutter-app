@@ -9,7 +9,7 @@ import 'package:digtial_costume_platform/bloc/gallery/gallery_bloc.dart';
 import 'package:digtial_costume_platform/bloc/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/i_user_service.dart';
-import 'package:digtial_costume_platform/domain/costume/i_costume_repository.dart';
+import 'package:digtial_costume_platform/data/infrastructure/costume/i_costume_repository.dart';
 import 'package:digtial_costume_platform/data/infrastructure/auth/firebase_user_repository.dart';
 import 'package:digtial_costume_platform/data/infrastructure/costume/firebase_costume_repository.dart';
 import 'package:digtial_costume_platform/data/services/gallery_service.dart';

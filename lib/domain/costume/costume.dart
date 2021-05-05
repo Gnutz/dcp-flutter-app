@@ -2,10 +2,8 @@ import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/status.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
-import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 import 'fashion.dart';
 
 part 'costume.g.dart';
@@ -26,7 +24,6 @@ class Costume extends Equatable {
   @JsonKey(fromJson: tagsFromJson, toJson: tagsToJson)
   List<String> colors;
   List<Production> productions;
-
   @JsonKey(ignore: true)
   List<CostumeImage> images;
 
@@ -181,33 +178,3 @@ Map<String, dynamic>? tagsToJson(List<String>? tags) {
   }
 
 }
-
- /*
-class _TagsConverter<T> implements JsonConverter<List<String>?, Object?> {
-  const _TagsConverter();
-
-  @override
-  List<String>? fromJson(Object? json) {
-    if (json is Map<String, bool>) {
-      List<String> tags = <String>[];
-      json.forEach((key, value) {
-        if (value == true) {
-          tags.add(key);
-        }
-      });
-      return tags;
-    }
-  }
-
-  @override
-  Object? toJson(List<String>? tags) {
-    final json = <String, dynamic>{};
-    if (tags != null) {
-      tags.forEach((tag) {
-        json[tag] = true;
-      });
-      return json;
-    }
-  }
-}
- */

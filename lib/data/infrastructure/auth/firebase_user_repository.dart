@@ -17,7 +17,7 @@ class FirebaseUserRepository implements IUserService {
   Future<void> addUser(User user) async {
       await _store
           .collection(_USERS_COLLECTION)
-          .doc(user.uid)
+          .doc(user.id)
           .set(user.toJson());
   }
 
@@ -26,7 +26,7 @@ class FirebaseUserRepository implements IUserService {
     final snapshot = await _store.collection(_USERS_COLLECTION).doc(id).get();
     final json = snapshot.data();
     if (json != null) {
-      return User.fromJson(json)..uid = id;
+      return User.fromJson(json)..id = id;
     }
     return null;
   }
@@ -35,7 +35,7 @@ class FirebaseUserRepository implements IUserService {
   Future<void> addCreatorRequest(User user) async {
     _store
         .collection(_INSTITUTIONS_COLLECTION)
-        .doc(user.institution!.id)
+        .doc(user.institution.id)
         .collection(_CREATOR_REQUESTS_COLLECTION)
         .add(CreatorRoleRequest(requestedBy: user).toJson());
   }

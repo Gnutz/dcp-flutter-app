@@ -2,7 +2,7 @@ import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 
-import 'costume.dart';
+import '../../../domain/costume/costume.dart';
 
 abstract class ICostumeRepository {
   Future<List<Costume>> getCostumes(String institutionId, CostumeQuery query);
