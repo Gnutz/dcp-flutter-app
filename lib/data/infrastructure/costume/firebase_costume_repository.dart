@@ -38,6 +38,8 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   static const _CURRENT_PRODUCTIONS = "current";
   // ignore: constant_identifier_names
   static const _IMAGES_COLLECTION = "images";
+  static const _THEMES_COLLECTION = "themes";
+  static const _COLORS_COLLECTION = "colors";
 
   Future<bool> _deleteImageSource(
       String institution, String costume, String id) async {
@@ -71,6 +73,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   @override
   Future<String?> createCostume(String institutionId, Costume costume) async {
+   await _addThemes(institutionId, costume.themes);
+    await _addColors(institutionId, costume.colors);
+
     return (await _store
               .collection(_INSTITUTIONS_COLLECTION)
               .doc(institutionId)
@@ -138,6 +143,9 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   @override
   Future<void> updateCostume(String institutionId, Costume updated) async {
+    await _addThemes(institutionId, updated.themes);
+    await _addColors(institutionId, updated.colors);
+
     _costumeReferenceFactory(institutionId, updated.id!)
         .set(updated.toJson());
   }
@@ -318,6 +326,135 @@ class FirebaseCostumeRepository implements ICostumeRepository {
           .delete();
     } on FirebaseException {
     }
+  }
+
+  @override
+  Future<List<String>> getColors(String institutionId) async {
+    const COLOR_KEY = "color";
+    final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_METADATA_COLLECTION)
+        .doc(_METADATA)
+        .collection(_COLORS_COLLECTION)
+        .orderBy(COLOR_KEY)
+        .get();
+
+    final colors = <String>[];
+    result.docs.forEach((doc) => colors.add(doc[COLOR_KEY] as String));
+
+    return colors;
+  }
+
+  @override
+  Future<List<String>> getThemes(String institutionId) async {
+    const THEME_KEY = "theme";
+    final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_METADATA_COLLECTION)
+        .doc(_METADATA)
+        .collection(_THEMES_COLLECTION)
+        .orderBy(THEME_KEY)
+        .get();
+
+    final themes = <String>[];
+    result.docs.forEach((doc) => themes.add(doc[THEME_KEY] as String));
+
+    return themes;
+  }
+
+  _addThemes(String institutionId, List<String> themes) async {
+    await Future.forEach(themes, (String theme) async => await _attemptAddingTheme(institutionId, theme));
+  }
+
+  _attemptAddingTheme(String institutionId, String theme) async {
+    await _store.runTransaction((transaction) async {
+
+      String? storedTheme = await _getTheme(institutionId, theme);
+      if(storedTheme == null) {
+        await _addTheme(institutionId, theme);
+      }
+
+    });
+
+
+  }
+
+  Future<String?>_getTheme(String institutionId, String theme) async {
+    const THEME_KEY = "theme";
+
+      final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_METADATA_COLLECTION)
+        .doc(_METADATA)
+        .collection(_THEMES_COLLECTION)
+        .where(THEME_KEY, isEqualTo: theme)
+        .limit(1)
+        .get();
+      if(result != null) {
+        return result.docs.first[THEME_KEY] as String?;
+      }
+
+  }
+
+  Future<void> _addTheme(String institutionId, String theme) async {
+    const THEME_KEY = "theme";
+
+    await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_METADATA_COLLECTION)
+        .doc(_METADATA)
+        .collection(_THEMES_COLLECTION)
+        .add({THEME_KEY: theme});
+
+  }
+
+  Future<void> _addColors(String institutionId, List<String> colors) async {
+    await Future.forEach(colors, (String color) async => await  _attemptAddingColor(institutionId, color));
+  }
+
+  Future<void>_attemptAddingColor(String institutionId, String color) async {
+    await _store.runTransaction((transaction) async {
+      String? storedColor = await _getColor(institutionId, color);
+      if(storedColor == null) {
+        await _addColor(institutionId, color);
+      }
+    });
+
+
+  }
+
+  Future<String?>_getColor(String institutionId, String color) async {
+    const COLOR_KEY = "color";
+
+    final result = await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_METADATA_COLLECTION)
+        .doc(_METADATA)
+        .collection(_COLORS_COLLECTION)
+        .where(COLOR_KEY, isEqualTo: color)
+        .limit(1)
+        .get();
+    if(result.docs.isNotEmpty) {
+      return result.docs.first[COLOR_KEY] as String?;
+    }
+
+  }
+
+  _addColor(String institutionId, String color) async {
+    const COLOR_KEY = "color";
+    await _store
+        .collection(_INSTITUTIONS_COLLECTION)
+        .doc(institutionId)
+        .collection(_METADATA_COLLECTION)
+        .doc(_METADATA)
+        .collection(_COLORS_COLLECTION)
+        .add({COLOR_KEY: color});
+
   }
 
 

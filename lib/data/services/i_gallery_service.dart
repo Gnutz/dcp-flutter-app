@@ -35,4 +35,8 @@ abstract class IGalleryService {
   Future<void> deleteImage(String costumeId, CostumeImage image);
 
   void setInstitution(Institution institution);
+
+  Future<List<String>> getThemes();
+
+  Future<List<String>> getColors();
 }

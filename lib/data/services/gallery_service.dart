@@ -95,4 +95,14 @@ class GalleryService implements IGalleryService {
     _currentInstitution = institution;
   }
 
+  @override
+  Future<List<String>> getColors() async {
+    return _costumeRepository.getColors(_currentInstitution!.id!);
+  }
+
+  @override
+  Future<List<String>> getThemes() async {
+    return _costumeRepository.getThemes(_currentInstitution!.id!);
+  }
+
 }

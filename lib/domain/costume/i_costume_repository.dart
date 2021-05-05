@@ -30,4 +30,8 @@ abstract class ICostumeRepository {
 
   Future<void> deleteImage(
       String institutionId, String costumeId, String imageIdS);
+
+  Future<List<String>> getColors(String institutionId);
+
+  Future<List<String>> getThemes(String institutionId);
 }

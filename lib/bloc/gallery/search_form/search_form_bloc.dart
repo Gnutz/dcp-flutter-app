@@ -62,8 +62,7 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
   }
 
   SearchFormState _colorSubmittedEventHandler(ColorSubmitted e) {
-
-    if(state.currentColor.isNotEmpty) {
+    if (state.currentColor.isNotEmpty) {
       String colorToAdd = state.currentColor.toLowerCase();
       colorToAdd = colorToAdd.trim();
       final colors = state.colors!.toList();
@@ -72,8 +71,7 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
       if (!alreadyAdded) {
         colors.add(colorToAdd);
 
-        return state.copyWith(
-            colors: colors, currentColor: "");
+        return state.copyWith(colors: colors, currentColor: "");
       }
     }
 
@@ -91,11 +89,15 @@ class SearchFormBloc extends Bloc<SearchFormEvent, SearchFormState> {
     final categoryOptions = await _galleryService.getCategories();
     final timePeriodOptions = await _galleryService.getTimePeriods();
     final productionOptions = await _galleryService.getProductions();
+    final themeOptions = await _galleryService.getThemes();
+    final colorOptions = await _galleryService.getColors();
 
     yield state.copyWith(
         categoryOptions: categoryOptions,
         timePeriodOptions: timePeriodOptions,
-        productionOptions: productionOptions);
+        productionOptions: productionOptions,
+        themeOptions: themeOptions,
+        colorOptions: colorOptions);
   }
 
   SearchFormState _themeValueEventHandler(ThemeValueChanged e) {
