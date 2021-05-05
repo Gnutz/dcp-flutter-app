@@ -194,7 +194,7 @@ class SearchForm extends StatelessWidget {
     return _buildSuggestionsFormField(
         hintText: AppLocalizations.of(_context)!.newTheme,
         controller: _themeController,
-        onSuggestionSelected: (_) {},
+        onSuggestionSelected: (theme) => _themeSuggestionSelected(theme),
         onChanged: (theme) => _formBloc.add(SearchFormEvent.themeValueChanged(theme!)),
         onSubmitted: () => _submitTheme(),
         suggestions: _state.themeOptions);
@@ -254,8 +254,13 @@ class SearchForm extends StatelessWidget {
     );
   }
 
-  _colorSuggestionSelected(String color) {
+  void _colorSuggestionSelected(String color) {
     _formBloc.add(SearchFormEvent.colorValueChanged(color));
     _submitColor();
+  }
+
+  void _themeSuggestionSelected(String theme) {
+    _formBloc.add(SearchFormEvent.themeValueChanged(theme));
+    _submitTheme();
   }
 }
