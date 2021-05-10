@@ -351,7 +351,7 @@ class CostumeEditForm extends StatelessWidget {
         crossAxisCount: 1),
     delegate:
     SliverChildBuilderDelegate((context, index) {
-    return Center(child: CircularProgressIndicator());})), success: (state) => sliverGrid(state));
+    return Center(child: const CircularProgressIndicator());})), success: (state) => sliverGrid(state));
   },
 );
   }

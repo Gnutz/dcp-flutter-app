@@ -232,7 +232,11 @@ class CostumeDetailsDisplay extends StatelessWidget {
 
   Widget buildImageCarousel() {
     return CarouselSlider(
-      options: CarouselOptions(height: 400.0),
+      options: CarouselOptions(
+          height: 400.0,
+          enableInfiniteScroll: false,
+          enlargeCenterPage: true, initialPage: (costume.images.length /2).floor(),
+        scrollDirection: Axis.horizontal),
       items: costume.images.map((image) {
         return Builder(
           builder: (BuildContext context) {
