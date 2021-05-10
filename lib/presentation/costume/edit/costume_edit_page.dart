@@ -1,5 +1,6 @@
 import 'package:digtial_costume_platform/bloc/auth/auth_bloc.dart';
 import 'package:digtial_costume_platform/bloc/costume/edit/costume_form_bloc.dart';
+import 'package:digtial_costume_platform/bloc/costume_image_watcher_bloc.dart';
 import 'package:digtial_costume_platform/bloc/gallery/search_form/search_form_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
@@ -46,18 +47,46 @@ class CostumeEditPage extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: BlocProvider(
-          create: (context) {
-            final CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
-            if (costumeId != null) {
-              bloc.add(CostumeFormEvent.loadCostume(costumeId));
-            }
-            return bloc;
-          },
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<CostumeFormBloc>(create: (context) {
+              final CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
+              if (costumeId != null) {
+                bloc.add(CostumeFormEvent.loadCostume(costumeId));
+              }
+              return bloc;
+            }),
+            BlocProvider<CostumeImageWatcherBloc>(create: (context) {
+              final CostumeImageWatcherBloc bloc =
+                  Locator().locator<CostumeImageWatcherBloc>();
+              if (costumeId != null) {
+                bloc.add(CostumeImageWatcherEvent.startListeningForImages(
+                    costumeId!));
+              }
+              return bloc;
+            }),
+          ],
           child: CostumeEditForm(),
         ),
       ),
     );
+  }
+
+  CostumeFormBloc getCostumeFormBloc() {
+    final CostumeFormBloc bloc = Locator().locator<CostumeFormBloc>();
+    if (costumeId != null) {
+      bloc.add(CostumeFormEvent.loadCostume(costumeId));
+    }
+    return bloc;
+  }
+
+  CostumeImageWatcherBloc getImagesBloc() {
+    final CostumeImageWatcherBloc bloc =
+        Locator().locator<CostumeImageWatcherBloc>();
+    if (costumeId != null) {
+      bloc.add(CostumeImageWatcherEvent.startListeningForImages(costumeId!));
+    }
+    return bloc;
   }
 
   void _showSearchForm() {

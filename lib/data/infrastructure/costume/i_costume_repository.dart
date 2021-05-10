@@ -1,10 +1,13 @@
 import 'package:digtial_costume_platform/domain/core/production.dart';
+import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 
 import '../../../domain/costume/costume.dart';
 
 abstract class ICostumeRepository {
+  Stream<List<CostumeImage>> watchCostumesImages(String institutionId, String costumeId);
+
   Future<List<Costume>> getCostumes(String institutionId, CostumeQuery query);
 
   Future<Costume?> getCostume(String institutionId, String id);

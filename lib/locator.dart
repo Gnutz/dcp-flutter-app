@@ -4,6 +4,7 @@ import 'package:digtial_costume_platform/bloc/auth/register/register_bloc.dart';
 import 'package:digtial_costume_platform/bloc/auth/sign_in/sign_in_bloc.dart';
 import 'package:digtial_costume_platform/bloc/costume/details/costume_details_bloc.dart';
 import 'package:digtial_costume_platform/bloc/costume/edit/costume_form_bloc.dart';
+import 'package:digtial_costume_platform/bloc/costume_image_watcher_bloc.dart';
 import 'package:digtial_costume_platform/bloc/gallery/category_select/category_selection_bloc.dart';
 import 'package:digtial_costume_platform/bloc/gallery/gallery_bloc.dart';
 import 'package:digtial_costume_platform/bloc/gallery/search_form/search_form_bloc.dart';
@@ -56,6 +57,7 @@ class Locator {
             () => CostumeDetailsBloc(locator<IGalleryService>()));
     locator.registerFactory<SearchFormBloc>(
             () => SearchFormBloc(locator<IGalleryService>()));
+    locator.registerFactory<CostumeImageWatcherBloc>(() => CostumeImageWatcherBloc(locator<IGalleryService>()));
     //ImageBloc
   }
 }

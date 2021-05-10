@@ -299,6 +299,39 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
   }
 
+  Stream<List<CostumeImage>> watchCostumesImages(String institutionId, String costumeId) async *{
+    /*yield* userDoc.noteCollection
+        .orderBy('serverTimeStamp', descending: true)
+        .snapshots()
+        .map(
+    (snapshot) => snapshot.documents
+        .map((doc) => NoteDto.fromFirestore(doc).toDomain()),
+    )
+        .map(
+    (notes) => right<NoteFailure, KtList<Note>>(
+    notes
+        .where(
+    (note) =>
+    note.todos.getOrCrash().any((todoItem) => !todoItem.done),
+    )
+        .toImmutableList(),
+    ),
+    )
+        .onErrorReturnWith((e) {
+    if (e is PlatformException && e.message.contains('PERMISSION_DENIED')) {
+    return left(const NoteFailure.insufficientPermissions());
+    } else {
+    return left(const NoteFailure.unexpected());
+    }
+    }); */
+
+    var costumeRef = _costumeReferenceFactory(institutionId, costumeId);
+
+    yield* costumeRef.collection(_IMAGES_COLLECTION)
+        .orderBy("uploaded", descending: true)
+    .snapshots().map((snapshot) => snapshot.docs.map((doc) => CostumeImage.fromJson(doc.data())..id = doc.id).toList());
+  }
+
   Future<List<CostumeImage>> _getImages(
       String institutionId, String costumeId) async {
     final results = await _costumeReferenceFactory(institutionId, costumeId)

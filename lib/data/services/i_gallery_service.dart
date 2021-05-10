@@ -8,6 +8,8 @@ import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 
 abstract class IGalleryService {
 
+  Stream<List<CostumeImage>> watchCostumesImages(String costumeId);
+
   Future<String?> createCostume(Costume costume);
 
   Future<void> deleteCostume(String id);

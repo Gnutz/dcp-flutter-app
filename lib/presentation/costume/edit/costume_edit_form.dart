@@ -1,4 +1,5 @@
 import 'package:digtial_costume_platform/bloc/costume/edit/costume_form_bloc.dart';
+import 'package:digtial_costume_platform/bloc/costume_image_watcher_bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
@@ -12,20 +13,23 @@ import '../costume_image_holder.dart';
 
 class CostumeEditForm extends StatelessWidget {
   late final CostumeFormBloc _formBloc;
+  late final CostumeImageWatcherBloc _imageBloc;
   final _themeHolder = TextEditingController();
   final _colorHolder = TextEditingController();
   late BuildContext _context;
-  late CostumeFormState _state;
+  late CostumeFormState _formState;
+  late CostumeImageWatcherState _imagesState;
   AppLocalizations? _appLocation;
 
   @override
   Widget build(BuildContext context) {
     _formBloc = context.read<CostumeFormBloc>();
+    _imageBloc = context.read<CostumeImageWatcherBloc>();
 
     return BlocBuilder<CostumeFormBloc, CostumeFormState>(
         builder: (context, state) {
       _context = context;
-      _state = state;
+      _formState = state;
       _appLocation = AppLocalizations.of(_context);
 
       return WillPopScope(
@@ -75,25 +79,7 @@ class CostumeEditForm extends StatelessWidget {
                             height: 20.0,
                           )
                         ])),
-                        SliverGrid(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisSpacing: 4,
-                                  crossAxisCount: 4),
-                          delegate:
-                              SliverChildBuilderDelegate((context, index) {
-                            return GridTile(
-                                    header: GridTileBar(
-                                        trailing: IconButton(
-                                      icon: const Icon(Icons.close),
-                                      onPressed: () {
-                                        _formBloc.add(CostumeFormEvent.deleteImage(state.images[index]));
-                                      },
-                                    )),
-                                    child: CostumeImageHolder(
-                                        image: _state.images[index]));
-                          }, childCount: state.images.length),
-                        ),
+                       _buildImageGrid(),
                         SliverList(
                             delegate: SliverChildListDelegate(
                           [
@@ -108,14 +94,14 @@ class CostumeEditForm extends StatelessWidget {
     return DropdownButtonFormField<String>(
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(_context)!.selectTheCostumeCategory),
-        items: _state.categoryOptions
+        items: _formState.categoryOptions
             .map((category) => DropdownMenuItem<String>(
                 value: category, child: Center(child: Text(category))))
             .toList(),
         onChanged: (category) {
           _formBloc.add(CostumeFormEvent.categorySelected(category!));
         },
-        value: _state.categoryOptions.isNotEmpty ? _state.category : null);
+        value: _formState.categoryOptions.isNotEmpty ? _formState.category : null);
   }
 
   Widget _buildTimeSelection() {
@@ -123,14 +109,14 @@ class CostumeEditForm extends StatelessWidget {
         decoration: textInputDecorator.copyWith(
             hintText:
                 AppLocalizations.of(_context)!.selectTheCostumeTimePeriod),
-        items: _state.timePeriodOptions
+        items: _formState.timePeriodOptions
             .map((time) =>
                 DropdownMenuItem(value: time, child: Center(child: Text(time))))
             .toList(),
         onChanged: (time) {
           _formBloc.add(CostumeFormEvent.timePeriodSelected(time!));
         },
-        value: _state.timePeriod);
+        value: _formState.timePeriod);
   }
 
   Widget _buildSubmitButton() {
@@ -154,7 +140,7 @@ class CostumeEditForm extends StatelessWidget {
             Row(children: [
               Radio<Fashion>(
                   value: Fashion.mens,
-                  groupValue: _state.fashion,
+                  groupValue: _formState.fashion,
                   onChanged: (val) =>
                       _formBloc.add(CostumeFormEvent.fashionSelected(val!))),
               Text(AppLocalizations.of(_context)!.mens)
@@ -162,7 +148,7 @@ class CostumeEditForm extends StatelessWidget {
             Row(children: [
               Radio<Fashion>(
                   value: Fashion.womens,
-                  groupValue: _state.fashion,
+                  groupValue: _formState.fashion,
                   onChanged: (val) =>
                       _formBloc.add(CostumeFormEvent.fashionSelected(val!))),
               Text(AppLocalizations.of(_context)!.womens)
@@ -217,25 +203,25 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   void _submitTheme() {
-    if (_state.currentTheme.isNotEmpty) {
+    if (_formState.currentTheme.isNotEmpty) {
       _formBloc.add(const CostumeFormEvent.themeAdded());
       _themeHolder.clear();
     }
   }
 
   void _submitColor() {
-    if (_state.currentColor.isNotEmpty) {
+    if (_formState.currentColor.isNotEmpty) {
       _formBloc.add(const CostumeFormEvent.colorAdded());
       _colorHolder.clear();
     }
   }
 
   Widget _buildThemesList() {
-    return _buildChipList(_state.themes!, _removeTheme);
+    return _buildChipList(_formState.themes!, _removeTheme);
   }
 
   Widget _buildColorsList() {
-    return _buildChipList(_state.colors!, _removeColor);
+    return _buildChipList(_formState.colors!, _removeColor);
   }
 
   void _removeTheme(String theme) {
@@ -279,28 +265,28 @@ class CostumeEditForm extends StatelessWidget {
                   decoration: textInputDecorator.copyWith(
                       hintText: AppLocalizations.of(_context)!
                           .selectWhereTheCostumeIsStored),
-                  items: _state.storageMainLocationOptions
+                  items: _formState.storageMainLocationOptions
                       .map((main) => DropdownMenuItem<Location>(
                           value: main, child: Text(main.location)))
                       .toList(),
                   onChanged: (main) => _formBloc
                       .add(CostumeFormEvent.mainLocationSelected(main!)),
-                  value: _state.storageMainLocationOptions.isNotEmpty
-                      ? _state.mainLocation
+                  value: _formState.storageMainLocationOptions.isNotEmpty
+                      ? _formState.mainLocation
                       : null),
               const SizedBox(height: 12.0),
               DropdownButtonFormField<Location>(
                   decoration: textInputDecorator.copyWith(
                       hintText: AppLocalizations.of(_context)!
                           .selectWhereTheCostumeIsStored),
-                  items: _state.storageSubLocationOptions
+                  items: _formState.storageSubLocationOptions
                       .map((location) => DropdownMenuItem<Location>(
                           value: location, child: Text(location.location)))
                       .toList(),
                   onChanged: (location) => _formBloc
                       .add(CostumeFormEvent.subLocationSelected(location!)),
-                  value: _state.storageSubLocationOptions.isNotEmpty
-                      ? _state.subLocation
+                  value: _formState.storageSubLocationOptions.isNotEmpty
+                      ? _formState.subLocation
                       : null),
             ],
           ),
@@ -308,7 +294,7 @@ class CostumeEditForm extends StatelessWidget {
   }
 
   Future<bool> _popPage() async {
-    if (!_state.unSavedChanges) return true;
+    if (!_formState.unSavedChanges) return true;
     return await showDialog(
         context: _context,
         builder: (context) => AlertDialog(
@@ -347,5 +333,48 @@ class CostumeEditForm extends StatelessWidget {
     if (selected != null) {
       _formBloc.add(CostumeFormEvent.addImage(selected.path));
     }
+  }
+
+  Widget _buildImageGrid() {
+    return  BlocBuilder<CostumeImageWatcherBloc, CostumeImageWatcherState>(
+  builder: (context, state) {
+    _imagesState = state;
+    return _imagesState.map(initial: (_) => SliverGrid(
+        gridDelegate:
+        const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1),
+        delegate:
+        SliverChildBuilderDelegate((context, index) {
+          return Center(child: Container());})), loading: (_) => SliverGrid(
+    gridDelegate:
+    const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 1),
+    delegate:
+    SliverChildBuilderDelegate((context, index) {
+    return Center(child: CircularProgressIndicator());})), success: (state) => sliverGrid(state));
+  },
+);
+  }
+
+  SliverGrid sliverGrid(Success state) {
+    return SliverGrid(
+    gridDelegate:
+    const SliverGridDelegateWithFixedCrossAxisCount(
+        mainAxisSpacing: 4,
+        crossAxisCount: 4),
+    delegate:
+    SliverChildBuilderDelegate((context, index) {
+      return GridTile(
+          header: GridTileBar(
+              trailing: IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  _formBloc.add(CostumeFormEvent.deleteImage(state.images[index]));
+                },
+              )),
+          child: CostumeImageHolder(
+              image: state.images[index]));
+    }, childCount: state.images.length),
+  );
   }
 }

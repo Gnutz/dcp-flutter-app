@@ -105,4 +105,8 @@ class GalleryService implements IGalleryService {
     return _costumeRepository.getThemes(_currentInstitution!.id!);
   }
 
+  @override
+  Stream<List<CostumeImage>> watchCostumesImages(String costumeId) async* {
+    yield* _costumeRepository.watchCostumesImages(_currentInstitution!.id!, costumeId);
+  }
 }
