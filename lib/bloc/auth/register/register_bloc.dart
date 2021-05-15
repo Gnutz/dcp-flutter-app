@@ -130,6 +130,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       add(const RegisterEvent.signInNavPressed());
     }
 
+
+    //error state display
     yield state.copyWith(
         isSubmitting: false,
         showInputErrorMessages: true,
