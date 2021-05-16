@@ -1,6 +1,6 @@
+import 'package:digtial_costume_platform/data/services/i_user_service.dart';
 import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
-import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
-import 'package:digtial_costume_platform/domain/auth/i_user_service.dart';
+import 'package:digtial_costume_platform/data/services/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';

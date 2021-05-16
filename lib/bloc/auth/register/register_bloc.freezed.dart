@@ -1579,7 +1579,7 @@ class _$RegisterStateTearOff {
       Institution? institution,
       required bool userAgreementAccepted,
       required bool isSubmitting,
-      AuthFailure? authFailureOrSuccessOption,
+      AuthFailure? authFailureOption,
       required bool showInputErrorMessages}) {
     return _RegisterState(
       institutions: institutions,
@@ -1591,7 +1591,7 @@ class _$RegisterStateTearOff {
       institution: institution,
       userAgreementAccepted: userAgreementAccepted,
       isSubmitting: isSubmitting,
-      authFailureOrSuccessOption: authFailureOrSuccessOption,
+      authFailureOption: authFailureOption,
       showInputErrorMessages: showInputErrorMessages,
     );
   }
@@ -1611,8 +1611,7 @@ mixin _$RegisterState {
   Institution? get institution => throw _privateConstructorUsedError;
   bool get userAgreementAccepted => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  AuthFailure? get authFailureOrSuccessOption =>
-      throw _privateConstructorUsedError;
+  AuthFailure? get authFailureOption => throw _privateConstructorUsedError;
   bool get showInputErrorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1635,10 +1634,10 @@ abstract class $RegisterStateCopyWith<$Res> {
       Institution? institution,
       bool userAgreementAccepted,
       bool isSubmitting,
-      AuthFailure? authFailureOrSuccessOption,
+      AuthFailure? authFailureOption,
       bool showInputErrorMessages});
 
-  $AuthFailureCopyWith<$Res>? get authFailureOrSuccessOption;
+  $AuthFailureCopyWith<$Res>? get authFailureOption;
 }
 
 /// @nodoc
@@ -1661,7 +1660,7 @@ class _$RegisterStateCopyWithImpl<$Res>
     Object? institution = freezed,
     Object? userAgreementAccepted = freezed,
     Object? isSubmitting = freezed,
-    Object? authFailureOrSuccessOption = freezed,
+    Object? authFailureOption = freezed,
     Object? showInputErrorMessages = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1701,9 +1700,9 @@ class _$RegisterStateCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
-          ? _value.authFailureOrSuccessOption
-          : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+      authFailureOption: authFailureOption == freezed
+          ? _value.authFailureOption
+          : authFailureOption // ignore: cast_nullable_to_non_nullable
               as AuthFailure?,
       showInputErrorMessages: showInputErrorMessages == freezed
           ? _value.showInputErrorMessages
@@ -1713,14 +1712,13 @@ class _$RegisterStateCopyWithImpl<$Res>
   }
 
   @override
-  $AuthFailureCopyWith<$Res>? get authFailureOrSuccessOption {
-    if (_value.authFailureOrSuccessOption == null) {
+  $AuthFailureCopyWith<$Res>? get authFailureOption {
+    if (_value.authFailureOption == null) {
       return null;
     }
 
-    return $AuthFailureCopyWith<$Res>(_value.authFailureOrSuccessOption!,
-        (value) {
-      return _then(_value.copyWith(authFailureOrSuccessOption: value));
+    return $AuthFailureCopyWith<$Res>(_value.authFailureOption!, (value) {
+      return _then(_value.copyWith(authFailureOption: value));
     });
   }
 }
@@ -1742,11 +1740,11 @@ abstract class _$RegisterStateCopyWith<$Res>
       Institution? institution,
       bool userAgreementAccepted,
       bool isSubmitting,
-      AuthFailure? authFailureOrSuccessOption,
+      AuthFailure? authFailureOption,
       bool showInputErrorMessages});
 
   @override
-  $AuthFailureCopyWith<$Res>? get authFailureOrSuccessOption;
+  $AuthFailureCopyWith<$Res>? get authFailureOption;
 }
 
 /// @nodoc
@@ -1771,7 +1769,7 @@ class __$RegisterStateCopyWithImpl<$Res>
     Object? institution = freezed,
     Object? userAgreementAccepted = freezed,
     Object? isSubmitting = freezed,
-    Object? authFailureOrSuccessOption = freezed,
+    Object? authFailureOption = freezed,
     Object? showInputErrorMessages = freezed,
   }) {
     return _then(_RegisterState(
@@ -1811,9 +1809,9 @@ class __$RegisterStateCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
-          ? _value.authFailureOrSuccessOption
-          : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+      authFailureOption: authFailureOption == freezed
+          ? _value.authFailureOption
+          : authFailureOption // ignore: cast_nullable_to_non_nullable
               as AuthFailure?,
       showInputErrorMessages: showInputErrorMessages == freezed
           ? _value.showInputErrorMessages
@@ -1836,7 +1834,7 @@ class _$_RegisterState implements _RegisterState {
       this.institution,
       required this.userAgreementAccepted,
       required this.isSubmitting,
-      this.authFailureOrSuccessOption,
+      this.authFailureOption,
       required this.showInputErrorMessages});
 
   @override
@@ -1858,13 +1856,13 @@ class _$_RegisterState implements _RegisterState {
   @override
   final bool isSubmitting;
   @override
-  final AuthFailure? authFailureOrSuccessOption;
+  final AuthFailure? authFailureOption;
   @override
   final bool showInputErrorMessages;
 
   @override
   String toString() {
-    return 'RegisterState(institutions: $institutions, name: $name, emailAddress: $emailAddress, password: $password, passwordConfirmation: $passwordConfirmation, role: $role, institution: $institution, userAgreementAccepted: $userAgreementAccepted, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption, showInputErrorMessages: $showInputErrorMessages)';
+    return 'RegisterState(institutions: $institutions, name: $name, emailAddress: $emailAddress, password: $password, passwordConfirmation: $passwordConfirmation, role: $role, institution: $institution, userAgreementAccepted: $userAgreementAccepted, isSubmitting: $isSubmitting, authFailureOption: $authFailureOption, showInputErrorMessages: $showInputErrorMessages)';
   }
 
   @override
@@ -1896,11 +1894,9 @@ class _$_RegisterState implements _RegisterState {
             (identical(other.isSubmitting, isSubmitting) ||
                 const DeepCollectionEquality()
                     .equals(other.isSubmitting, isSubmitting)) &&
-            (identical(other.authFailureOrSuccessOption,
-                    authFailureOrSuccessOption) ||
-                const DeepCollectionEquality().equals(
-                    other.authFailureOrSuccessOption,
-                    authFailureOrSuccessOption)) &&
+            (identical(other.authFailureOption, authFailureOption) ||
+                const DeepCollectionEquality()
+                    .equals(other.authFailureOption, authFailureOption)) &&
             (identical(other.showInputErrorMessages, showInputErrorMessages) ||
                 const DeepCollectionEquality().equals(
                     other.showInputErrorMessages, showInputErrorMessages)));
@@ -1918,7 +1914,7 @@ class _$_RegisterState implements _RegisterState {
       const DeepCollectionEquality().hash(institution) ^
       const DeepCollectionEquality().hash(userAgreementAccepted) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
-      const DeepCollectionEquality().hash(authFailureOrSuccessOption) ^
+      const DeepCollectionEquality().hash(authFailureOption) ^
       const DeepCollectionEquality().hash(showInputErrorMessages);
 
   @JsonKey(ignore: true)
@@ -1938,7 +1934,7 @@ abstract class _RegisterState implements RegisterState {
       Institution? institution,
       required bool userAgreementAccepted,
       required bool isSubmitting,
-      AuthFailure? authFailureOrSuccessOption,
+      AuthFailure? authFailureOption,
       required bool showInputErrorMessages}) = _$_RegisterState;
 
   @override
@@ -1960,8 +1956,7 @@ abstract class _RegisterState implements RegisterState {
   @override
   bool get isSubmitting => throw _privateConstructorUsedError;
   @override
-  AuthFailure? get authFailureOrSuccessOption =>
-      throw _privateConstructorUsedError;
+  AuthFailure? get authFailureOption => throw _privateConstructorUsedError;
   @override
   bool get showInputErrorMessages => throw _privateConstructorUsedError;
   @override

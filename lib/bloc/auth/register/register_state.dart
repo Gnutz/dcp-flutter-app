@@ -12,7 +12,7 @@ class RegisterState with _$RegisterState {
       Institution? institution,
       required bool userAgreementAccepted,
       required bool isSubmitting,
-      AuthFailure? authFailureOrSuccessOption,
+      AuthFailure? authFailureOption,
       required bool showInputErrorMessages}) = _RegisterState;
 
   factory RegisterState.initial() => const RegisterState(

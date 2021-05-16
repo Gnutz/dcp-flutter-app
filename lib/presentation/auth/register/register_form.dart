@@ -13,8 +13,8 @@ class RegisterForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
-        if (state.authFailureOrSuccessOption != null) {
-          state.authFailureOrSuccessOption!.map(
+        if (state.authFailureOption != null) {
+          state.authFailureOption!.map(
             serverError: (_) => ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                     content: Text(AppLocalizations.of(context)!.errorServer))),

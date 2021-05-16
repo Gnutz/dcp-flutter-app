@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'institution.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-class Institution {
+class Institution extends Equatable{
   String? id;
   String name;
   String? domain;
@@ -19,4 +20,8 @@ class Institution {
       _$InstitutionFromJson(json);
 
   Map<String, dynamic> toJson() => _$InstitutionToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id, name, domain, alias];
 }

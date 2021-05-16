@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
-import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
+import 'package:digtial_costume_platform/data/services/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:flutter/cupertino.dart';

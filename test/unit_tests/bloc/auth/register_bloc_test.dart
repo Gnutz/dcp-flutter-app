@@ -1,102 +1,99 @@
-import 'package:digtial_costume_platform/domain/costume/fashion.dart';
+import 'package:digtial_costume_platform/bloc/auth/register/register_bloc.dart';
+import 'package:digtial_costume_platform/data/infrastructure/auth/firebase_auth_repository.dart';
+import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:digtial_costume_platform/domain/costume/costume.dart';
-import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
-import 'package:digtial_costume_platform/domain/core/production.dart';
-import 'package:digtial_costume_platform/domain/costume/status.dart';
+import 'register_bloc_test.mocks.dart';
 
+
+@GenerateMocks([FirebaseAuthRepository])
 main() {
-  test("", () {
-        //arrange
 
-        final mockTime = DateTime.now();
-        final costume = Costume(
-            category: "coats",
-            timePeriod: "1930s",
-            created: DateTime.now(),
-            edited: DateTime.now(),
-            fashion: Fashion.mens,
-            themes: <String>["musical", "pirates", "navy"],
-            colors: <String>["black", "white", "brown"],
-            quantity: 1,
-            storageLocation: StorageLocation(
-                main: Location(id: "aNKkI9JUcgt2yIw0qRrm", location: "Loftet"),
-                subLocation: Location(
-                    id: 'gruFmc6JiDYgn4AY4DRb', location: "Lille Garderobe")));
+  late MockFirebaseAuthRepository mockAuthService;
+  late RegisterBloc unitUnderTest;
+  final mockedInstitutions = <Institution>[
+    Institution(
+        name: "Aarhus Teater", alias: "AT", id: "f3OS9VsFmNX6iZUH9SRs"),
+    Institution(name: "Det Konglelige Teater", id: "A7XwwAtuG5Uoali3F038")
+  ];
 
-        final expectedStatus = InUse(
-            inUseFor: Production(
-                title: "Charlie and the Chocolate Factory",
-                startDate: mockTime,
-                endDate: mockTime));
+  setUp((){
+    mockAuthService = MockFirebaseAuthRepository();
+    unitUnderTest = RegisterBloc(mockAuthService);
 
-        //act
-        costume.status = InUse(
-            inUseFor: Production(
-                title: "Charlie and the Chocolate Factory",
-                startDate: mockTime,
-                endDate: mockTime));
+  });
 
-        //assert
-        expect(costume.status, expectedStatus);
-        expect(costume.storageLocation, null);
-      });
+   test("RegisterBloc returns initial form then form with options at creation", () async {
 
-  test("setting valid storage location with both a main and sublocation sets the status to in storage", () {
-        //arrange
+     // arrange
+     final institutionsLoaded = RegisterState.initial().copyWith(institutions: mockedInstitutions);
+     when(mockAuthService.getInstitutions()).thenAnswer((_)  async => mockedInstitutions);
+      //assert inital state
+      expect(unitUnderTest.state, equals(RegisterState.initial()));
 
-        final mockTime = DateTime.now();
-        final costume = Costume(
-            category: "coats",
-            timePeriod: "1930s",
-            created: DateTime.now(),
-            edited: DateTime.now(),
-            fashion: Fashion.mens,
-            themes: <String>["musical", "pirates", "navy"],
-            colors: <String>["black", "white", "brown"],
-            quantity: 1);
+      //assert that form with institution options are loaded
+      await expectLater(
+          unitUnderTest.stream,
+          emits(institutionsLoaded)
+          );
 
+      //assert that only one call to repository made
+      verify(mockAuthService.getInstitutions()).called(1);
+      verifyNoMoreInteractions(mockAuthService);
+    });
 
-        final expectedLocation = StorageLocation(
-            main: Location(id: "aNKkI9JUcgt2yIw0qRrm", location: "Loftet"),
-            subLocation: Location(id:'gruFmc6JiDYgn4AY4DRb', location: "Lille Garderobe"));
+   /*test("Registerbloc return updated form without calling authService when form is updated with name", () async {
+     //arrange
+     const expectedName = "John Doe";
+     final unitUnderTest = RegisterBloc(mockAuthService);
+     when(mockAuthService.getInstitutions()).thenAnswer((
+         _) async => []);
 
-        final expectedStatus = InStorage(expectedLocation);
+     //act - instantiation
+     unitUnderTest.add(RegisterEvent.nameChanged(expectedName));
 
-        //act
-        costume.storageLocation = expectedLocation;
+     //assert inital state
+     expect(unitUnderTest.state, equals(RegisterState.initial()));
 
-        //assert
-        expect(costume.status, expectedStatus);
-        expect(costume.storageLocation, expectedLocation);
-      });
+     //assert that form with institution options are loaded
+     await expectLater(
+         unitUnderTest.stream,
+         emits(
+           //state returned after
+         RegisterState.initial()
+             .copyWith(name: expectedName)
+         )
+     );
+   });
 
-  test("creating a Costume with a storage location sets the right status", () {
-        //arrange
-        final expectedLocation = StorageLocation(
-            main: Location(id: "aNKkI9JUcgt2yIw0qRrm", location: "Loftet"),
-            subLocation: Location(id:'gruFmc6JiDYgn4AY4DRb', location: "Lille Garderobe"));
+    //assert that only one call to repository made
+    verify(mockAuthService.getInstitutions()).called(1);
+    verifyNoMoreInteractions(mockAuthService);
 
-        final expectedStatus = InStorage(expectedLocation);
+  }); */
 
-        //act
-        final costume = Costume(
-            category: "coats",
-            timePeriod: "1930s",
-            created: DateTime.now(),
-            edited: DateTime.now(),
-            fashion: Fashion.mens,
-            themes: <String>["musical", "pirates", "navy"],
-            colors: <String>["black", "white", "brown"],
-            quantity: 1,
-            storageLocation: expectedLocation
-        );
+  //email valid
 
-        //assert
-        expect(costume.status, expectedStatus);
-        expect(costume.storageLocation, expectedLocation);
-      });
+  // email invalid
 
+  //password
+
+  // password invalid
+
+  //confirmedPassword
+
+  //institution
+
+  //role
+
+  //submit
+
+  //userAgreement
+
+  //signUp
+
+  //if creator creates a Request
 
 }

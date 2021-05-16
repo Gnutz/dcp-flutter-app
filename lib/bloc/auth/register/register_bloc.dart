@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
-import 'package:digtial_costume_platform/domain/auth/i_auth_service.dart';
+import 'package:digtial_costume_platform/data/services/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/value_validators.dart';
@@ -50,21 +50,21 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterState _nameChangedEventHandler(NameChanged e) {
     return state.copyWith(
       name: e.name,
-      authFailureOrSuccessOption: null,
+      authFailureOption: null,
     );
   }
 
   RegisterState _emailChangedEventHandler(EmailChanged e) {
     return state.copyWith(
       emailAddress: e.email,
-      authFailureOrSuccessOption: null,
+      authFailureOption: null,
     );
   }
 
   RegisterState _passwordChangedEventHandler(PasswordChanged e) {
     return state.copyWith(
       password: e.password,
-      authFailureOrSuccessOption: null,
+      authFailureOption: null,
     );
   }
 
@@ -72,28 +72,28 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       PasswordConfirmedChanged e) {
     return state.copyWith(
       passwordConfirmation: e.passwordConfirmation,
-      authFailureOrSuccessOption: null,
+      authFailureOption: null,
     );
   }
 
   RegisterState _institutionSelectedEventHandler(InstitutionSelected e) {
     return state.copyWith(
       institution: e.institution,
-      authFailureOrSuccessOption: null,
+      authFailureOption: null,
     );
   }
 
   RegisterState _roleSelectedEventHandler(RoleSelected e) {
     return state.copyWith(
       role: e.role,
-      authFailureOrSuccessOption: null,
+      authFailureOption: null,
     );
   }
 
   RegisterState _userAgreementAcceptedEventHandler() {
     return state.copyWith(
       userAgreementAccepted: !state.userAgreementAccepted,
-      authFailureOrSuccessOption: null,
+      authFailureOption: null,
     );
   }
 
@@ -114,7 +114,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     if (isEmailValid && isPasswordValid && institutionSelected) {
       yield state.copyWith(
-          isSubmitting: true, authFailureOrSuccessOption: null);
+          isSubmitting: true, authFailureOption: null);
       failureOrSuccess = await _auth.registerUser(
           name: state.name,
           email: state.emailAddress,
@@ -123,7 +123,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           role: state.role);
 
       yield state.copyWith(
-          isSubmitting: false, authFailureOrSuccessOption: failureOrSuccess);
+          isSubmitting: false, authFailureOption: failureOrSuccess);
     }
 
     if (failureOrSuccess == null) {
@@ -135,11 +135,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     yield state.copyWith(
         isSubmitting: false,
         showInputErrorMessages: true,
-        authFailureOrSuccessOption: failureOrSuccess);
+        authFailureOption: failureOrSuccess);
   }
 
   Stream<RegisterState> _loadInstitutionsEventHandler() async* {
     final institutions = await _auth.getInstitutions();
-    yield state.copyWith(institutions: institutions);
+    if(institutions.isNotEmpty) yield state.copyWith(institutions: institutions);
   }
 }
