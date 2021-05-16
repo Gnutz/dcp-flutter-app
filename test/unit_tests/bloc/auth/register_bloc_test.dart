@@ -44,10 +44,9 @@ main() {
       verifyNoMoreInteractions(mockAuthService);
     });
 
-   /*test("Registerbloc return updated form without calling authService when form is updated with name", () async {
+   test("Registerbloc return updated form without calling authService when form is updated with name", () async {
      //arrange
      const expectedName = "John Doe";
-     final unitUnderTest = RegisterBloc(mockAuthService);
      when(mockAuthService.getInstitutions()).thenAnswer((
          _) async => []);
 
@@ -66,13 +65,13 @@ main() {
              .copyWith(name: expectedName)
          )
      );
+
+     //assert that only one call to repository made
+     verify(mockAuthService.getInstitutions()).called(1);
+     verifyNoMoreInteractions(mockAuthService);
    });
 
-    //assert that only one call to repository made
-    verify(mockAuthService.getInstitutions()).called(1);
-    verifyNoMoreInteractions(mockAuthService);
 
-  }); */
 
   //email valid
 
