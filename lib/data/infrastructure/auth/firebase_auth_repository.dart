@@ -60,6 +60,7 @@ class FirebaseAuthRepository implements IAuthService {
       required String password,
       required Institution institution,
       required UserRole role}) async {
+
     final isCreatorRequest = role == UserRole.creator;
 
     final user = User(

@@ -115,6 +115,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     if (isEmailValid && isPasswordValid && institutionSelected) {
       yield state.copyWith(
           isSubmitting: true, authFailureOption: null);
+
       failureOrSuccess = await _auth.registerUser(
           name: state.name,
           email: state.emailAddress,
@@ -122,12 +123,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           institution: state.institution!,
           role: state.role);
 
-      yield state.copyWith(
-          isSubmitting: false, authFailureOption: failureOrSuccess);
-    }
-
-    if (failureOrSuccess == null) {
-      add(const RegisterEvent.signInNavPressed());
+      if (failureOrSuccess == null) {
+        add(const RegisterEvent.signInNavPressed());
+      }
     }
 
 
