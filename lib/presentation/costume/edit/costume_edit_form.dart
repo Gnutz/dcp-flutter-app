@@ -6,6 +6,7 @@ import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
+import 'package:digtial_costume_platform/presentation/costume/costume_local_image.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -382,21 +383,5 @@ class CostumeEditForm extends StatelessWidget {
               image: image) : CostumeLocalImageHolder(image: image));
     }, childCount: state.images.length),
   );
-  }
-}
-
-class CostumeLocalImageHolder extends StatelessWidget {
-  const CostumeLocalImageHolder({
-    Key? key,
-    CostumeImage? image,
-  })
-      : image = image,
-        super(key: key);
-
-  final CostumeImage? image;
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.file(File(image!.path));
   }
 }

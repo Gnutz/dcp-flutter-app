@@ -241,7 +241,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
         return Builder(
           builder: (BuildContext context) {
             return ExtendedImage.network(
-              image.path,
+              image.path!,
               loadStateChanged: (ExtendedImageState state) {
                 switch (state.extendedImageLoadState) {
                   case LoadState.loading:

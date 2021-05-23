@@ -50,7 +50,7 @@ class Gallery extends StatelessWidget {
   Widget _buildCostumeGridTile(Costume costume) {
     return InkWell(
         onTap: () => _bloc.add(GalleryEvent.selectCostumeForDisplay(costume)),
-        child: CostumeWebImageHolder(image: costume.images.isNotEmpty ? costume.images.first : null));
+        child: costume.images.isNotEmpty ? CostumeWebImageHolder(image: costume.images.first) : const Placeholder());
   }
 
 }
