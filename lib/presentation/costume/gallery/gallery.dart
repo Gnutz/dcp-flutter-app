@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../costume_image_holder.dart';
+import '../costume_web_image_holder.dart';
 
 class Gallery extends StatelessWidget {
   CostumeQuery query;
@@ -50,7 +50,7 @@ class Gallery extends StatelessWidget {
   Widget _buildCostumeGridTile(Costume costume) {
     return InkWell(
         onTap: () => _bloc.add(GalleryEvent.selectCostumeForDisplay(costume)),
-        child: CostumeImageHolder(image: costume.images.isNotEmpty ? costume.images.first : null));
+        child: CostumeWebImageHolder(image: costume.images.isNotEmpty ? costume.images.first : null));
   }
 
 }

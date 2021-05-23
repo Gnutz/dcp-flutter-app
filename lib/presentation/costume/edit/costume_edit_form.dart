@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:digtial_costume_platform/bloc/costume/edit/costume_form_bloc.dart';
 import 'package:digtial_costume_platform/bloc/costume_image_watcher_bloc.dart';
+import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
@@ -9,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../costume_image_holder.dart';
+import '../costume_web_image_holder.dart';
 
 class CostumeEditForm extends StatelessWidget {
   late final CostumeFormBloc _formBloc;
@@ -339,24 +342,26 @@ class CostumeEditForm extends StatelessWidget {
     return  BlocBuilder<CostumeImageWatcherBloc, CostumeImageWatcherState>(
   builder: (context, state) {
     _imagesState = state;
-    return _imagesState.map(initial: (_) => SliverGrid(
+    /*return _imagesState.map(initial: (_) => SliverGrid(
         gridDelegate:
         const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 1),
         delegate:
         SliverChildBuilderDelegate((context, index) {
-          return Center(child: Container());})), loading: (_) => SliverGrid(
+          return Center(child: Container());})),
+        loading: (_) => SliverGrid(
     gridDelegate:
     const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 1),
     delegate:
     SliverChildBuilderDelegate((context, index) {
-    return Center(child: const CircularProgressIndicator());})), success: (state) => sliverGrid(state));
+    return Center(child: const CircularProgressIndicator());})), success: (state) => sliverGrid(state));  */
+    return sliverGrid(_imagesState);
   },
 );
   }
 
-  SliverGrid sliverGrid(Success state) {
+  SliverGrid sliverGrid(CostumeImageWatcherState state) {
     return SliverGrid(
     gridDelegate:
     const SliverGridDelegateWithFixedCrossAxisCount(
@@ -364,17 +369,34 @@ class CostumeEditForm extends StatelessWidget {
         crossAxisCount: 4),
     delegate:
     SliverChildBuilderDelegate((context, index) {
+      var image =  state.images[index];
       return GridTile(
           header: GridTileBar(
               trailing: IconButton(
                 icon: const Icon(Icons.close),
                 onPressed: () {
-                  _formBloc.add(CostumeFormEvent.deleteImage(state.images[index]));
+                  _formBloc.add(CostumeFormEvent.deleteImage(image));
                 },
               )),
-          child: CostumeImageHolder(
-              image: state.images[index]));
+          child: image.id != null ? CostumeWebImageHolder(
+              image: image) : CostumeLocalImageHolder(image: image));
     }, childCount: state.images.length),
   );
+  }
+}
+
+class CostumeLocalImageHolder extends StatelessWidget {
+  const CostumeLocalImageHolder({
+    Key? key,
+    CostumeImage? image,
+  })
+      : image = image,
+        super(key: key);
+
+  final CostumeImage? image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.file(File(image!.path));
   }
 }

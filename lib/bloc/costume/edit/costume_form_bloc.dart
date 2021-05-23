@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:digtial_costume_platform/bloc/costume_image_watcher_bloc.dart';
 import 'package:digtial_costume_platform/domain/core/production.dart';
 import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
@@ -17,6 +18,7 @@ part 'costume_form_state.dart';
 
 class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   final IGalleryService _costumeService;
+  late CostumeImageWatcherBloc imageWatcher;
 
   CostumeFormBloc(this._costumeService)
       : super(CostumeFormState.initial()) {
@@ -227,14 +229,14 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   Stream<CostumeFormState> _addImageHandler(AddImage e) async* {
-    String? id = state.id;
+   /* String? id = state.id;
     if (id == null) {
       id = await createCostume();
       _costumeService.addImage(e.imagePath, id!);
       yield state.copyWith(id: id);
     } else {
-      _costumeService.addImage(e.imagePath, id);
-    }
+      _costumeService.addImage(e.imagePath, id); } */
+    imageWatcher.add(CostumeImageWatcherEvent.addImage(e.imagePath));
   }
 
   CostumeFormState _statefromCostume(Costume costume) {
@@ -271,10 +273,11 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
   }
 
   Stream<CostumeFormState> _deleteImageEventHandler(DeleteImage e) async* {
-    final images = state.images;
+    /*final images = state.images;
     images.remove(e.image);
 
     yield state.copyWith(images: images);
-    _costumeService.deleteImage(state.id!, e.image);
+    _costumeService.deleteImage(state.id!, e.image); */
+    imageWatcher.add(CostumeImageWatcherEvent.deleteImage(e.image));
   }
 }

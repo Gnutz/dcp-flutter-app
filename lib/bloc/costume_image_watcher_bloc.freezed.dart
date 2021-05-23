@@ -27,6 +27,18 @@ class _$CostumeImageWatcherEventTearOff {
       images,
     );
   }
+
+  AddImage addImage(String imagePath) {
+    return AddImage(
+      imagePath,
+    );
+  }
+
+  DeleteImage deleteImage(CostumeImage image) {
+    return DeleteImage(
+      image,
+    );
+  }
 }
 
 /// @nodoc
@@ -38,12 +50,16 @@ mixin _$CostumeImageWatcherEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String costumeId) startListeningForImages,
     required TResult Function(List<CostumeImage> images) receivedImages,
+    required TResult Function(String imagePath) addImage,
+    required TResult Function(CostumeImage image) deleteImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String costumeId)? startListeningForImages,
     TResult Function(List<CostumeImage> images)? receivedImages,
+    TResult Function(String imagePath)? addImage,
+    TResult Function(CostumeImage image)? deleteImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,12 +68,16 @@ mixin _$CostumeImageWatcherEvent {
     required TResult Function(StartListeningForImages value)
         startListeningForImages,
     required TResult Function(ReceivedImages value) receivedImages,
+    required TResult Function(AddImage value) addImage,
+    required TResult Function(DeleteImage value) deleteImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartListeningForImages value)? startListeningForImages,
     TResult Function(ReceivedImages value)? receivedImages,
+    TResult Function(AddImage value)? addImage,
+    TResult Function(DeleteImage value)? deleteImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,6 +169,8 @@ class _$StartListeningForImages implements StartListeningForImages {
   TResult when<TResult extends Object?>({
     required TResult Function(String costumeId) startListeningForImages,
     required TResult Function(List<CostumeImage> images) receivedImages,
+    required TResult Function(String imagePath) addImage,
+    required TResult Function(CostumeImage image) deleteImage,
   }) {
     return startListeningForImages(costumeId);
   }
@@ -158,6 +180,8 @@ class _$StartListeningForImages implements StartListeningForImages {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String costumeId)? startListeningForImages,
     TResult Function(List<CostumeImage> images)? receivedImages,
+    TResult Function(String imagePath)? addImage,
+    TResult Function(CostumeImage image)? deleteImage,
     required TResult orElse(),
   }) {
     if (startListeningForImages != null) {
@@ -172,6 +196,8 @@ class _$StartListeningForImages implements StartListeningForImages {
     required TResult Function(StartListeningForImages value)
         startListeningForImages,
     required TResult Function(ReceivedImages value) receivedImages,
+    required TResult Function(AddImage value) addImage,
+    required TResult Function(DeleteImage value) deleteImage,
   }) {
     return startListeningForImages(this);
   }
@@ -181,6 +207,8 @@ class _$StartListeningForImages implements StartListeningForImages {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartListeningForImages value)? startListeningForImages,
     TResult Function(ReceivedImages value)? receivedImages,
+    TResult Function(AddImage value)? addImage,
+    TResult Function(DeleteImage value)? deleteImage,
     required TResult orElse(),
   }) {
     if (startListeningForImages != null) {
@@ -267,6 +295,8 @@ class _$ReceivedImages implements ReceivedImages {
   TResult when<TResult extends Object?>({
     required TResult Function(String costumeId) startListeningForImages,
     required TResult Function(List<CostumeImage> images) receivedImages,
+    required TResult Function(String imagePath) addImage,
+    required TResult Function(CostumeImage image) deleteImage,
   }) {
     return receivedImages(images);
   }
@@ -276,6 +306,8 @@ class _$ReceivedImages implements ReceivedImages {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String costumeId)? startListeningForImages,
     TResult Function(List<CostumeImage> images)? receivedImages,
+    TResult Function(String imagePath)? addImage,
+    TResult Function(CostumeImage image)? deleteImage,
     required TResult orElse(),
   }) {
     if (receivedImages != null) {
@@ -290,6 +322,8 @@ class _$ReceivedImages implements ReceivedImages {
     required TResult Function(StartListeningForImages value)
         startListeningForImages,
     required TResult Function(ReceivedImages value) receivedImages,
+    required TResult Function(AddImage value) addImage,
+    required TResult Function(DeleteImage value) deleteImage,
   }) {
     return receivedImages(this);
   }
@@ -299,6 +333,8 @@ class _$ReceivedImages implements ReceivedImages {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartListeningForImages value)? startListeningForImages,
     TResult Function(ReceivedImages value)? receivedImages,
+    TResult Function(AddImage value)? addImage,
+    TResult Function(DeleteImage value)? deleteImage,
     required TResult orElse(),
   }) {
     if (receivedImages != null) {
@@ -318,20 +354,261 @@ abstract class ReceivedImages implements CostumeImageWatcherEvent {
 }
 
 /// @nodoc
+abstract class $AddImageCopyWith<$Res> {
+  factory $AddImageCopyWith(AddImage value, $Res Function(AddImage) then) =
+      _$AddImageCopyWithImpl<$Res>;
+  $Res call({String imagePath});
+}
+
+/// @nodoc
+class _$AddImageCopyWithImpl<$Res>
+    extends _$CostumeImageWatcherEventCopyWithImpl<$Res>
+    implements $AddImageCopyWith<$Res> {
+  _$AddImageCopyWithImpl(AddImage _value, $Res Function(AddImage) _then)
+      : super(_value, (v) => _then(v as AddImage));
+
+  @override
+  AddImage get _value => super._value as AddImage;
+
+  @override
+  $Res call({
+    Object? imagePath = freezed,
+  }) {
+    return _then(AddImage(
+      imagePath == freezed
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddImage implements AddImage {
+  const _$AddImage(this.imagePath);
+
+  @override
+  final String imagePath;
+
+  @override
+  String toString() {
+    return 'CostumeImageWatcherEvent.addImage(imagePath: $imagePath)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is AddImage &&
+            (identical(other.imagePath, imagePath) ||
+                const DeepCollectionEquality()
+                    .equals(other.imagePath, imagePath)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(imagePath);
+
+  @JsonKey(ignore: true)
+  @override
+  $AddImageCopyWith<AddImage> get copyWith =>
+      _$AddImageCopyWithImpl<AddImage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String costumeId) startListeningForImages,
+    required TResult Function(List<CostumeImage> images) receivedImages,
+    required TResult Function(String imagePath) addImage,
+    required TResult Function(CostumeImage image) deleteImage,
+  }) {
+    return addImage(imagePath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String costumeId)? startListeningForImages,
+    TResult Function(List<CostumeImage> images)? receivedImages,
+    TResult Function(String imagePath)? addImage,
+    TResult Function(CostumeImage image)? deleteImage,
+    required TResult orElse(),
+  }) {
+    if (addImage != null) {
+      return addImage(imagePath);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartListeningForImages value)
+        startListeningForImages,
+    required TResult Function(ReceivedImages value) receivedImages,
+    required TResult Function(AddImage value) addImage,
+    required TResult Function(DeleteImage value) deleteImage,
+  }) {
+    return addImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartListeningForImages value)? startListeningForImages,
+    TResult Function(ReceivedImages value)? receivedImages,
+    TResult Function(AddImage value)? addImage,
+    TResult Function(DeleteImage value)? deleteImage,
+    required TResult orElse(),
+  }) {
+    if (addImage != null) {
+      return addImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddImage implements CostumeImageWatcherEvent {
+  const factory AddImage(String imagePath) = _$AddImage;
+
+  String get imagePath => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AddImageCopyWith<AddImage> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DeleteImageCopyWith<$Res> {
+  factory $DeleteImageCopyWith(
+          DeleteImage value, $Res Function(DeleteImage) then) =
+      _$DeleteImageCopyWithImpl<$Res>;
+  $Res call({CostumeImage image});
+}
+
+/// @nodoc
+class _$DeleteImageCopyWithImpl<$Res>
+    extends _$CostumeImageWatcherEventCopyWithImpl<$Res>
+    implements $DeleteImageCopyWith<$Res> {
+  _$DeleteImageCopyWithImpl(
+      DeleteImage _value, $Res Function(DeleteImage) _then)
+      : super(_value, (v) => _then(v as DeleteImage));
+
+  @override
+  DeleteImage get _value => super._value as DeleteImage;
+
+  @override
+  $Res call({
+    Object? image = freezed,
+  }) {
+    return _then(DeleteImage(
+      image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as CostumeImage,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteImage implements DeleteImage {
+  const _$DeleteImage(this.image);
+
+  @override
+  final CostumeImage image;
+
+  @override
+  String toString() {
+    return 'CostumeImageWatcherEvent.deleteImage(image: $image)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is DeleteImage &&
+            (identical(other.image, image) ||
+                const DeepCollectionEquality().equals(other.image, image)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(image);
+
+  @JsonKey(ignore: true)
+  @override
+  $DeleteImageCopyWith<DeleteImage> get copyWith =>
+      _$DeleteImageCopyWithImpl<DeleteImage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String costumeId) startListeningForImages,
+    required TResult Function(List<CostumeImage> images) receivedImages,
+    required TResult Function(String imagePath) addImage,
+    required TResult Function(CostumeImage image) deleteImage,
+  }) {
+    return deleteImage(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String costumeId)? startListeningForImages,
+    TResult Function(List<CostumeImage> images)? receivedImages,
+    TResult Function(String imagePath)? addImage,
+    TResult Function(CostumeImage image)? deleteImage,
+    required TResult orElse(),
+  }) {
+    if (deleteImage != null) {
+      return deleteImage(image);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartListeningForImages value)
+        startListeningForImages,
+    required TResult Function(ReceivedImages value) receivedImages,
+    required TResult Function(AddImage value) addImage,
+    required TResult Function(DeleteImage value) deleteImage,
+  }) {
+    return deleteImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartListeningForImages value)? startListeningForImages,
+    TResult Function(ReceivedImages value)? receivedImages,
+    TResult Function(AddImage value)? addImage,
+    TResult Function(DeleteImage value)? deleteImage,
+    required TResult orElse(),
+  }) {
+    if (deleteImage != null) {
+      return deleteImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteImage implements CostumeImageWatcherEvent {
+  const factory DeleteImage(CostumeImage image) = _$DeleteImage;
+
+  CostumeImage get image => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DeleteImageCopyWith<DeleteImage> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$CostumeImageWatcherStateTearOff {
   const _$CostumeImageWatcherStateTearOff();
 
-  Initial initial() {
-    return Initial();
-  }
-
-  Loading loading() {
-    return Loading();
-  }
-
-  Success success(List<CostumeImage> images) {
-    return Success(
-      images,
+  _CostumeImageWatcherState call({required List<CostumeImage> images}) {
+    return _CostumeImageWatcherState(
+      images: images,
     );
   }
 }
@@ -341,35 +618,10 @@ const $CostumeImageWatcherState = _$CostumeImageWatcherStateTearOff();
 
 /// @nodoc
 mixin _$CostumeImageWatcherState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<CostumeImage> images) success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<CostumeImage> images)? success,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    required TResult orElse(),
-  }) =>
+  List<CostumeImage> get images => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CostumeImageWatcherStateCopyWith<CostumeImageWatcherState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -378,6 +630,7 @@ abstract class $CostumeImageWatcherStateCopyWith<$Res> {
   factory $CostumeImageWatcherStateCopyWith(CostumeImageWatcherState value,
           $Res Function(CostumeImageWatcherState) then) =
       _$CostumeImageWatcherStateCopyWithImpl<$Res>;
+  $Res call({List<CostumeImage> images});
 }
 
 /// @nodoc
@@ -388,207 +641,48 @@ class _$CostumeImageWatcherStateCopyWithImpl<$Res>
   final CostumeImageWatcherState _value;
   // ignore: unused_field
   final $Res Function(CostumeImageWatcherState) _then;
-}
-
-/// @nodoc
-abstract class $InitialCopyWith<$Res> {
-  factory $InitialCopyWith(Initial value, $Res Function(Initial) then) =
-      _$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$InitialCopyWithImpl<$Res>
-    extends _$CostumeImageWatcherStateCopyWithImpl<$Res>
-    implements $InitialCopyWith<$Res> {
-  _$InitialCopyWithImpl(Initial _value, $Res Function(Initial) _then)
-      : super(_value, (v) => _then(v as Initial));
-
-  @override
-  Initial get _value => super._value as Initial;
-}
-
-/// @nodoc
-
-class _$Initial implements Initial {
-  _$Initial();
-
-  @override
-  String toString() {
-    return 'CostumeImageWatcherState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<CostumeImage> images) success,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<CostumeImage> images)? success,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Initial implements CostumeImageWatcherState {
-  factory Initial() = _$Initial;
-}
-
-/// @nodoc
-abstract class $LoadingCopyWith<$Res> {
-  factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
-      _$LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$LoadingCopyWithImpl<$Res>
-    extends _$CostumeImageWatcherStateCopyWithImpl<$Res>
-    implements $LoadingCopyWith<$Res> {
-  _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
-      : super(_value, (v) => _then(v as Loading));
-
-  @override
-  Loading get _value => super._value as Loading;
-}
-
-/// @nodoc
-
-class _$Loading implements Loading {
-  _$Loading();
-
-  @override
-  String toString() {
-    return 'CostumeImageWatcherState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<CostumeImage> images) success,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<CostumeImage> images)? success,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Loading implements CostumeImageWatcherState {
-  factory Loading() = _$Loading;
-}
-
-/// @nodoc
-abstract class $SuccessCopyWith<$Res> {
-  factory $SuccessCopyWith(Success value, $Res Function(Success) then) =
-      _$SuccessCopyWithImpl<$Res>;
-  $Res call({List<CostumeImage> images});
-}
-
-/// @nodoc
-class _$SuccessCopyWithImpl<$Res>
-    extends _$CostumeImageWatcherStateCopyWithImpl<$Res>
-    implements $SuccessCopyWith<$Res> {
-  _$SuccessCopyWithImpl(Success _value, $Res Function(Success) _then)
-      : super(_value, (v) => _then(v as Success));
-
-  @override
-  Success get _value => super._value as Success;
 
   @override
   $Res call({
     Object? images = freezed,
   }) {
-    return _then(Success(
-      images == freezed
+    return _then(_value.copyWith(
+      images: images == freezed
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<CostumeImage>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$CostumeImageWatcherStateCopyWith<$Res>
+    implements $CostumeImageWatcherStateCopyWith<$Res> {
+  factory _$CostumeImageWatcherStateCopyWith(_CostumeImageWatcherState value,
+          $Res Function(_CostumeImageWatcherState) then) =
+      __$CostumeImageWatcherStateCopyWithImpl<$Res>;
+  @override
+  $Res call({List<CostumeImage> images});
+}
+
+/// @nodoc
+class __$CostumeImageWatcherStateCopyWithImpl<$Res>
+    extends _$CostumeImageWatcherStateCopyWithImpl<$Res>
+    implements _$CostumeImageWatcherStateCopyWith<$Res> {
+  __$CostumeImageWatcherStateCopyWithImpl(_CostumeImageWatcherState _value,
+      $Res Function(_CostumeImageWatcherState) _then)
+      : super(_value, (v) => _then(v as _CostumeImageWatcherState));
+
+  @override
+  _CostumeImageWatcherState get _value =>
+      super._value as _CostumeImageWatcherState;
+
+  @override
+  $Res call({
+    Object? images = freezed,
+  }) {
+    return _then(_CostumeImageWatcherState(
+      images: images == freezed
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<CostumeImage>,
@@ -598,21 +692,21 @@ class _$SuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Success implements Success {
-  _$Success(this.images);
+class _$_CostumeImageWatcherState implements _CostumeImageWatcherState {
+  const _$_CostumeImageWatcherState({required this.images});
 
   @override
   final List<CostumeImage> images;
 
   @override
   String toString() {
-    return 'CostumeImageWatcherState.success(images: $images)';
+    return 'CostumeImageWatcherState(images: $images)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is Success &&
+        (other is _CostumeImageWatcherState &&
             (identical(other.images, images) ||
                 const DeepCollectionEquality().equals(other.images, images)));
   }
@@ -623,62 +717,19 @@ class _$Success implements Success {
 
   @JsonKey(ignore: true)
   @override
-  $SuccessCopyWith<Success> get copyWith =>
-      _$SuccessCopyWithImpl<Success>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<CostumeImage> images) success,
-  }) {
-    return success(images);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<CostumeImage> images)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(images);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
+  _$CostumeImageWatcherStateCopyWith<_CostumeImageWatcherState> get copyWith =>
+      __$CostumeImageWatcherStateCopyWithImpl<_CostumeImageWatcherState>(
+          this, _$identity);
 }
 
-abstract class Success implements CostumeImageWatcherState {
-  factory Success(List<CostumeImage> images) = _$Success;
+abstract class _CostumeImageWatcherState implements CostumeImageWatcherState {
+  const factory _CostumeImageWatcherState(
+      {required List<CostumeImage> images}) = _$_CostumeImageWatcherState;
 
+  @override
   List<CostumeImage> get images => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  $SuccessCopyWith<Success> get copyWith => throw _privateConstructorUsedError;
+  _$CostumeImageWatcherStateCopyWith<_CostumeImageWatcherState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

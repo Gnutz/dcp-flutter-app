@@ -3,8 +3,8 @@ import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
-class CostumeImageHolder extends StatelessWidget {
-  const CostumeImageHolder({
+class CostumeWebImageHolder extends StatelessWidget {
+  const CostumeWebImageHolder({
     Key? key,
     CostumeImage? image,
   })
@@ -37,4 +37,6 @@ class CostumeImageHolder extends StatelessWidget {
     )
         : const Placeholder();
   }
+
 }
+

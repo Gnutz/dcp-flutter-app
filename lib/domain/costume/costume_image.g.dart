@@ -9,7 +9,7 @@ part of 'costume_image.dart';
 CostumeImage _$CostumeImageFromJson(Map json) {
   return CostumeImage(
     id: json['id'] as String?,
-    path: json['path'] as String,
+    path: json['path'] as String?,
     uploaded: json['uploaded'] == null
         ? null
         : DateTime.parse(json['uploaded'] as String),

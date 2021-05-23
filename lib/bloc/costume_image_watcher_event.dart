@@ -6,4 +6,6 @@ abstract class CostumeImageWatcherEvent with _$CostumeImageWatcherEvent {
   StartListeningForImages;
 
   const factory CostumeImageWatcherEvent.receivedImages(List<CostumeImage> images) = ReceivedImages;
+  const factory CostumeImageWatcherEvent.addImage(String imagePath) = AddImage;
+  const factory CostumeImageWatcherEvent.deleteImage(CostumeImage image) = DeleteImage;
 }

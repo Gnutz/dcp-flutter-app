@@ -26,6 +26,14 @@ class CostumeImageWatcherBloc extends Bloc<CostumeImageWatcherEvent, CostumeImag
       _imageStream?.cancel();
       _imageStream = _galleryService.watchCostumesImages(event.costumeId)
           .listen((images) => add(CostumeImageWatcherEvent.receivedImages(images)));
+    }, deleteImage: (DeleteImage event) async* {
+      final images = state.images;
+      images.remove(event.image);
+      add(CostumeImageWatcherEvent.receivedImages(images));
+    }, addImage: (AddImage event) async* {
+      final images = state.images;
+      images.add(CostumeImage(path: event.imagePath));
+      add(CostumeImageWatcherEvent.receivedImages(images));
     });
   }
 

@@ -5,13 +5,15 @@ part 'costume_image.g.dart';
 @JsonSerializable(anyMap: true, explicitToJson: true)
 class CostumeImage {
   String? id;
-  String path;
+  String? path;
   DateTime? uploaded;
 
   CostumeImage(
       {this.id,
       required this.path,
-      required this.uploaded});
+      this.uploaded}){
+    this.uploaded = uploaded ?? DateTime.now();
+  }
 
   factory CostumeImage.fromJson(Map<String, dynamic> json) =>
       _$CostumeImageFromJson(json);
