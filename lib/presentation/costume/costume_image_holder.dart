@@ -17,7 +17,7 @@ class CostumeImageHolder extends StatelessWidget {
   Widget build(BuildContext context) {
     return image != null
         ? ExtendedImage.network(
-      image!.downloadUrl,
+      image!.path,
       loadStateChanged: (ExtendedImageState state) {
         switch (state.extendedImageLoadState) {
           case LoadState.loading:

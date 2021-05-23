@@ -66,7 +66,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     final String downloadUrl = await _storage.ref(imagePath).getDownloadURL();
 
     doc.set(CostumeImage(
-            downloadUrl: downloadUrl,
+            path: downloadUrl,
             uploaded: DateTime.now())
         .toJson());
   }

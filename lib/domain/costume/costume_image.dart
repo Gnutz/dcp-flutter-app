@@ -5,12 +5,12 @@ part 'costume_image.g.dart';
 @JsonSerializable(anyMap: true, explicitToJson: true)
 class CostumeImage {
   String? id;
-  String downloadUrl;
-  DateTime uploaded;
+  String path;
+  DateTime? uploaded;
 
   CostumeImage(
       {this.id,
-      required this.downloadUrl,
+      required this.path,
       required this.uploaded});
 
   factory CostumeImage.fromJson(Map<String, dynamic> json) =>
@@ -25,5 +25,5 @@ class CostumeImage {
           id == other.id;
 
   @override
-  int get hashCode => id.hashCode ^ downloadUrl.hashCode ^ uploaded.hashCode;
+  int get hashCode => id.hashCode ^ path.hashCode ^ uploaded.hashCode;
 }
