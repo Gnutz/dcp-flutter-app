@@ -20,8 +20,8 @@ main() {
         created: DateTime.now(),
         edited: DateTime.now(),
         fashion: Fashion.mens,
-        themes: <String>["musical", "pirates", "navy"],
-        colors: <String>["black", "white", "brown"],
+        themes: const <String>["musical", "pirates", "navy"],
+        colors: const <String>["black", "white", "brown"],
         quantity: 1,
         storageLocation: StorageLocation(
             main: Location(id: "aNKkI9JUcgt2yIw0qRrm", location: "Loftet"),
@@ -58,8 +58,8 @@ main() {
         created: DateTime.now(),
         edited: DateTime.now(),
         fashion: Fashion.mens,
-        themes: <String>["musical", "pirates", "navy"],
-        colors: <String>["black", "white", "brown"],
+        themes: const <String>["musical", "pirates", "navy"],
+        colors: const <String>["black", "white", "brown"],
         quantity: 1);
 
 
@@ -93,8 +93,8 @@ main() {
                 created: DateTime.now(),
                 edited: DateTime.now(),
                 fashion: Fashion.mens,
-                themes: <String>["musical", "pirates", "navy"],
-                colors: <String>["black", "white", "brown"],
+                themes:  const <String>["musical", "pirates", "navy"],
+                colors: const <String>["black", "white", "brown"],
                 quantity: 1,
                 storageLocation: expectedLocation
             );

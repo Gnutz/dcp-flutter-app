@@ -6,6 +6,7 @@ import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/gallery.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/search_form.dart';
+import 'package:digtial_costume_platform/presentation/routes/navigation_service.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';

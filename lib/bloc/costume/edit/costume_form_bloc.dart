@@ -6,7 +6,7 @@ import 'package:digtial_costume_platform/domain/costume/costume.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_image.dart';
 import 'package:digtial_costume_platform/domain/costume/fashion.dart';
 import 'package:digtial_costume_platform/domain/costume/storage_location.dart';
-import 'package:digtial_costume_platform/presentation/routes/routes.dart';
+import 'package:digtial_costume_platform/presentation/routes/navigation_service.dart';
 import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -45,9 +45,6 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
       },
       loadFormOptions: (_) async* {
         yield* _loadFormOptionsEventHandler();
-      },
-      saveChangesPressed: (_) async* {
-        _saveChangesPressedEventHandler();
       },
       saveCostume: (_) async* {
         yield* _saveCostumeEventHandler();
@@ -122,14 +119,10 @@ class CostumeFormBloc extends Bloc<CostumeFormEvent, CostumeFormState> {
     final storageOptions = await _costumeService.getStorageMainLocations();
 
     yield state.copyWith(
-        loading: false,
         categoryOptions: categoryOptions,
         timePeriodOptions: timePeriodOptions,
-        storageMainLocationOptions: storageOptions,
-        unSavedChanges: true);
+        storageMainLocationOptions: storageOptions);
   }
-
-  void _saveChangesPressedEventHandler() {}
 
   Stream<CostumeFormState> _saveCostumeEventHandler() async* {
     if (state.id != null) {

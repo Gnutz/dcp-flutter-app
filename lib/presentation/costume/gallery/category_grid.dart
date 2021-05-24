@@ -1,9 +1,7 @@
 import 'package:digtial_costume_platform/bloc/gallery/category_select/category_selection_bloc.dart';
 import 'package:digtial_costume_platform/locator.dart';
-import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/category_card.dart';
-import 'package:digtial_costume_platform/shared/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +14,6 @@ class CategoryGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     _context = context;
     _selectionBloc = _context.read<CategorySelectionBloc>();
-    //TODO: do I only need listener, builder?
     return BlocConsumer<CategorySelectionBloc, CategorySelectionState>(
       listener: (context, state) {},
       builder: (context, state) => _buildCategoryGrid(context, state),
@@ -33,7 +30,6 @@ class CategoryGrid extends StatelessWidget {
           children: [
             ...state.categories
                 .map((String category) => InkWell(
-                      //TODO change
                       onTap: () =>
                           _selectionBloc.add(CategorySelected(category)),
                       child: CategoryCard(costumeCategory: category),

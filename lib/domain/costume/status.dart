@@ -35,7 +35,6 @@ class InStorage extends Equatable implements Status{
   Map<String, dynamic> toJson() => _$InStorageToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [location];
 }
 

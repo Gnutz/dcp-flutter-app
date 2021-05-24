@@ -58,11 +58,10 @@ class CostumeDetailsPage extends StatelessWidget {
     showModalBottomSheet(
         context: _context,
         builder: (context) {
-          return Container(
-              child: BlocProvider(
+          return  BlocProvider(
             create: (context) => Locator().locator<SearchFormBloc>(),
             child: SearchForm(),
-          ));
+          );
         });
   }
 }

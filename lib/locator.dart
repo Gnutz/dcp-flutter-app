@@ -15,6 +15,7 @@ import 'package:digtial_costume_platform/data/infrastructure/costume/firebase_co
 import 'package:digtial_costume_platform/data/services/gallery_service.dart';
 import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/data/services/i_user_service.dart';
+import 'package:digtial_costume_platform/presentation/routes/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -25,6 +26,7 @@ class Locator {
   final locator = GetIt.instance;
 
   void setUp() {
+
     locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
     locator.registerLazySingleton<FirebaseFirestore>(
         () => FirebaseFirestore.instance);
@@ -32,6 +34,7 @@ class Locator {
         .registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
 
     //Services
+    locator.registerLazySingleton<NavigationService>(() => NavigationService());
     locator.registerLazySingleton<IUserService>(() => FirebaseUserRepository());
     locator.registerLazySingleton<ICostumeRepository>(() =>
         FirebaseCostumeRepository(
@@ -48,7 +51,7 @@ class Locator {
     locator
         .registerFactory<SignInBloc>(() => SignInBloc(locator<IAuthService>()));
     locator.registerFactory<RegisterBloc>(
-        () => RegisterBloc(locator<IAuthService>()));
+        () => RegisterBloc(locator<IAuthService>(), locator<NavigationService>()));
     locator.registerFactory<CategorySelectionBloc>(
             () => CategorySelectionBloc(locator<IGalleryService>()));
     //CostumeListBLoc

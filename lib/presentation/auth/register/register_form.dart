@@ -35,7 +35,6 @@ class RegisterForm extends StatelessWidget {
                 const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Form(
               autovalidateMode: AutovalidateMode.always,
-              //TODO:
               // autovalidate: state.showInputErrorMessages,
               child: Container(
                 alignment: Alignment.center,

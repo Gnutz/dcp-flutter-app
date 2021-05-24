@@ -3,8 +3,7 @@ part of 'costume_form_bloc.dart';
 @freezed
 class CostumeFormState with _$CostumeFormState {
   const factory CostumeFormState(
-      {required bool loading,
-      required List<String> timePeriodOptions,
+      {required List<String> timePeriodOptions,
       required List<String> categoryOptions,
       required List<Location> storageMainLocationOptions,
       required List<Location> storageSubLocationOptions,
@@ -25,7 +24,6 @@ class CostumeFormState with _$CostumeFormState {
       Location? subLocation}) = _CostumeFormState;
 
   factory CostumeFormState.initial() => const CostumeFormState(
-      loading: true,
       unSavedChanges: false,
       currentColor: StringsConstants.empty,
       currentTheme: StringsConstants.empty,

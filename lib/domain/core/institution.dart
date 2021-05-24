@@ -22,6 +22,5 @@ class Institution extends Equatable{
   Map<String, dynamic> toJson() => _$InstitutionToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id, name, domain, alias];
 }

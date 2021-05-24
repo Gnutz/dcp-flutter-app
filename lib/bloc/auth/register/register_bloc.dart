@@ -6,7 +6,9 @@ import 'package:digtial_costume_platform/data/services/i_auth_service.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
 import 'package:digtial_costume_platform/domain/core/value_validators.dart';
+import 'package:digtial_costume_platform/presentation/routes/navigation_service.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'register_bloc.freezed.dart';
@@ -15,8 +17,9 @@ part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final IAuthService _auth;
+  final NavigationService _navigation;
 
-  RegisterBloc(this._auth) : super(RegisterState.initial()) {
+  RegisterBloc(this._auth, this._navigation) : super(RegisterState.initial()) {
     add(const RegisterEvent.loadInstitutions());
   }
 
@@ -98,7 +101,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _signInNavEventHandler() {
-    NavigationService.instance!.pushReplacementNamed(Routes.signIn);
+    _navigation.pushReplacementNamed(Routes.signIn);
   }
 
   Stream<RegisterState> _registerSubmitEventHandler(
@@ -127,7 +130,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         add(const RegisterEvent.signInNavPressed());
       }
     }
-
 
     //error state display
     yield state.copyWith(

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:digtial_costume_platform/domain/costume/costume_query.dart';
+import 'package:digtial_costume_platform/presentation/routes/navigation_service.dart';
 import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -36,7 +37,7 @@ class CategorySelectionBloc
   }
 
   ///Navigates to [GalleryPage] with a [CostumeQuery] based on the selected category
-  void _categorySelectedEventHandler(CategorySelected e) async {
+  void _categorySelectedEventHandler(CategorySelected e)  {
      NavigationService.instance!.pushNamed(Routes.gallery,
          arguments: CostumeQuery(category: e.selectedCategory));
   }

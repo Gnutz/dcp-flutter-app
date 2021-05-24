@@ -195,6 +195,66 @@
   "@quantity": {
     "description": ""
   },
+
+  "costumeWasDeleted": "costume was deleted",
+  "@costumeWasDeleted": {
+    "description": ""
+  },
+
+  "selectAProduction":"Select a production",
+  "@selectAProduction": {
+    "description": ""
+  },
+
+  "signOut": "Sign Out"  ,
+  "@signOut": {
+    "description": ""
+  },
+
+  "productions": "Productions" ,
+  "@productions": {
+    "description": ""
+  },
+  "areYouSureYouWantToDeleteThisCostume": "Are you sure you want to delete this costume?",
+  "@areYouSureYouWantToDeleteThisCostume": {
+    "description": ""
+  },
+
+  "search": "Search",
+  "@search": {
+    "description": ""
+  },
+
+  "selectAListToAddCostumeTo" : "Select one of your list to add the costume to",
+  "@selectAListToAddCostumeTo": {
+    "description": ""
+  },
+
+  "error" : "Error",
+  "@error": {
+    "description": ""
+  },
+
+  "noMatchesFound" : "Matches no available suggestions",
+  "@noMatchesFound": {
+    "description": ""
+  },
+
+  "category" : "Category",
+  "@category": {
+    "description": ""
+  },
+
+  "timePeriod" : "Time Period",
+  "@timePeriod": {
+    "description": ""
+  },
+
+  "productionTitle" : "Production Title",
+  "@productionTitle": {
+    "description": ""
+  },
+
   "selectYourInstitution": "Select Your Institution",
   "@selectYourInstitution": {
     "description": ""

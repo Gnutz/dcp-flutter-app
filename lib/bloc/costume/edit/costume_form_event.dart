@@ -18,8 +18,6 @@ class CostumeFormEvent with _$CostumeFormEvent {
 
   const factory CostumeFormEvent.loadFormOptions() = LoadFormOptions;
 
-  const factory CostumeFormEvent.saveChangesPressed() = SaveChangesPressed;
-
   const factory CostumeFormEvent.saveCostume() = SaveCostume;
 
   const factory CostumeFormEvent.themeValueChanged(

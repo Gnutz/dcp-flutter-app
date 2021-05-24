@@ -50,10 +50,6 @@ class _$CostumeFormEventTearOff {
     return const LoadFormOptions();
   }
 
-  SaveChangesPressed saveChangesPressed() {
-    return const SaveChangesPressed();
-  }
-
   SaveCostume saveCostume() {
     return const SaveCostume();
   }
@@ -128,7 +124,6 @@ mixin _$CostumeFormEvent {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -150,7 +145,6 @@ mixin _$CostumeFormEvent {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -173,7 +167,6 @@ mixin _$CostumeFormEvent {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -195,7 +188,6 @@ mixin _$CostumeFormEvent {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -301,7 +293,6 @@ class _$LoadCostume implements LoadCostume {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -326,7 +317,6 @@ class _$LoadCostume implements LoadCostume {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -355,7 +345,6 @@ class _$LoadCostume implements LoadCostume {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -380,7 +369,6 @@ class _$LoadCostume implements LoadCostume {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -482,7 +470,6 @@ class _$CategorySelected implements CategorySelected {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -507,7 +494,6 @@ class _$CategorySelected implements CategorySelected {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -536,7 +522,6 @@ class _$CategorySelected implements CategorySelected {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -561,7 +546,6 @@ class _$CategorySelected implements CategorySelected {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -662,7 +646,6 @@ class _$TimePeriodSelected implements TimePeriodSelected {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -687,7 +670,6 @@ class _$TimePeriodSelected implements TimePeriodSelected {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -716,7 +698,6 @@ class _$TimePeriodSelected implements TimePeriodSelected {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -741,7 +722,6 @@ class _$TimePeriodSelected implements TimePeriodSelected {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -842,7 +822,6 @@ class _$FashionSelected implements FashionSelected {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -867,7 +846,6 @@ class _$FashionSelected implements FashionSelected {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -896,7 +874,6 @@ class _$FashionSelected implements FashionSelected {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -921,7 +898,6 @@ class _$FashionSelected implements FashionSelected {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -1023,7 +999,6 @@ class _$QuantityChanged implements QuantityChanged {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -1048,7 +1023,6 @@ class _$QuantityChanged implements QuantityChanged {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -1077,7 +1051,6 @@ class _$QuantityChanged implements QuantityChanged {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -1102,7 +1075,6 @@ class _$QuantityChanged implements QuantityChanged {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -1178,7 +1150,6 @@ class _$LoadFormOptions implements LoadFormOptions {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -1203,7 +1174,6 @@ class _$LoadFormOptions implements LoadFormOptions {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -1232,7 +1202,6 @@ class _$LoadFormOptions implements LoadFormOptions {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -1257,7 +1226,6 @@ class _$LoadFormOptions implements LoadFormOptions {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -1280,156 +1248,6 @@ class _$LoadFormOptions implements LoadFormOptions {
 
 abstract class LoadFormOptions implements CostumeFormEvent {
   const factory LoadFormOptions() = _$LoadFormOptions;
-}
-
-/// @nodoc
-abstract class $SaveChangesPressedCopyWith<$Res> {
-  factory $SaveChangesPressedCopyWith(
-          SaveChangesPressed value, $Res Function(SaveChangesPressed) then) =
-      _$SaveChangesPressedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$SaveChangesPressedCopyWithImpl<$Res>
-    extends _$CostumeFormEventCopyWithImpl<$Res>
-    implements $SaveChangesPressedCopyWith<$Res> {
-  _$SaveChangesPressedCopyWithImpl(
-      SaveChangesPressed _value, $Res Function(SaveChangesPressed) _then)
-      : super(_value, (v) => _then(v as SaveChangesPressed));
-
-  @override
-  SaveChangesPressed get _value => super._value as SaveChangesPressed;
-}
-
-/// @nodoc
-
-class _$SaveChangesPressed implements SaveChangesPressed {
-  const _$SaveChangesPressed();
-
-  @override
-  String toString() {
-    return 'CostumeFormEvent.saveChangesPressed()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is SaveChangesPressed);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? costumeId) loadCostume,
-    required TResult Function(String category) categorySelected,
-    required TResult Function(String time) timePeriodSelected,
-    required TResult Function(Fashion fashion) fashionSelected,
-    required TResult Function(int quantity) quantityChanged,
-    required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
-    required TResult Function() saveCostume,
-    required TResult Function(String theme) themeValueChanged,
-    required TResult Function() themeAdded,
-    required TResult Function(String theme) themeRemoved,
-    required TResult Function(String color) colorValueChanged,
-    required TResult Function() colorAdded,
-    required TResult Function(String color) colorRemoved,
-    required TResult Function(Location main) mainLocationSelected,
-    required TResult Function(Location location) subLocationSelected,
-    required TResult Function(String imagePath) addImage,
-    required TResult Function(CostumeImage image) deleteImage,
-  }) {
-    return saveChangesPressed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? costumeId)? loadCostume,
-    TResult Function(String category)? categorySelected,
-    TResult Function(String time)? timePeriodSelected,
-    TResult Function(Fashion fashion)? fashionSelected,
-    TResult Function(int quantity)? quantityChanged,
-    TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
-    TResult Function()? saveCostume,
-    TResult Function(String theme)? themeValueChanged,
-    TResult Function()? themeAdded,
-    TResult Function(String theme)? themeRemoved,
-    TResult Function(String color)? colorValueChanged,
-    TResult Function()? colorAdded,
-    TResult Function(String color)? colorRemoved,
-    TResult Function(Location main)? mainLocationSelected,
-    TResult Function(Location location)? subLocationSelected,
-    TResult Function(String imagePath)? addImage,
-    TResult Function(CostumeImage image)? deleteImage,
-    required TResult orElse(),
-  }) {
-    if (saveChangesPressed != null) {
-      return saveChangesPressed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadCostume value) loadCostume,
-    required TResult Function(CategorySelected value) categorySelected,
-    required TResult Function(TimePeriodSelected value) timePeriodSelected,
-    required TResult Function(FashionSelected value) fashionSelected,
-    required TResult Function(QuantityChanged value) quantityChanged,
-    required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
-    required TResult Function(SaveCostume value) saveCostume,
-    required TResult Function(ThemeValueChanged value) themeValueChanged,
-    required TResult Function(ThemeAdded value) themeAdded,
-    required TResult Function(ThemeRemoved value) themeRemoved,
-    required TResult Function(ColorValueChanged value) colorValueChanged,
-    required TResult Function(ColorAdded value) colorAdded,
-    required TResult Function(ColorRemoved value) colorRemoved,
-    required TResult Function(MainLocationSelected value) mainLocationSelected,
-    required TResult Function(SubLocationSelected value) subLocationSelected,
-    required TResult Function(AddImage value) addImage,
-    required TResult Function(DeleteImage value) deleteImage,
-  }) {
-    return saveChangesPressed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadCostume value)? loadCostume,
-    TResult Function(CategorySelected value)? categorySelected,
-    TResult Function(TimePeriodSelected value)? timePeriodSelected,
-    TResult Function(FashionSelected value)? fashionSelected,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
-    TResult Function(SaveCostume value)? saveCostume,
-    TResult Function(ThemeValueChanged value)? themeValueChanged,
-    TResult Function(ThemeAdded value)? themeAdded,
-    TResult Function(ThemeRemoved value)? themeRemoved,
-    TResult Function(ColorValueChanged value)? colorValueChanged,
-    TResult Function(ColorAdded value)? colorAdded,
-    TResult Function(ColorRemoved value)? colorRemoved,
-    TResult Function(MainLocationSelected value)? mainLocationSelected,
-    TResult Function(SubLocationSelected value)? subLocationSelected,
-    TResult Function(AddImage value)? addImage,
-    TResult Function(DeleteImage value)? deleteImage,
-    required TResult orElse(),
-  }) {
-    if (saveChangesPressed != null) {
-      return saveChangesPressed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SaveChangesPressed implements CostumeFormEvent {
-  const factory SaveChangesPressed() = _$SaveChangesPressed;
 }
 
 /// @nodoc
@@ -1478,7 +1296,6 @@ class _$SaveCostume implements SaveCostume {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -1503,7 +1320,6 @@ class _$SaveCostume implements SaveCostume {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -1532,7 +1348,6 @@ class _$SaveCostume implements SaveCostume {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -1557,7 +1372,6 @@ class _$SaveCostume implements SaveCostume {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -1653,7 +1467,6 @@ class _$ThemeValueChanged implements ThemeValueChanged {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -1678,7 +1491,6 @@ class _$ThemeValueChanged implements ThemeValueChanged {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -1707,7 +1519,6 @@ class _$ThemeValueChanged implements ThemeValueChanged {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -1732,7 +1543,6 @@ class _$ThemeValueChanged implements ThemeValueChanged {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -1807,7 +1617,6 @@ class _$ThemeAdded implements ThemeAdded {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -1832,7 +1641,6 @@ class _$ThemeAdded implements ThemeAdded {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -1861,7 +1669,6 @@ class _$ThemeAdded implements ThemeAdded {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -1886,7 +1693,6 @@ class _$ThemeAdded implements ThemeAdded {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -1982,7 +1788,6 @@ class _$ThemeRemoved implements ThemeRemoved {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -2007,7 +1812,6 @@ class _$ThemeRemoved implements ThemeRemoved {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -2036,7 +1840,6 @@ class _$ThemeRemoved implements ThemeRemoved {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -2061,7 +1864,6 @@ class _$ThemeRemoved implements ThemeRemoved {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -2162,7 +1964,6 @@ class _$ColorValueChanged implements ColorValueChanged {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -2187,7 +1988,6 @@ class _$ColorValueChanged implements ColorValueChanged {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -2216,7 +2016,6 @@ class _$ColorValueChanged implements ColorValueChanged {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -2241,7 +2040,6 @@ class _$ColorValueChanged implements ColorValueChanged {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -2316,7 +2114,6 @@ class _$ColorAdded implements ColorAdded {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -2341,7 +2138,6 @@ class _$ColorAdded implements ColorAdded {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -2370,7 +2166,6 @@ class _$ColorAdded implements ColorAdded {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -2395,7 +2190,6 @@ class _$ColorAdded implements ColorAdded {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -2491,7 +2285,6 @@ class _$ColorRemoved implements ColorRemoved {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -2516,7 +2309,6 @@ class _$ColorRemoved implements ColorRemoved {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -2545,7 +2337,6 @@ class _$ColorRemoved implements ColorRemoved {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -2570,7 +2361,6 @@ class _$ColorRemoved implements ColorRemoved {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -2672,7 +2462,6 @@ class _$MainLocationSelected implements MainLocationSelected {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -2697,7 +2486,6 @@ class _$MainLocationSelected implements MainLocationSelected {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -2726,7 +2514,6 @@ class _$MainLocationSelected implements MainLocationSelected {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -2751,7 +2538,6 @@ class _$MainLocationSelected implements MainLocationSelected {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -2853,7 +2639,6 @@ class _$SubLocationSelected implements SubLocationSelected {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -2878,7 +2663,6 @@ class _$SubLocationSelected implements SubLocationSelected {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -2907,7 +2691,6 @@ class _$SubLocationSelected implements SubLocationSelected {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -2932,7 +2715,6 @@ class _$SubLocationSelected implements SubLocationSelected {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -3031,7 +2813,6 @@ class _$AddImage implements AddImage {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -3056,7 +2837,6 @@ class _$AddImage implements AddImage {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -3085,7 +2865,6 @@ class _$AddImage implements AddImage {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -3110,7 +2889,6 @@ class _$AddImage implements AddImage {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -3211,7 +2989,6 @@ class _$DeleteImage implements DeleteImage {
     required TResult Function(Fashion fashion) fashionSelected,
     required TResult Function(int quantity) quantityChanged,
     required TResult Function() loadFormOptions,
-    required TResult Function() saveChangesPressed,
     required TResult Function() saveCostume,
     required TResult Function(String theme) themeValueChanged,
     required TResult Function() themeAdded,
@@ -3236,7 +3013,6 @@ class _$DeleteImage implements DeleteImage {
     TResult Function(Fashion fashion)? fashionSelected,
     TResult Function(int quantity)? quantityChanged,
     TResult Function()? loadFormOptions,
-    TResult Function()? saveChangesPressed,
     TResult Function()? saveCostume,
     TResult Function(String theme)? themeValueChanged,
     TResult Function()? themeAdded,
@@ -3265,7 +3041,6 @@ class _$DeleteImage implements DeleteImage {
     required TResult Function(FashionSelected value) fashionSelected,
     required TResult Function(QuantityChanged value) quantityChanged,
     required TResult Function(LoadFormOptions value) loadFormOptions,
-    required TResult Function(SaveChangesPressed value) saveChangesPressed,
     required TResult Function(SaveCostume value) saveCostume,
     required TResult Function(ThemeValueChanged value) themeValueChanged,
     required TResult Function(ThemeAdded value) themeAdded,
@@ -3290,7 +3065,6 @@ class _$DeleteImage implements DeleteImage {
     TResult Function(FashionSelected value)? fashionSelected,
     TResult Function(QuantityChanged value)? quantityChanged,
     TResult Function(LoadFormOptions value)? loadFormOptions,
-    TResult Function(SaveChangesPressed value)? saveChangesPressed,
     TResult Function(SaveCostume value)? saveCostume,
     TResult Function(ThemeValueChanged value)? themeValueChanged,
     TResult Function(ThemeAdded value)? themeAdded,
@@ -3325,8 +3099,7 @@ class _$CostumeFormStateTearOff {
   const _$CostumeFormStateTearOff();
 
   _CostumeFormState call(
-      {required bool loading,
-      required List<String> timePeriodOptions,
+      {required List<String> timePeriodOptions,
       required List<String> categoryOptions,
       required List<Location> storageMainLocationOptions,
       required List<Location> storageSubLocationOptions,
@@ -3346,7 +3119,6 @@ class _$CostumeFormStateTearOff {
       Location? mainLocation,
       Location? subLocation}) {
     return _CostumeFormState(
-      loading: loading,
       timePeriodOptions: timePeriodOptions,
       categoryOptions: categoryOptions,
       storageMainLocationOptions: storageMainLocationOptions,
@@ -3375,7 +3147,6 @@ const $CostumeFormState = _$CostumeFormStateTearOff();
 
 /// @nodoc
 mixin _$CostumeFormState {
-  bool get loading => throw _privateConstructorUsedError;
   List<String> get timePeriodOptions => throw _privateConstructorUsedError;
   List<String> get categoryOptions => throw _privateConstructorUsedError;
   List<Location> get storageMainLocationOptions =>
@@ -3409,8 +3180,7 @@ abstract class $CostumeFormStateCopyWith<$Res> {
           CostumeFormState value, $Res Function(CostumeFormState) then) =
       _$CostumeFormStateCopyWithImpl<$Res>;
   $Res call(
-      {bool loading,
-      List<String> timePeriodOptions,
+      {List<String> timePeriodOptions,
       List<String> categoryOptions,
       List<Location> storageMainLocationOptions,
       List<Location> storageSubLocationOptions,
@@ -3442,7 +3212,6 @@ class _$CostumeFormStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? loading = freezed,
     Object? timePeriodOptions = freezed,
     Object? categoryOptions = freezed,
     Object? storageMainLocationOptions = freezed,
@@ -3464,10 +3233,6 @@ class _$CostumeFormStateCopyWithImpl<$Res>
     Object? subLocation = freezed,
   }) {
     return _then(_value.copyWith(
-      loading: loading == freezed
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
       timePeriodOptions: timePeriodOptions == freezed
           ? _value.timePeriodOptions
           : timePeriodOptions // ignore: cast_nullable_to_non_nullable
@@ -3556,8 +3321,7 @@ abstract class _$CostumeFormStateCopyWith<$Res>
       __$CostumeFormStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {bool loading,
-      List<String> timePeriodOptions,
+      {List<String> timePeriodOptions,
       List<String> categoryOptions,
       List<Location> storageMainLocationOptions,
       List<Location> storageSubLocationOptions,
@@ -3591,7 +3355,6 @@ class __$CostumeFormStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? loading = freezed,
     Object? timePeriodOptions = freezed,
     Object? categoryOptions = freezed,
     Object? storageMainLocationOptions = freezed,
@@ -3613,10 +3376,6 @@ class __$CostumeFormStateCopyWithImpl<$Res>
     Object? subLocation = freezed,
   }) {
     return _then(_CostumeFormState(
-      loading: loading == freezed
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
       timePeriodOptions: timePeriodOptions == freezed
           ? _value.timePeriodOptions
           : timePeriodOptions // ignore: cast_nullable_to_non_nullable
@@ -3701,8 +3460,7 @@ class __$CostumeFormStateCopyWithImpl<$Res>
 
 class _$_CostumeFormState implements _CostumeFormState {
   const _$_CostumeFormState(
-      {required this.loading,
-      required this.timePeriodOptions,
+      {required this.timePeriodOptions,
       required this.categoryOptions,
       required this.storageMainLocationOptions,
       required this.storageSubLocationOptions,
@@ -3722,8 +3480,6 @@ class _$_CostumeFormState implements _CostumeFormState {
       this.mainLocation,
       this.subLocation});
 
-  @override
-  final bool loading;
   @override
   final List<String> timePeriodOptions;
   @override
@@ -3765,16 +3521,13 @@ class _$_CostumeFormState implements _CostumeFormState {
 
   @override
   String toString() {
-    return 'CostumeFormState(loading: $loading, timePeriodOptions: $timePeriodOptions, categoryOptions: $categoryOptions, storageMainLocationOptions: $storageMainLocationOptions, storageSubLocationOptions: $storageSubLocationOptions, currentColor: $currentColor, currentTheme: $currentTheme, unSavedChanges: $unSavedChanges, images: $images, id: $id, fashion: $fashion, category: $category, created: $created, timePeriod: $timePeriod, themes: $themes, colors: $colors, productions: $productions, quantity: $quantity, mainLocation: $mainLocation, subLocation: $subLocation)';
+    return 'CostumeFormState(timePeriodOptions: $timePeriodOptions, categoryOptions: $categoryOptions, storageMainLocationOptions: $storageMainLocationOptions, storageSubLocationOptions: $storageSubLocationOptions, currentColor: $currentColor, currentTheme: $currentTheme, unSavedChanges: $unSavedChanges, images: $images, id: $id, fashion: $fashion, category: $category, created: $created, timePeriod: $timePeriod, themes: $themes, colors: $colors, productions: $productions, quantity: $quantity, mainLocation: $mainLocation, subLocation: $subLocation)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _CostumeFormState &&
-            (identical(other.loading, loading) ||
-                const DeepCollectionEquality()
-                    .equals(other.loading, loading)) &&
             (identical(other.timePeriodOptions, timePeriodOptions) ||
                 const DeepCollectionEquality()
                     .equals(other.timePeriodOptions, timePeriodOptions)) &&
@@ -3818,7 +3571,8 @@ class _$_CostumeFormState implements _CostumeFormState {
                 const DeepCollectionEquality().equals(other.themes, themes)) &&
             (identical(other.colors, colors) ||
                 const DeepCollectionEquality().equals(other.colors, colors)) &&
-            (identical(other.productions, productions) || const DeepCollectionEquality().equals(other.productions, productions)) &&
+            (identical(other.productions, productions) ||
+                const DeepCollectionEquality().equals(other.productions, productions)) &&
             (identical(other.quantity, quantity) || const DeepCollectionEquality().equals(other.quantity, quantity)) &&
             (identical(other.mainLocation, mainLocation) || const DeepCollectionEquality().equals(other.mainLocation, mainLocation)) &&
             (identical(other.subLocation, subLocation) || const DeepCollectionEquality().equals(other.subLocation, subLocation)));
@@ -3827,7 +3581,6 @@ class _$_CostumeFormState implements _CostumeFormState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(loading) ^
       const DeepCollectionEquality().hash(timePeriodOptions) ^
       const DeepCollectionEquality().hash(categoryOptions) ^
       const DeepCollectionEquality().hash(storageMainLocationOptions) ^
@@ -3856,8 +3609,7 @@ class _$_CostumeFormState implements _CostumeFormState {
 
 abstract class _CostumeFormState implements CostumeFormState {
   const factory _CostumeFormState(
-      {required bool loading,
-      required List<String> timePeriodOptions,
+      {required List<String> timePeriodOptions,
       required List<String> categoryOptions,
       required List<Location> storageMainLocationOptions,
       required List<Location> storageSubLocationOptions,
@@ -3877,8 +3629,6 @@ abstract class _CostumeFormState implements CostumeFormState {
       Location? mainLocation,
       Location? subLocation}) = _$_CostumeFormState;
 
-  @override
-  bool get loading => throw _privateConstructorUsedError;
   @override
   List<String> get timePeriodOptions => throw _privateConstructorUsedError;
   @override

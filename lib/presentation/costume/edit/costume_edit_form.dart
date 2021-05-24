@@ -328,7 +328,7 @@ class CostumeEditForm extends StatelessWidget {
         onPressed: () => _pickImage(ImageSource.gallery));
   }
 
-  void _pickImage(ImageSource source) async {
+  Future<void> _pickImage(ImageSource source) async {
     final PickedFile? selected = await ImagePicker().getImage(source: source);
     if (selected != null) {
       _formBloc.add(CostumeFormEvent.addImage(selected.path));
@@ -351,7 +351,7 @@ class CostumeEditForm extends StatelessWidget {
         crossAxisCount: 1),
     delegate:
     SliverChildBuilderDelegate((context, index) {
-    return Center(child: const CircularProgressIndicator());})), success: (state) => sliverGrid(state));
+    return const Center(child: const CircularProgressIndicator());})), success: (state) => sliverGrid(state));
   },
 );
   }

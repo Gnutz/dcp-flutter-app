@@ -4,14 +4,17 @@ import 'package:digtial_costume_platform/data/infrastructure/auth/firebase_auth_
 import 'package:digtial_costume_platform/domain/auth/auth_failures.dart';
 import 'package:digtial_costume_platform/domain/auth/user.dart';
 import 'package:digtial_costume_platform/domain/core/institution.dart';
+import 'package:digtial_costume_platform/presentation/routes/navigation_service.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockFirebaseAuthRepository extends Mock implements FirebaseAuthRepository{}
-
+class MockNavigationService extends Mock implements NavigationService{}
 main() {
 
   late MockFirebaseAuthRepository mockAuthService;
+  late MockNavigationService mockNavigationService;
   late RegisterBloc unitUnderTest;
   final mockedInstitutions = <Institution>[
     Institution(
@@ -32,7 +35,8 @@ main() {
     registerFallbackValue(UserRole.creative);
     registerFallbackValue(mockedInstitutions[0]);
     mockAuthService = MockFirebaseAuthRepository();
-    unitUnderTest = RegisterBloc(mockAuthService);
+    mockNavigationService = MockNavigationService();
+    unitUnderTest = RegisterBloc(mockAuthService, mockNavigationService);
   });
 
    test("RegisterBloc returns initial form then form with options at creation", () async {
@@ -205,7 +209,7 @@ main() {
         _) async => []);
 
     //act
-    unitUnderTest.add(RegisterEvent.userAgreementAcceptToggle());
+    unitUnderTest.add(const RegisterEvent.userAgreementAcceptToggle());
 
     //assert inital state
     expect(unitUnderTest.state, equals(RegisterState.initial()));
@@ -233,7 +237,7 @@ main() {
         _) async => []);
 
     //act - instantiation
-    unitUnderTest.add(RegisterEvent.roleSelected(expectedRole));
+    unitUnderTest.add(const RegisterEvent.roleSelected(expectedRole));
 
     //assert inital state
     expect(unitUnderTest.state, equals(RegisterState.initial()));
@@ -252,27 +256,6 @@ main() {
     verify(() => mockAuthService.getInstitutions()).called(1);
     verifyNoMoreInteractions(mockAuthService);
   });
-
-
-  //submit
- /* test("Registerbloc return no new state if email is not valid", () async {
-    //arrange
-    const invalidEmail = "JohnDoe_com"; //example of invalid email
-    when(mockAuthService.getInstitutions()).thenAnswer((
-        _) async => []);
-    
-    
-
-    //act - instantiation
-    unitUnderTest.add(RegisterEvent.registerWithFormFilledPressed());
-
-    //assert inital state
-    expect(unitUnderTest.state, equals(RegisterState.initial()));
-
-    //assert that only one call to repository made
-    verify(mockAuthService.getInstitutions()).called(1);
-    verifyNoMoreInteractions(mockAuthService);
-  }); */
   
   blocTest("Registerbloc return no new state if email is not valid",
       build: () {
@@ -281,7 +264,7 @@ main() {
         return unitUnderTest;
       },
       seed: () => validState.copyWith(emailAddress: "JohnDoe_com"),
-      act: (_) => unitUnderTest.add(RegisterEvent.registerWithFormFilledPressed()),
+      act: (_) => unitUnderTest.add(const RegisterEvent.registerWithFormFilledPressed()),
       verify: (_) {
         verify(() => mockAuthService.getInstitutions()).called(1);
         verifyNoMoreInteractions(mockAuthService);
@@ -295,7 +278,7 @@ main() {
         return unitUnderTest;
       },
       seed: () => validState.copyWith(password: "password"),
-      act: (_) => unitUnderTest.add(RegisterEvent.registerWithFormFilledPressed()),
+      act: (_) => unitUnderTest.add(const RegisterEvent.registerWithFormFilledPressed()),
       verify: (_) {
         verify( () => mockAuthService.getInstitutions()).called(1);
         verifyNoMoreInteractions(mockAuthService);
@@ -309,7 +292,7 @@ main() {
         return unitUnderTest;
       },
       seed: () => validState.copyWith(institution: null),
-      act: (_) => unitUnderTest.add(RegisterEvent.registerWithFormFilledPressed()),
+      act: (_) => unitUnderTest.add(const RegisterEvent.registerWithFormFilledPressed()),
       verify: (_) {
         verify(() => mockAuthService.getInstitutions()).called(1);
         verifyNoMoreInteractions(mockAuthService);
@@ -324,15 +307,15 @@ main() {
             email: any(named: "email"),
             password: any(named: "password"),
             institution: any(named: "institution"),
-            role: any(named: "role"))).thenAnswer((_) async => AuthFailure.emailInUse());
+            role: any(named: "role"))).thenAnswer((_) async => const AuthFailure.emailInUse());
         return unitUnderTest;
       },
 
       seed: () => validState,
-      act: (_) => unitUnderTest.add(RegisterEvent.registerWithFormFilledPressed()),
+      act: (_) => unitUnderTest.add(const RegisterEvent.registerWithFormFilledPressed()),
       expect: () => [
         validState.copyWith(isSubmitting: true),
-        validState.copyWith(isSubmitting: false, authFailureOption: AuthFailure.emailInUse(), showInputErrorMessages: true)]
+        validState.copyWith(isSubmitting: false, authFailureOption: const AuthFailure.emailInUse(), showInputErrorMessages: true)]
       ,
       verify: (_) {
         verify(() => mockAuthService.getInstitutions()).called(1);
@@ -342,7 +325,32 @@ main() {
       }
   );
 
+  /*
+  blocTest("Registerbloc returns form with authFailure if failing register",
+      build: () {
+        when(() => mockAuthService.getInstitutions()).thenAnswer((
+            _) async => []);
+        when(() => mockAuthService.registerUser(name: any(named: 'name'),
+            email: any(named: "email"),
+            password: any(named: "password"),
+            institution: any(named: "institution"),
+            role: any(named: "role"))).thenAnswer((_) async => null);
+        return unitUnderTest;
+      },
 
-  //if creator creates a Request
+      seed: () => validState,
+      act: (_) => unitUnderTest.add(RegisterEvent.registerWithFormFilledPressed()),
+      expect: () => [
+        validState.copyWith(isSubmitting: true),
+        validState.copyWith(isSubmitting: false, authFailureOption: null, showInputErrorMessages: true)
+      ]
+      ,
+      verify: (_) {
+        verify(() => mockAuthService.getInstitutions()).called(1);
+        verify(() => mockAuthService.registerUser(institution: validState.institution!, name: validState.name, role: validState.role, password: validState.password
+            , email: validState.emailAddress)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+      }
+  ); */
 
 }

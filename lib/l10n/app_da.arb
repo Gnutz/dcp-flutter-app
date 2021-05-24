@@ -44,5 +44,17 @@
   "areYouSure": "Er du sikker?",
   "discardUnSavedChanges": "Vil du gemme dine ændringer?",
   "quantity": "Antal",
+  "costumeWasDeleted": "Kostumet blev slettet",
+  "selectAProduction":"Vælg en produktion",
+  "signOut": "Log ud"  ,
+  "productions": "Produktioner" ,
+  "areYouSureYouWantToDeleteThisCostume":"Er du sikker på du vil slette dette kostume?",
+  "search": "Søg",
+  "selectAListToAddCostumeTo" : "Vælg en af dine lister at tilføje kostumet til",
+  "error" : "Fejl",
+  "noMatchesFound" : "Ingen match fundet",
+  "category" : "Kategori",
+  "timePeriod" : "Tidsperiode",
+  "productionTitle" : "Produktions titel",
   "selectWhereTheCostumeIsStored": "Vælg  hvor kostumet er opbevaret"
 }

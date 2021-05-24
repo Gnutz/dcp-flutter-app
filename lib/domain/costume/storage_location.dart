@@ -16,7 +16,6 @@ class StorageLocation extends Equatable{
   Map<String, dynamic> toJson() => _$StorageLocationToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [main, subLocation];
 }
 
@@ -41,6 +40,5 @@ class Location extends Equatable {
   Map<String, dynamic> toJson() => _$LocationToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id, location];
 }

@@ -6,6 +6,7 @@ import 'package:digtial_costume_platform/presentation/costume/details/costume_de
 import 'package:digtial_costume_platform/presentation/costume/edit/costume_edit_page.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/category_selection.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/gallery_page.dart';
+import 'package:digtial_costume_platform/presentation/routes/navigation_service.dart';
 import 'package:digtial_costume_platform/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -18,26 +19,6 @@ abstract class Routes {
   static const costumeDetails = "costumes/details/";
   static const categorySelection = "costume/category-selection";
   static const gallery = "costume/gallery";
-}
-
-// ignore: avoid_classes_with_only_static_members
-class NavigationService {
-  static final GlobalKey<NavigatorState> _navigatorKey =
-      GlobalKey<NavigatorState>();
-
-  static String? get currentRoute {
-    try {
-      return ModalRoute.of(currentContext!)!.settings.name;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  static NavigatorState? get instance => _navigatorKey.currentState;
-
-  static BuildContext? get currentContext => key.currentState?.overlay?.context;
-
-  static GlobalKey<NavigatorState> get key => _navigatorKey;
 }
 
 // ignore: avoid_classes_with_only_static_members

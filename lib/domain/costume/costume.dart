@@ -63,12 +63,12 @@ class Costume extends Equatable {
       List<Production>? productions,
       List<CostumeImage>? images,
       StorageLocation? storageLocation})
-      : this.fashion = fashion ?? Fashion.mens,
-        this.quantity = quantity ?? 1,
-        this.themes = themes ?? <String>[],
-        this.colors = colors ?? <String>[],
-        this.productions = productions ?? <Production>[],
-        this.images = images ?? <CostumeImage>[] {
+      : fashion = fashion ?? Fashion.mens,
+        quantity = quantity ?? 1,
+        themes = themes ?? <String>[],
+        colors = colors ?? <String>[],
+        productions = productions ?? <Production>[],
+        images = images ?? <CostumeImage>[] {
     this.storageLocation = storageLocation;
   }
 
@@ -156,7 +156,7 @@ class _StatusConverter<T> implements JsonConverter<Status?, Object?> {
 
 List<String> tagsFromJson(Object? json) {
   if (json is Map<String, dynamic>) {
-    List<String> tags = <String>[];
+    final List<String> tags = <String>[];
     json.forEach((key, value) {
       if (value == true) {
         tags.add(key);

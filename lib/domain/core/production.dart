@@ -19,6 +19,5 @@ class Production extends Equatable {
   Map<String, dynamic> toJson() => _$ProductionToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id, title, startDate, endDate];
 }

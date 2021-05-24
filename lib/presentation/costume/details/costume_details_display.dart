@@ -65,7 +65,6 @@ class CostumeDetailsDisplay extends StatelessWidget {
                   _buildStatusField(),
                   const SizedBox(height: 10.0),
                   _buildProductionsList(),
-                  //TODO: Add images section
                 ],
               ),
             ),
@@ -167,7 +166,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
     );
   }
 
-  void _deleteCostume() async {
+  Future<void> _deleteCostume() async {
     final result = await _openDeleteConfirmationDialog();
     if (result) {
       _detailsBloc.add(const CostumeDetailsEvent.deleteCostume());
@@ -315,7 +314,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
     );
   }
 
-  void _addCostumeToList() async {
+  Future<void> _addCostumeToList() async {
     final selectedList = await _openSelectListDialog();
     if (selectedList != null) {
       _detailsBloc.add(CostumeDetailsEvent.addCostumeToList(selectedList));

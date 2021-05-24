@@ -28,7 +28,6 @@ class SignInForm extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Form(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            //TODO: remove
             // autovalidate: state.showInputErrorMessages,
             child: Container(
               alignment: Alignment.center,

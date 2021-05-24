@@ -1,12 +1,6 @@
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:flutter/material.dart';
 
-class Constants {
-  static final StringsConstants _strings = StringsConstants();
-
-  StringsConstants get strings => _strings;
-}
-
 class StringsConstants {
   static const costumeWasDeleted = 'costume was deleted';
   static const empty = '';
