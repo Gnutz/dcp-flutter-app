@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
+
 class SearchForm extends StatelessWidget {
   late final SearchFormBloc _formBloc;
   final _categoryController = TextEditingController();
@@ -17,7 +18,7 @@ class SearchForm extends StatelessWidget {
   final _colorController = TextEditingController();
   late BuildContext _context;
   late SearchFormState _state;
-  AppLocalizations? _appLocation;
+  AppLocalizations? _localization;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class SearchForm extends StatelessWidget {
         builder: (context, state) {
       _context = context;
       _state = state;
-      _appLocation = AppLocalizations.of(_context);
+      _localization = AppLocalizations.of(_context);
       _categoryController.text = _state.category ?? "";
       _timeController.text = _state.timePeriod ?? "";
       _productionController.text = _state.production?.title ?? "";
@@ -79,7 +80,7 @@ class SearchForm extends StatelessWidget {
     return _buildSuggestionsFormField(
         controller: _categoryController,
         suggestions: _state.categoryOptions,
-        hintText: StringsConstants.category,
+        hintText: _localization!.category,
         onSuggestionSelected: (String category) =>
             _formBloc.add(SearchFormEvent.categorySelected(category)));
   }
@@ -104,7 +105,7 @@ class SearchForm extends StatelessWidget {
       suggestionsCallback: (query) => List.of(suggestions.where((suggestion) =>
           suggestion.toLowerCase().contains(query.toLowerCase()))),
       noItemsFoundBuilder: (_) =>
-          const ListTile(title: Text(StringsConstants.noMatchesFound)),
+           ListTile(title: Text(_localization!.noMatchesFound))
     );
   }
 
@@ -112,7 +113,7 @@ class SearchForm extends StatelessWidget {
     return _buildSuggestionsFormField(
         controller: _timeController,
         suggestions: _state.timePeriodOptions,
-        hintText: StringsConstants.timePeriod,
+        hintText: _localization!.timePeriod,
         onSuggestionSelected: (time) =>
             _formBloc.add(SearchFormEvent.timePeriodSelected(time)));
   }
@@ -123,7 +124,7 @@ class SearchForm extends StatelessWidget {
         suggestions: _state.productionOptions
             .map((production) => production.title)
             .toList(),
-        hintText: StringsConstants.productionTitle,
+        hintText: _localization!.productionTitle,
         onSuggestionSelected: (productionTitle) {
           final selected = _state.productionOptions
               .where((production) => production.title == productionTitle)
@@ -139,8 +140,8 @@ class SearchForm extends StatelessWidget {
         NavigationService.instance!.pop();
       },
       //color: Colors.pink[400],
-      child: const Text(StringsConstants.search,
-          style: TextStyle(color: Colors.white)),
+      child:  Text(_localization!.search,
+          style: const TextStyle(color: Colors.white)),
 
       //disabledColor: Colors.cyan,
     );

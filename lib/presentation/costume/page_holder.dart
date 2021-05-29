@@ -6,6 +6,8 @@ import 'package:digtial_costume_platform/presentation/costume/gallery/search_for
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import '../page_factory.dart';
 
@@ -13,6 +15,9 @@ class PageHolder extends StatelessWidget {
   late BuildContext _context;
   String route;
   dynamic? arguments;
+  late AppLocalizations _localization;
+
+
 
   PageHolder(this.route, this.arguments);
 

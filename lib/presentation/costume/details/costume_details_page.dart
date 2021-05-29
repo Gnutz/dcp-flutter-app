@@ -6,22 +6,23 @@ import 'package:digtial_costume_platform/locator.dart';
 import 'package:digtial_costume_platform/presentation/core/theme.dart';
 import 'package:digtial_costume_platform/presentation/costume/details/costume_details_display.dart';
 import 'package:digtial_costume_platform/presentation/costume/gallery/search_form.dart';
-import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../shared/constants.dart';
 
 class CostumeDetailsPage extends StatelessWidget {
   final Costume costume;
   late BuildContext _context;
   late AuthBloc _auth;
+  late AppLocalizations _localization;
 
   CostumeDetailsPage({required this.costume});
 
   @override
   Widget build(BuildContext context) {
     _auth = context.read<AuthBloc>();
+    _localization = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: MyColorTheme.backgroundColor,
       appBar: AppBar(
@@ -35,8 +36,8 @@ class CostumeDetailsPage extends StatelessWidget {
                 Icons.person,
                 color: MyColorTheme.buttonTextColor,
               ),
-              label: const Text(StringsConstants.signOut,
-                style: TextStyle(color: MyColorTheme.buttonTextColor),
+              label: Text(_localization.signOut,
+                style: const TextStyle(color: MyColorTheme.buttonTextColor),
               )),
           IconButton(
             icon: const Icon(Icons.search),

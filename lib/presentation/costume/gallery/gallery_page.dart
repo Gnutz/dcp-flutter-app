@@ -11,11 +11,15 @@ import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class GalleryPage extends StatelessWidget {
   final CostumeQuery query;
 
   late BuildContext _context;
+  late AppLocalizations _localization;
+
 
   GalleryPage({required this.query});
 

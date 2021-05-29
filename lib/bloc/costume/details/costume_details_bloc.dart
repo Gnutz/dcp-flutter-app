@@ -10,6 +10,8 @@ import 'package:digtial_costume_platform/data/services/i_gallery_service.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 part 'costume_details_bloc.freezed.dart';
 part 'costume_details_event.dart';
@@ -62,8 +64,9 @@ class CostumeDetailsBloc
   void deleteCostumeEventHandler() {
     _galleryService.deleteCostume(state.costume!.id!);
     NavigationService.instance!.pop();
+    final deletedMessage = AppLocalizations.of(NavigationService.currentContext!)!.costumeWasDeleted;
     ScaffoldMessenger.of(NavigationService.currentContext!).showSnackBar(
-        const SnackBar(content: Text(StringsConstants.costumeWasDeleted)));
+        SnackBar(content: Text(deletedMessage)));
   }
 
   Stream<CostumeDetailsState> _loadProductionOptionsEventHandler() async* {

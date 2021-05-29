@@ -10,13 +10,16 @@ import 'package:digtial_costume_platform/presentation/routes/routes.dart';
 import 'package:digtial_costume_platform/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategorySelectionPage extends StatelessWidget {
   late BuildContext _context;
+  late AppLocalizations _localization;
 
   @override
   Widget build(BuildContext context) {
     _context = context;
+    _localization = AppLocalizations.of(context)!;
     final AuthBloc _auth = context.read<AuthBloc>();
     return Scaffold(
         backgroundColor: MyColorTheme.backgroundColor,
@@ -31,9 +34,9 @@ class CategorySelectionPage extends StatelessWidget {
                   Icons.person,
                   color: MyColorTheme.buttonTextColor,
                 ),
-                label: const Text(
-                  StringsConstants.signOut,
-                  style: TextStyle(color: MyColorTheme.buttonTextColor),
+                label: Text(
+                  _localization.signOut,
+                  style: const TextStyle(color: MyColorTheme.buttonTextColor),
                 )),
             IconButton(
               icon: const Icon(Icons.search),

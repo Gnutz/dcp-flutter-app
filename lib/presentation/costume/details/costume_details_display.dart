@@ -22,7 +22,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
   late final AuthBloc _auth;
   late BuildContext _context;
   late CostumeDetailsState _state;
-  AppLocalizations? _appLocalzation;
+  AppLocalizations? _localization;
   Costume costume;
 
   CostumeDetailsDisplay({required this.costume});
@@ -45,7 +45,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
         builder: (context, state) {
       _context = context;
       _state = state;
-      _appLocalzation = AppLocalizations.of(_context);
+      _localization = AppLocalizations.of(_context);
 
       if (_state.costume != null) {
         return Container(
@@ -177,8 +177,8 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (context) => AlertDialog(
-              content: const Text(
-                  StringsConstants.areYouSureYouWantToDeleteThisCostume),
+              content: Text(
+                 _localization!.areYouSureYouWantToDeleteThisCostume),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
@@ -205,7 +205,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (BuildContext context) => AlertDialog(
-                title: const Text(StringsConstants.selectAProduction),
+                title: Text(_localization!.selectAProduction),
                 content: DropdownButtonFormField<Production>(
                     value: selected,
                     items: productions
@@ -299,8 +299,8 @@ class CostumeDetailsDisplay extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(children: [
-          const Text(
-            StringsConstants.productions,
+          Text(
+            _localization!.productions,
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           Column(children: [
@@ -329,7 +329,7 @@ class CostumeDetailsDisplay extends StatelessWidget {
     return await showDialog(
         context: _context,
         builder: (BuildContext context) => AlertDialog(
-                title: const Text(StringsConstants.selectAListToAddCostumeTo),
+                title: Text(_localization!.selectAListToAddCostumeTo),
                 content: DropdownButtonFormField<CostumeList>(
                     value: selected,
                     items: productions
