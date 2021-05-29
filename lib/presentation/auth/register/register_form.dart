@@ -34,7 +34,7 @@ class RegisterForm extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Form(
-              autovalidateMode: AutovalidateMode.always,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               // autovalidate: state.showInputErrorMessages,
               child: Container(
                 alignment: Alignment.center,
@@ -82,7 +82,7 @@ class RegisterForm extends StatelessWidget {
 
     return InputField(
         hintText: AppLocalizations.of(context)!.yourName,
-        validator: (_) => bloc.state.name.isEmpty
+        validator: (_) => state.name.isEmpty
             ? AppLocalizations.of(context)!.enterAName
             : null,
         onChanged: (val) => bloc.add(RegisterEvent.nameChanged(val)));
@@ -94,7 +94,7 @@ class RegisterForm extends StatelessWidget {
     return InputField(
         hintText: AppLocalizations.of(context)!.email,
         validator: (_) =>
-            validateEmailAddress(context, bloc.state.emailAddress),
+            validateEmailAddress(context, state.emailAddress),
         onChanged: (val) => bloc.add(RegisterEvent.emailChanged(val)));
   }
 
@@ -106,7 +106,7 @@ class RegisterForm extends StatelessWidget {
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(context)!.password, errorMaxLines: 5),
         obscureText: true,
-        validator: (_) => validatePassword(context, bloc.state.password),
+        validator: (_) => validatePassword(context, state.password),
         onChanged: (val) => bloc.add(RegisterEvent.passwordChanged(val)));
   }
 
@@ -117,7 +117,7 @@ class RegisterForm extends StatelessWidget {
     return InputField(
         hintText: AppLocalizations.of(context)!.passwordConfirmation,
         validator: (val) =>
-            bloc.state.password == bloc.state.passwordConfirmation
+            state.password == state.passwordConfirmation
                 ? AppLocalizations.of(context)!.passwordsMustBeIdentical
                 : null,
         obscureText: true,
@@ -130,7 +130,7 @@ class RegisterForm extends StatelessWidget {
     return DropdownButtonFormField<UserRole>(
         decoration: textInputDecorator.copyWith(
             hintText: AppLocalizations.of(context)!.selectRole),
-        value: bloc.state.role,
+        value: state.role,
         items: UserRole.values
             .where((role) => role != UserRole.admin)
             .map((UserRole role) => _mapUserRoleToDropDownItem(context, role))
@@ -169,7 +169,7 @@ class RegisterForm extends StatelessWidget {
                 ))
             .toList(),
         onChanged: (val) => bloc.add(RegisterEvent.institutionSelected(val!)),
-        value: bloc.state.institution);
+        value: state.institution);
   }
 
   Widget _buildUserAgreementCheckBox(
@@ -192,7 +192,7 @@ class RegisterForm extends StatelessWidget {
     final bloc = context.read<RegisterBloc>();
 
     return ElevatedButton(
-      onPressed: bloc.state.userAgreementAccepted
+      onPressed: state.userAgreementAccepted
           ? () => bloc.add(const RegisterEvent.registerWithFormFilledPressed())
           : null,
       style: ElevatedButton.styleFrom(primary: MyColorTheme.buttonColor),

@@ -77,15 +77,13 @@ class CostumeEditForm extends StatelessWidget {
                           _buildAddImageButton(),
                           const SizedBox(
                             height: 20.0,
-                          )
+                          ),
+                              _buildSubmitButton(),
+                              const SizedBox(
+                                height: 20.0,
+                              ),
                         ])),
                        _buildImageGrid(),
-                        SliverList(
-                            delegate: SliverChildListDelegate(
-                          [
-                            _buildSubmitButton(),
-                          ],
-                        ))
                       ])))));
     });
   }

@@ -19,7 +19,10 @@ class SignInForm extends StatelessWidget {
                 SnackBar(
                     content:
                         Text(AppLocalizations.of(context)!.errorEmailInUse))),
-            invalidEmailAndPasswordCombination: (_) => () {});
+      invalidEmailAndPasswordCombination: (_) =>
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(AppLocalizations.of(context)!
+          .errorInvalidCombination))));
       } else {
         context.read<AuthBloc>().add(const AuthEvent.checkRequested());
       }

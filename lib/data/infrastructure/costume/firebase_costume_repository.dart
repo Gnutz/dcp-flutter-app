@@ -160,6 +160,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
     const FASHION_KEY = "fashion";
     const COLORS_KEY = "colors";
     const THEMES_KEY = "themes";
+    const TIME_KEY = "timePeriod";
 
 
     Query seedQuery = collectionReference;
@@ -170,6 +171,10 @@ class FirebaseCostumeRepository implements ICostumeRepository {
 
     if (query.category != null) {
       seedQuery = seedQuery.where(CATEGORY_KEY, isEqualTo: query.category);
+    }
+
+    if (query.timePeriod != null) {
+      seedQuery = seedQuery.where(TIME_KEY, isEqualTo: query.timePeriod);
     }
 
     if (query.fashion != null) {
@@ -300,30 +305,6 @@ class FirebaseCostumeRepository implements ICostumeRepository {
   }
 
   Stream<List<CostumeImage>> watchCostumesImages(String institutionId, String costumeId) async *{
-    /*yield* userDoc.noteCollection
-        .orderBy('serverTimeStamp', descending: true)
-        .snapshots()
-        .map(
-    (snapshot) => snapshot.documents
-        .map((doc) => NoteDto.fromFirestore(doc).toDomain()),
-    )
-        .map(
-    (notes) => right<NoteFailure, KtList<Note>>(
-    notes
-        .where(
-    (note) =>
-    note.todos.getOrCrash().any((todoItem) => !todoItem.done),
-    )
-        .toImmutableList(),
-    ),
-    )
-        .onErrorReturnWith((e) {
-    if (e is PlatformException && e.message.contains('PERMISSION_DENIED')) {
-    return left(const NoteFailure.insufficientPermissions());
-    } else {
-    return left(const NoteFailure.unexpected());
-    }
-    }); */
 
     var costumeRef = _costumeReferenceFactory(institutionId, costumeId);
 
@@ -426,7 +407,7 @@ class FirebaseCostumeRepository implements ICostumeRepository {
         .where(THEME_KEY, isEqualTo: theme)
         .limit(1)
         .get();
-      if(result != null) {
+      if(result.docs.isNotEmpty) {
         return result.docs.first[THEME_KEY] as String?;
       }
 
